@@ -1,7 +1,7 @@
 body {
   display: flex;
-  justify-content: center;
-  flex-direction: row;
+  /* justify-content: center;
+  flex-direction: row; */
   margin: 0px auto;
   width: 100%;
   min-height: 100vh;
@@ -15,7 +15,7 @@ main {
   display: flex;
   flex-direction: column;
   flex: 1;
-  max-width: 1440px;
+ /*  max-width: 1440px; */
 }
 
 a {
@@ -72,17 +72,21 @@ a {
 }
 
 header {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  max-width: 1440px;
-  height: 96px;
   background-color: rgb(255, 255, 255);
   box-shadow: 4px 0px 8px 0px rgb(170 170 170);
   padding-right: 40px;
   padding-left: 120px;
 
   font-size: 20px;
+}
+
+.header-wrapper{
+  display: flex;
+  align-items: center;
+  height: 96px;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0px auto;
 }
 
 .header-icons {
@@ -93,8 +97,11 @@ header {
 }
 
 .main-content-wrapper {
+  display: flex;
   padding-right: 40px;
   padding-left: 120px;
+  max-width: 1440px;
+  margin: 0px auto;
 }
 
 .header-help-icon {
