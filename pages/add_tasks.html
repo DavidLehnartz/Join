@@ -1,18 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Tasks</title>
-    <script src="../js/add_tasks.js"></script>
-    <link rel="stylesheet" href="../styles/add_task.css">
-    <link
-    rel="icon"
-    type="image/x-icon"
-    href="./assets/img/join_logo_white.svg"
-  />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>templates</title>
+  <link rel="icon" type="image/x-icon" href="../assets/img/join_logo_white.svg" />
+  <link rel="stylesheet" href="../styles/add_task.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+
 </head>
+
 <body>
-    <button>Test123</button>
+  <aside>
+    <div class="left-sidebar">
+      <img src="../assets/img/join_logo_white.svg" alt="join logo" />
+      <div class="left-sidebar-links">
+        <a class="links" href="#">
+          <img class="sidebar-icons" src="../assets/img/summary.png" alt="Summary" />
+          <p>Summary</p>
+        </a>
+        <a class="links" href="#">
+          <img class="sidebar-icons" src="../assets/img/add_task.png" alt="Add Task" />
+          <p>Add Task</p>
+        </a>
+        <a class="links" href="#">
+          <img class="sidebar-icons" src="../assets/img/board.png" alt="Board" />
+          <p>Board</p>
+        </a>
+        <a class="links" href="#">
+          <img class="sidebar-icons" src="../assets/img/contacts.png" alt="Contacts" />
+          <p>Contacts</p>
+        </a>
+      </div>
+      <div class="left-sidebar-links">
+        <a class="legacy-links" href="#"> Privacy Policy </a>
+        <a class="legacy-links" href="#"> Legal notice </a>
+      </div>
+    </div>
+  </aside>
+  <main>
+    <header>
+      <div class="header-wrapper">
+        <span> Kanban Project Management Tool</span>
+        <div class="header-icons">
+          <img class="header-help-icon" src="../assets/img/help.png" alt="help" />
+          <img class="header-profil-icon" src="../assets/img/profil_icon.png" alt="profil" />
+        </div>
+      </div>
+    </header>
+    <div class="main-content-wrapper">
+      <div class="addTaskContent">
+        <div>
+          <h1>Add Task</h1>
+        </div>
+        <div class="bothSides">
+          <div class="leftSide">
+            <div class="inputStyle">
+              <label for="inputField">Title</label>
+              <input type="text" id="inputField1" placeholder="Enter a title" class="titleInput">
+            </div>
+            <div class="inputStyle">
+              <label for="inputField">Description</label>
+              <input type="text" id="inputField2" placeholder="Enter a Description" class="titleInputDescription">
+            </div>
+            <div class="inputStyle">
+              <label for="inputField">Assigned to</label>
+              <input type="text" id="inputField3" placeholder="Select contacts to assign" class="titleInput">
+            </div>
+          </div>
+          <div class="seperator">
+          </div>
+          <div class="rightSide">
+            <div class="inputStyle">
+              <label for="inputField">Due date</label>
+              <input type="text" id="inputField4" placeholder="dd/mm/yyyy" class="titleInput">
+            </div>
+            <div class="inputStyle">
+              <label for="inputField">Prio</label>
+              <input type="text" id="inputField5" placeholder="Prio" class="titleInput">
+            </div>
+            <div class="inputStyle">
+              <label for="inputField">Category</label>
+              <input type="text" id="inputField6" placeholder="Select task category" class="titleInput">
+            </div>
+            <div class="inputStyle">
+              <label for="inputField">Subtasks</label>
+              <input type="text" id="inputField7" placeholder="Add new subtask" class="titleInput">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
+
 </html>
