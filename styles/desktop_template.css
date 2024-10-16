@@ -25,12 +25,11 @@ a {
 .left-sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 232px;
   height: 100vh;
   background-color: rgb(42, 54, 71);
-  padding: 64px 0px;
 }
 
 .left-sidebar-links {
@@ -51,6 +50,8 @@ a {
 .links:hover{
     color: white;
     background-color:rgb(57, 74, 95) ;
+    filter: brightness(1.2);
+    transition: filter 0.3s ease;
 }
 
 .sidebar-icons {
