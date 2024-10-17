@@ -1,0 +1,98 @@
+h4{
+    margin: 0px;
+}
+
+.overlay-board {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.pop-up-board-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 500px;
+    border-radius: 30px;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    padding: 48px 40px;
+    gap: 24px;
+}
+
+.pop-up-task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  border-radius: 8px;
+  padding: 4px 24px;
+  background-color: blue;
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+}
+
+.pop-up-close-img {
+  width: 32px;
+  height: 32px;
+}
+
+.pop-up-close-img:hover {
+  transition: transform 0.5s;
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: rgb(246, 247, 248);
+  border-radius: 100%;
+}
+
+.pop-up-task-content{
+    display: flex;
+    flex-direction: column;
+    font-size: 64px;
+    gap: 24px;
+}
+
+.pop-up-description{
+    font-size: 20px;
+}
+
+.pop-up-task-info{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+tr{
+    display: flex;
+}
+
+.pop-up-assigned-to-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.pop-up-assigned-profils{
+
+}
+
+.single-assigned-profil{
+    display: flex;
+    gap: 16px;
+    padding: 0px 16px;
+}
