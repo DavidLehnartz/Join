@@ -1,0 +1,16 @@
+https://f016eac8@join-380.developerakademie.net/join/add_tasks.html
+
+ <div class="bothSides">
+          <div class="leftSide">
+            <div class="titleInput">
+              <label for="inputField">Title</label>
+              <input type="text" id="inputField">
+            </div>
+            <div class="titleInput">
+              <label for="inputField">Description</label>
+              <input type="text" id="inputField">
+            </div>
+            <div class="titleInput">
+              <label for="inputField">Assigned to</label>
+              <input type="text" id="inputField">
+            </div>
