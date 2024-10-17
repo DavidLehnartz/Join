@@ -1,8 +1,23 @@
-/* inter-regular - latin */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../fonts/inter-v18-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  font-family: "interbold";
+  src: url("../fonts/inter-bold-webfont.woff2") format("woff2"),
+    url("../fonts/inter-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "intermedium";
+  src: url("../fonts/inter-medium-webfont.woff2") format("woff2"),
+    url("../fonts/inter-medium-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "interregular";
+  src: url("../fonts/inter-regular-webfont.woff2") format("woff2"),
+    url("../fonts/inter-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
