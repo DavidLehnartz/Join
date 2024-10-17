@@ -9,105 +9,185 @@ h1 {
   font-size: 73px;
 }
 
-h2{
+h2 {
   text-align: center;
   margin: 0px;
   font-size: 20px;
 }
 
-.searchbox-wrapper {
-  display: flex;
-    justify-content: end;
-    height: 48px;
-    cursor: pointer;
+h3 {
+  margin: 0px;
 }
 
-input{
-    /* height: 48px; */
-     width: 312px;
-    border-radius: 10px;
-    border: 1px solid rgb(170 170 170);
-    cursor: pointer;
-    font-size: 20px;
-    padding-left: 16px;
+p {
+  margin: 0px;
+}
+
+.searchbox-wrapper {
+  display: flex;
+  justify-content: end;
+  height: 48px;
+  cursor: pointer;
+}
+
+input {
+  /* height: 48px; */
+  width: 312px;
+  border-radius: 10px;
+  border: 1px solid rgb(170 170 170);
+  cursor: pointer;
+  font-size: 20px;
+  padding-left: 16px;
 }
 
 ::placeholder {
-    color: rgb(213, 212, 212);
-    opacity: 1;
-  }
-
-  .input-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    right: 50px;
-    border-radius: 0px;
-    border: none;
-    /* padding: 10px 0px; */
-    background: none;
-    border-left: 1px solid rgb(170 170 170);
-    /* width: 60px; */
-    margin: 9px 0px;
-  }
-
-  .input-btn-img:hover{
-    cursor: pointer;
-    background-color: rgb(246, 247, 248);
-    border-radius: 100px;
-   /*  border-radius: 50%; */
-  }
-
-  .add-task-btn{
-    display: flex;
-    align-items: center;
-    height: 48px;
-    background-color: rgb(42, 54, 71);
-    color: rgb(255, 255, 255);
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    gap: 4px;
-    padding: 8px 16px;
-
-    font-size: 20px;
-    font-weight: bold;
+  color: rgb(213, 212, 212);
+  opacity: 1;
 }
 
-.add-task-btn:hover{
+.input-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  right: 50px;
+  border-radius: 0px;
+  border: none;
+  /* padding: 10px 0px; */
+  background: none;
+  border-left: 1px solid rgb(170 170 170);
+  /* width: 60px; */
+  margin: 9px 0px;
+}
+
+.input-btn-img:hover {
+  cursor: pointer;
+  background-color: rgb(246, 247, 248);
+  border-radius: 100px;
+  /*  border-radius: 50%; */
+}
+
+.add-task-btn {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  background-color: rgb(42, 54, 71);
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  gap: 4px;
+  padding: 8px 16px;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.add-task-btn:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0px 4px 4px 0px rgb(170 170 170);
 }
 
-.add-task-btn-img{
+.add-task-btn-img {
   background: none;
   width: 25px;
   height: 25px;
 }
 
-.kanban-board-wrapper{
+.kanban-board-wrapper {
   display: flex;
   justify-content: space-between;
   gap: 24px;
   margin-top: 24px;
 }
 
-.kanban-column{
+.kanban-column {
   display: flex;
   flex-direction: column;
   width: 246px;
   width: 100%;
 }
 
-.kanban-header{
+.kanban-header {
   display: flex;
   justify-content: space-between;
   color: rgb(66, 82, 110);
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
-.kanban-header-img{
+.kanban-header-img {
   width: 24px;
   height: 24px;
+  cursor: pointer;
+}
+
+.kanban-task-wrapper {
+  display: flex;
+  flex-direction: column;
+  /*  width: 100%; */
+  height: 244px;
+  border-radius: 24px;
+  background: rgb(255, 255, 255);
+  padding: 16px;
+  gap: 24px;
+  cursor: pointer;
+ /*  overflow-y: scroll;
+  scrollbar-width: thin; */
+}
+
+.kanban-task-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 113px;
+  height: 27px;
+  background-color: rgb(0, 56, 255);
+  color: white;
+  border-radius: 8px;
+  padding: 4px 16px;
+}
+
+.kanban-task-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kanban-task-subtasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subtasks-progress-bar {
+  width: 128px;
+}
+
+.subtasks-counter {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.kanban-task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.asignees-profil {
+}
+
+.priority-info {
+}
+
+.kanban-task-no-task-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  background-color: rgb(231, 231, 231);
+  border-radius: 10px;
+  border: dotted rgb(168, 168, 168);
+  color: rgb(168, 168, 168);
+  cursor: pointer;
 }
