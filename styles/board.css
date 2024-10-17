@@ -2,25 +2,112 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 56px;
 }
 
-h1{
-    font-size: 73px;
+h1 {
+  font-size: 73px;
+}
+
+h2{
+  text-align: center;
+  margin: 0px;
+  font-size: 20px;
+}
+
+.searchbox-wrapper {
+  display: flex;
+    justify-content: end;
+    height: 48px;
+    cursor: pointer;
 }
 
 input{
-    height: 48px;
-    /* width: 312px; */
+    /* height: 48px; */
+     width: 312px;
     border-radius: 10px;
     border: 1px solid rgb(170 170 170);
     cursor: pointer;
     font-size: 20px;
     padding-left: 16px;
-   
-    
 }
 
 ::placeholder {
     color: rgb(213, 212, 212);
-    opacity: 1; /* Firefox */
+    opacity: 1;
   }
+
+  .input-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    right: 50px;
+    border-radius: 0px;
+    border: none;
+    /* padding: 10px 0px; */
+    background: none;
+    border-left: 1px solid rgb(170 170 170);
+    /* width: 60px; */
+    margin: 9px 0px;
+  }
+
+  .input-btn-img:hover{
+    cursor: pointer;
+    background-color: rgb(246, 247, 248);
+    border-radius: 100px;
+   /*  border-radius: 50%; */
+  }
+
+  .add-task-btn{
+    display: flex;
+    align-items: center;
+    height: 48px;
+    background-color: rgb(42, 54, 71);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    gap: 4px;
+    padding: 8px 16px;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.add-task-btn:hover{
+  background-color: rgb(41, 171, 226);
+  box-shadow: 0px 4px 4px 0px rgb(170 170 170);
+}
+
+.add-task-btn-img{
+  background: none;
+  width: 25px;
+  height: 25px;
+}
+
+.kanban-board-wrapper{
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.kanban-column{
+  display: flex;
+  flex-direction: column;
+  width: 246px;
+  width: 100%;
+}
+
+.kanban-header{
+  display: flex;
+  justify-content: space-between;
+  color: rgb(66, 82, 110);
+  margin-bottom: 8px;
+}
+
+.kanban-header-img{
+  width: 24px;
+  height: 24px;
+}

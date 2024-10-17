@@ -19,6 +19,10 @@ a {
   text-decoration: none;
 }
 
+h1{
+  margin: 0px;
+}
+
 .left-sidebar {
   display: flex;
   flex-direction: column;
@@ -71,8 +75,8 @@ a {
 header {
   background-color: rgb(255, 255, 255);
   box-shadow: 4px 0px 8px 0px rgb(170 170 170);
-  padding-right: 40px;
-  padding-left: 120px;
+  padding-right: 60px;
+  padding-left: 60px;
 
   font-size: 20px;
 }
@@ -93,19 +97,25 @@ header {
   cursor: pointer;
 }
 
+
+
 .main-content-wrapper {
-  /* display: flex; */
-  /* padding-right: 40px;
-  padding-left: 120px; */
+  display: flex;
+  flex-direction: column;
   max-width: 1440px;
   margin: 0px auto;
-  padding-left: 120px;
+  padding-left: 60px;
     padding-right: 60px;
 }
 
 .header-help-icon {
   width: 32px;
   height: 32px;
+}
+
+.header-help-icon:hover{
+  transition: transform 0.1s;
+  transform: scale(1.1);
 }
 
 .header-profil-icon {
