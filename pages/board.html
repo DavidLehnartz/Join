@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../styles/desktop_template.css" />
     <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="stylesheet" href="../styles/board.css" />
+    <link rel="stylesheet" href="../styles/pop_up_board.css" />
   </head>
 
   <!-- TASKS
@@ -20,6 +21,7 @@
   ** overlay / pop up von task erstellen
   -->
   <body>
+    <!-- SIDEBAR -->
     <aside>
       <div class="left-sidebar">
         <img src="../assets/img/join_logo_white.svg" alt="join logo" />
@@ -65,6 +67,7 @@
     </aside>
 
     <main>
+      <!-- HEADER -->
       <header>
         <div class="header-wrapper">
           <span> Kanban Project Management Tool</span>
@@ -82,7 +85,9 @@
           </div>
         </div>
       </header>
+      <!-- MAiN CONTENT -->
       <div class="main-content-wrapper">
+        <!-- HEADLINE / SEARCHBOX -->
         <section>
           <div class="headline">
             <h1>Board</h1>
@@ -106,6 +111,7 @@
             </div>
           </div>
         </section>
+        <!-- KANBAN BOARD -->
         <section>
           <div class="kanban-board-wrapper">
             <div class="kanban-column">
@@ -119,7 +125,7 @@
               </div>
               <div class="kanban-task-wrapper">
                 <div class="kanban-task-header">
-                  <p>$$$$ $$$$</p>
+                  <p>$$ Ctgry $$</p>
                 </div>
                 <div class="kanban-task-content">
                   <h3>$$ Title $$</h3>
@@ -129,17 +135,13 @@
                   </p>
                 </div>
                 <div class="kanban-task-subtasks">
-                  <div class="subtasks-progress-bar">
-                    $$ p.bar $$
-                  </div>
+                  <div class="subtasks-progress-bar">$$ p.bar $$</div>
                   <div class="subtasks-counter">
                     <span>$/$ Subtasks</span>
                   </div>
                 </div>
                 <div class="kanban-task-footer">
-                  <div class="asignees-profil">
-                    $$ Profil $$
-                  </div>
+                  <div class="asignees-profil">$$ Profil $$</div>
                   <div class="priority-info">
                     <p>$$ Urgent $$</p>
                   </div>
@@ -167,17 +169,13 @@
                   </p>
                 </div>
                 <div class="kanban-task-subtasks">
-                  <div class="subtasks-progress-bar">
-                    $$ p.bar $$
-                  </div>
+                  <div class="subtasks-progress-bar">$$ p.bar $$</div>
                   <div class="subtasks-counter">
                     <span>$/$ Subtasks</span>
                   </div>
                 </div>
                 <div class="kanban-task-footer">
-                  <div class="asignees-profil">
-                    $$ Profil $$
-                  </div>
+                  <div class="asignees-profil">$$ Profil $$</div>
                   <div class="priority-info">
                     <p>$$ Urgent $$</p>
                   </div>
@@ -205,17 +203,13 @@
                   </p>
                 </div>
                 <div class="kanban-task-subtasks">
-                  <div class="subtasks-progress-bar">
-                    $$ p.bar $$
-                  </div>
+                  <div class="subtasks-progress-bar">$$ p.bar $$</div>
                   <div class="subtasks-counter">
                     <span>$/$ Subtasks</span>
                   </div>
                 </div>
                 <div class="kanban-task-footer">
-                  <div class="asignees-profil">
-                    $$ Profil $$
-                  </div>
+                  <div class="asignees-profil">$$ Profil $$</div>
                   <div class="priority-info">
                     <p>$$ Urgent $$</p>
                   </div>
@@ -226,9 +220,61 @@
               <div class="kanban-header">
                 <h2>Done</h2>
               </div>
-              <div class="kanban-task-no-task-found"> 
-                No tasks To do
+              <div class="kanban-task-no-task-found">No tasks To do</div>
+            </div>
+          </div>
+        </section>
+        <!-- OVERLAY / POP UP -->
+        <section>
+          <div class="overlay-board">
+            <div class="pop-up-board-wrapper">
+              <div class="pop-up-task-header">
+                <div class="header-category">
+                  <p>$$Ctgry$$</p>
+                </div>
+                <img
+                  class="pop-up-close-img"
+                  src="../assets/img/close_black.png"
+                  alt="close"
+                />
               </div>
+              <div class="pop-up-task-content">
+                <h4>$$ Title $$</h4>
+                <div class="pop-up-description">
+                  <p>
+                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit....
+                  </p>
+                </div>
+              </div>
+              <table>
+                <tbody class="pop-up-task-info">
+                  <tr>
+                    <td>Due date:</td>
+                    <td>$$ Date $$</td>
+                  </tr>
+                  <tr>
+                    <td>Priority:</td>
+                    <td>$$ Urgent $$</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="pop-up-assigned-to-wrapper">
+                <p>Assigned To:</p>
+                <div class="pop-up-assigned-profils">
+                  <div class="single-assigned-profil">
+                    <!-- Rendern -->
+                    <img src="#" alt="profil" />
+                    <p>$$ Name $$</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pop-up-subtasks">
+                <p>Subtasks</p>
+                <input type="checkbox">
+                <input type="checkbox">
+              </div>
+              <div class="pop-up-footer"></div>
             </div>
           </div>
         </section>

@@ -23,6 +23,10 @@ p {
   margin: 0px;
 }
 
+.d_none{
+  display: none;
+}
+
 .searchbox-wrapper {
   display: flex;
   justify-content: end;
