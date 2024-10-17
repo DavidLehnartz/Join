@@ -1,0 +1,26 @@
+.headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1{
+    font-size: 73px;
+}
+
+input{
+    height: 48px;
+    /* width: 312px; */
+    border-radius: 10px;
+    border: 1px solid rgb(170 170 170);
+    cursor: pointer;
+    font-size: 20px;
+    padding-left: 16px;
+   
+    
+}
+
+::placeholder {
+    color: rgb(213, 212, 212);
+    opacity: 1; /* Firefox */
+  }

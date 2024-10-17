@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="../styles/desktop_template.css" />
     <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="../styles/board.css" />
   </head>
   <body>
     <aside>
@@ -60,27 +61,36 @@
 
     <main>
       <header>
-        <span> Kanban Project Management Tool</span>
-        <div class="header-icons">
-          <img
-            class="header-help-icon"
-            src="../assets/img/help.png"
-            alt="help"
-          />
-          <img
-            class="header-profil-icon"
-            src="../assets/img/profil_icon.png"
-            alt="profil"
-          />
+        <div class="header-wrapper">
+          <span> Kanban Project Management Tool</span>
+          <div class="header-icons">
+            <img
+              class="header-help-icon"
+              src="../assets/img/help.png"
+              alt="help"
+            />
+            <img
+              class="header-profil-icon"
+              src="../assets/img/profil_icon.png"
+              alt="profil"
+            />
+          </div>
         </div>
       </header>
       <div class="main-content-wrapper">
-        <h1>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque,
-          reprehenderit debitis temporibus quis pariatur excepturi facilis
-          praesentium. Ducimus explicabo, facilis aut optio hic minima, sapiente
-          saepe inventore ratione ullam iusto!
-        </h1>
+        <div class="headline">
+          <h1>Board</h1>
+          <form>
+           
+            <input type="text" placeholder="Find Task" required>
+            <button>
+              <img src="../assets/img/search_glass.png" alt="">
+            </button>
+            <button>
+              Add task
+            </button>
+          </form>
+        </div>
       </div>
     </main>
   </body>
