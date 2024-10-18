@@ -14,11 +14,14 @@
     <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="stylesheet" href="../styles/board.css" />
     <link rel="stylesheet" href="../styles/pop_up_board.css" />
+    <link rel="stylesheet" href="../styles/pop_up_board_edit_task.css" />
   </head>
 
   <!-- TASKS
   ** Plus button on hover blau
   ** overlay / pop up von task erstellen
+  ** blauer rahmen input onclick
+  ** scrollbar im pop up
   -->
   <body>
     <!-- SIDEBAR -->
@@ -91,8 +94,12 @@
         <section>
           <div class="headline">
             <h1>Board</h1>
-            <div class="searchbox-wrapper">
-              <input type="text" placeholder="Find Task" />
+            <form class="searchbox-wrapper">
+              <input
+                class="searchbox-input"
+                type="text"
+                placeholder="Find Task"
+              />
               <button class="input-btn">
                 <img
                   class="input-btn-img"
@@ -108,7 +115,7 @@
                   alt="plus"
                 />
               </button>
-            </div>
+            </form>
           </div>
         </section>
         <!-- KANBAN BOARD -->
@@ -224,9 +231,9 @@
             </div>
           </div>
         </section>
-        <!-- OVERLAY / POP UP -->
+        <!-- OVERLAY / POP UP BOARD TASK RENDERN-->
         <section>
-          <div class="overlay-board">
+          <div class="overlay-pop-up-board d_none">
             <div class="pop-up-board-wrapper">
               <div class="pop-up-task-header">
                 <div class="header-category">
@@ -271,10 +278,138 @@
               </div>
               <div class="pop-up-subtasks">
                 <p>Subtasks</p>
-                <input type="checkbox">
-                <input type="checkbox">
+                <div class="single-subtasks">
+                  <img src="#" alt="checkbox" />
+                  $$ Single Subtask $$
+                </div>
+                <div class="single-subtasks">
+                  <img src="#" alt="checkbox" />
+                  $$ Single Subtask $$
+                </div>
               </div>
-              <div class="pop-up-footer"></div>
+              <div class="pop-up-footer">
+                <img
+                  class="pop-up-footer-edit-img"
+                  src="../assets/img/edit_black.png"
+                  alt="edit"
+                />
+                <div class="pop-up-seperator"></div>
+                <img
+                  class="pop-up-footer-delete-img"
+                  src="../assets/img/delete_black.png"
+                  alt="delete"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- POP UP BOARD EDIT TASK RENDERN-->
+        <section>
+          <div class="overlay-pop-up-edit-task">
+            <div class="pop-up-edit-task-wrapper">
+              <div class="pop-up-edit-task-inner-container">
+                <div class="pop-up-edit-task-headline">
+                  <h4>Edit task</h4>
+                  <img
+                    class="pop-up-close-img"
+                    src="../assets/img/close_black.png"
+                    alt="close"
+                  />
+                </div>
+                <form class="pop-up-edit-task-form">
+                  <div class="pop-up-edit-task-title">
+                    <label for="">
+                      Title
+                      <span class="required-sign">*</span>
+                    </label>
+                    <input
+                      class="pop-up-edit-task-input"
+                      type="text"
+                      placeholder="Enter a title"
+                    />
+                  </div>
+
+                  <div class="pop-up-edit-task-description">
+                    <label for="">
+                      Description
+                      <span class="required-sign">*</span>
+                    </label>
+                    <textarea
+                      class="pop-up-edit-task-textarea"
+                      rows="4"
+                      placeholder="Enter a Description"
+                    ></textarea>
+                  </div>
+
+                  <div class="pop-up-edit-task-due-date">
+                    <label for="">
+                      Due date
+                      <span class="required-sign">*</span>
+                    </label>
+                    <input class="pop-up-edit-task-input" type="date" />
+                  </div>
+
+                  <div class="pop-up-edit-task-priority">
+                    <label for="">
+                      Priority
+                      <span class="required-sign">*</span>
+                    </label>
+                    <div class="prio-status">
+                      <div class="prio-urgent">
+                        <img src="#" alt="urgent" />
+                      </div>
+                      <div class="prio-medium">
+                        <img src="#" alt="medium" />
+                      </div>
+                      <div class="prio-low">
+                        <img src="#" alt="low" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="pop-up-edit-task-assigned-to">
+                    <label for="">
+                      Assigned to
+                      <span class="required-sign">*</span>
+                    </label>
+                    <select class="pop-up-edit-task-input" type="text">
+                      <option value="">Select contacts to assign</option>
+                      <option class="select-contact" value="">
+                        $$ Contact $$
+                      </option>
+                      <option class="select-contact" value="">
+                        $$ Contact $$
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="pop-up-edit-task-subtasks">
+                    <label for="">
+                      Subtasks
+                      <span class="required-sign">*</span>
+                    </label>
+                    <div class="edit-input-box">
+                      <img
+                        class="pop-up-edit-task-input-img"
+                        src="../assets/img/add_black.png"
+                        alt=""
+                      />
+                      <input
+                        class="pop-up-edit-task-input"
+                        type="text"
+                        placeholder="Add new subtask"
+                      />
+                      
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="pop-up-edit-task-footer">
+                <button class="pop-up-edit-task-btn">
+                  Ok
+                  <img class="pop-up-edit-task-btn-img" src="../assets/img/check_white.png" alt="check">
+                </button>
+              </div>
             </div>
           </div>
         </section>

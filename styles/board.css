@@ -23,7 +23,7 @@ p {
   margin: 0px;
 }
 
-.d_none{
+.d_none {
   display: none;
 }
 
@@ -34,14 +34,21 @@ p {
   cursor: pointer;
 }
 
-input {
+.searchbox-input {
   /* height: 48px; */
   width: 312px;
   border-radius: 10px;
   border: 1px solid rgb(170 170 170);
   cursor: pointer;
+  transition: 0.5s;
+  outline: none;
+  padding: 12px 21px;
   font-size: 20px;
   padding-left: 16px;
+}
+
+.searchbox-input:focus{
+  border: 1px solid rgb(41, 171, 226);
 }
 
 ::placeholder {
@@ -135,7 +142,7 @@ input {
   padding: 16px;
   gap: 24px;
   cursor: pointer;
- /*  overflow-y: scroll;
+  /*  overflow-y: scroll;
   scrollbar-width: thin; */
 }
 

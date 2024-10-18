@@ -2,7 +2,7 @@ h4{
     margin: 0px;
 }
 
-.overlay-board {
+.overlay-pop-up-board {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -21,13 +21,15 @@ h4{
     top: 50%;
     left: 50%;
     width: 400px;
-    height: 500px;
+    height: 530px;
     border-radius: 30px;
     background-color: white;
     transform: translate(-50%, -50%);
     padding: 48px 40px;
     gap: 24px;
 }
+
+
 
 .pop-up-task-header {
   display: flex;
@@ -39,7 +41,7 @@ h4{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 36px;
+ /*  height: 36px; */
   border-radius: 8px;
   padding: 4px 24px;
   background-color: blue;
@@ -63,7 +65,7 @@ h4{
 .pop-up-task-content{
     display: flex;
     flex-direction: column;
-    font-size: 64px;
+    font-size: 61px;
     gap: 24px;
 }
 
@@ -72,9 +74,10 @@ h4{
 }
 
 .pop-up-task-info{
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 20px;
 }
 
 tr{
@@ -82,9 +85,10 @@ tr{
 }
 
 .pop-up-assigned-to-wrapper{
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 20px;
 }
 
 .pop-up-assigned-profils{
@@ -95,4 +99,50 @@ tr{
     display: flex;
     gap: 16px;
     padding: 0px 16px;
+}
+
+.pop-up-subtasks{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  font-size: 20px;
+}
+
+.single-subtasks{
+  display: flex;
+  /* width: 344px; */
+  gap: 16px;
+  padding: 4px 16px;
+
+  font-size: 16px;
+}
+
+.single-subtasks:hover{
+  background-color: rgb(246, 247, 248);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.pop-up-footer{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.pop-up-footer-edit-img{
+  width: 62px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.pop-up-footer-delete-img{
+  width: 81px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.pop-up-seperator{
+  border-left: 1px solid #d1d1d1;
+  height: 24px;
+  margin: 0px 8px;
 }
