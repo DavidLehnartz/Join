@@ -3,4 +3,13 @@
   --secondary: #29abe2;
   --hover: #091931;
   --highlight: #2a3d59;
+  --orange: #ff7a00;
+}
+
+.bg-grey {
+  background-color: #d1d1d1;
+}
+
+.bg-orange {
+  background-color: #ff7a00;
 }
