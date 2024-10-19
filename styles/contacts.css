@@ -80,6 +80,15 @@
 }
 
 .item-active {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 78px;
+  border-radius: 10px;
+  border: none;
+  padding: 7px 0px;
+  gap: 35px;
+  cursor: pointer;
   background-color: #2a3647;
 }
 
@@ -146,6 +155,14 @@ hr {
   right: 0px;
   top: 96px;
   bottom: 0px;
+}
+
+.contact-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 30px;
 }
 
 .contacts-headline {

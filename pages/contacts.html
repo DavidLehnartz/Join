@@ -7,6 +7,7 @@
     <script src="../js/desktop_template.js"></script>
     <script src="../js/contact-template.js"></script>
     <script src="../js/add_contact.js"></script>
+    <script src="../js/contacts.js"></script>
     <link
       rel="icon"
       type="image/x-icon"
@@ -97,10 +98,14 @@
               <p class="contacts-info-hl section-letter">A</p>
               <hr />
             </div>
-            <div id="contact-list-item" class="contact-list-item">
+            <div
+              id="contact-item-anton"
+              class="contact-list-item"
+              onclick="showContactInfo(), toggleActive('anton')"
+            >
               <div id="list-initial" class="profile-icon-small">AM</div>
               <div class="contact-list-info">
-                <p id="list-name" class="contacts-info-hl">Anton Mayer</p>
+                <p id="list-name-anton" class="contacts-info-hl">Anton Mayer</p>
                 <p id="list-mail" class="copy-mail">antom@gmail.com</p>
               </div>
             </div>
@@ -113,35 +118,7 @@
             <div class="vl"></div>
             <p>Better with a team</p>
           </div>
-          <div class="contacts-name">
-            <div id="contact-initial" class="profile-icon-big">AM</div>
-            <div id="contact-name" class="name-container">
-              <h3>Anton Mayer</h3>
-              <div class="contacts-btn-row">
-                <div
-                  id="btn-contact-edit"
-                  class="text-button"
-                  onclick="showEditContactForm(event)"
-                >
-                  <img src="../assets/icons/edit.svg" />
-                  <p>Edit</p>
-                </div>
-                <div id="btn-contact-delete" class="text-button">
-                  <img src="../assets/icons/delete.svg" />
-                  <p>Delete</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="contacts-info-hl">
-            <h4>Contact Information</h4>
-          </div>
-          <div class="contacts-info-content">
-            <p class="label">Email</p>
-            <p id="contact-mail" class="copy-mail">antonm@gmail.com</p>
-            <p class="label">Phone</p>
-            <p id="contact-phone" class="copy-text">+49 1111 111 11 1</p>
-          </div>
+          <div id="contacts-info" class="contact-info-container"></div>
         </div>
       </div>
 
