@@ -137,6 +137,12 @@ header {
     gap: 8px;
 }
 
+.required-asterisk {
+    color: red;
+    margin-left: 0px; /* Adds a small space between the label and the asterisk */
+    font-size: 20px; /* Matches the size of the label */
+}
+
 .priorityStyle {
     display: flex;
     flex-direction: column;
@@ -222,6 +228,7 @@ header {
     cursor: pointer;
     border: 1px solid transparent;
     transition: all 0.3s ease;
+    height: 56px;
 }
 
 .clear-btn {
@@ -240,7 +247,8 @@ header {
     cursor: pointer;
     border: 1px solid transparent;
     transition: all 0.3s ease;
-    gap: 8px;  
+    gap: 8px;
+    height: 56px;
 }
 
 .urgMedLow-btn {
