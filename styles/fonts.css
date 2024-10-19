@@ -58,8 +58,8 @@ h4 {
 
 .contacts-info-hl {
   font-family: "interregular";
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 20px !important;
+  line-height: 24px !important;
   color: black;
   margin: 0px;
 }

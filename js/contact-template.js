@@ -107,3 +107,35 @@ function getEditContactOverlayTemplate(color, initial, name, email, phone) {
             </div>
           </div>`;
 }
+
+function getContactInfoTemplate(color, initial, name, email, phone) {
+  return `<div class="contacts-name">
+              <div id="contact-initial" class="profile-icon-big bg-${color}">${initial}</div>
+              <div id="contact-name" class="name-container">
+                <h3>${name}</h3>
+                <div class="contacts-btn-row">
+                  <div
+                    id="btn-contact-edit"
+                    class="text-button"
+                    onclick="showEditContactForm(event)"
+                  >
+                    <img src="../assets/icons/edit.svg" />
+                    <p>Edit</p>
+                  </div>
+                  <div id="btn-contact-delete" class="text-button">
+                    <img src="../assets/icons/delete.svg" />
+                    <p>Delete</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="contacts-info-hl">
+              <h4>Contact Information</h4>
+            </div>
+            <div class="contacts-info-content">
+              <p class="label">Email</p>
+              <p id="contact-mail" class="copy-mail">${email}</p>
+              <p class="label">Phone</p>
+              <p id="contact-phone" class="copy-text">${phone}</p>
+            </div>`;
+}
