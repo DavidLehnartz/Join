@@ -165,11 +165,11 @@ header {
 .selectCategory:hover {
     border-color: #29ABE2;
     box-shadow: 0 0 5px #29ABE2;
-    transition: all 0.3s ease;
+    transition: all 125ms ease;
 }
 
 .selectCategory span {
-    font-size: 16px;
+    font-size: 20px;
     color: #000;
     font-family: "Inter", sans-serif;
 }
@@ -232,19 +232,19 @@ header {
 .titleInput:hover {
     border-color: #29ABE2;
     box-shadow: 0 0 5px #29ABE2;
-    transition: all 0.3s ease;
+    transition: all 125ms ease;
 }
 
 .titleInputDescription:hover {
     border-color: #29ABE2;
     box-shadow: 0 0 5px #29ABE2;
-    transition: all 0.3s ease;
+    transition: all 125ms ease;
 }
 
 .titleInput {
     height: 38px;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 20px;
     border: 1px solid #D1D1D1;
     cursor: text;
     padding: 8px 12px;
@@ -254,7 +254,7 @@ header {
 .titleInputDescription {
     height: 96px;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 20px;
     border: 1px solid #D1D1D1;
     cursor: text;
     padding: 16px 12px;
@@ -272,17 +272,17 @@ textarea {
     border-color: #29ABE2 !important;
     box-shadow: none;
     outline: none;
-    transition: all 0.3s ease;
+    transition: all 125ms ease;
 }
 
 ::placeholder {
-    font-size: 16px;
+    font-size: 20px;
     color: #D1D1D1;
 }
 
 #inputField2::placeholder {
     text-align: left;
-    font-size: 16px;
+    font-size: 20px;
     color: #D1D1D1;
     padding: 0;
     position: static;
@@ -297,12 +297,12 @@ textarea {
 
 .btn {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 20px;
     border-radius: 10px;
     cursor: pointer;
     border: 1px solid transparent;
-    transition: all 0.3s ease;
-    height: 56px;   
+    transition: all 125ms ease;
+    height: 56px;
 }
 
 .clear-btn {
@@ -316,11 +316,11 @@ textarea {
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 20px;
     border-radius: 10px;
     cursor: pointer;
     border: 1px solid transparent;
-    transition: all 0.3s ease;
+    transition: all 125ms ease;
     gap: 8px;
     height: 56px;
 }
@@ -339,7 +339,8 @@ textarea {
 .urgMedLow-btn:hover,
 .urgMedLow-btn-medium:hover {
     border-color: #29ABE2;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px #29ABE2;
+    transition: all 125ms ease;
 }
 
 .active-urgent {

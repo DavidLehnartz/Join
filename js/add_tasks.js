@@ -27,7 +27,7 @@ function setPriority(button, priority) {
         if (btn.innerText.includes('Urgent')) {
             img.src = '../assets/img/urgent.png';
         } else if (btn.innerText.includes('Medium')) {
-            img.src = '../assets/img/medium2.png';
+            img.src = '../assets/img/medium21.png';
         } else if (btn.innerText.includes('Low')) {
             img.src = '../assets/img/low.png';
         }
@@ -36,13 +36,13 @@ function setPriority(button, priority) {
     const img = button.querySelector('img');
     if (priority === 'urgent') {
         button.classList.add('active-urgent');
-        img.src = '../assets/img/urgent2.png';
+        img.src = '../assets/img/urgent21.png';
     } else if (priority === 'medium') {
         button.classList.add('active-medium');
         img.src = '../assets/img/medium.png';
     } else if (priority === 'low') {
         button.classList.add('active-low');
-        img.src = '../assets/img/low2.png';
+        img.src = '../assets/img/low21.png';
     }
 
     localStorage.setItem('selectedPriority', priority);
@@ -67,4 +67,5 @@ function setTodayDate() {
     const todayString = `${year}-${month}-${day}`;
     dateInput.setAttribute('min', todayString);
     dateInput.value = todayString;
+  
 }
