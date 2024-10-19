@@ -4,12 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>templates</title>
-  <link rel="icon" type="image/x-icon" href="../assets/img/join_logo_white.svg" />
+  <title>Add Task</title>
+  <link rel="icon" type="image/x-icon" href="../assets/img/join_logo_grey.svg" />
   <link rel="stylesheet" href="../styles/add_task.css">
   <link rel="stylesheet" href="../styles/fonts.css">
   <script src="../js/add_tasks.js"></script>
-
 </head>
 
 <body>
@@ -58,7 +57,7 @@
         <div class="bothSides">
           <div class="leftSide">
             <div class="inputStyle">
-              <span for="inputField">Title <span class="required-asterisk">*</span></span>
+              <span for="inputField">Title<span class="required-asterisk">*</span></span>
               <input type="text" id="inputField1" placeholder="Enter a title" class="titleInput">
             </div>
             <div class="inputStyle">
@@ -78,9 +77,9 @@
           </div>
           <div class="rightSide">
             <div class="inputStyle">
-              <span for="inputField">Due date <span class="required-asterisk">*</span></span>
+              <span for="inputField">Due date<span class="required-asterisk">*</span></span>
               <input required type="date" id="inputField4" placeholder="dd/mm/yyyy" class="titleInput">
-          </div>
+            </div>
             <div class="priorityStyle">
               <span for="inputField">Prio</span>
               <div class="priority-button">
@@ -98,13 +97,15 @@
                 </button>
               </div>
             </div>
-            <span style="margin-bottom: -6px; margin-top: 32px;">Category</span>
-            <div class="selectCategory" onclick="toggleDropdown(event)">
-              <span id="selectedCategory">Select task category</span>
-              <img src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
-              <div class="category-dropdown" id="categoryDropdown">
-                <span onclick="selectCategory('Technical Task')">Technical Task</span>
-                <span onclick="selectCategory('User Story')">User Story</span>
+            <div class="inputStyle">
+              <span for="inputField">Category<span class="required-asterisk">*</span></span>
+              <div class="selectCategory" onclick="toggleDropdown(event)">
+                <span id="selectedCategory">Select task category</span>
+                <img src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
+                <div class="category-dropdown" id="categoryDropdown">
+                  <span onclick="selectCategory('Technical Task')">Technical Task</span>
+                  <span onclick="selectCategory('User Story')">User Story</span>
+                </div>
               </div>
             </div>
             <div class="inputStyle">

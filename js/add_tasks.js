@@ -44,7 +44,7 @@ function setPriority(button, priority) {
         button.classList.add('active-low');
         img.src = '../assets/img/low2.png';
     }
-    
+
     localStorage.setItem('selectedPriority', priority);
 }
 
