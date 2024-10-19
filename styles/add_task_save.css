@@ -111,10 +111,9 @@ header {
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    margin-left: 100px;
+    margin-left: 150px;
     gap: 20px;
 }
-
 
 .bothSides {
     display: flex;
@@ -135,7 +134,7 @@ header {
     width: 1px;
     background-color: #D1D1D1;
     border: 1px;
-    height: 460x;
+    height: 450px;
 }
 
 .inputStyle {
@@ -145,27 +144,128 @@ header {
     gap: 8px;
 }
 
-.titleInputDescription {
-    height: 96px;
+.selectCategory {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    height: 38px;
+    box-sizing: border-box;
+    background-color: white;
 }
 
-input {
-    max-width: 100%;
-    border-radius: 10px;
-    font-size: 20px;
+.selectCategory span {
+    font-size: 16px;
+    color: #000;
+    font-family: "Inter", sans-serif;
+}
+
+.dropdown-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.category-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
     border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    background-color: white;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+}
+
+.category-dropdown li {
+    padding: 10px;
     cursor: pointer;
 }
 
-input:hover {
-    border-color: #000;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+.category-dropdown li:hover {
+    background-color: #f0f0f0;
+}
+
+
+
+
+.required-asterisk {
+    color: red;
+    margin-left: 0px;
+    font-size: 20px;
+}
+
+.priorityStyle {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.priority-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.titleInput:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 5px #29ABE2;
     transition: all 0.3s ease;
 }
 
-::placeholder{
+.titleInputDescription:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 5px #29ABE2;
+    transition: all 0.3s ease;
+}
+
+.titleInput {
+    height: 38px;
+    border-radius: 10px;
+    font-size: 20px;
+    border: 1px solid #D1D1D1;
+    cursor: text;
+    padding: 8px 12px;
+    box-sizing: border-box;
+}
+
+.titleInputDescription {
+    height: 96px;
+    border-radius: 10px;
+    font-size: 20px;
+    border: 1px solid #D1D1D1;
+    cursor: text;
+    padding: 16px 12px;
+    box-sizing: border-box;
+}
+
+textarea{
+    resize: none;
+    font-family: "Inter", sans-serif;
+    scrollbar-width: none;
+}
+
+.titleInput:focus,
+.titleInputDescription:focus {
+    border-color: #29ABE2 !important;
+    box-shadow: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+::placeholder {
     font-size: 16px;
-    padding: 8px 24px;
     color: #D1D1D1;
 }
 
@@ -173,22 +273,15 @@ input:hover {
     text-align: left;
     font-size: 16px;
     color: #D1D1D1;
-    line-height: 1.2;
-    padding: 8px 24px;
-    position: relative;
-    top: -20px;
+    padding: 0;
+    position: static;
 }
 
-.titleInput{
-    height: 38px;
-}
-
-.clear-task-button{
+.clear-task-button {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
     margin-top: 20px
-   
 }
 
 .btn {
@@ -198,15 +291,67 @@ input:hover {
     cursor: pointer;
     border: 1px solid transparent;
     transition: all 0.3s ease;
+    height: 56px;
 }
+
 .clear-btn {
     background-color: white;
     color: #000;
     border-color: #ccc;
 }
 
+.priobtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    gap: 8px;
+    height: 56px;
+}
+
+.urgMedLow-btn {
+    background-color: white;
+    color: #000;
+    border-color: #ccc;
+    min-width: 140px;
+}
+
+.urgMedLow-btn-medium {
+    background-color: #FFA827;
+}
+
+.urgMedLow-btn-medium:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.urgMedLow-btn:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.active-urgent {
+    background-color: red;
+    color: white;
+}
+
+.active-medium {
+    background-color: orange;
+    color: white;
+}
+
+.active-low {
+    background-color: green;
+    color: white;
+}
+
 .clear-btn:hover {
-    border-color: #000;
+    border-color: #29ABE2;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -217,6 +362,6 @@ input:hover {
 }
 
 .create-task-btn:hover {
-    border-color: #fff;
+    border-color: #29ABE2;
     box-shadow: 0 0 10px rgba(42, 54, 71, 0.5);
 }

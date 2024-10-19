@@ -8,6 +8,7 @@
   <link rel="icon" type="image/x-icon" href="../assets/img/join_logo_white.svg" />
   <link rel="stylesheet" href="../styles/add_task.css">
   <link rel="stylesheet" href="../styles/fonts.css">
+  <script src="../js/add_tasks.js"></script>
 
 </head>
 
@@ -57,15 +58,15 @@
         <div class="bothSides">
           <div class="leftSide">
             <div class="inputStyle">
-              <label for="inputField">Title</label>
+              <span for="inputField">Title <span class="required-asterisk">*</span></span>
               <input type="text" id="inputField1" placeholder="Enter a title" class="titleInput">
             </div>
             <div class="inputStyle">
-              <label for="inputField">Description</label>
-              <input type="text" id="inputField2" placeholder="Enter a Description" class="titleInputDescription">
+              <span for="inputField">Description</span>
+              <textarea id="inputField2" placeholder="Enter a Description" class="titleInputDescription"></textarea>
             </div>
             <div class="inputStyle">
-              <label for="inputField">Assigned to</label>
+              <span for="inputField">Assigned to</span>
               <input type="text" id="inputField3" placeholder="Select contacts to assign" class="titleInput">
             </div>
             <span style="color: black; position: relative; top: 200px">
@@ -77,19 +78,37 @@
           </div>
           <div class="rightSide">
             <div class="inputStyle">
-              <label for="inputField">Due date</label>
-              <input type="text" id="inputField4" placeholder="dd/mm/yyyy" class="titleInput">
+              <span for="inputField">Due date <span class="required-asterisk">*</span></span>
+              <input required type="date" min="2024-10-19" id="inputField4" placeholder="dd/mm/yyyy" class="titleInput">
+            </div>
+            <div class="priorityStyle">
+              <span for="inputField">Prio</span>
+              <div class="priority-button">
+                <button class="priobtn urgMedLow-btn" onclick="setPriority(this, 'urgent')">
+                    Urgent
+                    <img src="../assets/img/urgent.png" class="priority-icon">
+                </button>
+                <button class="priobtn urgMedLow-btn-medium" onclick="setPriority(this, 'medium')">
+                    Medium
+                    <img src="../assets/img/medium.png" class="priority-icon">
+                </button>
+                <button class="priobtn urgMedLow-btn" onclick="setPriority(this, 'low')">
+                    Low
+                    <img src="../assets/img/low.png" class="priority-icon">
+                </button>
+            </div>
+            </div>
+            <span style="margin-bottom: -6px; margin-top: 32px;">Category</span>
+            <div class="selectCategory" onclick="toggleDropdown()">
+              <span>Select task category</span>
+              <img src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
+              <ul class="category-dropdown" id="categoryDropdown">
+                <li>Technical Task</li>
+                <li>User Story</li>
+              </ul>
             </div>
             <div class="inputStyle">
-              <label for="inputField">Prio</label>
-              <input type="text" id="inputField5" placeholder="Prio" class="titleInput">
-            </div>
-            <div class="inputStyle">
-              <label for="inputField">Category</label>
-              <input type="text" id="inputField6" placeholder="Select task category" class="titleInput">
-            </div>
-            <div class="inputStyle">
-              <label for="inputField">Subtasks</label>
+              <span for="inputField">Subtasks</span>
               <input type="text" id="inputField7" placeholder="Add new subtask" class="titleInput">
             </div>
             <div class="clear-task-button">
@@ -104,8 +123,3 @@
 </body>
 
 </html>
-
-<div class="inputStyle">
-  <label for="inputField">Category <span class="required-asterisk">*</span></label>
-  <input type="text" id="inputField6" class="titleInput">
-</div>

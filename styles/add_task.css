@@ -130,6 +130,13 @@ header {
     width: 440px;
 }
 
+.seperator {
+    width: 1px;
+    background-color: #D1D1D1;
+    border: 1px;
+    height: 450px;
+}
+
 .inputStyle {
     display: flex;
     flex-direction: column;
@@ -137,11 +144,69 @@ header {
     gap: 8px;
 }
 
-.selectCategory{
+.selectCategory {
     display: flex;
-    flex-direction: column;
-    height: 120px;
-    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    height: 38px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.selectCategory:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 5px #29ABE2;
+    transition: all 0.3s ease;
+}
+
+.selectCategory span {
+    font-size: 16px;
+    color: #000;
+    font-family: "Inter", sans-serif;
+}
+
+.dropdown-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.category-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    background-color: white;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+}
+
+.category-dropdown.show {
+    display: block;
+}
+
+.category-dropdown li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.category-dropdown li:hover {
+    background-color: #f0f0f0;
+    border-radius: 10px;
 }
 
 .required-asterisk {
@@ -159,13 +224,6 @@ header {
 .priority-button {
     display: flex;
     justify-content: space-between;
-}
-
-.seperator {
-    width: 1px;
-    background-color: #D1D1D1;
-    border: 1px;
-    height: 500px;
 }
 
 .titleInput:hover {
@@ -198,6 +256,12 @@ header {
     cursor: text;
     padding: 16px 12px;
     box-sizing: border-box;
+}
+
+textarea {
+    resize: none;
+    font-family: "Inter", sans-serif;
+    scrollbar-width: none;
 }
 
 .titleInput:focus,
