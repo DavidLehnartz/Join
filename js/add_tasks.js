@@ -67,5 +67,4 @@ function setTodayDate() {
     const todayString = `${year}-${month}-${day}`;
     dateInput.setAttribute('min', todayString);
     dateInput.value = todayString;
-  
 }
