@@ -137,10 +137,17 @@ header {
     gap: 8px;
 }
 
+.selectCategory{
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    gap: 8px;
+}
+
 .required-asterisk {
     color: red;
-    margin-left: 0px; /* Adds a small space between the label and the asterisk */
-    font-size: 20px; /* Matches the size of the label */
+    margin-left: 0px;
+    font-size: 20px;
 }
 
 .priorityStyle {
