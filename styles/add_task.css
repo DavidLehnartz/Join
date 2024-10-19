@@ -177,7 +177,6 @@ header {
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
-    pointer-events: none;
 }
 
 .category-dropdown {
@@ -199,14 +198,14 @@ header {
     display: block;
 }
 
-.category-dropdown li {
+.category-dropdown span {
+    display: block;
     padding: 10px;
     cursor: pointer;
 }
 
-.category-dropdown li:hover {
+.category-dropdown span:hover {
     background-color: #f0f0f0;
-    border-radius: 10px;
 }
 
 .required-asterisk {

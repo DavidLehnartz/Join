@@ -1,13 +1,10 @@
-function toggleDropdown() {
+function toggleDropdown(event) {
     const dropdown = document.getElementById("categoryDropdown");
     dropdown.classList.toggle("show");
+    event.stopPropagation();
 }
 
-document.addEventListener('click', function(event) {
-    const selectCategory = document.querySelector('.selectCategory');
-    const dropdown = document.getElementById("categoryDropdown");
-
-    if (!selectCategory.contains(event.target)) {
-        dropdown.classList.remove("show");
-    }
-});
+function selectCategory(category) {
+    const selectedCategoryElement = document.getElementById("selectedCategory");
+    selectedCategoryElement.textContent = category;
+}

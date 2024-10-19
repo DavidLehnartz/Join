@@ -98,14 +98,14 @@
                 </button>
               </div>
             </div>
-            <span style="margin-bottom: -10px; margin-top: 32px;">Category</span>
-            <div class="selectCategory" onclick="toggleDropdown()">
-              <span>Select task category</span>
+            <span style="margin-bottom: -6px; margin-top: 32px;">Category</span>
+            <div class="selectCategory" onclick="toggleDropdown(event)">
+              <span id="selectedCategory">Select task category</span>
               <img src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
-              <ul class="category-dropdown" id="categoryDropdown">
-                <li>Technical Task</li>
-                <li>User Story</li>
-              </ul>
+              <div class="category-dropdown" id="categoryDropdown">
+                <span onclick="selectCategory('Technical Task')">Technical Task</span>
+                <span onclick="selectCategory('User Story')">User Story</span>
+              </div>
             </div>
             <div class="inputStyle">
               <span for="inputField">Subtasks</span>
