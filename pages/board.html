@@ -142,10 +142,11 @@
                   </p>
                 </div>
                 <div class="kanban-task-subtasks">
-                  <div class="subtasks-progress-bar">$$ p.bar $$</div>
-                  <div class="subtasks-counter">
-                    <span>$/$ Subtasks</span>
-                  </div>
+                  <!--  <div class="subtasks-progress-bar"> -->
+                  <progress value="0" max="100"></progress>
+                  <span>$/$ Subtasks</span>
+
+                  <!-- </div> -->
                 </div>
                 <div class="kanban-task-footer">
                   <div class="asignees-profil">$$ Profil $$</div>
@@ -271,7 +272,7 @@
                 <div class="pop-up-assigned-profils">
                   <div class="single-assigned-profil">
                     <!-- Rendern -->
-                    <img src="#" alt="profil" />
+                    <img src="#" alt="contact" />
                     <p>$$ Name $$</p>
                   </div>
                 </div>
@@ -305,7 +306,7 @@
         </section>
         <!-- POP UP BOARD EDIT TASK RENDERN-->
         <section>
-          <div class="overlay-pop-up-edit-task">
+          <div class="overlay-pop-up-edit-task ">
             <div class="pop-up-edit-task-wrapper">
               <div class="pop-up-edit-task-inner-container">
                 <div class="pop-up-edit-task-headline">
@@ -381,6 +382,11 @@
                         $$ Contact $$
                       </option>
                     </select>
+                    <div class="assigned-contacts">
+                      <div>$$ Selected contacts $$</div>
+                      <div>$$ Selected contacts $$</div>
+                      <div>$$ Selected contacts $$</div>
+                    </div>
                   </div>
 
                   <div class="pop-up-edit-task-subtasks">
@@ -388,26 +394,36 @@
                       Subtasks
                       <span class="required-sign">*</span>
                     </label>
-                    <div class="edit-input-box">
-                      <img
-                        class="pop-up-edit-task-input-img"
-                        src="../assets/img/add_black.png"
-                        alt=""
-                      />
-                      <input
-                        class="pop-up-edit-task-input"
-                        type="text"
-                        placeholder="Add new subtask"
-                      />
-                      
-                    </div>
+                    <input
+                      class="pop-up-edit-subtask-input"
+                      type="text"
+                      placeholder="Add new subtask"
+                    />
+                    <img
+                      class="pop-up-edit-task-input-btn-img"
+                      src="../assets/img/add_black.png"
+                      alt=""
+                    />
+                    <ul>
+                      <li>
+                        $$ Added subtask $$
+                        <img src="#" alt="" />
+                      </li>
+                      <li>$$ Added subtask $$</li>
+                      <li>$$ Added subtask $$</li>
+                      <li>$$ Added subtask $$</li>
+                    </ul>
                   </div>
                 </form>
               </div>
               <div class="pop-up-edit-task-footer">
                 <button class="pop-up-edit-task-btn">
                   Ok
-                  <img class="pop-up-edit-task-btn-img" src="../assets/img/check_white.png" alt="check">
+                  <img
+                    class="pop-up-edit-task-btn-img"
+                    src="../assets/img/check_white.png"
+                    alt="check"
+                  />
                 </button>
               </div>
             </div>

@@ -47,7 +47,7 @@ p {
   padding-left: 16px;
 }
 
-.searchbox-input:focus{
+.searchbox-input:focus {
   border: 1px solid rgb(41, 171, 226);
 }
 
@@ -168,10 +168,13 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
+  font-size: 12px;
 }
 
-.subtasks-progress-bar {
-  width: 128px;
+progress {
+  width: 150px;
+  
 }
 
 .subtasks-counter {
