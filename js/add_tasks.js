@@ -8,8 +8,6 @@ task = {
     subtasks: ['first subtask', 'secondSubtask']
 }
 
-
-
 function toggleDropdown(event) {
     const dropdown = document.getElementById("categoryDropdown");
     dropdown.classList.toggle("show");
@@ -21,9 +19,7 @@ function selectCategory(category) {
     selectedCategoryElement.textContent = category;
 }
 
-
 function setPriority(button, priority) {
-    // Entferne die aktive Klasse von allen Buttons und setze die ursprünglichen Bilder zurück
     const buttons = document.querySelectorAll('.priobtn');
     buttons.forEach(btn => {
         btn.classList.remove('active-urgent', 'active-medium', 'active-low');
@@ -37,7 +33,6 @@ function setPriority(button, priority) {
         }
     });
 
-    // Füge die entsprechende Klasse zum geklickten Button hinzu und ändere das Bild
     const img = button.querySelector('img');
     if (priority === 'urgent') {
         button.classList.add('active-urgent');
@@ -49,32 +44,27 @@ function setPriority(button, priority) {
         button.classList.add('active-low');
         img.src = '../assets/img/low2.png';
     }
-
-    // Speichere die ausgewählte Priorität in localStorage
+    
     localStorage.setItem('selectedPriority', priority);
 }
 
 function restorePriority() {
-    const savedPriority = localStorage.getItem('selectedPriority');
-    const buttons = document.querySelectorAll('.priobtn');
-
-    if (savedPriority) {
-        buttons.forEach(button => {
-            if (button.innerText.includes('Urgent') && savedPriority === 'urgent') {
-                setPriority(button, 'urgent');
-            } else if (button.innerText.includes('Medium') && savedPriority === 'medium') {
-                setPriority(button, 'medium');
-            } else if (button.innerText.includes('Low') && savedPriority === 'low') {
-                setPriority(button, 'low');
-            }
-        });
-    } else {
-        // Wenn keine Auswahl gespeichert ist, wähle standardmäßig "Medium"
-        const mediumPriorityBtn = document.querySelector('.urgMedLow-btn-medium');
-        setPriority(mediumPriorityBtn, 'medium');
-    }
+    const mediumPriorityBtn = document.querySelector('.urgMedLow-btn-medium');
+    setPriority(mediumPriorityBtn, 'medium');
 }
 
 window.onload = function () {
     restorePriority();
+    setTodayDate();
 };
+
+function setTodayDate() {
+    const dateInput = document.getElementById('inputField4');
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const todayString = `${year}-${month}-${day}`;
+    dateInput.setAttribute('min', todayString);
+    dateInput.value = todayString;
+}
