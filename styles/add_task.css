@@ -171,7 +171,7 @@ header {
 }
 
 .dropdown-arrow {
-    position: absolute;
+   position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
@@ -321,6 +321,8 @@ textarea {
     height: 56px;
 }
 
+
+
 .urgMedLow-btn {
     background-color: white;
     color: #000;
@@ -329,17 +331,28 @@ textarea {
 }
 
 .urgMedLow-btn-medium {
-    background-color: #FFA827;
+    background-color: white;
 }
 
+.urgMedLow-btn:hover,
 .urgMedLow-btn-medium:hover {
     border-color: #29ABE2;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.urgMedLow-btn:hover {
-    border-color: #29ABE2;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+.active-urgent {
+    background-color: #FE3D19;
+    color: white;
+}
+
+.active-medium {
+    background-color: #FFA827;
+    color: white;
+}
+
+.active-low {
+    background-color: #7AE22B;
+    color: white;
 }
 
 .clear-btn:hover {

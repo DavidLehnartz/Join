@@ -84,17 +84,17 @@
             <div class="priorityStyle">
               <span for="inputField">Prio</span>
               <div class="priority-button">
-                <button class="priobtn urgMedLow-btn">
+                <button class="priobtn urgMedLow-btn" onclick="setPriority(this, 'urgent')">
                   Urgent
-                  <img src="../assets/img/urgent.png">
+                  <img src="../assets/img/urgent.png" class="priority-icon">
                 </button>
-                <button class="priobtn urgMedLow-btn-medium">
+                <button class="priobtn urgMedLow-btn-medium" onclick="setPriority(this, 'medium')">
                   Medium
-                  <img src="../assets/img/medium.png">
+                  <img src="../assets/img/medium2.png" class="priority-icon">
                 </button>
-                <button class="priobtn urgMedLow-btn">
+                <button class="priobtn urgMedLow-btn" onclick="setPriority(this, 'low')">
                   Low
-                  <img src="../assets/img/low.png">
+                  <img src="../assets/img/low.png" class="priority-icon">
                 </button>
               </div>
             </div>
