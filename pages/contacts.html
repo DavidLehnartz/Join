@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contacts</title>
     <script src="../js/desktop_template.js"></script>
+    <script src="../js/contact-template.js"></script>
+    <script src="../js/add_contact.js"></script>
     <link
       rel="icon"
       type="image/x-icon"
       href="./assets/img/join_logo_white.svg"
     />
+    <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../styles/desktop_template.css" />
     <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="stylesheet" href="../styles/contacts.css" />
+    <link rel="stylesheet" href="../styles/add_contact.css" />
   </head>
   <body>
     <aside>
@@ -77,13 +81,32 @@
           </div>
         </div>
       </header>
+
       <div class="contacts-content-wrapper">
         <div class="contacts-list-container">
-          <button class="btn-add-contact">
+          <button
+            id="btn-add-contact"
+            class="btn-add-contact"
+            onclick="showAddContactForm(event)"
+          >
             <p>Add new contact</p>
             <img src="../assets/icons/person_add.svg" />
           </button>
+          <div id="contact-list" class="contact-list">
+            <div id="section-header" class="section-header">
+              <p class="contacts-info-hl section-letter">A</p>
+              <hr />
+            </div>
+            <div id="contact-list-item" class="contact-list-item">
+              <div id="list-initial" class="profile-icon-small">AM</div>
+              <div class="contact-list-info">
+                <p id="list-name" class="contacts-info-hl">Anton Mayer</p>
+                <p id="list-mail" class="copy-mail">antom@gmail.com</p>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="contact-preview-container">
           <div class="contacts-headline">
             <h2>Contacts</h2>
@@ -91,11 +114,22 @@
             <p>Better with a team</p>
           </div>
           <div class="contacts-name">
-            <div class="profile-icon-big"></div>
-            <div class="name-container">
-              <h3>Anton Maier</h3>
+            <div id="contact-initial" class="profile-icon-big">AM</div>
+            <div id="contact-name" class="name-container">
+              <h3>Anton Mayer</h3>
               <div class="contacts-btn-row">
-                <div class="text-button"></div>
+                <div
+                  id="btn-contact-edit"
+                  class="text-button"
+                  onclick="showEditContactForm(event)"
+                >
+                  <img src="../assets/icons/edit.svg" />
+                  <p>Edit</p>
+                </div>
+                <div id="btn-contact-delete" class="text-button">
+                  <img src="../assets/icons/delete.svg" />
+                  <p>Delete</p>
+                </div>
               </div>
             </div>
           </div>
@@ -103,17 +137,19 @@
             <h4>Contact Information</h4>
           </div>
           <div class="contacts-info-content">
-            <div class="contacts-info-item">
-              <p class="label">Email</p>
-              <p class="copy-text">antonm@gmail.com</p>
-            </div>
-            <div class="contacts-info-item">
-              <p class="label">Phone</p>
-              <p class="copy-text">+49 1111 111 11 1</p>
-            </div>
+            <p class="label">Email</p>
+            <p id="contact-mail" class="copy-mail">antonm@gmail.com</p>
+            <p class="label">Phone</p>
+            <p id="contact-phone" class="copy-text">+49 1111 111 11 1</p>
           </div>
         </div>
       </div>
+
+      <section
+        id="contacts-overlay"
+        class="contacts-overlay hidden"
+        onclick="closeContactForm(event)"
+      ></section>
     </main>
   </body>
 </html>
