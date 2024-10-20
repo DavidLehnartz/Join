@@ -22,61 +22,63 @@
   <!-- TASKS
    **drop down zeile 420
   ** Plus button on hover blau
-  ** overlay / pop up von task erstellen
-  ** blauer rahmen input onclick
-  ** scrollbar im pop up
   -->
   <body>
     <!-- SIDEBAR -->
-    <aside>
-      <div class="left-sidebar">
-        <img src="../assets/img/join_logo_white.svg" alt="join logo" />
-        <div class="left-sidebar-links">
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/summary.png"
-              alt="Summary"
-            />
-            <p>Summary</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/add_task.png"
-              alt="Add Task"
-            />
-            <p>Add Task</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/board.png"
-              alt="Board"
-            />
-            <p>Board</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/contacts.png"
-              alt="Contacts"
-            />
-            <p>Contacts</p>
-          </a>
-        </div>
-        <div class="left-sidebar-links">
-          <a class="legacy-links" href="#"> Privacy Policy </a>
-          <a class="legacy-links" href="#"> Legal notice </a>
-        </div>
+
+    <div class="left-sidebar">
+      <img src="../assets/img/join_logo_white.svg" alt="join logo" />
+      <div class="left-sidebar-links">
+        <a class="links" href="#">
+          <img
+            class="sidebar-icons"
+            src="../assets/img/summary.png"
+            alt="Summary"
+          />
+          <p>Summary</p>
+        </a>
+        <a class="links" href="#">
+          <img
+            class="sidebar-icons"
+            src="../assets/img/add_task.png"
+            alt="Add Task"
+          />
+          <p>Add Task</p>
+        </a>
+        <a class="links" href="#">
+          <img
+            class="sidebar-icons"
+            src="../assets/img/board.png"
+            alt="Board"
+          />
+          <p>Board</p>
+        </a>
+        <a class="links" href="#">
+          <img
+            class="sidebar-icons"
+            src="../assets/img/contacts.png"
+            alt="Contacts"
+          />
+          <p>Contacts</p>
+        </a>
       </div>
-    </aside>
+      <div class="left-sidebar-links">
+        <a class="legacy-links" href="#"> Privacy Policy </a>
+        <a class="legacy-links" href="#"> Legal notice </a>
+      </div>
+    </div>
 
     <main>
       <!-- HEADER -->
       <header>
         <div class="header-wrapper">
-          <span> Kanban Project Management Tool</span>
+          <span class="app-description"> Kanban Project Management Tool</span>
+          <!-- RESPONSIVE LOGO -->
+          <img
+            class="join-logo-responsive"
+            src="../assets/img/join_logo_grey.svg"
+            alt="logo"
+          />
           <div class="header-icons">
             <img
               class="header-help-icon"
@@ -99,6 +101,7 @@
           <div class="headline">
             <h1>Board</h1>
             <form class="searchbox-wrapper">
+              <div class="searchbox-container"></div>
               <input
                 class="searchbox-input"
                 type="text"
@@ -111,6 +114,7 @@
                   alt="search"
                 />
               </button>
+
               <button class="add-task-btn">
                 Add task
                 <img
@@ -119,8 +123,38 @@
                   alt="plus"
                 />
               </button>
+              <!-- RESPONSIVE BTN-->
+              <button class="add-task-btn-responsive">
+                <img
+                  class="add-task-btn-img"
+                  src="../assets/img/plus_white.png"
+                  alt="plus"
+                />
+              </button>
             </form>
           </div>
+        </section>
+
+        <!-- HEADLINE RESPONSIVE -->
+        <section>
+          <div class="headline-responsive">
+            <h1>Board</h1>
+            <button class="add-task-btn-responsive">
+              <img
+                class="add-task-btn-img"
+                src="../assets/img/plus_white.png"
+                alt="plus"
+              />
+            </button>
+          </div>
+          <input class="searchbox-input-responsive" type="text" placeholder="Find Task" />
+          <button class="input-btn-responsive">
+            <img
+              class="input-btn-img"
+              src="../assets/img/search_glass.png"
+              alt="search"
+            />
+          </button>
         </section>
 
         <!-- KANBAN BOARD -->
@@ -135,6 +169,29 @@
                   src="../assets/img/plus_black.png"
                   alt="plus"
                 />
+              </div>
+              <!-- CONTENT -->
+              <div class="kanban-task-wrapper">
+                <div class="kanban-task-header">
+                  <p>$$ Ctgry $$</p>
+                </div>
+                <div class="kanban-task-content">
+                  <h3>$$ Title $$</h3>
+                  <p>
+                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit....
+                  </p>
+                </div>
+                <div class="kanban-task-subtasks">
+                  <progress value="0" max="100"></progress>
+                  <span>$/$ Subtasks</span>
+                </div>
+                <div class="kanban-task-footer">
+                  <div class="asignees-profil">$$ Profil $$</div>
+                  <div class="priority-info">
+                    <p>$$ Urgent $$</p>
+                  </div>
+                </div>
               </div>
               <div class="kanban-task-wrapper">
                 <div class="kanban-task-header">
@@ -159,7 +216,7 @@
                 </div>
               </div>
             </div>
-            <!-- TO DO -->
+            <!-- IN PROGRESS -->
             <div class="kanban-column">
               <div class="kanban-header">
                 <h2>In progress</h2>
@@ -170,6 +227,28 @@
                 />
               </div>
               <!-- CONTENT -->
+              <div class="kanban-task-wrapper">
+                <div class="kanban-task-header">
+                  <p>$$ Ctgry $$</p>
+                </div>
+                <div class="kanban-task-content">
+                  <h3>$$ Title $$</h3>
+                  <p>
+                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit....
+                  </p>
+                </div>
+                <div class="kanban-task-subtasks">
+                  <progress value="0" max="100"></progress>
+                  <span>$/$ Subtasks</span>
+                </div>
+                <div class="kanban-task-footer">
+                  <div class="asignees-profil">$$ Profil $$</div>
+                  <div class="priority-info">
+                    <p>$$ Urgent $$</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- AWAIT FEEDBACK -->
             <div class="kanban-column">
@@ -182,20 +261,64 @@
                 />
               </div>
               <!-- CONTENT -->
+              <div class="kanban-task-wrapper">
+                <div class="kanban-task-header">
+                  <p>$$ Ctgry $$</p>
+                </div>
+                <div class="kanban-task-content">
+                  <h3>$$ Title $$</h3>
+                  <p>
+                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit....
+                  </p>
+                </div>
+                <div class="kanban-task-subtasks">
+                  <progress value="0" max="100"></progress>
+                  <span>$/$ Subtasks</span>
+                </div>
+                <div class="kanban-task-footer">
+                  <div class="asignees-profil">$$ Profil $$</div>
+                  <div class="priority-info">
+                    <p>$$ Urgent $$</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- DONE -->
             <div class="kanban-column">
               <div class="kanban-header">
                 <h2>Done</h2>
               </div>
-              <div class="kanban-task-no-task-found">No tasks To do</div>
+              <!--  <div class="kanban-task-no-task-found">No tasks To do</div> -->
+              <div class="kanban-task-wrapper">
+                <div class="kanban-task-header">
+                  <p>$$ Ctgry $$</p>
+                </div>
+                <div class="kanban-task-content">
+                  <h3>$$ Title $$</h3>
+                  <p>
+                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit....
+                  </p>
+                </div>
+                <div class="kanban-task-subtasks">
+                  <progress value="0" max="100"></progress>
+                  <span>$/$ Subtasks</span>
+                </div>
+                <div class="kanban-task-footer">
+                  <div class="asignees-profil">$$ Profil $$</div>
+                  <div class="priority-info">
+                    <p>$$ Urgent $$</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         <!-- OVERLAY / POP UP BOARD TASK RENDERN-->
         <section>
-          <div class="overlay-pop-up-board d_none">
+          <div class="overlay-pop-up-board d_none"> 
             <div class="pop-up-board-wrapper">
               <div class="pop-up-board-inner-container">
                 <div class="pop-up-task-header">
@@ -288,7 +411,7 @@
 
         <!-- POP UP BOARD EDIT TASK RENDERN-->
         <section>
-          <div class="overlay-pop-up-edit-task">
+          <div class="overlay-pop-up-edit-task d_none">
             <div class="pop-up-edit-task-wrapper">
               <div class="pop-up-edit-task-inner-container">
                 <div class="pop-up-edit-task-headline">
@@ -378,21 +501,33 @@
                         placeholder="Select an option"
                         readonly
                       />
+                      <img
+                        class="dropdown-icon"
+                        src="../assets/img/arrow_drop_downaa.png"
+                        alt=""
+                      />
                       <div class="dropdown-content">
                         <div class="dropdown-item">
-                          <img src="../assets/img/profil_icon_orange.png" alt="Option 1" />
-                          Option 1
-                          <img src="../assets/img/checkbox_false.png" alt="">
+                          <div class="dropdown-item-user">
+                            <img
+                              class="user-icon"
+                              src="../assets/img/profil_icon_orange.png"
+                              alt="Option 1"
+                            />
+                            Option 1
+                          </div>
+                          <img src="../assets/img/checkbox_false.png" alt="" />
                         </div>
                         <div class="dropdown-item">
-                          <img src="../assets/img/profil_icon_light_blue_.png" alt="Option 2" />
-                          Option 2
-                          <img src="../assets/img/checkbox_false.png" alt="">
-                        </div>
-                        <div class="dropdown-item">
-                          <img src="path_to_image3.png" alt="Option 3" />
-                          Option 3
-                          <img src="../assets/img/checkbox_false.png" alt="">
+                          <div class="dropdown-item-user">
+                            <img
+                              class="user-icon"
+                              src="../assets/img/profil_icon_light_blue_.png"
+                              alt="Option 1"
+                            />
+                            Option 2
+                          </div>
+                          <img src="../assets/img/checkbox_false.png" alt="" />
                         </div>
                       </div>
                     </div>
@@ -400,12 +535,14 @@
                     <div class="assigned-contacts">
                       <div>
                         <img
+                          class="user-icon"
                           src="../assets/img/profil_icon_orange.png"
                           alt=""
                         />
                       </div>
                       <div>
                         <img
+                          class="user-icon"
                           src="../assets/img/profil_icon_light_blue_.png"
                           alt=""
                         />
@@ -453,6 +590,43 @@
           </div>
         </section>
       </div>
+      <!-- FOOTER / NAVBAR RESPONSIVE -->
+      <nav>
+        <div class="navbar-links-responsive">
+          <a class="navbar-links" href="#">
+            <img
+              class="navbar-icons"
+              src="../assets/img/summary.png"
+              alt="Summary"
+            />
+            <p>Summary</p>
+          </a>
+          <a class="navbar-links" href="#">
+            <img
+              class="navbar-icons"
+              src="../assets/img/add_task.png"
+              alt="Add Task"
+            />
+            <p>Add Task</p>
+          </a>
+          <a class="navbar-links" href="#">
+            <img
+              class="navbar-icons"
+              src="../assets/img/board.png"
+              alt="Board"
+            />
+            <p>Board</p>
+          </a>
+          <a class="navbar-links" href="#">
+            <img
+              class="navbar-icons"
+              src="../assets/img/contacts.png"
+              alt="Contacts"
+            />
+            <p>Contacts</p>
+          </a>
+        </div>
+      </nav>
     </main>
   </body>
 </html>
