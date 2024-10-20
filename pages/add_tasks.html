@@ -73,7 +73,7 @@
               This Field is required
             </span>
           </div>
-          <div class="seperator">
+          <div class="seperator1">
           </div>
           <div class="rightSide">
             <div class="inputStyle">
@@ -101,7 +101,7 @@
               <span for="inputField">Category<span class="required-asterisk">*</span></span>
               <div class="selectCategory" onclick="toggleDropdown(event)">
                 <span id="selectedCategory">Select task category</span>
-                <img src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
+                <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
                 <div class="category-dropdown" id="categoryDropdown">
                   <span onclick="selectCategory('Technical Task')">Technical Task</span>
                   <span onclick="selectCategory('User Story')">User Story</span>
@@ -110,12 +110,21 @@
             </div>
             <div class="inputStyle">
               <span for="inputField">Subtasks</span>
-              <input type="text" id="inputField7" placeholder="Add new subtask" class="titleInput">
-            </div>
+              <div class="subtaskInputWrapper">
+                  <input type="text" id="inputField7" placeholder="Add new subtask" class="subtaskInput">
+                  <div class="iconWrapper" id="iconWrapper">
+                      <img src="../assets/img/Propertyadd.png" id="actionIcon" class="icon" onclick="addSubtask()">
+                  </div>
+              </div>
+              <!-- Ungeordnete Liste für Subtasks -->
+              <ul id="subtaskList" class="subtaskList"></ul>
+          </div>
+
             <div class="clear-task-button">
-              <button class="btn clear-btn">Clear ✖</button>
+              <button class="btn clear-btn" onclick="clearEverything()">Clear ✖</button>
               <button class="btn create-task-btn">Create Task ✔</button>
             </div>
+
           </div>
         </div>
       </div>
