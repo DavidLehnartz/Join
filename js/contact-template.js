@@ -139,3 +139,19 @@ function getContactInfoTemplate(color, initial, name, email, phone) {
               <p id="contact-phone" class="copy-text">${phone}</p>
             </div>`;
 }
+
+function getContactListItemTemplate(index, id, name, mail, color, initial) {
+  return `<div
+              id="contact-item-${index}"
+              class="contact-list-item"
+              onclick="showContactInfo(${id}), toggleActive(${index})"
+            >
+              <div id="list-initial" class="profile-icon-small bg-${color}">${initial}</div>
+              <div class="contact-list-info">
+                <p id="list-name-${index}" class="contacts-info-hl">${name}</p>
+                <p id="list-mail" class="copy-mail">${mail}</p>
+              </div>
+            </div>`;
+}
+
+//   let firstname = name.split(" ").slice(0, -1).toString().toLowerCase();
