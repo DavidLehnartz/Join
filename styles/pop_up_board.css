@@ -29,6 +29,14 @@ h4{
     gap: 24px;
 }
 
+.pop-up-board-inner-container{
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none;
+  gap: 24px;
+}
+
 
 
 .pop-up-task-header {
@@ -73,15 +81,27 @@ h4{
     font-size: 20px;
 }
 
+.pop-up-task-info-container {
+  display: flex; 
+  gap: 24px; 
+}
+
 .pop-up-task-info{
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 24px;
   font-size: 20px;
 }
 
-tr{
-    display: flex;
+.task-info-label{
+  display: flex;
+  flex-direction: column;
+}
+
+.task-info-value{
+  display: flex;
+  align-items: center;
 }
 
 .pop-up-assigned-to-wrapper{
@@ -92,13 +112,21 @@ tr{
 }
 
 .pop-up-assigned-profils{
-
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .single-assigned-profil{
-    display: flex;
-    gap: 16px;
-    padding: 0px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0px 16px;
+}
+
+.assigned-to-profil-icons{
+  width: 42px;
+  height: 42px;
 }
 
 .pop-up-subtasks{

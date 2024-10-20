@@ -15,9 +15,12 @@
     <link rel="stylesheet" href="../styles/board.css" />
     <link rel="stylesheet" href="../styles/pop_up_board.css" />
     <link rel="stylesheet" href="../styles/pop_up_board_edit_task.css" />
+
+    <script src="../js/board.js" defer></script>
   </head>
 
   <!-- TASKS
+   **drop down zeile 420
   ** Plus button on hover blau
   ** overlay / pop up von task erstellen
   ** blauer rahmen input onclick
@@ -88,6 +91,7 @@
           </div>
         </div>
       </header>
+
       <!-- MAiN CONTENT -->
       <div class="main-content-wrapper">
         <!-- HEADLINE / SEARCHBOX -->
@@ -118,9 +122,11 @@
             </form>
           </div>
         </section>
+
         <!-- KANBAN BOARD -->
         <section>
           <div class="kanban-board-wrapper">
+            <!-- TO DO -->
             <div class="kanban-column">
               <div class="kanban-header">
                 <h2>To Do</h2>
@@ -142,11 +148,8 @@
                   </p>
                 </div>
                 <div class="kanban-task-subtasks">
-                  <!--  <div class="subtasks-progress-bar"> -->
                   <progress value="0" max="100"></progress>
                   <span>$/$ Subtasks</span>
-
-                  <!-- </div> -->
                 </div>
                 <div class="kanban-task-footer">
                   <div class="asignees-profil">$$ Profil $$</div>
@@ -156,6 +159,7 @@
                 </div>
               </div>
             </div>
+            <!-- TO DO -->
             <div class="kanban-column">
               <div class="kanban-header">
                 <h2>In progress</h2>
@@ -165,31 +169,9 @@
                   alt="plus"
                 />
               </div>
-              <div class="kanban-task-wrapper">
-                <div class="kanban-task-header">
-                  <p>$$$$ $$$$</p>
-                </div>
-                <div class="kanban-task-content">
-                  <h3>$$ Title $$</h3>
-                  <p>
-                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
-                    adipisicing elit....
-                  </p>
-                </div>
-                <div class="kanban-task-subtasks">
-                  <div class="subtasks-progress-bar">$$ p.bar $$</div>
-                  <div class="subtasks-counter">
-                    <span>$/$ Subtasks</span>
-                  </div>
-                </div>
-                <div class="kanban-task-footer">
-                  <div class="asignees-profil">$$ Profil $$</div>
-                  <div class="priority-info">
-                    <p>$$ Urgent $$</p>
-                  </div>
-                </div>
-              </div>
+              <!-- CONTENT -->
             </div>
+            <!-- AWAIT FEEDBACK -->
             <div class="kanban-column">
               <div class="kanban-header">
                 <h2>Await feedback</h2>
@@ -199,31 +181,9 @@
                   alt="plus"
                 />
               </div>
-              <div class="kanban-task-wrapper">
-                <div class="kanban-task-header">
-                  <p>$$$$ $$$$</p>
-                </div>
-                <div class="kanban-task-content">
-                  <h3>$$ Title $$</h3>
-                  <p>
-                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
-                    adipisicing elit....
-                  </p>
-                </div>
-                <div class="kanban-task-subtasks">
-                  <div class="subtasks-progress-bar">$$ p.bar $$</div>
-                  <div class="subtasks-counter">
-                    <span>$/$ Subtasks</span>
-                  </div>
-                </div>
-                <div class="kanban-task-footer">
-                  <div class="asignees-profil">$$ Profil $$</div>
-                  <div class="priority-info">
-                    <p>$$ Urgent $$</p>
-                  </div>
-                </div>
-              </div>
+              <!-- CONTENT -->
             </div>
+            <!-- DONE -->
             <div class="kanban-column">
               <div class="kanban-header">
                 <h2>Done</h2>
@@ -232,60 +192,81 @@
             </div>
           </div>
         </section>
+
         <!-- OVERLAY / POP UP BOARD TASK RENDERN-->
         <section>
           <div class="overlay-pop-up-board d_none">
             <div class="pop-up-board-wrapper">
-              <div class="pop-up-task-header">
-                <div class="header-category">
-                  <p>$$Ctgry$$</p>
+              <div class="pop-up-board-inner-container">
+                <div class="pop-up-task-header">
+                  <div class="header-category">
+                    <p>$$Ctgry$$</p>
+                  </div>
+                  <img
+                    class="pop-up-close-img"
+                    src="../assets/img/close_black.png"
+                    alt="close"
+                  />
                 </div>
-                <img
-                  class="pop-up-close-img"
-                  src="../assets/img/close_black.png"
-                  alt="close"
-                />
-              </div>
-              <div class="pop-up-task-content">
-                <h4>$$ Title $$</h4>
-                <div class="pop-up-description">
-                  <p>
-                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
-                    adipisicing elit....
-                  </p>
-                </div>
-              </div>
-              <table>
-                <tbody class="pop-up-task-info">
-                  <tr>
-                    <td>Due date:</td>
-                    <td>$$ Date $$</td>
-                  </tr>
-                  <tr>
-                    <td>Priority:</td>
-                    <td>$$ Urgent $$</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="pop-up-assigned-to-wrapper">
-                <p>Assigned To:</p>
-                <div class="pop-up-assigned-profils">
-                  <div class="single-assigned-profil">
-                    <!-- Rendern -->
-                    <img src="#" alt="contact" />
-                    <p>$$ Name $$</p>
+                <div class="pop-up-task-content">
+                  <h4>$$ Title $$</h4>
+                  <div class="pop-up-description">
+                    <p>
+                      $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
+                      adipisicing elit....
+                    </p>
                   </div>
                 </div>
-              </div>
-              <div class="pop-up-subtasks">
-                <p>Subtasks</p>
-                <div class="single-subtasks">
-                  <img src="#" alt="checkbox" />
-                  $$ Single Subtask $$
+                <div class="pop-up-task-info-container">
+                  <div class="pop-up-task-info">
+                    <div class="task-info-label">Due date:</div>
+                    <div class="task-info-value">Priority:</div>
+                  </div>
+                  <div class="pop-up-task-info">
+                    <div class="task-info-label">$$ Date $$</div>
+                    <div class="task-info-value">
+                      Medium
+                      <img src="../assets/img/prio_medium_orange.png" alt="" />
+                    </div>
+                  </div>
                 </div>
-                <div class="single-subtasks">
-                  <img src="#" alt="checkbox" />
-                  $$ Single Subtask $$
+                <div class="pop-up-assigned-to-wrapper">
+                  <p>Assigned To:</p>
+                  <div class="pop-up-assigned-profils">
+                    <div class="single-assigned-profil">
+                      <img
+                        class="assigned-to-profil-icons"
+                        src="../assets/img/profil_icon_orange.png"
+                        alt="contact"
+                      />
+                      <p>$$ Name $$</p>
+                    </div>
+                    <div class="single-assigned-profil">
+                      <img
+                        class="assigned-to-profil-icons"
+                        src="../assets/img/profil_icon_light_blue_.png"
+                        alt="contact"
+                      />
+                      <p>$$ Name $$</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="pop-up-subtasks">
+                  <p>Subtasks</p>
+                  <div class="single-subtasks">
+                    <img
+                      src="../assets/img/checkbox_false.png"
+                      alt="checkbox"
+                    />
+                    $$ Single Subtask $$
+                  </div>
+                  <div class="single-subtasks">
+                    <img
+                      src="../assets/img/checkbox_false.png"
+                      alt="checkbox"
+                    />
+                    $$ Single Subtask $$
+                  </div>
                 </div>
               </div>
               <div class="pop-up-footer">
@@ -304,9 +285,10 @@
             </div>
           </div>
         </section>
+
         <!-- POP UP BOARD EDIT TASK RENDERN-->
         <section>
-          <div class="overlay-pop-up-edit-task ">
+          <div class="overlay-pop-up-edit-task">
             <div class="pop-up-edit-task-wrapper">
               <div class="pop-up-edit-task-inner-container">
                 <div class="pop-up-edit-task-headline">
@@ -357,13 +339,28 @@
                     </label>
                     <div class="prio-status">
                       <div class="prio-urgent">
-                        <img src="#" alt="urgent" />
+                        Urgent
+                        <img
+                          class="prio-img"
+                          src="../assets/img/prio_urgent_red.png"
+                          alt="urgent"
+                        />
                       </div>
                       <div class="prio-medium">
-                        <img src="#" alt="medium" />
+                        Medium
+                        <img
+                          class="prio-img"
+                          src="../assets/img/prio_medium_orange.png"
+                          alt="medium"
+                        />
                       </div>
                       <div class="prio-low">
-                        <img src="#" alt="low" />
+                        Low
+                        <img
+                          class="prio-img"
+                          src="../assets/img/prio_low_green.png"
+                          alt="low"
+                        />
                       </div>
                     </div>
                   </div>
@@ -373,22 +370,48 @@
                       Assigned to
                       <span class="required-sign">*</span>
                     </label>
-                    <select class="pop-up-edit-task-input" type="text">
-                      <option value="">Select contacts to assign</option>
-                      <option class="select-contact" value="">
-                        $$ Contact $$
-                      </option>
-                      <option class="select-contact" value="">
-                        $$ Contact $$
-                      </option>
-                    </select>
+
+                    <div class="custom-dropdown">
+                      <input
+                        type="text"
+                        class="dropdown-input"
+                        placeholder="Select an option"
+                        readonly
+                      />
+                      <div class="dropdown-content">
+                        <div class="dropdown-item">
+                          <img src="../assets/img/profil_icon_orange.png" alt="Option 1" />
+                          Option 1
+                          <img src="../assets/img/checkbox_false.png" alt="">
+                        </div>
+                        <div class="dropdown-item">
+                          <img src="../assets/img/profil_icon_light_blue_.png" alt="Option 2" />
+                          Option 2
+                          <img src="../assets/img/checkbox_false.png" alt="">
+                        </div>
+                        <div class="dropdown-item">
+                          <img src="path_to_image3.png" alt="Option 3" />
+                          Option 3
+                          <img src="../assets/img/checkbox_false.png" alt="">
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="assigned-contacts">
-                      <div>$$ Selected contacts $$</div>
-                      <div>$$ Selected contacts $$</div>
-                      <div>$$ Selected contacts $$</div>
+                      <div>
+                        <img
+                          src="../assets/img/profil_icon_orange.png"
+                          alt=""
+                        />
+                      </div>
+                      <div>
+                        <img
+                          src="../assets/img/profil_icon_light_blue_.png"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
-
                   <div class="pop-up-edit-task-subtasks">
                     <label for="">
                       Subtasks
@@ -404,7 +427,7 @@
                       src="../assets/img/add_black.png"
                       alt=""
                     />
-                    <ul>
+                    <div class="pop-up-edit-task-list-container">
                       <li>
                         $$ Added subtask $$
                         <img src="#" alt="" />
@@ -412,7 +435,7 @@
                       <li>$$ Added subtask $$</li>
                       <li>$$ Added subtask $$</li>
                       <li>$$ Added subtask $$</li>
-                    </ul>
+                    </div>
                   </div>
                 </form>
               </div>
