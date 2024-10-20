@@ -7,7 +7,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  /*  z-index: 999; */
+   z-index: 999;
 }
 
 .pop-up-edit-task-wrapper {
@@ -64,6 +64,7 @@
   border: 1px solid #d1d1d1;
   padding: 12px 21px;
   font-size: 20px;
+  cursor: pointer;
 
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -90,6 +91,7 @@
   resize: none;
   overflow-y: auto;
   scrollbar-width: none;
+  cursor: pointer;
 
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -190,6 +192,7 @@ select {
   border: 1px solid #d1d1d1;
   padding: 12px 21px;
   font-size: 20px;
+  cursor: pointer;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
@@ -228,6 +231,7 @@ select {
 li {
   padding: 4px 16px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 li:hover {
@@ -289,6 +293,20 @@ li:hover {
   border: 1px solid rgb(41, 171, 226);
 }
 
+.dropdown-icon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 357px;
+  top: 13px;
+  cursor: pointer;
+}
+
+.dropdown-icon:hover {
+  background-color: rgb(246, 247, 248);
+  border-radius: 100%;
+}
+
 /* Versteckter Inhalt des Dropdowns */
 .dropdown-content {
   display: none;
@@ -303,7 +321,9 @@ li:hover {
 
 .dropdown-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  border-radius: 10px;
   gap: 10px;
   padding: 8px 16px;
   cursor: pointer;
@@ -313,16 +333,45 @@ li:hover {
   background-color: #f1f1f1;
 }
 
-.dropdown-item img {
+/* .dropdown-item img {
   width: 20px;
   height: 20px;
+} */
+
+.dropdown-item-user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 /* Dropdown anzeigen, wenn geklickt */
 .custom-dropdown.open .dropdown-content {
-    display: flex;
-    border-radius: 10px;
-    border: 1px solid rgb(41, 171, 226);
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid rgb(41, 171, 226);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.user-icon {
+  width: 42px;
+  height: 42px;
+}
+
+/* MEDIA QUERY */
+
+@media(max-width:500px){
+  .pop-up-edit-task-wrapper{
+    height: 100vh;
     width: 100%;
-    box-sizing: border-box;
+  }
+
+  .pop-up-edit-task-inner-container {
+    padding: 32px 16px;
+  }
+
+  .pop-up-edit-task-footer{
+    padding: 0px 16px;
+    padding-bottom: 32px;
+  }
 }

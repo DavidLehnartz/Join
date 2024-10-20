@@ -2,10 +2,12 @@
 const inputField = document.querySelector('.dropdown-input');
 const dropdown = document.querySelector('.custom-dropdown');
 const dropdownItems = document.querySelectorAll('.dropdown-item');
+const dropDownBtn= document.querySelector('.dropdown-icon');
 
 // Öffnen des Dropdowns bei Klick auf das Input-Feld
 inputField.addEventListener('click', function() {
   dropdown.classList.toggle('open');
+  dropDownBtn.classList.toggle('open');
 });
 
 // Text aus dem Dropdown in das Input-Feld setzen

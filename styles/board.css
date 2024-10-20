@@ -27,6 +27,11 @@ p {
   display: none;
 }
 
+.join-logo-responsive {
+  width: 32px;
+  height: 39px;
+}
+
 .searchbox-wrapper {
   display: flex;
   justify-content: end;
@@ -116,7 +121,7 @@ p {
   display: flex;
   flex-direction: column;
   width: 246px;
-  width: 100%;
+  /*  width: 100%; */
 }
 
 .kanban-header {
@@ -135,13 +140,15 @@ p {
 .kanban-task-wrapper {
   display: flex;
   flex-direction: column;
-  /*  width: 100%; */
+  /* width: 100%; */
   height: 244px;
   border-radius: 24px;
   background: rgb(255, 255, 255);
   padding: 16px;
   gap: 24px;
   cursor: pointer;
+  margin-bottom: 24px;
+  box-sizing: border-box;
   /*  overflow-y: scroll;
   scrollbar-width: thin; */
 }
@@ -168,13 +175,13 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
   gap: 8px;
   font-size: 12px;
 }
 
 progress {
   width: 150px;
-  
 }
 
 .subtasks-counter {
@@ -204,4 +211,184 @@ progress {
   border: dotted rgb(168, 168, 168);
   color: rgb(168, 168, 168);
   cursor: pointer;
+}
+
+nav {
+  position: sticky;
+  bottom: 0px;
+  background-color: rgb(42, 54, 71);
+}
+
+.navbar-links-responsive {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+}
+
+.navbar-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #b5b6b9;
+  gap: 4px;
+  padding: 15px;
+}
+
+.navbar-links:hover {
+  color: white;
+  background-color: rgb(57, 74, 95);
+  filter: brightness(1.2);
+  transition: filter 0.3s ease;
+}
+
+.navbar-icons {
+  width: 24px;
+  height: 24px;
+}
+
+.headline-responsive {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 56px;
+}
+
+.searchbox-input-responsive {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgb(170 170 170);
+  cursor: pointer;
+  transition: 0.5s;
+  outline: none;
+  padding: 12px 21px;
+  font-size: 20px;
+  padding-left: 16px;
+  box-sizing: border-box;
+  margin: 16px 0px;
+}
+
+.input-btn-responsive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 58px;
+  top: 250px;
+  border-radius: 0px;
+  border: none;
+  background: none;
+  border-left: 1px solid rgb(170 170 170);
+  margin: 9px 0px;
+}
+
+.add-task-btn-responsive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgb(42, 54, 71);
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  padding: 3px;
+}
+
+.add-task-btn-responsive:hover {
+  background-color: rgb(41, 171, 226);
+  box-shadow: 0px 4px 4px 0px rgb(170 170 170);
+}
+
+/* MEDIA QUERY */
+
+@media (max-width: 1400px) {
+  .kanban-board-wrapper {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 1130px) {
+  .add-task-btn {
+    display: none;
+  }
+  .left-sidebar {
+    display: none;
+  }
+
+  .app-description {
+    display: none;
+  }
+
+  .header-profil-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 770px) {
+header{
+  padding: 0px 16px;
+}
+
+  .headline {
+    display: none;
+  }
+}
+
+@media (max-width: 630px) {
+  .kanban-column {
+    width: 100%;
+  }
+
+  .main-content-wrapper {
+    padding: 0px 16px;
+  }
+
+  .input-btn-responsive {
+    right: 15px;
+  }
+
+  .navbar-links{
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  progress{
+    width: 80%;
+  }
+}
+
+@media (min-width: 1130px) {
+  .add-task-btn-responsive {
+    display: none;
+  }
+
+  .join-logo-responsive {
+    display: none;
+    width: 32px;
+    height: 39px;
+  }
+
+  nav {
+    display: none;
+  }
+}
+
+@media (min-width: 770px) {
+  .headline-responsive {
+    display: none;
+  }
+
+  .input-btn-responsive {
+    display: none;
+  }
+
+  .searchbox-input-responsive {
+    display: none;
+  }
 }
