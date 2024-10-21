@@ -14,3 +14,14 @@ async function getContactById(id) {
   let contact = contactsArray.find((e) => id === e.id);
   return contact;
 }
+
+async function createContact(contactData) {
+  let newContactResponse = await fetch(BASE_URL + "/contacts" + ".json", {
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(contactData),
+  });
+  return (contactToJson = await newContactResponse.json());
+}

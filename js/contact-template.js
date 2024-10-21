@@ -42,7 +42,7 @@ function getAddContactOverlayTemplate() {
                     <p>Cancel</p>
                     <img src="../assets/icons/close.svg" />
                   </button>
-                  <button class="contact-form-btn btn-filled">
+                  <button class="contact-form-btn btn-filled" onclick="getNewContactsInfo(event)">
                     <p>Create Contact</p>
                     <img src="../assets/icons/check.svg" />
                   </button>
@@ -98,7 +98,7 @@ function getEditContactOverlayTemplate(color, initial, name, email, phone) {
                       <img src="../assets/icons/close.svg" />
                     </button>
                     <button class="contact-form-btn btn-filled">
-                      <p>Create Contact</p>
+                      <p>Save</p>
                       <img src="../assets/icons/check.svg" />
                     </button>
                   </div>
@@ -117,7 +117,7 @@ function getContactInfoTemplate(color, initial, name, email, phone) {
                   <div
                     id="btn-contact-edit"
                     class="text-button"
-                    onclick="showEditContactForm(event)"
+                    onclick="showEditContactForm(event, '${color}', '${initial}', '${name}', '${email}', '${phone}')"
                   >
                     <img src="../assets/icons/edit.svg" />
                     <p>Edit</p>
@@ -140,11 +140,18 @@ function getContactInfoTemplate(color, initial, name, email, phone) {
             </div>`;
 }
 
-function getContactListItemTemplate(index, id, name, mail, color, initial) {
+function getContactListHeaderTemplate(letter) {
+  return `<div id="section-header" class="section-header">
+              <p class="contacts-info-hl section-letter">${letter}</p>
+              <hr />
+            </div>`;
+}
+
+function getContactListItemTemplate(index, name, mail, color, initial, phone) {
   return `<div
               id="contact-item-${index}"
               class="contact-list-item"
-              onclick="showContactInfo(${id}), toggleActive(${index})"
+              onclick="showContactInfo('${color}', '${initial}', '${name}', '${mail}', '${phone}')"
             >
               <div id="list-initial" class="profile-icon-small bg-${color}">${initial}</div>
               <div class="contact-list-info">
@@ -153,5 +160,3 @@ function getContactListItemTemplate(index, id, name, mail, color, initial) {
               </div>
             </div>`;
 }
-
-//   let firstname = name.split(" ").slice(0, -1).toString().toLowerCase();

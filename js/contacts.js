@@ -1,14 +1,14 @@
-async function showContactInfo(id) {
+let groupedContacts = {};
+
+function showContactInfo(color, initial, name, email, phone) {
   let contactInfo = document.getElementById("contacts-info");
-  let contact = await getContactById(id);
-  console.log(contact);
   contactInfo.innerHTML = "";
   contactInfo.innerHTML += getContactInfoTemplate(
-    "orange",
-    "AM",
-    "Anton Mayer",
-    "antonm@gmail.com",
-    "+49 1111 111 11 1"
+    color,
+    initial,
+    name,
+    email,
+    phone
   );
 }
 
@@ -22,20 +22,24 @@ function toggleActive(i) {
 
 async function loadContactList() {
   let contactsArray = await loadContacts();
-  sortContacts(contactsArray);
-  loadContactListItems(contactsArray);
+  groupContacts(contactsArray);
+  loadGroupedContactList();
 }
 
-function sortContacts(arrayName) {
-  arrayName.sort(function (a, b) {
-    if (a.name < b.name) {
-      return -1;
+function groupContacts(arrayName) {
+  groupedContacts = Object.groupBy(arrayName, ({ name }) => name.slice(0, 1));
+  return groupedContacts;
+}
+
+function loadGroupedContactList() {
+  let contactList = document.getElementById("contact-list");
+  for (i = 65; i <= 90; i++) {
+    let letter = String.fromCharCode(i);
+    if (typeof groupedContacts[letter] !== "undefined") {
+      contactList.innerHTML += getContactListHeaderTemplate(letter);
+      loadContactListItems(groupedContacts[letter]);
     }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
-  });
+  }
 }
 
 function loadContactListItems(arrayName) {
@@ -44,11 +48,11 @@ function loadContactListItems(arrayName) {
     const contact = arrayName[i];
     contactList.innerHTML += getContactListItemTemplate(
       i,
-      contact.id,
       contact.name,
       contact.email,
       contact.color,
-      contact.initial
+      contact.initial,
+      contact.phone
     );
   }
 }
