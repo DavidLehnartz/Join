@@ -1,0 +1,151 @@
+body {
+    display: flex;
+    margin: 0px auto;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    background-color: rgb(246, 247, 248);
+    font-family: "Inter", sans-serif;
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    text-decoration: none;
+}
+
+span {
+    font-family: "Inter", sans-serif;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+.left-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 232px;
+    height: 100vh;
+    background-color: rgb(42, 54, 71);
+}
+
+.left-sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    color: #b5b6b9;
+    background-color: #2a3647;
+    width: 232px;
+    gap: 8px;
+}
+
+.links:hover {
+    color: white;
+    background-color: rgb(57, 74, 95);
+    filter: brightness(1.2);
+    transition: all 125ms ease;
+}
+
+.sidebar-icons {
+    margin-left: 64px;
+}
+
+.legacy-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #b5b6b9;
+}
+
+.legacy-links:hover {
+    color: rgb(41, 171, 226);
+    transition: transform 125ms;
+    transform: scale(1.05);
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 4px 0px 8px 0px rgb(170 170 170);
+    padding-right: 40px;
+    padding-left: 120px;
+    font-size: 24px;
+}
+
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    height: 96px;
+    justify-content: space-between;
+    max-width: 1440px;
+    margin: 0px auto;
+}
+
+.mobileLogoStyle {
+    width: 50px;
+    height: 50px;
+    display: none;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.main-content-wrapper {
+    max-width: 1440px;
+}
+
+.header-help-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.header-help-icon:hover {
+    transition: transform 0.1s;
+    transform: scale(1.1);
+}
+
+.headlineContent {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-left: 150px;
+    gap:20px;
+}
+
+.header-profil-icon {
+    width: 56px;
+    height: 56px;
+}
+
+.seperator1 {
+    width: 3px;
+    background-color: #29ABE2;
+    border: 1px;
+    height: 50px;
+}
+
+.metricsAtGlance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1320px) {
+    .KanbanSpanStyle {
+        display: none;
+    }
+}

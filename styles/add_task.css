@@ -10,8 +10,6 @@ body {
 }
 
 main {
-    display: flex;
-    flex-direction: column;
     flex: 1;
 }
 
@@ -56,7 +54,7 @@ h1 {
     color: white;
     background-color: rgb(57, 74, 95);
     filter: brightness(1.2);
-    transition: filter 0.3s ease;
+    transition: all 125ms ease;
 }
 
 .sidebar-icons {
@@ -72,7 +70,7 @@ h1 {
 
 .legacy-links:hover {
     color: rgb(41, 171, 226);
-    transition: transform 0.5s;
+    transition: transform 125ms;
     transform: scale(1.05);
 }
 
@@ -91,6 +89,12 @@ header {
     justify-content: space-between;
     max-width: 1440px;
     margin: 0px auto;
+}
+
+.mobileLogoStyle {
+    width: 50px;
+    height: 50px;
+    display: none;
 }
 
 .header-icons {
@@ -114,6 +118,11 @@ header {
     height: 56px;
 }
 
+.header-help-icon:hover {
+    transition: transform 0.1s;
+    transform: scale(1.1);
+}
+
 .addTaskContent {
     display: flex;
     justify-content: flex-start;
@@ -130,11 +139,15 @@ header {
     gap: 20px;
 }
 
-.leftSide,
+.leftSide {
+    display: flex;
+    flex-direction: column;
+    width: 440px;
+}
+
 .rightSide {
     display: flex;
     flex-direction: column;
-    gap: 20px;
     width: 440px;
 }
 
@@ -150,6 +163,44 @@ header {
     flex-direction: column;
     height: 120px;
     gap: 8px;
+}
+
+.spanCategoryStyle {
+    margin-top: 53px;
+}
+
+.assignedToSpanStyle {
+    margin-top: 20px;
+}
+
+.SubtaskSpanStyle {
+    margin-top: 30px;
+}
+
+.selectContactsToAssign {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    height: 38px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.selectContactsToAssign:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 5px #29ABE2;
+    transition: all 125ms ease;
+}
+
+.selectContactsToAssign span {
+    font-size: 20px;
+    color: #000;
+    font-family: "Inter", sans-serif;
 }
 
 .selectCategory {
@@ -219,27 +270,16 @@ header {
 }
 
 .category-dropdown span:hover {
-    background-color: #f0f0f0;
+    background-color: #D1D1D1;
+    border-radius: 10px;
+
 }
 
 .subtaskInputWrapper {
     position: relative;
     width: 100%;
     cursor: pointer;
-
-}
-
-.subtaskInput {
-    width: 100%;  /* Nimmt die volle Breite des Containers ein */
-    box-sizing: border-box;  /* Padding und Border zählen zur Gesamtbreite */
-    height: 38px;  /* Höhe des Eingabefelds */
-    border-radius: 10px;  /* Runde Ecken */
-    padding: 8px 12px;  /* Allgemeines Padding */
-    padding-left: 40px;  /* Abstand zum linken Punkt (gleicher Abstand wie im Subtask-Text) */
-    font-size: 16px;  /* Schriftgröße */
-    border: none;  /* Entferne den Rand */
-    background-color: #fff;  /* Hintergrundfarbe auf Weiß setzen */
-    outline: none;  /* Entferne den Fokusrahmen (blauer Rahmen) */
+    font-family: "Inter", sans-serif;
 }
 
 .subtaskInput:hover {
@@ -262,16 +302,13 @@ header {
     cursor: pointer;
 }
 
-
-
-
-
 .subtaskList {
     list-style-type: none;
     padding: 0;
-    margin-top: 10px;
-    
-
+    min-height: 80px;
+    overflow: auto;
+    margin: 0;
+    scrollbar-width: none;
 }
 
 .subtask-item {
@@ -284,8 +321,9 @@ header {
     line-height: 20px;
     border-radius: 10px;
     background-color: #F6F7F8;
-    transition: background-color 0.3s ease;
-    
+    transition: all 125ms ease;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
 }
 
 .subtask-item::before {
@@ -297,17 +335,15 @@ header {
 }
 
 .subtask-item:hover {
-    background-color: #A8A8A8;
+    background-color: #D1D1D1;
 }
 
-
-
 .subtask-item.editing:hover {
-    background-color: #fff; /* Setze den Hintergrund auf Weiß, damit kein Hover sichtbar ist */
+    background-color: #fff;
 }
 
 .subtask-item.editing::before {
-    content: ''; /* Kein Punkt anzeigen */
+    content: '';
 }
 
 .subtask-icons {
@@ -319,14 +355,13 @@ header {
 
 .separator {
     width: 1px;
-    height: 20px; /* Kurzer Separator passend ins <li> */
-    background-color: #2A3647; /* Leicht graue Farbe */
-    margin: 0 5px; /* Kleiner Abstand zu den Icons */
+    height: 20px;
+    background-color: #2A3647;
+    margin: 0 5px;
 }
 
 .subtask-icons img {
     cursor: pointer;
-    
 }
 
 .subtaskInput {
@@ -335,16 +370,11 @@ header {
     height: 38px;
     border-radius: 10px;
     padding: 8px 12px;
-    font-size: 16px;
+    font-size: 20px;
     border: 1px solid #D1D1D1;
-    
+    font-family: "Inter", sans-serif;
+    background-color: white;
 }
-
-
-
-
-
-
 
 .required-asterisk {
     color: red;
@@ -361,6 +391,7 @@ header {
 .priority-button {
     display: flex;
     justify-content: space-between;
+
 }
 
 .titleInput:hover {
@@ -442,6 +473,10 @@ textarea {
 }
 
 .clear-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
     background-color: white;
     color: #000;
     border-color: #ccc;
@@ -451,7 +486,7 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
+    padding: 5px 10px;
     font-size: 20px;
     border-radius: 10px;
     cursor: pointer;
@@ -459,13 +494,14 @@ textarea {
     transition: all 125ms ease;
     gap: 8px;
     height: 56px;
+    min-width: 120px;
 }
 
 .urgMedLow-btn {
     background-color: white;
     color: #000;
     border-color: #ccc;
-    min-width: 140px;
+
 }
 
 .urgMedLow-btn-medium {
@@ -500,6 +536,10 @@ textarea {
 }
 
 .create-task-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
     background-color: rgb(42, 54, 71);
     color: #fff;
     border-color: #2a3647;
@@ -508,4 +548,269 @@ textarea {
 .create-task-btn:hover {
     border-color: #29ABE2;
     box-shadow: 0 0 10px rgba(42, 54, 71, 0.5);
+}
+
+.buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+
+
+
+
+
+.selected-contacts-badges-container {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    /* Abstand zum Dropdown */
+}
+
+.contact-badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.category-dropdown.open {
+    display: block;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    /* Weniger Innenabstand */
+    cursor: pointer;
+    justify-content: flex-start;
+    /* Links ausrichten */
+    gap: 10px;
+    /* Abstand zwischen den Elementen */
+    height: 20px;
+    /* Standardhöhe von 20px */
+    transition: background-color 125ms ease, height 125ms ease;
+    /* Animiert die Höhe */
+}
+
+.contact-item:hover {
+    /* Hover-Effekt nur auf contact-item */
+    background-color: #D1D1D1;
+    /* Hintergrundfarbe ändern beim Hover */
+    border-radius: 10px;
+}
+
+.contact-item span:hover {
+    background-color: transparent;
+    /* Keine Hintergrundänderung für Spans */
+}
+
+.contact-initials {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    /* Abstand zwischen Initialen und Name */
+    margin-left: 15px;
+    /* Mehr Abstand nach links für die Initialen */
+}
+
+.contact-checkbox {
+    margin-left: auto;
+    /* Checkbox nach rechts verschieben */
+    margin-right: 15px;
+    /* Mehr Abstand zwischen Checkbox und Scrollbalken */
+}
+
+
+
+
+
+
+
+@media (max-width: 1320px) {
+    .bothSides {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        width: 100%;
+    }
+
+    .seperator1 {
+        display: none;
+    }
+
+    .leftSide {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        width: 100%;
+    }
+
+    .rightSide {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 65px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .bigLogo {
+        display: none;
+    }
+
+    .links {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .sidebar-icons {
+        margin-left: 0;
+        margin-right: 0px;
+        width: 24px;
+        height: 24px;
+    }
+
+    .left-sidebar {
+        width: 100%;
+        max-width: 100vw;
+        height: fit-content;
+        padding: 15px 0px;
+        position: fixed;
+        bottom: 0;
+        background-attachment: scroll;
+        z-index: 90;
+        justify-content: space-between;
+    }
+
+    p,
+    div,
+    button,
+    span,
+    input,
+    a,
+    .titleInputDescription,
+    .subtask-item,
+    input::placeholder,
+    textarea::placeholder {
+        margin: 0px;
+        font-size: 15px !important;
+    }
+
+    .placeholder {
+        font-size: 15px !important;
+    }
+
+    .left-sidebar-links {
+        width: 100%;
+        flex-direction: row;
+        margin: auto;
+    }
+
+    .legacy-links {
+        display: none;
+    }
+
+    .links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .mobileSpanStyle {
+        margin-bottom: 140px;
+        margin-left: 80px;
+    }
+
+    .addTaskContent {
+        margin-left: 0px;
+        width: 90%;
+    }
+
+    .main-content-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .priobtn {
+        font-size: 16px;
+        padding: 5px 10px;
+        min-width: 0px;
+        height: 45px;
+    }
+
+    .priority-button {
+        height: 45px;
+    }
+
+    .clear-btn,
+    .create-task-btn {
+        height: 45px;
+    }
+
+    header {
+        padding: 0px;
+    }
+
+    .inputStyle {
+        height: 80px;
+        margin-top: 10px;
+    }
+
+    .spanCategoryStyle {
+        margin-top: 0px;
+    }
+
+    .assignedToSpanStyle {
+        margin-top: 0px;
+    }
+
+    .SubtaskSpanStyle {
+        margin-top: 0px;
+    }
+
+    .KanbanSpanStyle {
+        display: none;
+    }
+
+    .header-wrapper {
+        padding: 0px 10px;
+    }
+
+    .mobileLogoStyle {
+        display: flex;
+    }
+
+
+
 }
