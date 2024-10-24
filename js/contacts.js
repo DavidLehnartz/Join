@@ -1,9 +1,10 @@
 let groupedContacts = {};
 
-function showContactInfo(color, initial, name, email, phone) {
+function showContactInfo(id, color, initial, name, email, phone) {
   let contactInfo = document.getElementById("contacts-info");
   contactInfo.innerHTML = "";
   contactInfo.innerHTML += getContactInfoTemplate(
+    id,
     color,
     initial,
     name,
@@ -12,18 +13,29 @@ function showContactInfo(color, initial, name, email, phone) {
   );
 }
 
-function toggleActive(i) {
-  let contactItem = document.getElementById(`contact-item-${i}`);
-  let contactName = document.getElementById(`list-name-${i}`);
-  contactItem.classList.toggle("contact-list-item");
-  contactItem.classList.toggle("item-active");
-  contactName.classList.toggle("name-active");
+function toggleActive() {
+  const contactItems = document.getElementsByClassName("contact-list-item");
+  for (let i = 0; i < contactItems.length; i++) {
+    const item = contactItems[i];
+    item.addEventListener("click", () => {
+      item.classList.toggle("contact-list-item");
+      item.classList.toggle("item-active");
+    });
+  }
 }
 
 async function loadContactList() {
-  let contactsArray = await loadContacts();
+  let contactsArray = await loadAllContactsInfo();
   groupContacts(contactsArray);
   loadGroupedContactList();
+}
+
+async function refreshContactList() {
+  let contactList = document.getElementById("contact-list");
+  let contactInfo = document.getElementById("contacts-info");
+  contactList.innerHTML = "";
+  contactInfo.innerHTML = "";
+  loadContactList();
 }
 
 function groupContacts(arrayName) {
@@ -47,7 +59,7 @@ function loadContactListItems(arrayName) {
   for (let i = 0; i < arrayName.length; i++) {
     const contact = arrayName[i];
     contactList.innerHTML += getContactListItemTemplate(
-      i,
+      contact.id,
       contact.name,
       contact.email,
       contact.color,

@@ -3,10 +3,14 @@
   align-items: flex-start;
   justify-content: flex-start;
   max-width: 1440px;
+  position: absolute;
+  top: 96px;
+  bottom: 0px;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -15,6 +19,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: #a8a8a8;
+  border-radius: 5px;
 }
 
 .contacts-list-container {
@@ -22,14 +27,12 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  width: 386px;
+  width: 35%;
+  height: 100%;
   box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.1);
   overflow-y: scroll;
   margin: 0px;
   padding: 22px 50px;
-  position: absolute;
-  top: 96px;
-  bottom: 0px;
 }
 
 .btn-add-contact {
@@ -61,6 +64,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .contact-list-item {
@@ -90,9 +94,6 @@
   gap: 35px;
   cursor: pointer;
   background-color: #2a3647;
-}
-
-.name-active {
   color: white;
 }
 
@@ -144,16 +145,12 @@ hr {
 .contact-preview-container {
   display: flex;
   flex-direction: column;
+  width: 65%;
   align-items: flex-start;
   justify-content: flex-start;
   margin: 0px;
-  padding: 110px 55px;
-  gap: 30px;
-  position: absolute;
-  left: 718px;
-  right: 0px;
-  top: 96px;
-  bottom: 0px;
+  padding: 75px 55px;
+  gap: 60px;
 }
 
 .contact-info-container {
@@ -212,10 +209,24 @@ hr {
   color: #29abe2;
 }
 
-.text-button img {
+.text-button:hover .hover-icon {
+  display: block;
   width: 24px;
   height: 24px;
-  fill: #2a3647;
+}
+
+.text-button:hover .default-icon {
+  display: none;
+}
+
+.default-icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+}
+
+.hover-icon {
+  display: none;
 }
 
 .text-button img:hover {
@@ -226,4 +237,31 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+@media (max-width: 1250px) {
+  .contacts-list-container {
+    padding: 22px 20px;
+  }
+
+  .profile-icon-small {
+    margin-left: 12px;
+    width: 35px;
+    height: 35px;
+    border-radius: 35px;
+    font-size: 12px;
+  }
+
+  .section-header {
+    height: 60px;
+  }
+
+  hr {
+    margin-bottom: 3px;
+  }
+
+  .section-letter {
+    margin-left: 24px;
+    margin-bottom: 10px;
+  }
 }
