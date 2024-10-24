@@ -1,0 +1,20 @@
+.top-row-su {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: -50px;
+}
+
+.signup-back-nav {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.card-header {
+  display: flex;
+  align-items: top;
+  justify-content: space-between;
+  width: 90%;
+}
