@@ -35,26 +35,6 @@
   padding: 22px 50px;
 }
 
-.btn-add-contact {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  width: 100%;
-  height: 56px;
-  border-radius: 10px;
-  border: none;
-  padding: 12px 0px;
-  background-color: #2a3647;
-  box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.1);
-  color: white;
-  cursor: pointer;
-}
-
-.btn-add-contact:hover {
-  background-color: #29abe2;
-}
-
 .btn-add-contact img {
   width: 32px;
   height: 32px;

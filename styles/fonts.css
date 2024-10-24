@@ -63,7 +63,7 @@ h4 {
   margin: 0px;
 }
 
-.btn-add-contact p {
+.btn-filled p {
   font-family: "interbold";
   font-size: 21px;
 }
@@ -96,4 +96,21 @@ h4 {
   font-family: "interregular";
   font-size: 16px;
   margin: 0px;
+}
+
+.small-print {
+  font-family: "interregular";
+  font-size: 16px;
+  margin: 0px;
+}
+
+.small-print a {
+  font-family: "interregular";
+  font-size: 16px;
+  margin: 0px;
+  color: #29abe2;
+}
+
+.small-print a:hover {
+  text-decoration: underline;
 }

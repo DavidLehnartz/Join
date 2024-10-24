@@ -85,42 +85,8 @@
   width: 75%;
 }
 
-.add-contacts-form input {
-  width: 422px;
-  height: 50px;
-  border-radius: 10px;
-  border: 1px solid #d1d1d1;
-  font-family: "interlight";
-  font-size: 20px;
-  padding: 0px 10px;
-  cursor: pointer;
-}
-
-.add-contacts-form input::placeholder {
-  color: #d1d1d1;
-}
-
 .input-active {
   color: black !important;
-}
-
-.add-contacts-form input:focus {
-  border-color: #29abe2 !important;
-  color: black;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-.input-icon {
-  width: 24px;
-  height: 24px;
-  margin-left: -40px;
-}
-
-.icon-input-field {
-  display: flex;
-  align-items: center;
-  margin: 0px;
 }
 
 .add-contact-buttons {
