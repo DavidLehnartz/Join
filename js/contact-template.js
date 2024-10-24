@@ -108,7 +108,7 @@ function getEditContactOverlayTemplate(color, initial, name, email, phone) {
           </div>`;
 }
 
-function getContactInfoTemplate(color, initial, name, email, phone) {
+function getContactInfoTemplate(id, color, initial, name, email, phone) {
   return `<div class="contacts-name">
               <div id="contact-initial" class="profile-icon-big bg-${color}">${initial}</div>
               <div id="contact-name" class="name-container">
@@ -119,11 +119,13 @@ function getContactInfoTemplate(color, initial, name, email, phone) {
                     class="text-button"
                     onclick="showEditContactForm(event, '${color}', '${initial}', '${name}', '${email}', '${phone}')"
                   >
-                    <img src="../assets/icons/edit.svg" />
+                    <img class="default-icon" src="../assets/icons/edit.svg" />
+                    <img class="hover-icon" src="../assets/icons/edit_blue.svg" />
                     <p>Edit</p>
                   </div>
-                  <div id="btn-contact-delete" class="text-button">
-                    <img src="../assets/icons/delete.svg" />
+                  <div id="btn-contact-delete" class="text-button" onclick="deleteContact('${id}'), refreshContactList()">
+                    <img class="default-icon" src="../assets/icons/delete.svg" />
+                    <img class="hover-icon" src="../assets/icons/delete_blue.svg" />
                     <p>Delete</p>
                   </div>
                 </div>
@@ -147,15 +149,15 @@ function getContactListHeaderTemplate(letter) {
             </div>`;
 }
 
-function getContactListItemTemplate(index, name, mail, color, initial, phone) {
+function getContactListItemTemplate(id, name, mail, color, initial, phone) {
   return `<div
-              id="contact-item-${index}"
+              id="contact-item"
               class="contact-list-item"
-              onclick="showContactInfo('${color}', '${initial}', '${name}', '${mail}', '${phone}')"
+              onclick="showContactInfo('${id}', '${color}', '${initial}', '${name}', '${mail}', '${phone}'), toggleActive()"
             >
               <div id="list-initial" class="profile-icon-small bg-${color}">${initial}</div>
               <div class="contact-list-info">
-                <p id="list-name-${index}" class="contacts-info-hl">${name}</p>
+                <p id="list-name" class="contacts-info-hl">${name}</p>
                 <p id="list-mail" class="copy-mail">${mail}</p>
               </div>
             </div>`;

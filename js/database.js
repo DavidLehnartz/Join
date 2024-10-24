@@ -3,16 +3,27 @@ const BASE_URL =
 
 async function loadContacts() {
   let contacts = await fetch(BASE_URL + "/contacts" + ".json");
-  let contactsArray = await contacts.json();
+  let contactsToJson = await contacts.json();
+  let contactsArray = Object.keys(contactsToJson);
+  return contactsArray;
+}
+
+async function loadAllContactsInfo() {
+  let idArray = await loadContacts();
+  let contactsArray = [];
+  for (let i = 0; i < idArray.length; i++) {
+    const id = idArray[i];
+    let newContact = await getContactById(id);
+    contactsArray.push(newContact);
+  }
   console.log(contactsArray);
   return contactsArray;
 }
 
 async function getContactById(id) {
-  let contacts = await fetch(BASE_URL + "/contacts" + ".json");
-  let contactsArray = await contacts.json();
-  let contact = contactsArray.find((e) => id === e.id);
-  return contact;
+  let contactResponse = await fetch(BASE_URL + "/contacts/" + id + ".json");
+  let contactToJson = await contactResponse.json();
+  return contactToJson;
 }
 
 async function createContact(contactData) {
@@ -24,4 +35,12 @@ async function createContact(contactData) {
     body: JSON.stringify(contactData),
   });
   return (contactToJson = await newContactResponse.json());
+}
+
+async function deleteContact(id) {
+  let contactResponse = await fetch(BASE_URL + "/contacts/" + id + ".json", {
+    method: "DELETE",
+  });
+  let deletedContact = await contactResponse.json();
+  return deletedContact;
 }

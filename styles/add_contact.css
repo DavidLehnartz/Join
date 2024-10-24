@@ -1,5 +1,4 @@
 .contacts-overlay {
-  z-index: 30;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -14,7 +13,6 @@
 }
 
 .contacts-overlay-container {
-  z-index: 40;
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -31,6 +29,8 @@
   align-items: flex-start;
   justify-content: center;
   background-color: #2a3647;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
   color: white;
   width: 35%;
   height: 100%;

@@ -40,12 +40,12 @@ function getNewContactsInfo(event) {
 }
 
 function createInitial(name) {
-  let fullName = string.split(" "),
+  let fullName = name.split(" "),
     initials = fullName[0].substring(0, 1).toUpperCase();
-
   if (fullName.length > 1) {
     initials += fullName[fullName.length - 1].substring(0, 1).toUpperCase();
   }
+  console.log(initials);
   return initials;
 }
 
