@@ -16,17 +16,15 @@
   </head>
   <body>
     <main>
-      <div class="top-row">
-        <img class="main-logo" src="./assets/img/join_logo_grey.svg" />
-        <div class="sign-up-info">
-          <p class="contacts-info-hl">Not a Join user?</p>
-          <button
-            class="btn-filled-small label"
-            onclick="window.location.href='./pages/signup.html'"
-          >
-            Sign up
-          </button>
-        </div>
+      <img class="main-logo" src="./assets/img/join_logo_grey.svg" />
+      <div class="sign-up-info hidden-mobile">
+        <p class="contacts-info-hl">Not a Join user?</p>
+        <button
+          class="btn-filled-small label"
+          onclick="window.location.href='./pages/signup.html'"
+        >
+          Sign up
+        </button>
       </div>
       <div class="login-card">
         <div>
@@ -52,6 +50,15 @@
             <button class="btn-outlined-medium">Guest Log in</button>
           </div>
         </form>
+      </div>
+      <div class="sign-up-info hidden-desktop">
+        <p class="contacts-info-hl">Not a Join user?</p>
+        <button
+          class="btn-filled-small label"
+          onclick="window.location.href='./pages/signup.html'"
+        >
+          Sign up
+        </button>
       </div>
       <div class="login-legal">
         <p
