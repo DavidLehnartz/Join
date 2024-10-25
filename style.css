@@ -2,6 +2,10 @@
   display: none !important;
 }
 
+.hidden-desktop {
+  display: none !important;
+}
+
 body {
   background-color: #f6f7f8;
 }
@@ -110,7 +114,7 @@ input:focus {
 .icon-input-field {
   display: flex;
   align-items: center;
-  margin: 0px;
+  margin: 0px 20px 0px 0px;
 }
 
 .input-checkbox {
@@ -154,4 +158,40 @@ input:focus {
   font-family: "interbold";
   color: #29abe2;
   cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+
+  .hidden-desktop {
+    display: flex !important;
+  }
+
+  .btn-filled-medium {
+    width: 180px;
+  }
+
+  .btn-outlined-medium {
+    width: 180px;
+  }
+}
+
+@media (max-width: 550px) {
+  input {
+    width: 364px;
+  }
+}
+
+@media (max-width: 480px) {
+  input {
+    width: 280px;
+  }
+}
+
+@media (max-width: 390px) {
+  input {
+    width: 200px;
+  }
 }

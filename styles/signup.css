@@ -1,12 +1,5 @@
-.top-row-su {
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-bottom: -50px;
-}
-
 .signup-back-nav {
+  margin-top: 25px;
   width: 32px;
   height: 32px;
   cursor: pointer;
@@ -17,4 +10,23 @@
   align-items: top;
   justify-content: space-between;
   width: 90%;
+}
+
+@media (max-width: 950px) {
+  .signup-back-nav {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 390px) {
+  .card-header {
+    width: 95%;
+  }
+
+  .signup-back-nav {
+    margin-top: 15px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
 }
