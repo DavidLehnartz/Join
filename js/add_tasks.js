@@ -25,33 +25,44 @@ function selectCategory(category) {
     checkForm();
 }
 
+const BASE_URL =
+    "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
+
+async function loadContacts() {
+    let contacts1 = await fetch(BASE_URL + "/contacts" + ".json");
+    let contactsToJson = await contacts1.json();
+    let contacts = Object.keys(contactsToJson);
+    return contacts;
+}
+
+let contacts = [];
+
+async function loadAllContactsInfo() {
+    let idArray = await loadContacts();
+    for (let i = 0; i < idArray.length; i++) {
+        const id = idArray[i];
+        let newContact = await getContactById(id);
+        contacts.push(newContact);
+    }
+    console.log(contacts);
+    return contacts;
+}
+
+async function getContactById(id) {
+    let contactResponse = await fetch(BASE_URL + "/contacts/" + id + ".json");
+    let contactToJson = await contactResponse.json();
+    return contactToJson;
+}
 
 
 
 
-
-// Beispielhafte Kontaktliste, die durch einen Datenbankabruf ersetzt werden kann
-// Statische Liste von Kontakten (Beispiel)
-const contacts = [
-    { name: "Sofia Müller (You)", email: "sofia.mueller@example.com", initials: "SM", color: "blue" },
-    { name: "Anton Mayer", email: "anton.mayer@example.com", initials: "AM", color: "orange" },
-    { name: "Anja Schulz", email: "anja.schulz@example.com", initials: "AS", color: "purple" },
-    { name: "Benedikt Ziegler", email: "benedikt.ziegler@example.com", initials: "BZ", color: "blue" },
-    { name: "David Eisenberg", email: "david.eisenberg@example.com", initials: "DE", color: "pink" },
-    { name: "Eva Fischer", email: "eva.fischer@example.com", initials: "EF", color: "orange" },
-    { name: "Emmanuel Mauer", email: "emmanuel.mauer@example.com", initials: "EM", color: "lightgreen" },
-    { name: "Marcel Bauer", email: "marcel.bauer@example.com", initials: "MB", color: "purple" },
-    { name: "Tatjana Wolf", email: "tatjana.wolf@example.com", initials: "TW", color: "red" }
-];
-
-// Array zum Speichern der ausgewählten Kontakte
 let selectedContacts = [];
 
 // Funktion zum Öffnen und Schließen der Dropdown-Liste (beim Klick auf den Dropdown-Pfeil)
 function toggleContactDropdown() {
     const dropdown = document.getElementById("categoryDropdown2");
     const arrowElement = document.getElementById("dropdownArrow");
-
     if (dropdown.classList.contains("open")) {
         dropdown.classList.remove("open");
         arrowElement.src = "../assets/img/arrow_drop_downaa.png";
@@ -67,13 +78,13 @@ function toggleContactDropdown() {
             const contactElement = document.createElement('div');
             contactElement.classList.add('contact-item');
             contactElement.innerHTML = `
-                <div class="contact-initials" style="background-color: ${contact.color};">${contact.initials}</div>
+                <div class="contact-initials" style="background-color: ${contact.color};">${contact.initial}</div>
                 <span>${contact.name}</span>
                 <input type="checkbox" class="contact-checkbox" data-name="${contact.name}" ${isSelected(contact.name) ? 'checked' : ''}/>
             `;
 
             const checkbox = contactElement.querySelector(".contact-checkbox");
-            checkbox.addEventListener("change", function() {
+            checkbox.addEventListener("change", function () {
                 toggleContactSelection(contact);
             });
 
@@ -133,17 +144,11 @@ function updateSelectedContactsDisplay() {
             const contactBadge = document.createElement('div');
             contactBadge.classList.add('contact-badge');
             contactBadge.style.backgroundColor = contact.color;
-            contactBadge.textContent = contact.initials;
+            contactBadge.textContent = contact.initial;
             badgesContainer.appendChild(contactBadge);
         });
     }
 }
-
-
-
-
-
-
 
 function toggleDropdown() {
     const dropdown = document.getElementById("categoryDropdown");
@@ -198,6 +203,7 @@ function restorePriority() {
 window.onload = function () {
     restorePriority();
     setTodayDate();
+    loadAllContactsInfo();
 };
 
 function addSubtask() {
@@ -354,11 +360,11 @@ function clearEverything() {
     clearCheckboxesAndDropdowns();
     resetSpecialFields();
     cancelSubtask();
-    
+
     // Subtask-Liste leeren
     const subtaskList = document.getElementById('subtaskList');
     subtaskList.innerHTML = '';
-    
+
     // Kontakte zurücksetzen
     clearSelectedContacts();
 }
@@ -369,7 +375,7 @@ function clearSelectedContacts() {
     if (selectedContactsElement) {
         selectedContactsElement.textContent = 'Select Contacts to assign';  // Setzt den Text zurück
     }
-    
+
     // Entfernt alle angezeigten Kontakt-Badges
     const selectedContactsBadges = document.getElementById('selectedContactsBadges');
     if (selectedContactsBadges) {
@@ -415,61 +421,35 @@ function checkForm() {
     document.getElementById('createTaskBtn').disabled = !formIsValid;
 }
 
+async function createTask() {
+    const taskData = {
+        title: document.getElementById('inputFieldTitle').value,
+        description: document.getElementById('inputFieldDescription').value,
+        dueDate: document.getElementById('inputFieldDueDate').value,
+        priority: document.getElementById('inputFieldUrgent').classList.contains('active-urgent') ? 'Urgent' :
+                  document.getElementById('inputFieldMedium').classList.contains('active-medium') ? 'Medium' :
+                  document.getElementById('inputFieldLow').classList.contains('active-low') ? 'Low' : 'None',
+        category: document.getElementById('selectedCategory').textContent,
+        subtasks: [
+            ...Array.from(document.querySelectorAll('#subtaskList li')).map(item => item.textContent.trim()),
+            document.getElementById('inputFieldSubtask').value.trim()
+        ].filter(subtask => subtask !== ''),
+        assignedTo: Array.from(document.querySelectorAll('#selectedContactsBadges .contact-badge'))
+                         .map(contact => contact.textContent)
+    };
 
-function createTask() {
-    const title = document.getElementById('inputFieldTitle').value;
-    const description = document.getElementById('inputFieldDescription').value;
-    const dueDate = document.getElementById('inputFieldDueDate').value;
+    try {
+        const response = await fetch(`${BASE_URL}/tasks.json`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(taskData)
+        });
 
-    // Priorität abrufen
-    let priority = 'None';
-    if (document.getElementById('inputFieldUrgent').classList.contains('active-urgent')) {
-        priority = 'Urgent';
-    } else if (document.getElementById('inputFieldMedium').classList.contains('active-medium')) {
-        priority = 'Medium';
-    } else if (document.getElementById('inputFieldLow').classList.contains('active-low')) {
-        priority = 'Low';
+        alert(response.ok ? "Task successfully saved in Firebase!" : "Failed to save task in Firebase.");
+    } catch (error) {
+        console.error("Error saving task:", error);
     }
-
-    // Kategorie und Subtasks abrufen
-    const selectedCategory = document.getElementById('selectedCategory').textContent;
-    const subtaskInput = document.getElementById('inputFieldSubtask').value.trim();
-    const subtasks = [...document.querySelectorAll('#subtaskList li')].map(item => item.textContent.trim());
-    if (subtaskInput !== '') {
-        subtasks.push(subtaskInput);
-    }
-
-    // Abgerufene Kontakte (Badges) abrufen
-    const selectedContactsElements = document.querySelectorAll('#selectedContactsBadges .contact-badge');
-    const assignedTo = Array.from(selectedContactsElements).map(contact => contact.textContent).join(', '); // Initialen in eine Liste umwandeln
-
-    // Neues Fenster öffnen mit der Aufgabe
-    const newWindow = window.open("", "_blank");
-    newWindow.document.write(`
-        <html>
-            <head>
-                <title>Task Summary</title>
-                <style>
-                    body { font-family: Arial, sans-serif; padding: 20px; }
-                    h2 { color: #333; }
-                    ul { list-style-type: none; padding: 0; }
-                    li { margin-bottom: 5px; }
-                </style>
-            </head>
-            <body>
-                <h2>Task Summary</h2>
-                <p><strong>Title:</strong> ${title}</p>
-                <p><strong>Description:</strong> ${description}</p>
-                <p><strong>Assigned To:</strong> ${assignedTo}</p> <!-- Kontakte als Namenskürzel -->
-                <p><strong>Due Date:</strong> ${dueDate}</p>
-                <p><strong>Priority:</strong> ${priority}</p>
-                <p><strong>Category:</strong> ${selectedCategory}</p>
-                <p><strong>Subtasks:</strong></p>
-                <ul>
-                    ${subtasks.map(subtask => `<li>${subtask}</li>`).join('')}
-                </ul>
-            </body>
-        </html>
-    `);
 }
 
