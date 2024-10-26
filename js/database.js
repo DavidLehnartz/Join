@@ -26,6 +26,15 @@ async function getContactById(id) {
   return contactToJson;
 }
 
+async function getSingleContact(name, email, phone) {
+  let contactsArray = await loadAllContactsInfo();
+  let contact = contactsArray.find((c) => {
+    c.name === name && c.email === email && c.phone === phone;
+  });
+  console.log(contact);
+  return contact;
+}
+
 async function createContact(contactData) {
   let newContactResponse = await fetch(BASE_URL + "/contacts" + ".json", {
     method: "POST",

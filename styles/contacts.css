@@ -27,7 +27,7 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  width: 35%;
+  width: 465px;
   height: 100%;
   box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.1);
   overflow-y: scroll;
@@ -125,7 +125,7 @@ hr {
 .contact-preview-container {
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 80%;
   align-items: flex-start;
   justify-content: flex-start;
   margin: 0px;
