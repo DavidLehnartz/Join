@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="../styles/pop_up_board.css" />
     <link rel="stylesheet" href="../styles/pop_up_board_edit_task.css" />
 
+    <script src="../js/board_templates.js" defer></script>
+    <script src="../js/board_drop_down.js" defer></script>
+    <script src="../js/board_drag_and_drop.js"></script>
     <script src="../js/board.js" defer></script>
   </head>
 
@@ -23,57 +26,58 @@
    **drop down zeile 420
   ** Plus button on hover blau
   -->
-  <body>
+  <body onload="init()">
     <!-- SIDEBAR -->
-
-    <div class="left-sidebar">
-      <img src="../assets/img/join_logo_white.svg" alt="join logo" />
-      <div class="left-sidebar-links">
-        <a class="links" href="#">
-          <img
-            class="sidebar-icons"
-            src="../assets/img/summary.png"
-            alt="Summary"
-          />
-          <p>Summary</p>
-        </a>
-        <a class="links" href="#">
-          <img
-            class="sidebar-icons"
-            src="../assets/img/add_task.png"
-            alt="Add Task"
-          />
-          <p>Add Task</p>
-        </a>
-        <a class="links" href="#">
-          <img
-            class="sidebar-icons"
-            src="../assets/img/board.png"
-            alt="Board"
-          />
-          <p>Board</p>
-        </a>
-        <a class="links" href="#">
-          <img
-            class="sidebar-icons"
-            src="../assets/img/contacts.png"
-            alt="Contacts"
-          />
-          <p>Contacts</p>
-        </a>
-      </div>
-      <div class="left-sidebar-links">
-        <a class="legacy-links" href="#"> Privacy Policy </a>
-        <a class="legacy-links" href="#"> Legal notice </a>
-      </div>
+    <div id="sidebar_template">
+      <!--  <div class="left-sidebar">
+          <img src="../assets/img/join_logo_white.svg" alt="join logo" />
+          <div class="left-sidebar-links">
+            <a class="links" href="#">
+              <img
+                class="sidebar-icons"
+                src="../assets/img/summary.png"
+                alt="Summary"
+              />
+              <p>Summary</p>
+            </a>
+            <a class="links" href="#">
+              <img
+                class="sidebar-icons"
+                src="../assets/img/add_task.png"
+                alt="Add Task"
+              />
+              <p>Add Task</p>
+            </a>
+            <a class="links" href="#">
+              <img
+                class="sidebar-icons"
+                src="../assets/img/board.png"
+                alt="Board"
+              />
+              <p>Board</p>
+            </a>
+            <a class="links" href="#">
+              <img
+                class="sidebar-icons"
+                src="../assets/img/contacts.png"
+                alt="Contacts"
+              />
+              <p>Contacts</p>
+            </a>
+          </div>
+          <div class="left-sidebar-links">
+            <a class="legacy-links" href="#"> Privacy Policy </a>
+            <a class="legacy-links" href="#"> Legal notice </a>
+          </div>
+        </div> -->
     </div>
 
     <main>
       <!-- HEADER -->
-      <header>
-        <div class="header-wrapper">
+      <header id="header_template">
+        <!--  <div class="header-wrapper">
           <span class="app-description"> Kanban Project Management Tool</span>
-          <!-- RESPONSIVE LOGO -->
+        
           <img
             class="join-logo-responsive"
             src="../assets/img/join_logo_grey.svg"
@@ -91,14 +95,14 @@
               alt="profil"
             />
           </div>
-        </div>
+        </div> -->
       </header>
 
       <!-- MAiN CONTENT -->
       <div class="main-content-wrapper">
         <!-- HEADLINE / SEARCHBOX -->
-        <section>
-          <div class="headline">
+        <section id="board_headline">
+          <!--  <div class="headline">
             <h1>Board</h1>
             <form class="searchbox-wrapper">
               <div class="searchbox-container"></div>
@@ -123,7 +127,7 @@
                   alt="plus"
                 />
               </button>
-              <!-- RESPONSIVE BTN-->
+            
               <button class="add-task-btn-responsive">
                 <img
                   class="add-task-btn-img"
@@ -132,11 +136,11 @@
                 />
               </button>
             </form>
-          </div>
+          </div> -->
         </section>
 
-        <!-- HEADLINE RESPONSIVE -->
-        <section>
+        <!-- HEADLINE / SEARCHBOX  RESPONSIVE-->
+        <!-- <section>
           <div class="headline-responsive">
             <h1>Board</h1>
             <button class="add-task-btn-responsive">
@@ -147,7 +151,11 @@
               />
             </button>
           </div>
-          <input class="searchbox-input-responsive" type="text" placeholder="Find Task" />
+          <input
+            class="searchbox-input-responsive"
+            type="text"
+            placeholder="Find Task"
+          />
           <button class="input-btn-responsive">
             <img
               class="input-btn-img"
@@ -155,13 +163,13 @@
               alt="search"
             />
           </button>
-        </section>
+        </section> -->
 
         <!-- KANBAN BOARD -->
-        <section>
+        <section id="kanban-board">
           <div class="kanban-board-wrapper">
             <!-- TO DO -->
-            <div class="kanban-column">
+            <div id="to_do" class="kanban-column">
               <div class="kanban-header">
                 <h2>To Do</h2>
                 <img
@@ -171,29 +179,12 @@
                 />
               </div>
               <!-- CONTENT -->
-              <div class="kanban-task-wrapper">
-                <div class="kanban-task-header">
-                  <p>$$ Ctgry $$</p>
-                </div>
-                <div class="kanban-task-content">
-                  <h3>$$ Title $$</h3>
-                  <p>
-                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
-                    adipisicing elit....
-                  </p>
-                </div>
-                <div class="kanban-task-subtasks">
-                  <progress value="0" max="100"></progress>
-                  <span>$/$ Subtasks</span>
-                </div>
-                <div class="kanban-task-footer">
-                  <div class="asignees-profil">$$ Profil $$</div>
-                  <div class="priority-info">
-                    <p>$$ Urgent $$</p>
-                  </div>
-                </div>
-              </div>
-              <div class="kanban-task-wrapper">
+              <div
+                onclick=" openTaskPopUp()"
+                draggable="true"
+                ondragstart="startDragging()"
+                class="kanban-task-wrapper"
+              >
                 <div class="kanban-task-header">
                   <p>$$ Ctgry $$</p>
                 </div>
@@ -216,8 +207,9 @@
                 </div>
               </div>
             </div>
+
             <!-- IN PROGRESS -->
-            <div class="kanban-column">
+            <div id="in_progress" class="kanban-column">
               <div class="kanban-header">
                 <h2>In progress</h2>
                 <img
@@ -250,8 +242,9 @@
                 </div>
               </div>
             </div>
+
             <!-- AWAIT FEEDBACK -->
-            <div class="kanban-column">
+            <div id="await_feedback" class="kanban-column">
               <div class="kanban-header">
                 <h2>Await feedback</h2>
                 <img
@@ -284,8 +277,9 @@
                 </div>
               </div>
             </div>
+
             <!-- DONE -->
-            <div class="kanban-column">
+            <div id="done" class="kanban-column">
               <div class="kanban-header">
                 <h2>Done</h2>
               </div>
@@ -317,10 +311,19 @@
         </section>
 
         <!-- OVERLAY / POP UP BOARD TASK RENDERN-->
-        <section>
-          <div class="overlay-pop-up-board d_none"> 
-            <div class="pop-up-board-wrapper">
-              <div class="pop-up-board-inner-container">
+
+        <div
+          onclick=" closePopUps()"
+          id="overlay_task_pop_up"
+          class="overlay-pop-up-board responsive-pop-up-closed"
+        >
+          <!-- d_none  -->
+          <div
+            onclick="event.stopPropagation()"
+            id="task_pop_up"
+            class="pop-up-board-wrapper"
+          >
+            <!--  <div class="pop-up-board-inner-container">
                 <div class="pop-up-task-header">
                   <div class="header-category">
                     <p>$$Ctgry$$</p>
@@ -404,195 +407,193 @@
                   src="../assets/img/delete_black.png"
                   alt="delete"
                 />
-              </div>
-            </div>
+              </div>  -->
           </div>
-        </section>
+        </div>
 
         <!-- POP UP BOARD EDIT TASK RENDERN-->
-        <section>
-          <div class="overlay-pop-up-edit-task d_none">
-            <div class="pop-up-edit-task-wrapper">
-              <div class="pop-up-edit-task-inner-container">
-                <div class="pop-up-edit-task-headline">
-                  <h4>Edit task</h4>
-                  <img
-                    class="pop-up-close-img"
-                    src="../assets/img/close_black.png"
-                    alt="close"
+        <section id="edit_task_pop_up" class="d_none">
+          <!-- <div class="overlay-pop-up-edit-task"> -->
+         <!--  <div class="pop-up-edit-task-wrapper">
+            <div class="pop-up-edit-task-inner-container">
+              <div class="pop-up-edit-task-headline">
+                <h4>Edit task</h4>
+                <img
+                  onclick="closePopUps()"
+                  class="pop-up-close-img"
+                  src="../assets/img/close_black.png"
+                  alt="close"
+                />
+              </div>
+              <div class="pop-up-edit-task-form">
+                <div class="pop-up-edit-task-title">
+                  <label for="">
+                    Title
+                    <span class="required-sign">*</span>
+                  </label>
+                  <input
+                    class="pop-up-edit-task-input"
+                    type="text"
+                    placeholder="Enter a title"
                   />
                 </div>
-                <form class="pop-up-edit-task-form">
-                  <div class="pop-up-edit-task-title">
-                    <label for="">
-                      Title
-                      <span class="required-sign">*</span>
-                    </label>
+
+                <div class="pop-up-edit-task-description">
+                  <label for=""> Description </label>
+                  <textarea
+                    class="pop-up-edit-task-textarea"
+                    rows="4"
+                    placeholder="Enter a Description"
+                  ></textarea>
+                </div>
+
+                <div class="pop-up-edit-task-due-date">
+                  <label for="">
+                    Due date
+                    <span class="required-sign">*</span>
+                  </label>
+                  <input class="pop-up-edit-task-input" type="date" />
+                </div>
+
+                <div class="pop-up-edit-task-priority">
+                  <label for=""> Priority </label>
+                  <div class="prio-status">
+                    <div class="prio-urgent">
+                      Urgent
+                      <img
+                        class="prio-img"
+                        src="../assets/img/prio_urgent_red.png"
+                        alt="urgent"
+                      />
+                    </div>
+                    <div class="prio-medium">
+                      Medium
+                      <img
+                        class="prio-img"
+                        src="../assets/img/prio_medium_orange.png"
+                        alt="medium"
+                      />
+                    </div>
+                    <div class="prio-low">
+                      Low
+                      <img
+                        class="prio-img"
+                        src="../assets/img/prio_low_green.png"
+                        alt="low"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pop-up-edit-task-assigned-to">
+                  <label for="">
+                    Assigned to
+                    <span class="required-sign">*</span>
+                  </label>
+
+                  <div class="custom-dropdown">
                     <input
-                      class="pop-up-edit-task-input"
                       type="text"
-                      placeholder="Enter a title"
+                      class="dropdown-input"
+                      placeholder="Select an option"
+                      readonly
                     />
-                  </div>
-
-                  <div class="pop-up-edit-task-description">
-                    <label for="">
-                      Description
-                      <span class="required-sign">*</span>
-                    </label>
-                    <textarea
-                      class="pop-up-edit-task-textarea"
-                      rows="4"
-                      placeholder="Enter a Description"
-                    ></textarea>
-                  </div>
-
-                  <div class="pop-up-edit-task-due-date">
-                    <label for="">
-                      Due date
-                      <span class="required-sign">*</span>
-                    </label>
-                    <input class="pop-up-edit-task-input" type="date" />
-                  </div>
-
-                  <div class="pop-up-edit-task-priority">
-                    <label for="">
-                      Priority
-                      <span class="required-sign">*</span>
-                    </label>
-                    <div class="prio-status">
-                      <div class="prio-urgent">
-                        Urgent
-                        <img
-                          class="prio-img"
-                          src="../assets/img/prio_urgent_red.png"
-                          alt="urgent"
-                        />
+                    <img
+                      class="dropdown-icon"
+                      src="../assets/img/arrow_drop_downaa.png"
+                      alt=""
+                    />
+                    <div class="dropdown-content">
+                      <div class="dropdown-item">
+                        <div class="dropdown-item-user">
+                          <img
+                            class="user-icon"
+                            src="../assets/img/profil_icon_orange.png"
+                            alt="Option 1"
+                          />
+                          Option 1
+                        </div>
+                        <img src="../assets/img/checkbox_false.png" alt="" />
                       </div>
-                      <div class="prio-medium">
-                        Medium
-                        <img
-                          class="prio-img"
-                          src="../assets/img/prio_medium_orange.png"
-                          alt="medium"
-                        />
-                      </div>
-                      <div class="prio-low">
-                        Low
-                        <img
-                          class="prio-img"
-                          src="../assets/img/prio_low_green.png"
-                          alt="low"
-                        />
+                      <div class="dropdown-item">
+                        <div class="dropdown-item-user">
+                          <img
+                            class="user-icon"
+                            src="../assets/img/profil_icon_light_blue_.png"
+                            alt="Option 1"
+                          />
+                          Option 2
+                        </div>
+                        <img src="../assets/img/checkbox_false.png" alt="" />
                       </div>
                     </div>
                   </div>
 
-                  <div class="pop-up-edit-task-assigned-to">
-                    <label for="">
-                      Assigned to
-                      <span class="required-sign">*</span>
-                    </label>
-
-                    <div class="custom-dropdown">
-                      <input
-                        type="text"
-                        class="dropdown-input"
-                        placeholder="Select an option"
-                        readonly
-                      />
+                  <div class="assigned-contacts">
+                    <div>
                       <img
-                        class="dropdown-icon"
-                        src="../assets/img/arrow_drop_downaa.png"
+                        class="user-icon"
+                        src="../assets/img/profil_icon_orange.png"
                         alt=""
                       />
-                      <div class="dropdown-content">
-                        <div class="dropdown-item">
-                          <div class="dropdown-item-user">
-                            <img
-                              class="user-icon"
-                              src="../assets/img/profil_icon_orange.png"
-                              alt="Option 1"
-                            />
-                            Option 1
-                          </div>
-                          <img src="../assets/img/checkbox_false.png" alt="" />
-                        </div>
-                        <div class="dropdown-item">
-                          <div class="dropdown-item-user">
-                            <img
-                              class="user-icon"
-                              src="../assets/img/profil_icon_light_blue_.png"
-                              alt="Option 1"
-                            />
-                            Option 2
-                          </div>
-                          <img src="../assets/img/checkbox_false.png" alt="" />
-                        </div>
-                      </div>
                     </div>
-
-                    <div class="assigned-contacts">
-                      <div>
-                        <img
-                          class="user-icon"
-                          src="../assets/img/profil_icon_orange.png"
-                          alt=""
-                        />
-                      </div>
-                      <div>
-                        <img
-                          class="user-icon"
-                          src="../assets/img/profil_icon_light_blue_.png"
-                          alt=""
-                        />
-                      </div>
+                    <div>
+                      <img
+                        class="user-icon"
+                        src="../assets/img/profil_icon_light_blue_.png"
+                        alt=""
+                      />
                     </div>
                   </div>
-                  <div class="pop-up-edit-task-subtasks">
-                    <label for="">
-                      Subtasks
-                      <span class="required-sign">*</span>
-                    </label>
+                </div>
+
+                <div class="pop-up-edit-task-subtasks">
+                  Subtasks
+                  <div class="input-box">
                     <input
+                      id="input_subtask_add_subtask"
                       class="pop-up-edit-subtask-input"
                       type="text"
                       placeholder="Add new subtask"
                     />
-                    <img
-                      class="pop-up-edit-task-input-btn-img"
-                      src="../assets/img/add_black.png"
-                      alt=""
-                    />
-                    <div class="pop-up-edit-task-list-container">
-                      <li>
-                        $$ Added subtask $$
-                        <img src="#" alt="" />
-                      </li>
-                      <li>$$ Added subtask $$</li>
-                      <li>$$ Added subtask $$</li>
-                      <li>$$ Added subtask $$</li>
-                    </div>
+                    <button class="pop-up-edit-task-input-btn">
+                      <img
+                        onclick="addSubtask()"
+                        class="pop-up-edit-task-input-btn-img"
+                        src="../assets/img/add_black.png"
+                        alt=""
+                      />
+                    </button>
                   </div>
-                </form>
-              </div>
-              <div class="pop-up-edit-task-footer">
-                <button class="pop-up-edit-task-btn">
-                  Ok
-                  <img
-                    class="pop-up-edit-task-btn-img"
-                    src="../assets/img/check_white.png"
-                    alt="check"
-                  />
-                </button>
+
+                  <div id="error_message" class="error-message"></div>
+                  <div
+                    id="subtasks"
+                    class="pop-up-edit-task-list-container"
+                  ></div>
+                </div>
               </div>
             </div>
-          </div>
+            <div class="pop-up-edit-task-footer">
+              <button
+                onclick=" renderTaskPopUp();"
+                class="pop-up-edit-task-btn"
+              >
+                Ok
+                <img
+                  class="pop-up-edit-task-btn-img"
+                  src="../assets/img/check_white.png"
+                  alt="check"
+                />
+              </button>
+            </div>
+          </div> -->
+          <!-- </div> -->
         </section>
       </div>
       <!-- FOOTER / NAVBAR RESPONSIVE -->
-      <nav>
-        <div class="navbar-links-responsive">
+      <nav id="navbar_responsive">
+        <!--  <div class="navbar-links-responsive">
           <a class="navbar-links" href="#">
             <img
               class="navbar-icons"
@@ -625,7 +626,7 @@
             />
             <p>Contacts</p>
           </a>
-        </div>
+        </div> -->
       </nav>
     </main>
   </body>

@@ -148,7 +148,6 @@ p {
   gap: 24px;
   cursor: pointer;
   margin-bottom: 24px;
-  box-sizing: border-box;
   /*  overflow-y: scroll;
   scrollbar-width: thin; */
 }

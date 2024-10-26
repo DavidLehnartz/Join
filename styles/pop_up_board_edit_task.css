@@ -188,7 +188,7 @@ select {
 
 .pop-up-edit-subtask-input {
   border-radius: 10px;
-  /* width: 100%; */
+  width: 100%;
   border: 1px solid #d1d1d1;
   padding: 12px 21px;
   font-size: 20px;
@@ -196,25 +196,35 @@ select {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
+  box-sizing: border-box;
 }
 
 .pop-up-edit-subtask-input:focus {
   border: 1px solid rgb(41, 171, 226);
 }
 
+.input-box{
+  position: relative;
+  width: 100%;
+}
+
 .pop-up-edit-task-input-btn {
   display: flex;
-  align-items: center;
-  border: none;
-  background-color: transparent;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: center;
+    border: none;
+    background-color: transparent;
 }
 
 .pop-up-edit-task-input-btn-img {
   width: 25px;
   height: 25px;
-  position: relative;
+  /* position: relative;
   left: 357px;
-  bottom: 45px;
+  bottom: 45px; */
 }
 
 .pop-up-edit-task-input-btn-img:hover {
@@ -356,6 +366,11 @@ li:hover {
 .user-icon {
   width: 42px;
   height: 42px;
+}
+
+.error-message{
+  color: red;
+  font-size: 14px;
 }
 
 /* MEDIA QUERY */
