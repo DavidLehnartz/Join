@@ -2,9 +2,11 @@
 
 /* BOARD MAIN SCRIPT */
 
+const BASE_URL =
+  "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 
+let tasks = [];
 let subtasks = [];
-
 
 /**
  * This function is used to initialize onload
@@ -12,10 +14,7 @@ let subtasks = [];
  */
 function init() {
   renderDesktopTemplate();
-  /*   renderBoardHeadline(); */
-
-  /* renderEditTaskPopUp(); */
-  /* renderNavbarResponsive(); */
+  loadTasks();
 }
 
 
@@ -27,12 +26,74 @@ function renderDesktopTemplate() {
   let sidebarTemplateContent = document.getElementById('sidebar_template');
   let headerTemplateContent = document.getElementById('header_template');
   let boardHeadlineContent = document.getElementById('board_headline');
+  /* let kanbanBoardContent = document.getElementById('kanban_board'); */
   let navbarResponsiveContent = document.getElementById('navbar_responsive');
 
   sidebarTemplateContent.innerHTML = getSidebarTemplate();
   headerTemplateContent.innerHTML = getHeaderTemplate();
   boardHeadlineContent.innerHTML = getBoardHeadlineTemplate();
+  /*  kanbanBoardContent.innerHTML = getKanbanBoardTemplate(); */
   navbarResponsiveContent.innerHTML = getNavbarResponsiveTemplate();
+}
+
+
+async function loadTasks() {
+  try {
+    await fetchTasksData();
+  } catch (error) {
+    console.error(error);
+  }
+  renderTasks();
+}
+
+
+async function fetchTasksData() {
+  tasks = [];
+  let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
+  let tasksToJson = await tasksResponse.json();
+  tasks = Object.values(tasksToJson);
+
+  console.log(tasksToJson);
+  console.log(tasks);
+}
+
+
+function renderTasks() {
+  let tasksContent = document.getElementById('task');
+  tasksContent.innerHTML = "";
+  /*   tasksContent.innerHTML += getTasksTemplate() */
+
+  for (let indexTasks = 0; indexTasks < tasks.length; indexTasks++) {
+    tasksContent.innerHTML += getTasksTemplate(tasks[indexTasks]);
+
+  }
+}
+
+function getTasksTemplate(tasks) {
+  return `    <div class="kanban-task">
+                <div class="kanban-task-header">
+                  <p>${tasks.category}</p>
+                </div>
+                <div class="kanban-task-content">
+                  <h3>${tasks.title}</h3>
+                  <p>
+                    ${tasks.description}
+                  </p>
+                </div>
+                <div class="kanban-task-subtasks">
+                  <progress value="0" max="100"></progress>
+                  <span>$/${tasks.subtasks}</span>
+                </div>
+                <div class="kanban-task-footer">
+                  <div class="asignees-profil">
+                  ${tasks.assignedTo}
+                  </div>
+                  <div class="priority-info">
+                    <p>${tasks.priority}</p>
+                  </div>
+                </div>
+              </div>
+`;
 }
 
 
@@ -43,20 +104,8 @@ function renderDesktopTemplate() {
  */
 function renderTaskPopUp() {
   let taskPopUpContent = document.getElementById('task_pop_up');
-  taskPopUpContent.innerHTML = '';
+  taskPopUpContent.innerHTML = "";
   taskPopUpContent.innerHTML = getTaskPopUpTemplate();
-}
-
-
-/**
- * This function is used to generate the edit task pop up
- * Template can be found at "board_templates.js"
- * 
- */
-function renderEditTaskPopUp() {
-  let editTaskPopUpContent = document.getElementById('edit_task_pop_up');
-  editTaskPopUpContent.innerHTML = '';
-  editTaskPopUpContent.innerHTML = getEditTaskPopUp();
 }
 
 
@@ -71,6 +120,17 @@ function openTaskPopUp() {
   renderTaskPopUp();
 }
 
+
+/**
+ * This function is used to generate the edit task pop up
+ * Template can be found at "board_templates.js"
+ * 
+ */
+function renderEditTaskPopUp() {
+  let editTaskPopUpContent = document.getElementById('edit_task_pop_up');
+  editTaskPopUpContent.innerHTML = "";
+  editTaskPopUpContent.innerHTML = getEditTaskPopUp();
+}
 
 /**
  * This function is used to close pop up board task onclick
@@ -110,11 +170,11 @@ function getSubtasksTemplate(indexSubtasks) {
  */
 function addSubtask() {
   let inputAddedSubtask = document.getElementById('input_subtask_add_subtask');
-  let addedSubtask = inputAddedSubtask.value.trim(); 
+  let addedSubtask = inputAddedSubtask.value.trim();
 
- if (errorMessage()) {
-  return; 
-}
+  if (errorMessage()) {
+    return;
+  }
 
   subtasks.push(addedSubtask);
   renderSubtasks();

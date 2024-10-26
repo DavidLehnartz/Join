@@ -7,7 +7,7 @@
     <link
       rel="icon"
       type="image/x-icon"
-      href="../assets/img/join_logo_white.svg"
+      href="../assets/img/join_logo_grey.svg"
     />
 
     <link rel="stylesheet" href="../styles/desktop_template.css" />
@@ -166,9 +166,8 @@
         </section> -->
 
         <!-- KANBAN BOARD -->
-        <section id="kanban-board">
+        <section id="kanban_board">
           <div class="kanban-board-wrapper">
-            <!-- TO DO -->
             <div id="to_do" class="kanban-column">
               <div class="kanban-header">
                 <h2>To Do</h2>
@@ -178,37 +177,14 @@
                   alt="plus"
                 />
               </div>
-              <!-- CONTENT -->
+              <!-- TASK RENDERN -->
               <div
-                onclick=" openTaskPopUp()"
-                draggable="true"
-                ondragstart="startDragging()"
+                onclick="openTaskPopUp()"
+                id="task"
                 class="kanban-task-wrapper"
-              >
-                <div class="kanban-task-header">
-                  <p>$$ Ctgry $$</p>
-                </div>
-                <div class="kanban-task-content">
-                  <h3>$$ Title $$</h3>
-                  <p>
-                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
-                    adipisicing elit....
-                  </p>
-                </div>
-                <div class="kanban-task-subtasks">
-                  <progress value="0" max="100"></progress>
-                  <span>$/$ Subtasks</span>
-                </div>
-                <div class="kanban-task-footer">
-                  <div class="asignees-profil">$$ Profil $$</div>
-                  <div class="priority-info">
-                    <p>$$ Urgent $$</p>
-                  </div>
-                </div>
-              </div>
+              ></div>
             </div>
 
-            <!-- IN PROGRESS -->
             <div id="in_progress" class="kanban-column">
               <div class="kanban-header">
                 <h2>In progress</h2>
@@ -218,32 +194,8 @@
                   alt="plus"
                 />
               </div>
-              <!-- CONTENT -->
-              <div class="kanban-task-wrapper">
-                <div class="kanban-task-header">
-                  <p>$$ Ctgry $$</p>
-                </div>
-                <div class="kanban-task-content">
-                  <h3>$$ Title $$</h3>
-                  <p>
-                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
-                    adipisicing elit....
-                  </p>
-                </div>
-                <div class="kanban-task-subtasks">
-                  <progress value="0" max="100"></progress>
-                  <span>$/$ Subtasks</span>
-                </div>
-                <div class="kanban-task-footer">
-                  <div class="asignees-profil">$$ Profil $$</div>
-                  <div class="priority-info">
-                    <p>$$ Urgent $$</p>
-                  </div>
-                </div>
-              </div>
             </div>
 
-            <!-- AWAIT FEEDBACK -->
             <div id="await_feedback" class="kanban-column">
               <div class="kanban-header">
                 <h2>Await feedback</h2>
@@ -253,58 +205,11 @@
                   alt="plus"
                 />
               </div>
-              <!-- CONTENT -->
-              <div class="kanban-task-wrapper">
-                <div class="kanban-task-header">
-                  <p>$$ Ctgry $$</p>
-                </div>
-                <div class="kanban-task-content">
-                  <h3>$$ Title $$</h3>
-                  <p>
-                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
-                    adipisicing elit....
-                  </p>
-                </div>
-                <div class="kanban-task-subtasks">
-                  <progress value="0" max="100"></progress>
-                  <span>$/$ Subtasks</span>
-                </div>
-                <div class="kanban-task-footer">
-                  <div class="asignees-profil">$$ Profil $$</div>
-                  <div class="priority-info">
-                    <p>$$ Urgent $$</p>
-                  </div>
-                </div>
-              </div>
             </div>
 
-            <!-- DONE -->
             <div id="done" class="kanban-column">
               <div class="kanban-header">
                 <h2>Done</h2>
-              </div>
-              <!--  <div class="kanban-task-no-task-found">No tasks To do</div> -->
-              <div class="kanban-task-wrapper">
-                <div class="kanban-task-header">
-                  <p>$$ Ctgry $$</p>
-                </div>
-                <div class="kanban-task-content">
-                  <h3>$$ Title $$</h3>
-                  <p>
-                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
-                    adipisicing elit....
-                  </p>
-                </div>
-                <div class="kanban-task-subtasks">
-                  <progress value="0" max="100"></progress>
-                  <span>$/$ Subtasks</span>
-                </div>
-                <div class="kanban-task-footer">
-                  <div class="asignees-profil">$$ Profil $$</div>
-                  <div class="priority-info">
-                    <p>$$ Urgent $$</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -414,7 +319,7 @@
         <!-- POP UP BOARD EDIT TASK RENDERN-->
         <section id="edit_task_pop_up" class="d_none">
           <!-- <div class="overlay-pop-up-edit-task"> -->
-         <!--  <div class="pop-up-edit-task-wrapper">
+          <!--  <div class="pop-up-edit-task-wrapper">
             <div class="pop-up-edit-task-inner-container">
               <div class="pop-up-edit-task-headline">
                 <h4>Edit task</h4>
@@ -631,3 +536,26 @@
     </main>
   </body>
 </html>
+
+<!--  <div onclick=" openTaskPopUp()"class="kanban-task-wrapper">
+                <div class="kanban-task-header">
+                  <p>$$ Ctgry $$</p>
+                </div>
+                <div class="kanban-task-content">
+                  <h3>$$ Title $$</h3>
+                  <p>
+                    $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit....
+                  </p>
+                </div>
+                <div class="kanban-task-subtasks">
+                  <progress value="0" max="100"></progress>
+                  <span>$/$ Subtasks</span>
+                </div>
+                <div class="kanban-task-footer">
+                  <div class="asignees-profil">$$ Profil $$</div>
+                  <div class="priority-info">
+                    <p>$$ Urgent $$</p>
+                  </div>
+                </div>
+              </div> -->

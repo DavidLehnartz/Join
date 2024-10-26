@@ -1,16 +1,1231 @@
-https://f016eac8@join-380.developerakademie.net/join/add_tasks.html
+https://f0168274@david-pyritz.developerakademie.net/JoinVersion2/Join/pages/add_tasks.html
 
- <div class="bothSides">
-          <div class="leftSide">
-            <div class="titleInput">
-              <label for="inputField">Title</label>
-              <input type="text" id="inputField">
+
+body {
+    display: flex;
+    margin: 0px auto;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    background-color: rgb(246, 247, 248);
+    font-family: "Inter", sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+a {
+    text-decoration: none;
+}
+
+span {
+    font-family: "Inter", sans-serif;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+.left-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 232px;
+    height: 100vh;
+    background-color: rgb(42, 54, 71);
+}
+
+.left-sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    color: #b5b6b9;
+    background-color: #2a3647;
+    width: 232px;
+    gap: 8px;
+}
+
+.links:hover {
+    color: white;
+    background-color: rgb(57, 74, 95);
+    filter: brightness(1.2);
+    transition: all 125ms ease;
+}
+
+.sidebar-icons {
+    margin-left: 64px;
+}
+
+.legacy-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #b5b6b9;
+}
+
+.legacy-links:hover {
+    color: rgb(41, 171, 226);
+    transition: transform 125ms;
+    transform: scale(1.05);
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 4px 0px 8px 0px rgb(170 170 170);
+    padding-right: 40px;
+    padding-left: 120px;
+    font-size: 24px;
+}
+
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    height: 96px;
+    justify-content: space-between;
+    max-width: 1440px;
+    margin: 0px auto;
+}
+
+.mobileLogoStyle {
+    width: 50px;
+    height: 50px;
+    display: none;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.main-content-wrapper {
+    max-width: 1440px;
+}
+
+.header-help-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.header-profil-icon {
+    width: 56px;
+    height: 56px;
+}
+
+.addTaskContent {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 150px;
+    gap: 20px;
+}
+
+.bothSides {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.leftSide {
+    display: flex;
+    flex-direction: column;
+    width: 440px;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    width: 440px;
+}
+
+.seperator1 {
+    width: 1px;
+    background-color: #D1D1D1;
+    border: 1px;
+    height: 460px;
+}
+
+.inputStyle {
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    gap: 8px;
+}
+
+.spanCategoryStyle {
+    margin-top: 53px;
+}
+
+.assignedToSpanStyle {
+    margin-top: 20px;
+}
+
+.SubtaskSpanStyle {
+    margin-top: 30px;
+}
+
+.selectCategory {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    height: 38px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.selectCategory:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 5px #29ABE2;
+    transition: all 125ms ease;
+}
+
+.selectCategory span {
+    font-size: 20px;
+    color: #000;
+    font-family: "Inter", sans-serif;
+}
+
+.dropdown-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+}
+
+.category-dropdown.open {
+    display: block;
+}
+
+.category-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    background-color: white;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+}
+
+.category-dropdown.show {
+    display: block;
+    font-family: "Inter", sans-serif;
+}
+
+.category-dropdown span {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+}
+
+.category-dropdown span:hover {
+    background-color: #D1D1D1;
+    border-radius: 10px;
+    
+}
+
+.subtaskInputWrapper {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+}
+
+.subtaskInput:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 5px #29ABE2;
+    transition: all 125ms ease;
+}
+
+.iconWrapper {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.subtaskList {
+    list-style-type: none;
+    padding: 0;
+    min-height: 80px;
+    overflow: auto;
+    margin: 0;
+    scrollbar-width: none;
+}
+
+.subtask-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 5px 0 5px 40px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 10px;
+    background-color: #F6F7F8;
+    transition: all 125ms ease;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+}
+
+.subtask-item::before {
+    content: "•";
+    position: absolute;
+    left: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.subtask-item:hover {
+    background-color: #D1D1D1;
+}
+
+.subtask-item.editing:hover {
+    background-color: #fff;
+}
+
+.subtask-item.editing::before {
+    content: '';
+}
+
+.subtask-icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.separator {
+    width: 1px;
+    height: 20px;
+    background-color: #2A3647;
+    margin: 0 5px;
+}
+
+.subtask-icons img {
+    cursor: pointer;
+}
+
+.subtaskInput {
+    width: 100%;
+    box-sizing: border-box;
+    height: 38px;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 20px;
+    border: 1px solid #D1D1D1;
+    font-family: "Inter", sans-serif;
+    background-color: white;
+}
+
+.required-asterisk {
+    color: red;
+    margin-left: 0px;
+    font-size: 20px;
+}
+
+.priorityStyle {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.priority-button {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.titleInput:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 5px #29ABE2;
+    transition: all 125ms ease;
+}
+
+.titleInputDescription:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 5px #29ABE2;
+    transition: all 125ms ease;
+}
+
+.titleInput {
+    height: 38px;
+    border-radius: 10px;
+    font-size: 20px;
+    border: 1px solid #D1D1D1;
+    cursor: text;
+    padding: 8px 12px;
+    box-sizing: border-box;
+}
+
+.titleInputDescription {
+    height: 96px;
+    border-radius: 10px;
+    font-size: 20px;
+    border: 1px solid #D1D1D1;
+    cursor: text;
+    padding: 16px 12px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: none;
+    font-family: "Inter", sans-serif;
+    scrollbar-width: none;
+}
+
+.titleInput:focus,
+.titleInputDescription:focus,
+.subtaskInput:focus {
+    border-color: #29ABE2 !important;
+    box-shadow: none;
+    outline: none;
+    transition: all 125ms ease;
+    border: none;
+}
+
+::placeholder {
+    font-size: 20px;
+    color: #D1D1D1;
+}
+
+#inputField2::placeholder {
+    text-align: left;
+    font-size: 20px;
+    color: #D1D1D1;
+    padding: 0;
+    position: static;
+}
+
+.clear-task-button {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 50px
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 125ms ease;
+    height: 56px;
+}
+
+.clear-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    background-color: white;
+    color: #000;
+    border-color: #ccc;
+}
+
+.priobtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 125ms ease;
+    gap: 8px;
+    height: 56px;
+    min-width: 120px;
+}
+
+.urgMedLow-btn {
+    background-color: white;
+    color: #000;
+    border-color: #ccc;
+
+}
+
+.urgMedLow-btn-medium {
+    background-color: white;
+}
+
+.urgMedLow-btn:hover,
+.urgMedLow-btn-medium:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 5px #29ABE2;
+    transition: all 125ms ease;
+}
+
+.active-urgent {
+    background-color: #FE3D19;
+    color: white;
+}
+
+.active-medium {
+    background-color: #FFA827;
+    color: white;
+}
+
+.active-low {
+    background-color: #7AE22B;
+    color: white;
+}
+
+.clear-btn:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.create-task-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    background-color: rgb(42, 54, 71);
+    color: #fff;
+    border-color: #2a3647;
+}
+
+.create-task-btn:hover {
+    border-color: #29ABE2;
+    box-shadow: 0 0 10px rgba(42, 54, 71, 0.5);
+}
+
+.buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+
+
+
+
+
+.selected-contacts-badges-container {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 10px; /* Abstand zum Dropdown */
+}
+
+.contact-badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.category-dropdown.open {
+    display: block;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 0; /* Weniger Innenabstand */
+    cursor: pointer;
+    justify-content: flex-start; /* Links ausrichten */
+    gap: 10px; /* Abstand zwischen den Elementen */
+    height: 20px; /* Standardhöhe von 20px */
+    transition: background-color 125ms ease, height 125ms ease; /* Animiert die Höhe */
+}
+
+.contact-item:hover { /* Hover-Effekt nur auf contact-item */
+    background-color: #D1D1D1; /* Hintergrundfarbe ändern beim Hover */
+    border-radius: 10px;
+}
+
+.contact-item span:hover {
+    background-color: transparent; /* Keine Hintergrundänderung für Spans */
+}
+
+.contact-initials {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px; /* Abstand zwischen Initialen und Name */
+    margin-left: 15px; /* Mehr Abstand nach links für die Initialen */
+}
+
+.contact-checkbox {
+    margin-left: auto; /* Checkbox nach rechts verschieben */
+    margin-right: 15px; /* Mehr Abstand zwischen Checkbox und Scrollbalken */
+}
+
+
+
+
+
+
+
+@media (max-width: 1320px) {
+    .bothSides {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        width: 100%;
+    }
+
+    .seperator1 {
+        display: none;
+    }
+
+    .leftSide {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        width: 100%;
+    }
+
+    .rightSide {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .bigLogo {
+        display: none;
+    }
+
+    .links {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .sidebar-icons {
+        margin-left: 0;
+        margin-right: 0px;
+        width: 24px;
+        height: 24px;
+    }
+
+    .left-sidebar {
+        width: 100%;
+        max-width: 100vw;
+        height: fit-content;
+        padding: 15px 0px;
+        position: fixed;
+        bottom: 0;
+        background-attachment: scroll;
+        z-index: 90;
+        justify-content: space-between;
+    }
+
+    p,
+    div,
+    button,
+    span,
+    input,
+    a,
+    .titleInputDescription,
+    .subtask-item,
+    input::placeholder,
+    textarea::placeholder {
+        margin: 0px;
+        font-size: 15px !important;
+    }
+
+    .placeholder {
+        font-size: 15px !important;
+    }
+
+    .left-sidebar-links {
+        width: 100%;
+        flex-direction: row;
+        margin: auto;
+    }
+
+    .legacy-links {
+        display: none;
+    }
+
+    .links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .mobileSpanStyle {
+        margin-bottom: 140px;
+        margin-left: 80px;
+    }
+
+    .addTaskContent {
+        margin-left: 0px;
+        width: 90%;
+    }
+
+    .main-content-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .priobtn {
+        font-size: 16px;
+        padding: 5px 10px;
+        min-width: 0px;
+        height: 45px;
+    }
+
+    .priority-button {
+        height: 45px;
+    }
+
+    .clear-btn,
+    .create-task-btn {
+        height: 45px;
+    }
+
+    header {
+        padding: 0px;
+    }
+
+    .inputStyle {  
+        margin-top: 40px;
+    }
+
+    .spanCategoryStyle {
+        margin-top: 0px;
+    }
+
+    .assignedToSpanStyle {
+        margin-top: 0px;
+    }
+
+    .SubtaskSpanStyle {
+        margin-top: 0px;
+    }
+
+    .KanbanSpanStyle {
+        display: none;
+    }
+
+    .header-wrapper {
+        padding: 0px 10px;
+    }
+
+    .mobileLogoStyle {
+        display: flex;
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="inputStyle">
+              <span for="inputField">Category<span class="required-asterisk">*</span></span>
+              <div class="selectCategory" onclick="toggleDropdown(event)">
+                <span id="selectedCategory">Select task category</span>
+                <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
+                <div class="category-dropdown" id="categoryDropdown">
+                  <span onclick="selectCategory('Technical Task')">Technical Task</span>
+                  <span onclick="selectCategory('User Story')">User Story</span>
+                </div>
+              </div>
             </div>
-            <div class="titleInput">
-              <label for="inputField">Description</label>
-              <input type="text" id="inputField">
+
+
+
+
+wenn nicht alle drei inputfelder mit den ID´s inputFieldTitle, inputFieldDueDate und selectedCategory augefüllt sind soll jedes Feld eine rote schicke boarder bekommen, pass bitte dazu die Funktion checkForm(an):
+html: 
+<div class="inputStyle">
+              <span for="inputField">Title<span class="required-asterisk">*</span></span>
+              <input type="text" id="inputFieldTitle" placeholder="Enter a title" class="titleInput"
+                oninput="checkForm()">
             </div>
-            <div class="titleInput">
-              <label for="inputField">Assigned to</label>
-              <input type="text" id="inputField">
+
+<div class="inputStyle">
+              <span for="inputField">Due date<span class="required-asterisk">*</span></span>
+              <input type="date" id="inputFieldDueDate" class="titleInput" oninput="checkForm()">
             </div>
+
+<div class="inputStyle">
+              <span for="inputField">Category<span class="required-asterisk">*</span></span>
+              <div class="selectCategory" onclick="toggleDropdown(event)">
+                <span id="selectedCategory">Select task category</span>
+                <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
+                <div class="category-dropdown" id="categoryDropdown">
+                  <span onclick="selectCategory('Technical Task')">Technical Task</span>
+                  <span onclick="selectCategory('User Story')">User Story</span>
+                </div>
+              </div>
+            </div>
+
+JavaScript: function checkForm() {
+    const title = document.getElementById('inputFieldTitle').value.trim();
+    const dueDate = document.getElementById('inputFieldDueDate').value;
+    const selectedCategory = document.getElementById('selectedCategory').textContent.trim();
+    if (title !== '' && dueDate !== '' && selectedCategory !== 'Select task category') {
+        document.getElementById('createTaskBtn').disabled = false;
+    } else {
+        document.getElementById('createTaskBtn').disabled = true;
+    }
+}
+
+
+
+Assigned to, kontakte rausholen aus contacts
+
+verlinkung rechts oben zu Privacy Policy Legal notice
+
+
+function createTask(){
+    inputFieldTitle
+    inputFieldDescription
+    inputFieldAssignedTo
+    inputFieldDueDate
+    inputFieldUrgent
+    inputFieldMedium
+    inputFieldLow
+    'selectedCategory'
+    inputFieldSubtask
+}
+
+Holle alle eingaben aus den Feldern und Buttons und erstelle mit innerHTML eine onclick Funktion namens createTask() und zeige alles in einer neuen Webseite an: IDs: function createTask(){
+    inputFieldTitle
+    inputFieldDescription
+    inputFieldAssignedTo
+    inputFieldDueDate
+    inputFieldUrgent
+    inputFieldMedium
+    inputFieldLow
+    'selectedCategory'
+    inputFieldSubtask
+    subtaskList
+}
+
+html: <div class="clear-task-button">
+              <button class="btn clear-btn" onclick="clearEverything()">Clear<img id="dropdownArrow"
+                  src="../assets/img/iconoir_cancel.png"></button>
+              <button class="btn create-task-btn" onclick="createTask()">Create Task<img id="dropdownArrow"
+                  src="../assets/img/check_white.png"></button>
+            </div>
+
+JavaScript: task = {
+    title: 'title-input',
+    content: 'textarea-content',
+    assignedTO: 'assigned-to-input',
+    date: 'date-input',
+    prio: 'prio-button',
+    category: 'category-dropdown',
+    subtasks: ['first subtask', 'secondSubtask']
+}
+
+function setTodayDate() {
+    const dateInput = document.getElementById('inputFieldDueDate');
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const todayString = `${year}-${month}-${day}`;
+    dateInput.setAttribute('min', todayString);
+    dateInput.value = todayString;
+}
+
+function selectCategory(category) {
+    const selectedCategoryElement = document.getElementById("selectedCategory");
+    selectedCategoryElement.textContent = category;
+}
+
+function toggleDropdown() {
+    const dropdown = document.getElementById("categoryDropdown");
+    const arrowElement = document.getElementById("dropdownArrow");
+    if (dropdown.classList.contains("open")) {
+        dropdown.classList.remove("open");
+        arrowElement.src = "../assets/img/arrow_drop_downaa.png";
+    } else {
+        dropdown.classList.add("open");
+        arrowElement.src = "../assets/img/arrow_drop_up.png";
+    }
+}
+
+function resetButtons() {
+    const buttons = document.querySelectorAll('.priobtn');
+    buttons.forEach(btn => {
+        btn.classList.remove('active-urgent', 'active-medium', 'active-low');
+        const img = btn.querySelector('img');
+        if (btn.innerText.includes('Urgent')) {
+            img.src = '../assets/img/urgent.png';
+        } else if (btn.innerText.includes('Medium')) {
+            img.src = '../assets/img/medium21.png';
+        } else if (btn.innerText.includes('Low')) {
+            img.src = '../assets/img/low.png';
+        }
+    });
+}
+
+function setPriority(button, priority) {
+    resetButtons();
+    const img = button.querySelector('img');
+    if (priority === 'urgent') {
+        button.classList.add('active-urgent');
+        img.src = '../assets/img/urgent21.png';
+    } else if (priority === 'medium') {
+        button.classList.add('active-medium');
+        img.src = '../assets/img/medium.png';
+    } else if (priority === 'low') {
+        button.classList.add('active-low');
+        img.src = '../assets/img/low21.png';
+    }
+    localStorage.setItem('selectedPriority', priority);
+}
+
+function restorePriority() {
+    const mediumPriorityBtn = document.querySelector('.urgMedLow-btn-medium');
+    setPriority(mediumPriorityBtn, 'medium');
+}
+
+window.onload = function () {
+    restorePriority();
+    setTodayDate();
+};
+
+
+
+
+
+function addSubtask() {
+    const inputField = document.getElementById('inputFieldSubtask');
+    const iconWrapper = document.getElementById('iconWrapper');
+    const actionIcon = document.getElementById('actionIcon');
+    inputField.disabled = false;
+    inputField.focus();
+    actionIcon.src = "../assets/img/Propertycheck.png";
+    if (!document.getElementById('closeIcon')) {
+        const closeIcon = document.createElement('img');
+        closeIcon.src = "../assets/img/close.png";
+        closeIcon.classList.add('icon');
+        closeIcon.id = 'closeIcon';
+        closeIcon.onclick = cancelSubtask;
+        iconWrapper.prepend(closeIcon);
+    }
+    actionIcon.onclick = function() {
+        const subtaskText = inputField.value.trim();
+        if (subtaskText !== '') {
+            const subtaskList = document.getElementById('subtaskList');
+            const newSubtask = document.createElement('li');
+            newSubtask.classList.add('subtask-item');
+            newSubtask.textContent = subtaskText;
+            const iconsWrapper = document.createElement('div');
+            iconsWrapper.classList.add('subtask-icons');
+            const editIcon = document.createElement('img');
+            editIcon.src = '../assets/img/edit.png';
+            editIcon.alt = 'Edit';
+            editIcon.onclick = function() {
+                editSubtask(newSubtask);
+            };
+            const separator = document.createElement('div');
+            separator.classList.add('separator');
+            const deleteIcon = document.createElement('img');
+            deleteIcon.src = '../assets/img/delete.png';
+            deleteIcon.alt = 'Delete';
+            deleteIcon.onclick = function() {
+                deleteSubtask(newSubtask);
+            };
+            iconsWrapper.appendChild(editIcon);
+            iconsWrapper.appendChild(separator);
+            iconsWrapper.appendChild(deleteIcon);
+            newSubtask.appendChild(iconsWrapper);
+            subtaskList.appendChild(newSubtask);
+            
+            inputField.value = '';
+            inputField.focus();
+        }
+    }.bind(this);
+}
+
+
+
+function cancelSubtask() {
+    const inputField = document.getElementById('inputFieldSubtask');
+    const iconWrapper = document.getElementById('iconWrapper');
+    const actionIcon = document.getElementById('actionIcon');
+    inputField.disabled = true;
+    inputField.value = '';
+    actionIcon.src = "../assets/img/Propertyadd.png";
+    const closeIcon = document.getElementById('closeIcon');
+    if (closeIcon) {
+        iconWrapper.removeChild(closeIcon);
+    }
+    actionIcon.onclick = addSubtask;
+}
+
+
+
+function editSubtask(subtaskItem) {
+    const currentText = subtaskItem.firstChild.textContent.trim();
+    subtaskItem.classList.add('editing');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = currentText;
+    input.classList.add('subtaskInput');
+    input.style.width = '100%';
+    input.style.height = subtaskItem.offsetHeight + 'px';
+    input.style.backgroundColor = '#fff';
+    input.style.border = 'none';
+    input.style.outline = 'none';
+    input.style.paddingLeft = '40px';
+    subtaskItem.firstChild.replaceWith(input);
+    input.focus();
+    input.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const newText = input.value.trim();
+            if (newText !== '') {
+                const textNode = document.createTextNode(newText);
+                input.replaceWith(textNode);
+                subtaskItem.classList.remove('editing');
+            } else {
+                const textNode = document.createTextNode(currentText);
+                input.replaceWith(textNode);
+                subtaskItem.classList.remove('editing');
+            }
+        }
+    });
+    input.addEventListener('blur', function() {
+        const newText = input.value.trim();
+        if (newText !== '') {
+            const textNode = document.createTextNode(newText);
+            input.replaceWith(textNode);
+        } else {
+            const textNode = document.createTextNode(currentText);
+            input.replaceWith(textNode);
+        }
+        subtaskItem.classList.remove('editing');
+    });
+}
+
+
+function deleteSubtask(subtaskItem) {
+    subtaskItem.remove();
+}
+ 
+
+
+
+
+
+function clearFormInputs() {
+    const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], input[type="email"], input[type="password"]');
+    inputs.forEach(input => {
+        input.value = '';
+    });
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(textarea => {
+        textarea.value = '';
+    });
+}
+
+function clearCheckboxesAndDropdowns() {
+    const checkboxesAndRadios = document.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+    checkboxesAndRadios.forEach(input => {
+        input.checked = false;
+    });
+    const dropdowns = document.querySelectorAll('select');
+    dropdowns.forEach(dropdown => {
+        dropdown.selectedIndex = 0;
+    });
+}
+
+function resetSpecialFields() {
+    const subtaskInput = document.getElementById('inputFieldSubtask');
+    if (subtaskInput) {
+        subtaskInput.value = '';
+        subtaskInput.disabled = true;
+    }
+    const selectedCategoryElement = document.getElementById("selectedCategory");
+    if (selectedCategoryElement) {
+        selectedCategoryElement.textContent = 'Select task category';
+    }
+    resetButtons();
+    restorePriority();
+    setTodayDate();
+}
+
+function clearEverything() {
+    clearFormInputs();
+    clearCheckboxesAndDropdowns();
+    resetSpecialFields();
+    cancelSubtask();
+    const subtaskList = document.getElementById('subtaskList');
+    subtaskList.innerHTML = '';
+}
+
+
+bitte hole noch zuätzlich die eingabe aus den priority Buttons: html:
+<div class="priorityStyle">
+              <span for="inputField">Prio</span>
+              <div class="priority-button">
+                <button id="inputFieldUrgent" class="priobtn urgMedLow-btn" onclick="setPriority(this, 'urgent')">
+                  Urgent
+                  <img src="../assets/img/urgent.png" class="priority-icon">
+                </button>
+                <button id="inputFieldMedium" class="priobtn urgMedLow-btn-medium"
+                  onclick="setPriority(this, 'medium')">
+                  Medium
+                  <img src="../assets/img/medium21.png" class="priority-icon">
+                </button>
+                <button id="inputFieldLow" class="priobtn urgMedLow-btn" onclick="setPriority(this, 'low')">
+                  Low
+                  <img src="../assets/img/low.png" class="priority-icon">
+                </button>
+              </div>
+            </div>
+
+bitte hole noch die eingaben aus den Subtask und den <ul> und <li> eingaben: html:
+
+<div class="inputStyle">
+              <span for="inputField">Subtasks</span>
+              <div class="subtaskInputWrapper">
+                <input type="text" id="inputFieldSubtask" placeholder="Add new subtask" class="subtaskInput">
+                <div class="iconWrapper" id="iconWrapper">
+                  <img src="../assets/img/Propertyadd.png" id="actionIcon" class="icon" onclick="addSubtask()">
+                </div>
+              </div>
+              <!-- Ungeordnete Liste für Subtasks -->
+              <ul id="subtaskList" class="subtaskList"></ul>
+            </div>
+            <div class="clear-task-button">
+              <button class="btn clear-btn" onclick="clearEverything()">Clear<img id="dropdownArrow"
+                  src="../assets/img/iconoir_cancel.png"></button>
+              <button class="btn create-task-btn" onclick="createTask()">Create Task<img id="dropdownArrow"
+                  src="../assets/img/check_white.png"></button>
+            </div>
+
+
+
+deklariere bitte die Felder mit folgenden ID´s inputFieldTitle, inputFieldDueDate und selectedCategory, das eine eingabe erfolgen muss, ansonsten kann Create Task function() nicht aufgerufen werden: html:  
+<div class="inputStyle">
+              <span for="inputField">Title<span class="required-asterisk">*</span></span>
+              <input type="text" id="inputFieldTitle" placeholder="Enter a title" class="titleInput" oninput="checkForm()">
+            </div>
+            <div class="inputStyle">
+              <span for="inputField">Description</span>
+              <textarea id="inputFieldDescription" placeholder="Enter a Description"
+                class="titleInputDescription"></textarea>
+            </div>
+<div class="inputStyle">
+              <span for="inputField">Due date<span class="required-asterisk">*</span></span>
+              <input required type="date" id="inputFieldDueDate" placeholder="dd/mm/yyyy" class="titleInput" oninput="checkForm()">
+            </div>
+<div class="inputStyle">
+              <span for="inputField">Category<span class="required-asterisk">*</span></span>
+              <div class="selectCategory" onclick="toggleDropdown(event)" oninput="checkForm()">
+                <span id="selectedCategory">Select task category</span>
+                <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
+                <div class="category-dropdown" id="categoryDropdown">
+                  <span onclick="selectCategory('Technical Task')">Technical Task</span>
+                  <span onclick="selectCategory('User Story')">User Story</span>
+                </div>
+              </div>
+            </div>
+JavaScript: function checkForm() {
+    const title = document.getElementById('inputFieldTitle').value.trim();
+    const dueDate = document.getElementById('inputFieldDueDate').value;
+    const selectedCategory = document.getElementById('selectedCategory').textContent.trim();
+
+    // Überprüfen, ob alle Felder ausgefüllt sind
+    if (title !== '' && dueDate !== '' && selectedCategory !== 'Select task category') {
+        document.getElementById('createTaskBtn').disabled = false;
+    } else {
+        document.getElementById('createTaskBtn').disabled = true;
+    }
+}

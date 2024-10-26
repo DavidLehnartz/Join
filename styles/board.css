@@ -141,6 +141,19 @@ p {
   display: flex;
   flex-direction: column;
   /* width: 100%; */
+  /* height: 244px; */
+  /* border-radius: 24px; */
+  /* background: rgb(255, 255, 255); */
+  /* padding: 16px; */
+  /* gap: 24px; */
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+.kanban-task{
+  display: flex;
+  flex-direction: column;
+  /* width: 100%; */
   height: 244px;
   border-radius: 24px;
   background: rgb(255, 255, 255);
@@ -148,8 +161,6 @@ p {
   gap: 24px;
   cursor: pointer;
   margin-bottom: 24px;
-  /*  overflow-y: scroll;
-  scrollbar-width: thin; */
 }
 
 .kanban-task-header {
@@ -192,6 +203,7 @@ progress {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 12px;
 }
 
 .asignees-profil {

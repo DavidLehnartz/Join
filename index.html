@@ -3,16 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Join</title>
     <link
       rel="icon"
       type="image/x-icon"
       href="./assets/img/join_logo_white.svg"
     />
+<<<<<<< HEAD
 
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
   
+=======
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/fonts.css" />
+    <link rel="stylesheet" href="./styles/color.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+  </head>
+  <body>
+    <main>
+      <img class="main-logo" src="./assets/img/join_logo_grey.svg" />
+      <div class="sign-up-info hidden-mobile">
+        <p class="contacts-info-hl">Not a Join user?</p>
+        <button
+          class="btn-filled-small label"
+          onclick="window.location.href='./pages/signup.html'"
+        >
+          Sign up
+        </button>
+      </div>
+      <div class="login-card">
+        <div>
+          <h2>Log in</h2>
+          <hr />
+        </div>
+        <form class="login-form">
+          <div class="icon-input-field">
+            <input id="login-mail" type="email" placeholder="Email" />
+            <img class="input-icon" src="../assets/icons/mail-grey.svg" />
+          </div>
+          <div class="icon-input-field">
+            <input id="login-password" type="password" placeholder="Password" />
+            <img class="input-icon" src="../assets/icons/lock.svg" />
+          </div>
+          <div class="input-checkbox">
+            <img class="default-cb" src="../assets/icons/default.svg" />
+            <img class="hover-cb" src="../assets/icons/hover_default.svg" />
+            <p class="small-print">Remember me</p>
+          </div>
+          <div class="login-btn-row">
+            <button class="btn-filled-medium">Log in</button>
+            <button class="btn-outlined-medium">Guest Log in</button>
+          </div>
+        </form>
+      </div>
+      <div class="sign-up-info hidden-desktop">
+        <p class="contacts-info-hl">Not a Join user?</p>
+        <button
+          class="btn-filled-small label"
+          onclick="window.location.href='./pages/signup.html'"
+        >
+          Sign up
+        </button>
+      </div>
+      <div class="login-legal">
+        <p
+          class="small-text-button"
+          onclick="window.location.href='./pages/privacy_policy.html'"
+        >
+          Privacy Policy
+        </p>
+        <p
+          class="small-text-button"
+          onclick="window.location.href='./pages/legal_notice.html'"
+        >
+          Legal notice
+        </p>
+      </div>
+    </main>
+>>>>>>> a647464a4666bc1518257407ce8f8cfb6be698f4
   </body>
 </html>

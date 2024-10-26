@@ -3,6 +3,23 @@
   align-items: flex-start;
   justify-content: flex-start;
   max-width: 1440px;
+  position: absolute;
+  top: 96px;
+  bottom: 0px;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a8a8a8;
+  border-radius: 5px;
 }
 
 .contacts-list-container {
@@ -10,41 +27,94 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  width: 456px;
+  width: 35%;
+  height: 100%;
   box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.1);
   overflow-y: scroll;
   margin: 0px;
-}
-
-.btn-add-contact {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  width: 352px;
-  height: 56px;
-  margin: 22px 0px;
-  border-radius: 10px;
-  border: none;
-  background-color: #2a3647;
-  box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.1);
-  color: white;
-  cursor: pointer;
-}
-
-.btn-add-contact:hover {
-  background-color: #29abe2;
-}
-
-.btn-add-contact p {
-  font-family: "interbold";
-  font-weight: 700;
-  font-size: 21px;
+  padding: 22px 50px;
 }
 
 .btn-add-contact img {
   width: 32px;
   height: 32px;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.contact-list-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 78px;
+  border-radius: 10px;
+  border: none;
+  padding: 7px 0px;
+  gap: 35px;
+  cursor: pointer;
+}
+
+.contact-list-item:hover {
+  background: linear-gradient(#f9f9f9, #f0f0f0);
+}
+
+.item-active {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 78px;
+  border-radius: 10px;
+  border: none;
+  padding: 7px 0px;
+  gap: 35px;
+  cursor: pointer;
+  background-color: #2a3647;
+  color: white;
+}
+
+.contact-list-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile-icon-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 24px;
+  width: 42px;
+  height: 42px;
+  border-radius: 45px;
+  text-align: center;
+  border: 2px solid white;
+  font-family: "interregular";
+  font-size: 14px;
+  color: white;
+}
+
+.section-header {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+hr {
+  width: 100%;
+  border-top: 1px solid #d1d1d1;
+  margin-bottom: 5px;
+}
+
+.section-letter {
+  margin-left: 40px;
+  margin-bottom: 15px;
 }
 
 .vl {
@@ -54,12 +124,21 @@
 
 .contact-preview-container {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 65%;
+  align-items: flex-start;
+  justify-content: flex-start;
   margin: 0px;
-  padding-top: 30px;
+  padding: 75px 55px;
+  gap: 60px;
+}
+
+.contact-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 30px;
 }
 
 .contacts-headline {
@@ -69,14 +148,100 @@
   align-items: center;
 }
 
-.contacts-headline h2 {
-  font-family: "interbold";
-  font-size: 61px;
-  color: black;
+.contacts-name {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 50px;
 }
 
-.contacts-headline p {
-  font-family: "intermedium";
-  font-size: 27px;
+.profile-icon-big {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 70px;
+  text-align: center;
+  border: 3px solid white;
+  font-family: "interregular";
+  font-size: 47px;
+  color: white;
+}
+
+.contacts-btn-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+.text-button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
   color: #2a3647;
+}
+
+.text-button:hover {
+  color: #29abe2;
+}
+
+.text-button:hover .hover-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.text-button:hover .default-icon {
+  display: none;
+}
+
+.default-icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+}
+
+.hover-icon {
+  display: none;
+}
+
+.text-button img:hover {
+  fill: #29abe2;
+}
+
+.contacts-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+@media (max-width: 1250px) {
+  .contacts-list-container {
+    padding: 22px 20px;
+  }
+
+  .profile-icon-small {
+    margin-left: 12px;
+    width: 35px;
+    height: 35px;
+    border-radius: 35px;
+    font-size: 12px;
+  }
+
+  .section-header {
+    height: 60px;
+  }
+
+  hr {
+    margin-bottom: 3px;
+  }
+
+  .section-letter {
+    margin-left: 24px;
+    margin-bottom: 10px;
+  }
 }

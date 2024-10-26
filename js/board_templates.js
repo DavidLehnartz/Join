@@ -143,6 +143,56 @@ function getBoardHeadlineTemplate() {
 }
 
 
+/* function getKanbanBoardTemplate() {
+  return `
+           <div class="kanban-board-wrapper">
+            <div id="to_do" class="kanban-column">
+              <div class="kanban-header">
+                <h2>To Do</h2>
+                <img
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+             <div onclick="openTaskPopUp()" id="task" class="kanban-task-wrapper"></div>
+            </div>
+
+            <div id="in_progress" class="kanban-column">
+              <div class="kanban-header">
+                <h2>In progress</h2>
+                <img
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+           <!-- CONTENT -->
+            </div>
+
+            <div id="await_feedback" class="kanban-column">
+              <div class="kanban-header">
+                <h2>Await feedback</h2>
+                <img
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+              <!-- CONTENT -->
+            </div>
+
+            <div id="done" class="kanban-column">
+              <div class="kanban-header">
+                <h2>Done</h2>
+              </div>
+           <!-- CONTENT -->
+            </div>
+          </div>
+`;
+} */
+
+
 function getTaskPopUpTemplate() {
   return `
              <div class="pop-up-board-inner-container">

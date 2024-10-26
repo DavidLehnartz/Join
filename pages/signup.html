@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./assets/img/join_logo_white.svg"
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="../styles/color.css" />
+    <link rel="stylesheet" href="../styles/login.css" />
+    <link rel="stylesheet" href="../styles/signup.css" />
+  </head>
+  <body>
+    <main>
+      <img class="main-logo" src="../assets/img/join_logo_grey.svg" />
+      <div class="login-card">
+        <div class="card-header">
+          <div
+            class="signup-back-nav"
+            onclick="window.location.href='../index.html'"
+          >
+            <img src="../assets/icons/arrow-left-line.svg" />
+          </div>
+          <div>
+            <h2>Sign up</h2>
+            <hr />
+          </div>
+          <div class="signup-back-nav"></div>
+        </div>
+        <form class="login-form">
+          <div class="icon-input-field">
+            <input id="signup-name" type="text" placeholder="Name" />
+            <img class="input-icon" src="../assets/icons/person-grey.svg" />
+          </div>
+          <div class="icon-input-field">
+            <input id="signup-mail" type="email" placeholder="Email" />
+            <img class="input-icon" src="../assets/icons/mail-grey.svg" />
+          </div>
+          <div class="icon-input-field">
+            <input
+              id="signup-password"
+              type="password"
+              placeholder="Password"
+            />
+            <img class="input-icon" src="../assets/icons/lock.svg" />
+          </div>
+          <div class="icon-input-field">
+            <input
+              id="signup-password-confirm"
+              type="password"
+              placeholder="Confirm Password"
+            />
+            <img class="input-icon" src="../assets/icons/lock.svg" />
+          </div>
+          <div class="input-checkbox">
+            <img class="default-cb" src="../assets/icons/default.svg" />
+            <img class="hover-cb" src="../assets/icons/hover_default.svg" />
+            <p class="small-print">I accept the <a>Privacy policy</a></p>
+          </div>
+          <button class="btn-filled-medium">Sign up</button>
+        </form>
+      </div>
+      <div class="login-legal">
+        <p
+          class="small-text-button"
+          onclick="window.location.href='./privacy_policy.html'"
+        >
+          Privacy Policy
+        </p>
+        <p
+          class="small-text-button"
+          onclick="window.location.href='./legal_notice.html'"
+        >
+          Legal notice
+        </p>
+      </div>
+    </main>
+  </body>
+</html>
