@@ -3,10 +3,17 @@ function toggleOverlay() {
   overlay.classList.toggle("hidden");
 }
 
+function validateClick(event) {
+  let overlay = document.getElementById("contacts-overlay");
+  if (overlay && !overlay.contains(event.target)) {
+    toggleOverlay();
+  }
+}
+
 function showAddContactForm(event) {
   toggleOverlay();
   let overlay = document.getElementById("contacts-overlay");
-  overlay.innerHTML += getAddContactOverlayTemplate();
+  overlay.innerHTML = getAddContactOverlayTemplate();
   event.stopPropagation();
 }
 
@@ -30,13 +37,12 @@ function closeContactForm(event) {
   event.stopPropagation();
 }
 
-function getNewContactsInfo(event) {
+function getNewContactsInfo() {
   let name = document.getElementById("add-contact-name").value;
   let mail = document.getElementById("add-contact-mail").value;
   let phone = document.getElementById("add-contact-phone").value;
   let newContact = newContactObject(name, mail, phone);
   createContact(newContact);
-  event.stopPropagation();
 }
 
 function createInitial(name) {
@@ -49,11 +55,31 @@ function createInitial(name) {
   return initials;
 }
 
+const colors = [
+  "orange",
+  "lila",
+  "violet",
+  "pink",
+  "yellow",
+  "turquoise",
+  "darkviolet",
+  "red",
+  "lightblue",
+  "coral",
+  "blue",
+  "darkblue",
+];
+
+function getRandomColor() {
+  let color = colors[Math.floor(Math.random() * colors.length)];
+  console.log(color);
+  return color;
+}
+
 function newContactObject(name, mail, phone) {
   return {
-    color: "coral",
+    color: getRandomColor(),
     email: mail,
-    id: uuidv4(),
     initial: createInitial(name),
     name: name,
     phone: phone,
