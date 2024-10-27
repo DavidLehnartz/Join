@@ -121,6 +121,7 @@ p {
   display: flex;
   flex-direction: column;
   width: 246px;
+  border: 2px solid;
   /*  width: 100%; */
 }
 
@@ -159,8 +160,12 @@ p {
   background: rgb(255, 255, 255);
   padding: 16px;
   gap: 24px;
-  cursor: pointer;
+  cursor:pointer;
   margin-bottom: 24px;
+}
+
+.kanban-task:active {
+  cursor: grabbing; 
 }
 
 .kanban-task-header {
@@ -204,6 +209,10 @@ progress {
   justify-content: space-between;
   align-items: center;
   font-size: 12px;
+}
+
+.test{
+  
 }
 
 .asignees-profil {

@@ -2,11 +2,6 @@
 
 /* BOARD MAIN SCRIPT */
 
-const BASE_URL =
-  "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
-
-let tasks = [];
-let subtasks = [];
 
 /**
  * This function is used to initialize onload
@@ -14,7 +9,19 @@ let subtasks = [];
  */
 function init() {
   renderDesktopTemplate();
-  loadTasks();
+  loadFetchedData();
+}
+
+
+async function loadFetchedData() {
+  try {
+    await fetchTasksData();
+    await fetchContactsData();
+  } catch (error) {
+    console.error(error);
+  }
+  renderTasks();
+
 }
 
 
@@ -37,63 +44,14 @@ function renderDesktopTemplate() {
 }
 
 
-async function loadTasks() {
-  try {
-    await fetchTasksData();
-  } catch (error) {
-    console.error(error);
-  }
-  renderTasks();
-}
-
-
-async function fetchTasksData() {
-  tasks = [];
-  let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
-  let tasksToJson = await tasksResponse.json();
-  tasks = Object.values(tasksToJson);
-
-  console.log(tasksToJson);
-  console.log(tasks);
-}
-
-
 function renderTasks() {
-  let tasksContent = document.getElementById('task');
+  let tasksContent = document.getElementById('to_do');
   tasksContent.innerHTML = "";
-  /*   tasksContent.innerHTML += getTasksTemplate() */
 
-  for (let indexTasks = 0; indexTasks < tasks.length; indexTasks++) {
+  for (let indexTasks = 0; indexTasks < tasks.length; indexTasks++
+  ) {
     tasksContent.innerHTML += getTasksTemplate(tasks[indexTasks]);
-
   }
-}
-
-function getTasksTemplate(tasks) {
-  return `    <div class="kanban-task">
-                <div class="kanban-task-header">
-                  <p>${tasks.category}</p>
-                </div>
-                <div class="kanban-task-content">
-                  <h3>${tasks.title}</h3>
-                  <p>
-                    ${tasks.description}
-                  </p>
-                </div>
-                <div class="kanban-task-subtasks">
-                  <progress value="0" max="100"></progress>
-                  <span>$/${tasks.subtasks}</span>
-                </div>
-                <div class="kanban-task-footer">
-                  <div class="asignees-profil">
-                  ${tasks.assignedTo}
-                  </div>
-                  <div class="priority-info">
-                    <p>${tasks.priority}</p>
-                  </div>
-                </div>
-              </div>
-`;
 }
 
 
@@ -102,10 +60,14 @@ function getTasksTemplate(tasks) {
  * Template can be found at "board_templates.js"
  * 
  */
-function renderTaskPopUp() {
+function renderTaskPopUp(taskId) {
   let taskPopUpContent = document.getElementById('task_pop_up');
   taskPopUpContent.innerHTML = "";
-  taskPopUpContent.innerHTML = getTaskPopUpTemplate();
+
+  const task = tasks.find((t) => t.id === taskId);
+  if (task) {
+    taskPopUpContent.innerHTML = getTaskPopUpTemplate(task);
+  }
 }
 
 
@@ -114,10 +76,10 @@ function renderTaskPopUp() {
  * 
  * 
  */
-function openTaskPopUp() {
+function openTaskPopUp(taskId) {
   document.getElementById('overlay_task_pop_up').classList.remove('responsive-pop-up-closed');
 
-  renderTaskPopUp();
+  renderTaskPopUp(taskId);
 }
 
 
@@ -126,11 +88,39 @@ function openTaskPopUp() {
  * Template can be found at "board_templates.js"
  * 
  */
-function renderEditTaskPopUp() {
+function renderEditTaskPopUp(taskId) {
   let editTaskPopUpContent = document.getElementById('edit_task_pop_up');
   editTaskPopUpContent.innerHTML = "";
-  editTaskPopUpContent.innerHTML = getEditTaskPopUp();
+
+  const task = tasks.find(t => t.id === taskId);
+
+  if (task) {
+    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task);
+  }
+  document.getElementById('edit_task_pop_up').classList.remove('responsive-pop-up-closed');
 }
+
+
+async function saveTaskChanges(taskId) {
+  const task = tasks.find(t => t.id === taskId);
+
+  if (task) {
+    task.title = document.getElementById('edit_title').value;
+    task.description = document.getElementById('edit_description').value;
+    task.dueDate = document.getElementById('edit_due_date').value;
+  }
+  renderTasks();
+  await updateTaskInFirebase(task);
+  closeEditPopUp();
+  openTaskPopUp(taskId);
+}
+
+
+function closeEditPopUp() {
+  document.getElementById('edit_task_pop_up').classList.add('responsive-pop-up-closed');
+}
+
+
 
 /**
  * This function is used to close pop up board task onclick
@@ -140,7 +130,6 @@ function renderEditTaskPopUp() {
 function closePopUps() {
   document.getElementById('overlay_task_pop_up').classList.add('responsive-pop-up-closed');
 }
-
 
 
 /**
@@ -157,11 +146,13 @@ function renderSubtasks() {
   }
 }
 
+
 function getSubtasksTemplate(indexSubtasks) {
   return `
           <li>${subtasks[indexSubtasks]}</li>
   `;
 }
+
 
 /**
  * This function is used to add a subtask to subtasks at edit task pop up
@@ -178,7 +169,6 @@ function addSubtask() {
 
   subtasks.push(addedSubtask);
   renderSubtasks();
-
   clearInputs();
 }
 
@@ -191,15 +181,13 @@ function addSubtask() {
 function errorMessage() {
   let inputAddedSubtask = document.getElementById('input_subtask_add_subtask').value.trim();
 
-  // Überprüfen, ob das Eingabefeld leer ist
   if (inputAddedSubtask === "") {
     document.getElementById('error_message').innerHTML = `Please enter a subtask!`;
-    return true; // Gibt `true` zurück, wenn eine Fehlermeldung angezeigt wurde
+    return true;
   }
 
-  // Leert die Fehlermeldung, falls eine gültige Eingabe vorliegt
   document.getElementById('error_message').innerHTML = "";
-  return false; // Gibt `false` zurück, wenn keine Fehlermeldung angezeigt wurde
+  return false;
 }
 
 
@@ -210,30 +198,3 @@ function errorMessage() {
 function clearInputs() {
   document.getElementById('input_subtask_add_subtask').value = "";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* function toggleTaskPopUp() {
-  document.getElementById('overlay_task_pop_up').classList.toggle('responsive-pop-up-closed');
-  renderTaskPopUp();
-} */
-
-
-

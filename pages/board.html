@@ -15,10 +15,13 @@
     <link rel="stylesheet" href="../styles/board.css" />
     <link rel="stylesheet" href="../styles/pop_up_board.css" />
     <link rel="stylesheet" href="../styles/pop_up_board_edit_task.css" />
+    <link rel="stylesheet" href="../styles/color.css" />
 
+    <script src="../js/board_database.js" defer></script>
     <script src="../js/board_templates.js" defer></script>
     <script src="../js/board_drop_down.js" defer></script>
-    <script src="../js/board_drag_and_drop.js"></script>
+    <script src="../js/board_drag_and_drop.js" defer></script>
+
     <script src="../js/board.js" defer></script>
   </head>
 
@@ -166,9 +169,9 @@
         </section> -->
 
         <!-- KANBAN BOARD -->
-        <section id="kanban_board">
+        <section>
           <div class="kanban-board-wrapper">
-            <div id="to_do" class="kanban-column">
+            <div class="kanban-column">
               <div class="kanban-header">
                 <h2>To Do</h2>
                 <img
@@ -179,13 +182,15 @@
               </div>
               <!-- TASK RENDERN -->
               <div
-                onclick="openTaskPopUp()"
-                id="task"
+               
+                ondrop="drop(event, 'to_do')"
+                ondragover="allowDrop(event)"
+                id="to_do"
                 class="kanban-task-wrapper"
               ></div>
             </div>
 
-            <div id="in_progress" class="kanban-column">
+            <div class="kanban-column">
               <div class="kanban-header">
                 <h2>In progress</h2>
                 <img
@@ -194,9 +199,15 @@
                   alt="plus"
                 />
               </div>
+              <div
+                id="in_progress"
+                ondrop="drop(event, 'in_progress')"
+                ondragover="allowDrop(event)"
+                class="kanban-task-wrapper"
+              ></div>
             </div>
 
-            <div id="await_feedback" class="kanban-column">
+            <div class="kanban-column">
               <div class="kanban-header">
                 <h2>Await feedback</h2>
                 <img
@@ -205,12 +216,24 @@
                   alt="plus"
                 />
               </div>
+              <div
+                id="await_feedback"
+                ondrop="drop(event, 'await_feedback')"
+                ondragover="allowDrop(event)"
+                class="kanban-task-wrapper"
+              ></div>
             </div>
 
-            <div id="done" class="kanban-column">
+            <div class="kanban-column">
               <div class="kanban-header">
                 <h2>Done</h2>
               </div>
+              <div
+                id="done"
+                ondrop="drop(event, 'done')"
+                ondragover="allowDrop(event)"
+                class="kanban-task-wrapper"
+              ></div>
             </div>
           </div>
         </section>

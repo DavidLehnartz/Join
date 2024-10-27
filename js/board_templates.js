@@ -143,62 +143,40 @@ function getBoardHeadlineTemplate() {
 }
 
 
-/* function getKanbanBoardTemplate() {
-  return `
-           <div class="kanban-board-wrapper">
-            <div id="to_do" class="kanban-column">
-              <div class="kanban-header">
-                <h2>To Do</h2>
-                <img
-                  class="kanban-header-img"
-                  src="../assets/img/plus_black.png"
-                  alt="plus"
-                />
+function getTasksTemplate(tasks) {
+  return `    <div onclick="openTaskPopUp('${tasks.id}')" draggable="true" ondragstart="startDragging('${tasks.id}')" class="kanban-task">
+                <div class="kanban-task-header">
+                  <p>${tasks.category}</p>
+                </div>
+                <div class="kanban-task-content">
+                  <h3>${tasks.title}</h3>
+                  <p>
+                    ${tasks.description}
+                  </p>
+                </div>
+                <div class="kanban-task-subtasks">
+                  <progress value="0" max="100"></progress>
+                  <span>$/${tasks.subtasks}</span>
+                </div>
+                <div class="kanban-task-footer">
+                  <div class="asignees-profil">
+                  <div class="test">${tasks.assignedTo}</div>
+                  </div>
+                  <div class="priority-info">
+                    <p>${tasks.priority}</p>
+                  </div>
+                </div>
               </div>
-             <div onclick="openTaskPopUp()" id="task" class="kanban-task-wrapper"></div>
-            </div>
-
-            <div id="in_progress" class="kanban-column">
-              <div class="kanban-header">
-                <h2>In progress</h2>
-                <img
-                  class="kanban-header-img"
-                  src="../assets/img/plus_black.png"
-                  alt="plus"
-                />
-              </div>
-           <!-- CONTENT -->
-            </div>
-
-            <div id="await_feedback" class="kanban-column">
-              <div class="kanban-header">
-                <h2>Await feedback</h2>
-                <img
-                  class="kanban-header-img"
-                  src="../assets/img/plus_black.png"
-                  alt="plus"
-                />
-              </div>
-              <!-- CONTENT -->
-            </div>
-
-            <div id="done" class="kanban-column">
-              <div class="kanban-header">
-                <h2>Done</h2>
-              </div>
-           <!-- CONTENT -->
-            </div>
-          </div>
 `;
-} */
+}
 
 
-function getTaskPopUpTemplate() {
+function getTaskPopUpTemplate(tasks) {
   return `
              <div class="pop-up-board-inner-container">
                 <div class="pop-up-task-header">
                   <div class="header-category">
-                    <p>$$Ctgry$$</p>
+                    <p>${tasks.category}</p>
                   </div>
                   <img onclick="closePopUps()"
                     class="pop-up-close-img"
@@ -207,11 +185,10 @@ function getTaskPopUpTemplate() {
                   />
                 </div>
                 <div class="pop-up-task-content">
-                  <h4>$$ Title $$</h4>
+                  <h4>${tasks.title}</h4>
                   <div class="pop-up-description">
                     <p>
-                      $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
-                      adipisicing elit....
+                      ${tasks.description}
                     </p>
                   </div>
                 </div>
@@ -221,7 +198,7 @@ function getTaskPopUpTemplate() {
                     <div class="task-info-value">Priority:</div>
                   </div>
                   <div class="pop-up-task-info">
-                    <div class="task-info-label">$$ Date $$</div>
+                    <div class="task-info-label">${tasks.dueDate}</div>
                     <div class="task-info-value">
                       Medium
                       <img src="../assets/img/prio_medium_orange.png" alt="" />
@@ -237,15 +214,7 @@ function getTaskPopUpTemplate() {
                         src="../assets/img/profil_icon_orange.png"
                         alt="contact"
                       />
-                      <p>$$ Name $$</p>
-                    </div>
-                    <div class="single-assigned-profil">
-                      <img
-                        class="assigned-to-profil-icons"
-                        src="../assets/img/profil_icon_light_blue_.png"
-                        alt="contact"
-                      />
-                      <p>$$ Name $$</p>
+                      <p> ${tasks.assignedTo}</p>
                     </div>
                   </div>
                 </div>
@@ -256,19 +225,12 @@ function getTaskPopUpTemplate() {
                       src="../assets/img/checkbox_false.png"
                       alt="checkbox"
                     />
-                    $$ Single Subtask $$
-                  </div>
-                  <div class="single-subtasks">
-                    <img
-                      src="../assets/img/checkbox_false.png"
-                      alt="checkbox"
-                    />
-                    $$ Single Subtask $$
+                    ${tasks.subtasks}
                   </div>
                 </div>
               </div>
               <div class="pop-up-footer">
-                <img onclick="renderEditTaskPopUp()"
+                <img onclick="renderEditTaskPopUp('${tasks.id}')"
                   class="pop-up-footer-edit-img"
                   src="../assets/img/edit_black.png"
                   alt="edit"
@@ -286,7 +248,7 @@ function getTaskPopUpTemplate() {
 }
 
 
-function getEditTaskPopUp() {
+function getEditTaskPopUpTemplate(tasks) {
   return `
           <div class="pop-up-edit-task-wrapper">
             <div class="pop-up-edit-task-inner-container">
@@ -302,10 +264,10 @@ function getEditTaskPopUp() {
               <div class="pop-up-edit-task-form">
                 <div class="pop-up-edit-task-title">
                   <label for="">
-                    Title
+                  Title
                     <span class="required-sign">*</span>
                   </label>
-                  <input
+                  <input id="edit_title" value="${tasks.title}"
                     class="pop-up-edit-task-input"
                     type="text"
                     placeholder="Enter a title"
@@ -314,11 +276,11 @@ function getEditTaskPopUp() {
 
                 <div class="pop-up-edit-task-description">
                   <label for=""> Description </label>
-                  <textarea
+                  <textarea id="edit_description"
                     class="pop-up-edit-task-textarea"
                     rows="4"
                     placeholder="Enter a Description"
-                  ></textarea>
+                  >${tasks.description}</textarea>
                 </div>
 
                 <div class="pop-up-edit-task-due-date">
@@ -326,7 +288,9 @@ function getEditTaskPopUp() {
                     Due date
                     <span class="required-sign">*</span>
                   </label>
-                  <input class="pop-up-edit-task-input" type="date" />
+                  <input id="edit_due_date" value="${tasks.dueDate}"
+                   class="pop-up-edit-task-input"
+                   type="date" />
                 </div>
 
                 <div class="pop-up-edit-task-priority">
@@ -451,7 +415,7 @@ function getEditTaskPopUp() {
             </div>
             <div class="pop-up-edit-task-footer">
               <button
-                onclick=" renderTaskPopUp();"
+               onclick="saveTaskChanges('${tasks.id}')"
                 class="pop-up-edit-task-btn"
               >
                 Ok
@@ -505,3 +469,53 @@ function getNavbarResponsiveTemplate() {
           </div>
     `;
 }
+
+
+/* function getKanbanBoardTemplate() {
+  return `
+           <div class="kanban-board-wrapper">
+            <div id="to_do" class="kanban-column">
+              <div class="kanban-header">
+                <h2>To Do</h2>
+                <img
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+             <div onclick="openTaskPopUp()" id="task" class="kanban-task-wrapper"></div>
+            </div>
+
+            <div id="in_progress" class="kanban-column">
+              <div class="kanban-header">
+                <h2>In progress</h2>
+                <img
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+           <!-- CONTENT -->
+            </div>
+
+            <div id="await_feedback" class="kanban-column">
+              <div class="kanban-header">
+                <h2>Await feedback</h2>
+                <img
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+              <!-- CONTENT -->
+            </div>
+
+            <div id="done" class="kanban-column">
+              <div class="kanban-header">
+                <h2>Done</h2>
+              </div>
+           <!-- CONTENT -->
+            </div>
+          </div>
+`;
+} */

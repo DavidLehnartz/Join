@@ -1,5 +1,26 @@
 https://f0168274@david-pyritz.developerakademie.net/JoinVersion2/Join/pages/add_tasks.html
 
+https://f0168274@david-pyritz.developerakademie.net/JoinVersion2/Join/pages/summary.html
+
+
+
+function addOutsideClickListener(dropdown, arrowElement) {
+    function handleClickOutside(event) {
+        if (!dropdown.contains(event.target) && !arrowElement.contains(event.target)) {
+            dropdown.classList.remove("open");
+            arrowElement.src = "../assets/img/arrow_drop_downaa.png";
+            removeOutsideClickListener();
+        }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+    dropdown.setAttribute('data-listener', handleClickOutside);
+}
+
+
+
+
+
 
 body {
     display: flex;
