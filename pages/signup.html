@@ -32,7 +32,7 @@
           </div>
           <div class="signup-back-nav"></div>
         </div>
-        <form class="login-form">
+        <form id="signup-form" class="login-form">
           <div class="icon-input-field">
             <input id="signup-name" type="text" placeholder="Name" />
             <img class="input-icon" src="../assets/icons/person-grey.svg" />
@@ -55,14 +55,36 @@
               type="password"
               placeholder="Confirm Password"
             />
-            <img class="input-icon" src="../assets/icons/lock.svg" />
+            <img
+              id="confirm-password-icon"
+              class="input-icon"
+              src="../assets/icons/lock.svg"
+              onfocus="showVisibilityIcon('confirm-password-icon')"
+              onclick="showPassword('confirm-password-icon', 'signup-password-confirm')"
+            />
           </div>
-          <div class="input-checkbox">
-            <img class="default-cb" src="../assets/icons/default.svg" />
-            <img class="hover-cb" src="../assets/icons/hover_default.svg" />
-            <p class="small-print">I accept the <a>Privacy policy</a></p>
+          <div class="input-checkbox" onclick="checkPrivacyPolicy()">
+            <img
+              id="privacy-checkbox"
+              class="default-cb"
+              src="../assets/icons/default.svg"
+            />
+            <img
+              id="privacy-checkbox-hover"
+              class="hover-cb"
+              src="../assets/icons/hover_default.svg"
+            />
+            <p class="small-print">
+              I accept the <a href="./legal_notice.html">Privacy policy</a>
+            </p>
           </div>
-          <button class="btn-filled-medium">Sign up</button>
+          <button
+            id="sign-up-button"
+            class="btn-filled-medium"
+            onclick="signUpUser()"
+          >
+            Sign up
+          </button>
         </form>
       </div>
       <div class="login-legal">
@@ -74,11 +96,15 @@
         </p>
         <p
           class="small-text-button"
+          href="'./legal_notice.html'"
           onclick="window.location.href='./legal_notice.html'"
         >
           Legal notice
         </p>
       </div>
     </main>
+    <script src="../js/login.js"></script>
+    <script src="../js/add_contact.js"></script>
+    <script src="../js/database.js"></script>
   </body>
 </html>
