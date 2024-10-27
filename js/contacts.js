@@ -13,17 +13,6 @@ function showContactInfo(id, color, initial, name, email, phone) {
   );
 }
 
-function toggleActive() {
-  const contactItems = document.getElementsByClassName("contact-list-item");
-  for (let i = 0; i < contactItems.length; i++) {
-    const item = contactItems[i];
-    item.addEventListener("click", () => {
-      item.classList.toggle("contact-list-item");
-      item.classList.toggle("item-active");
-    });
-  }
-}
-
 async function loadContactList() {
   let contactsArray = await loadAllContactsInfo();
   groupContacts(contactsArray);
@@ -40,6 +29,7 @@ async function refreshContactList() {
 
 function groupContacts(arrayName) {
   groupedContacts = Object.groupBy(arrayName, ({ name }) => name.slice(0, 1));
+  console.log(groupedContacts);
   return groupedContacts;
 }
 

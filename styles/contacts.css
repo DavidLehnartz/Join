@@ -57,22 +57,13 @@
   padding: 7px 0px;
   gap: 35px;
   cursor: pointer;
+  background-color: white;
+  &:not(:focus):hover {
+    background: linear-gradient(#f9f9f9, #f0f0f0);
+  }
 }
 
-.contact-list-item:hover {
-  background: linear-gradient(#f9f9f9, #f0f0f0);
-}
-
-.item-active {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 78px;
-  border-radius: 10px;
-  border: none;
-  padding: 7px 0px;
-  gap: 35px;
-  cursor: pointer;
+.contact-list-item:focus {
   background-color: #2a3647;
   color: white;
 }
@@ -80,6 +71,7 @@
 .contact-list-info {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 5px;
 }
 

@@ -53,3 +53,14 @@ async function deleteContact(id) {
   let deletedContact = await contactResponse.json();
   return deletedContact;
 }
+
+async function createUser(userData) {
+  let newUserResponse = await fetch(BASE_URL + "/users" + ".json", {
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+  return (userToJson = await newUserResponse.json());
+}
