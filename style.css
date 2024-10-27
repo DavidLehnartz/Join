@@ -111,6 +111,7 @@ input:focus {
   width: 24px;
   height: 24px;
   margin-left: -40px;
+  cursor: pointer;
 }
 
 .icon-input-field {

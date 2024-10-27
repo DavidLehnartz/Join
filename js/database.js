@@ -26,6 +26,15 @@ async function getContactById(id) {
   return contactToJson;
 }
 
+async function getSingleContact(name, email, phone) {
+  let contactsArray = await loadAllContactsInfo();
+  let contact = contactsArray.find((c) => {
+    c.name === name && c.email === email && c.phone === phone;
+  });
+  console.log(contact);
+  return contact;
+}
+
 async function createContact(contactData) {
   let newContactResponse = await fetch(BASE_URL + "/contacts" + ".json", {
     method: "POST",
@@ -43,4 +52,15 @@ async function deleteContact(id) {
   });
   let deletedContact = await contactResponse.json();
   return deletedContact;
+}
+
+async function createUser(userData) {
+  let newUserResponse = await fetch(BASE_URL + "/users" + ".json", {
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+  return (userToJson = await newUserResponse.json());
 }
