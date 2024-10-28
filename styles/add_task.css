@@ -105,7 +105,6 @@ header {
     display: flex;
     align-items: center;
     gap: 16px;
-    cursor: pointer;
 }
 
 .main-content-wrapper {
@@ -115,11 +114,13 @@ header {
 .header-help-icon {
     width: 32px;
     height: 32px;
+    cursor: pointer;
 }
 
 .header-profil-icon {
     width: 56px;
     height: 56px;
+    cursor: pointer;
 }
 
 .header-help-icon:hover {
@@ -328,6 +329,7 @@ header {
     transition: all 125ms ease;
     font-family: "Inter", sans-serif;
     font-size: 20px;
+    cursor: text;
 }
 
 .subtask-item::before {
@@ -415,9 +417,13 @@ header {
     border-radius: 10px;
     font-size: 20px;
     border: 1px solid #D1D1D1;
-    cursor: text;
+    cursor: pointer;
     padding: 8px 12px;
     box-sizing: border-box;
+}
+
+#inputFieldTitle {
+    cursor: text;
 }
 
 .titleInputDescription {
@@ -505,7 +511,6 @@ textarea {
     background-color: white;
     color: #000;
     border-color: #ccc;
-
 }
 
 .urgMedLow-btn-medium {
@@ -561,17 +566,11 @@ textarea {
     width: 100%;
 }
 
-
-
-
-
-
 .selected-contacts-badges-container {
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
     margin-top: 10px;
-    /* Abstand zum Dropdown */
 }
 
 .contact-badge {
@@ -604,28 +603,20 @@ textarea {
     display: flex;
     align-items: center;
     padding: 5px 0;
-    /* Weniger Innenabstand */
     cursor: pointer;
     justify-content: flex-start;
-    /* Links ausrichten */
     gap: 10px;
-    /* Abstand zwischen den Elementen */
     height: 20px;
-    /* Standardhöhe von 20px */
     transition: background-color 125ms ease, height 125ms ease;
-    /* Animiert die Höhe */
 }
 
 .contact-item:hover {
-    /* Hover-Effekt nur auf contact-item */
     background-color: #D1D1D1;
-    /* Hintergrundfarbe ändern beim Hover */
     border-radius: 10px;
 }
 
 .contact-item span:hover {
     background-color: transparent;
-    /* Keine Hintergrundänderung für Spans */
 }
 
 .contact-initials {
@@ -638,22 +629,55 @@ textarea {
     align-items: center;
     justify-content: center;
     margin-right: 10px;
-    /* Abstand zwischen Initialen und Name */
     margin-left: 15px;
-    /* Mehr Abstand nach links für die Initialen */
 }
 
 .contact-checkbox {
     margin-left: auto;
-    /* Checkbox nach rechts verschieben */
     margin-right: 15px;
-    /* Mehr Abstand zwischen Checkbox und Scrollbalken */
 }
 
+@keyframes slideIn {
+    from {
+        bottom: 0px;
+        transform: translateY(-100%);
+        opacity: 0.2;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
+    to {
+        bottom: 400px;
+        transform: translateY(0);
+        opacity: 1;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
 
+.showMe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 220px;
+    height: 50px;
+    background-color: #2A3647;
+    z-index: 1000;
+    color: white;
+    gap: 10px;
+    border-radius: 10px;
+    animation: slideIn 3s ease-in-out forwards;
+}
 
+.showMe img {
+    width: 24px;
+    height: 24px;
+}
 
+.d-none {
+    display: none;
+}
 
 
 @media (max-width: 1320px) {
@@ -810,11 +834,4 @@ textarea {
     .header-wrapper {
         padding: 0px 10px;
     }
-
-    .mobileLogoStyle {
-        display: flex;
-    }
-
-
-
 }

@@ -1,12 +1,12 @@
-addTaskInput = {
-    title: 'title-input',
-    content: 'textarea-content',
-    assignedTO: 'assigned-to-input',
-    date: 'date-input',
-    prio: 'prio-button',
-    category: 'category-dropdown',
-    subtasks: ['first subtask', 'secondSubtask']
-}
+const BASE_URL = "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
+let contacts = [];
+let selectedContacts = [];
+
+window.onload = function () {
+    restorePriority();
+    setTodayDate();
+    loadAllContactsInfo();
+};
 
 function setTodayDate() {
     const dateInput = document.getElementById('inputFieldDueDate');
@@ -25,8 +25,6 @@ function selectCategory(category) {
     checkForm();
 }
 
-const BASE_URL =
-    "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 
 async function loadContacts() {
     let contacts1 = await fetch(BASE_URL + "/contacts" + ".json");
@@ -35,7 +33,12 @@ async function loadContacts() {
     return contacts;
 }
 
-let contacts = [];
+async function getContactById(id) {
+    let contactResponse = await fetch(BASE_URL + "/contacts/" + id + ".json");
+    let contactToJson = await contactResponse.json();
+    return contactToJson;
+}
+
 
 async function loadAllContactsInfo() {
     let idArray = await loadContacts();
@@ -48,25 +51,15 @@ async function loadAllContactsInfo() {
     return contacts;
 }
 
-async function getContactById(id) {
-    let contactResponse = await fetch(BASE_URL + "/contacts/" + id + ".json");
-    let contactToJson = await contactResponse.json();
-    return contactToJson;
-}
-
-
-
-
-let selectedContacts = [];
-
 // Funktion zum Öffnen und Schließen der Dropdown-Liste (beim Klick auf den Dropdown-Pfeil)
 function toggleContactDropdown() {
     const dropdown = document.getElementById("categoryDropdown2");
     const arrowElement = document.getElementById("dropdownArrow");
+
     if (dropdown.classList.contains("open")) {
         dropdown.classList.remove("open");
         arrowElement.src = "../assets/img/arrow_drop_downaa.png";
-        removeOutsideClickListener(); // Entfernt den Listener, wenn das Dropdown geschlossen wird
+        removeOutsideClickListener();
     } else {
         dropdown.classList.add("open");
         arrowElement.src = "../assets/img/arrow_drop_up.png";
@@ -78,9 +71,9 @@ function toggleContactDropdown() {
             const contactElement = document.createElement('div');
             contactElement.classList.add('contact-item');
             contactElement.innerHTML = `
-                <div class="contact-initials" style="background-color: ${contact.color};">${contact.initial}</div>
+                <div class="contact-initials bg-${contact.color}">${contact.initial}</div>
                 <span>${contact.name}</span>
-                <input type="checkbox" class="contact-checkbox" data-name="${contact.name}" ${isSelected(contact.name) ? 'checked' : ''}/>
+                <input type="checkbox" name="assignedContacts" class="contact-checkbox" data-name="${contact.name}" ${isSelected(contact.name) ? 'checked' : ''}/>
             `;
 
             const checkbox = contactElement.querySelector(".contact-checkbox");
@@ -91,7 +84,6 @@ function toggleContactDropdown() {
             dropdown.appendChild(contactElement);
         });
 
-        // Füge den Event Listener für Klicks außerhalb des Dropdowns hinzu
         addOutsideClickListener(dropdown, arrowElement);
     }
 }
@@ -142,8 +134,7 @@ function updateSelectedContactsDisplay() {
     if (selectedContacts.length > 0) {
         selectedContacts.forEach(contact => {
             const contactBadge = document.createElement('div');
-            contactBadge.classList.add('contact-badge');
-            contactBadge.style.backgroundColor = contact.color;
+            contactBadge.classList.add('contact-badge', `bg-${contact.color}`); // Klasse für die Farbe hinzufügen
             contactBadge.textContent = contact.initial;
             badgesContainer.appendChild(contactBadge);
         });
@@ -161,7 +152,6 @@ function toggleDropdown() {
         arrowElement.src = "../assets/img/arrow_drop_up.png";
     }
 }
-
 
 
 function resetButtons() {
@@ -200,11 +190,7 @@ function restorePriority() {
     setPriority(mediumPriorityBtn, 'medium');
 }
 
-window.onload = function () {
-    restorePriority();
-    setTodayDate();
-    loadAllContactsInfo();
-};
+
 
 function addSubtask() {
     const inputField = document.getElementById('inputFieldSubtask');
@@ -427,15 +413,14 @@ async function createTask() {
         description: document.getElementById('inputFieldDescription').value,
         dueDate: document.getElementById('inputFieldDueDate').value,
         priority: document.getElementById('inputFieldUrgent').classList.contains('active-urgent') ? 'Urgent' :
-                  document.getElementById('inputFieldMedium').classList.contains('active-medium') ? 'Medium' :
-                  document.getElementById('inputFieldLow').classList.contains('active-low') ? 'Low' : 'None',
+            document.getElementById('inputFieldMedium').classList.contains('active-medium') ? 'Medium' :
+                document.getElementById('inputFieldLow').classList.contains('active-low') ? 'Low' : 'None',
         category: document.getElementById('selectedCategory').textContent,
         subtasks: [
             ...Array.from(document.querySelectorAll('#subtaskList li')).map(item => item.textContent.trim()),
             document.getElementById('inputFieldSubtask').value.trim()
         ].filter(subtask => subtask !== ''),
-        assignedTo: Array.from(document.querySelectorAll('#selectedContactsBadges .contact-badge'))
-                         .map(contact => contact.textContent)
+        assignedTo: selectedContacts
     };
 
     try {
@@ -447,7 +432,15 @@ async function createTask() {
             body: JSON.stringify(taskData)
         });
 
-        alert(response.ok ? "Task successfully saved in Firebase!" : "Failed to save task in Firebase.");
+        if (response.ok) {
+            let message = document.querySelector('.showMe');
+            message.classList.remove('d-none');
+            setTimeout(() => {
+                window.location.href = 'board.html';
+                message.classList.add('d-none');
+            }, 2900);
+        }
+
     } catch (error) {
         console.error("Error saving task:", error);
     }

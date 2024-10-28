@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../styles/add_task.css">
   <link rel="stylesheet" href="../styles/fonts.css">
   <script src="../js/add_tasks.js"></script>
+  <link rel="stylesheet" href="../styles/color.css">
 </head>
 
 <body>
@@ -72,7 +73,7 @@
             <div class="inputStyle">
               <span class="assignedToSpanStyle" for="inputField">Assigned to</span>
               <div class="selectContactsToAssign">
-                <span id="selectedContacts">Select contacts to assign</span>
+                <span id="selectedContacts" name="assignedContactsDisplay">Select contacts to assign</span>
                 <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow"
                   onclick="toggleContactDropdown()">
                 <div class="category-dropdown" id="categoryDropdown2"></div> <!-- Dynamisch gefülltes Dropdown -->
@@ -147,6 +148,10 @@
       </div>
     </div>
   </main>
+  <div class="showMe d-none">
+    Task Added To Board
+    <img src="../assets/img/board.png" alt="">
+  </div>
 </body>
 
 </html>
