@@ -6,32 +6,18 @@ function toggleOverlay() {
 function showAddContactForm(event) {
   toggleOverlay();
   let dialog = document.getElementById("contacts-dialog");
-  let icon = document.getElementById("add-contact-icon");
   dialog.classList.add("show");
-  icon.classList.add(`bg-grey`);
-  icon.innerHTML = `<img src="../assets/icons/person.svg" />`;
+  dialog.innerHTML = getAddContactDialog();
   event.stopPropagation();
 }
 
-function showEditContactForm(event, color, initial, name, email, phone) {
+async function showEditContactForm(event, id) {
   toggleOverlay();
   let dialog = document.getElementById("contacts-dialog");
   dialog.classList.add("show");
-  fillWithInformation(name, email, phone, color, initial);
+  let contact = await getContactById(id);
+  dialog.innerHTML = getEditContactDialog(contact, id);
   event.stopPropagation();
-}
-
-function fillWithInformation(name, email, phone, color, initial) {
-  let addButton = document.getElementById("add-contact-btn");
-  let editButton = document.getElementById("edit-contact-btn");
-  let icon = document.getElementById("add-contact-icon");
-  document.getElementById("add-contact-name").value = name;
-  document.getElementById("add-contact-mail").value = email;
-  document.getElementById("add-contact-phone").value = phone;
-  icon.classList.add(`bg-${color}`);
-  icon.innerHTML = initial;
-  addButton.classList.add("hidden");
-  editButton.classList.remove("hidden");
 }
 
 function closeContactForm(event) {
@@ -51,8 +37,15 @@ function getNewContactsInfo(event) {
   dialog.classList.remove("show");
   let newContact = newContactObject(name, mail, phone);
   createContact(newContact);
-  form.clear();
   event.stopPropagation();
+}
+
+function updateContactInfo(id) {
+  let name = document.getElementById("edit-contact-name").value;
+  let mail = document.getElementById("edit-contact-mail").value;
+  let phone = document.getElementById("edit-contact-phone").value;
+  let updatedContact = updatedContactObject(name, mail, phone);
+  updateContact(updatedContact, id);
 }
 
 function showSuccessMessage() {
@@ -69,7 +62,6 @@ function createInitial(name) {
   if (fullName.length > 1) {
     initials += fullName[fullName.length - 1].substring(0, 1).toUpperCase();
   }
-  console.log(initials);
   return initials;
 }
 
@@ -90,13 +82,21 @@ const colors = [
 
 function getRandomColor() {
   let color = colors[Math.floor(Math.random() * colors.length)];
-  console.log(color);
   return color;
 }
 
 function newContactObject(name, mail, phone) {
   return {
     color: getRandomColor(),
+    email: mail,
+    initial: createInitial(name),
+    name: name,
+    phone: phone,
+  };
+}
+
+function updatedContactObject(name, mail, phone) {
+  return {
     email: mail,
     initial: createInitial(name),
     name: name,

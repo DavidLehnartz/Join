@@ -121,11 +121,6 @@
   margin: 0px;
 }
 
-.contact-form-btn img {
-  width: 24px;
-  height: 24px;
-}
-
 .btn-outline {
   border: 1px solid #2a3647;
   background-color: white;
@@ -137,6 +132,25 @@
   background-color: white;
   color: #29abe2;
   box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.1);
+}
+.btn-outline:hover .hover-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.btn-outline:hover .default-icon {
+  display: none;
+}
+
+.default-icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+}
+
+.hover-icon {
+  display: none;
 }
 
 .btn-filled {

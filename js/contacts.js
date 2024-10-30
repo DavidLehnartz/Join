@@ -1,16 +1,10 @@
 let groupedContacts = {};
 
-function showContactInfo(id, color, initial, name, email, phone) {
+async function showContactInfo(id) {
   let contactInfo = document.getElementById("contacts-info");
+  let contact = await getContactById(id);
   contactInfo.innerHTML = "";
-  contactInfo.innerHTML += getContactInfoTemplate(
-    id,
-    color,
-    initial,
-    name,
-    email,
-    phone
-  );
+  contactInfo.innerHTML += getContactInfoTemplate(contact, id);
 }
 
 async function loadContactList() {
@@ -19,17 +13,25 @@ async function loadContactList() {
   loadGroupedContactList();
 }
 
-async function refreshContactList() {
+function refreshContactList() {
   let contactList = document.getElementById("contact-list");
   let contactInfo = document.getElementById("contacts-info");
   contactList.innerHTML = "";
   contactInfo.innerHTML = "";
-  loadContactList();
+  loadGroupedContactList();
+}
+
+async function deleteAndRefreshContactList(id) {
+  let contactList = document.getElementById("contact-list");
+  let contactInfo = document.getElementById("contacts-info");
+  await deleteContact(id);
+  contactList.innerHTML = "";
+  contactInfo.innerHTML = "";
+  await loadContactList();
 }
 
 function groupContacts(arrayName) {
   groupedContacts = Object.groupBy(arrayName, ({ name }) => name.slice(0, 1));
-  console.log(groupedContacts);
   return groupedContacts;
 }
 
@@ -48,13 +50,6 @@ function loadContactListItems(arrayName) {
   let contactList = document.getElementById("contact-list");
   for (let i = 0; i < arrayName.length; i++) {
     const contact = arrayName[i];
-    contactList.innerHTML += getContactListItemTemplate(
-      contact.id,
-      contact.name,
-      contact.email,
-      contact.color,
-      contact.initial,
-      contact.phone
-    );
+    contactList.innerHTML += getContactListItemTemplate(contact, contact.id);
   }
 }
