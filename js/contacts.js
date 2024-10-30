@@ -32,7 +32,6 @@ async function deleteAndRefreshContactList(id) {
 
 function groupContacts(arrayName) {
   groupedContacts = Object.groupBy(arrayName, ({ name }) => name.slice(0, 1));
-  console.log(groupedContacts);
   return groupedContacts;
 }
 

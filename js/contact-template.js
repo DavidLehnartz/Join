@@ -1,5 +1,3 @@
-"use strict";
-
 function getAddContactDialog() {
   return `<div class="contacts-overlay-header">
           <img src="../assets/img/join_logo_white.svg" />
@@ -35,7 +33,8 @@ function getAddContactDialog() {
                   onclick="closeContactForm(event)"
                 >
                   <p>Cancel</p>
-                  <img src="../assets/icons/close.svg" />
+                  <img class="default-icon" src="../assets/icons/close.svg" />
+                  <img class="hover-icon" src="../assets/icons/iconoir_cancel.svg" />
                 </button>
                 <button
                   id="add-contact-btn"
@@ -85,12 +84,13 @@ function getEditContactDialog(contact, id) {
                   onclick="closeContactForm(event)"
                 >
                   <p>Cancel</p>
-                  <img src="../assets/icons/close.svg" />
+                  <img class="default-icon" src="../assets/icons/close.svg" />
+                  <img class="hover-icon" src="../assets/icons/iconoir_cancel.svg" />
                 </button>
                 <button
                   id="edit-contact-btn"
                   class="contact-form-btn btn-filled"
-                  onclick="updateContactInfo(event, '${id}')"
+                  onclick="updateContactInfo('${id}')"
                 >
                   <p>Save</p>
                   <img src="../assets/icons/check.svg" />

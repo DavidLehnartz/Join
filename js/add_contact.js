@@ -37,18 +37,15 @@ function getNewContactsInfo(event) {
   dialog.classList.remove("show");
   let newContact = newContactObject(name, mail, phone);
   createContact(newContact);
-  form.clear();
   event.stopPropagation();
 }
 
-function updateContactInfo(event, id) {
+function updateContactInfo(id) {
   let name = document.getElementById("edit-contact-name").value;
   let mail = document.getElementById("edit-contact-mail").value;
   let phone = document.getElementById("edit-contact-phone").value;
-  toggleOverlay();
-  let updatedContact = newContactObject(name, mail, phone);
+  let updatedContact = updatedContactObject(name, mail, phone);
   updateContact(updatedContact, id);
-  event.stopPropagation();
 }
 
 function showSuccessMessage() {
@@ -65,7 +62,6 @@ function createInitial(name) {
   if (fullName.length > 1) {
     initials += fullName[fullName.length - 1].substring(0, 1).toUpperCase();
   }
-  console.log(initials);
   return initials;
 }
 
@@ -86,13 +82,21 @@ const colors = [
 
 function getRandomColor() {
   let color = colors[Math.floor(Math.random() * colors.length)];
-  console.log(color);
   return color;
 }
 
 function newContactObject(name, mail, phone) {
   return {
     color: getRandomColor(),
+    email: mail,
+    initial: createInitial(name),
+    name: name,
+    phone: phone,
+  };
+}
+
+function updatedContactObject(name, mail, phone) {
+  return {
     email: mail,
     initial: createInitial(name),
     name: name,

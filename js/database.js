@@ -43,13 +43,17 @@ async function createContact(contactData) {
 
 async function updateContact(contactData, id) {
   const response = await fetch(`${BASE_URL}/contacts/${id}.json`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(contactData),
   });
-  return (contactToJson = await response.json());
+  if (!response.ok) {
+    throw new Error("Failed to update contact");
+  }
+  const result = await response.json();
+  console.log("Contact updated:", result);
 }
 
 async function deleteContact(id) {
