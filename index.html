@@ -9,13 +9,6 @@
       type="image/x-icon"
       href="./assets/img/join_logo_white.svg"
     />
-<<<<<<< HEAD
-
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-  
-=======
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./styles/fonts.css" />
     <link rel="stylesheet" href="./styles/color.css" />
@@ -44,8 +37,18 @@
             <img class="input-icon" src="../assets/icons/mail-grey.svg" />
           </div>
           <div class="icon-input-field">
-            <input id="login-password" type="password" placeholder="Password" />
-            <img class="input-icon" src="../assets/icons/lock.svg" />
+            <input
+              id="login-password"
+              type="password"
+              placeholder="Password"
+              onfocus="showVisibilityIcon('login-password-icon')"
+            />
+            <img
+              id="login-password-icon"
+              class="input-icon"
+              src="../assets/icons/lock.svg"
+              onclick="showPassword('login-password-icon', 'login-password')"
+            />
           </div>
           <div class="input-checkbox">
             <img class="default-cb" src="../assets/icons/default.svg" />
@@ -82,6 +85,5 @@
         </p>
       </div>
     </main>
->>>>>>> a647464a4666bc1518257407ce8f8cfb6be698f4
   </body>
 </html>

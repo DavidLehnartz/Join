@@ -28,15 +28,15 @@ function closeContactForm(event) {
 }
 
 function getNewContactsInfo(event) {
-  let form = document.getElementById("add-contacts-form");
   let name = document.getElementById("add-contact-name").value;
   let mail = document.getElementById("add-contact-mail").value;
   let phone = document.getElementById("add-contact-phone").value;
   let dialog = document.getElementById("contacts-dialog");
-  toggleOverlay();
-  dialog.classList.remove("show");
   let newContact = newContactObject(name, mail, phone);
   createContact(newContact);
+  toggleOverlay();
+  dialog.classList.remove("show");
+  showSuccessMessage();
   event.stopPropagation();
 }
 
