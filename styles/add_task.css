@@ -834,4 +834,8 @@ textarea {
     .header-wrapper {
         padding: 0px 10px;
     }
+
+    .mobileLogoStyle {
+        display: flex;
+    }
 }
