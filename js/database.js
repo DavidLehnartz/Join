@@ -1,13 +1,6 @@
 const BASE_URL =
   "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app";
 
-async function loadContacts() {
-  let contacts = await fetch(`${BASE_URL}/contacts.json`);
-  let contactsToJson = await contacts.json();
-  let contactsArray = Object.keys(contactsToJson);
-  return contactsArray;
-}
-
 async function loadAllContactsInfo() {
   let contacts = [];
   let contactsResponse = await fetch(`${BASE_URL}/contacts.json`);
@@ -52,8 +45,7 @@ async function updateContact(contactData, id) {
   if (!response.ok) {
     throw new Error("Failed to update contact");
   }
-  const result = await response.json();
-  console.log("Contact updated:", result);
+  return await response.json();
 }
 
 async function deleteContact(id) {
@@ -61,6 +53,22 @@ async function deleteContact(id) {
     method: "DELETE",
   });
   return (responseToJson = await response.json());
+}
+
+async function loadAllUsersInfo() {
+  let users = [];
+  let usersResponse = await fetch(`${BASE_URL}/users.json`);
+  let usersToJson = await usersResponse.json();
+  if (usersToJson) {
+    const userKeys = Object.keys(usersToJson);
+    userKeys.forEach((key) => {
+      users.push({
+        id: key,
+        ...usersToJson[key],
+      });
+    });
+  }
+  return users;
 }
 
 async function createUser(userData) {

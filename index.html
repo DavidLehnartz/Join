@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join</title>
+    <title>Join Login</title>
     <link
       rel="icon"
       type="image/x-icon"
@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="./styles/fonts.css" />
     <link rel="stylesheet" href="./styles/color.css" />
     <link rel="stylesheet" href="./styles/login.css" />
+
+    <script src="../js/login.js"></script>
+    <script src="../js/signup.js"></script>
+    <script src="../js/database.js"></script>
   </head>
   <body>
     <main>
@@ -36,28 +40,52 @@
             <input id="login-mail" type="email" placeholder="Email" />
             <img class="input-icon" src="../assets/icons/mail-grey.svg" />
           </div>
-          <div class="icon-input-field">
-            <input
-              id="login-password"
-              type="password"
-              placeholder="Password"
-              onfocus="showVisibilityIcon('login-password-icon')"
+          <div>
+            <div class="icon-input-field">
+              <input
+                id="login-password"
+                type="password"
+                placeholder="Password"
+                onfocus="showVisibilityIcon('login-password-icon')"
+              />
+              <img
+                id="login-password-icon"
+                class="input-icon"
+                src="../assets/icons/lock.svg"
+                onclick="showPassword('login-password-icon', 'login-password')"
+              />
+            </div>
+            <p id="login-error-message" class="error-text hidden">
+              Check your email and password. Please try again.
+            </p>
+          </div>
+          <div class="input-checkbox" onclick="checkRememberMe()">
+            <img
+              id="remember-checkbox"
+              class="default-cb"
+              src="../assets/icons/default.svg"
             />
             <img
-              id="login-password-icon"
-              class="input-icon"
-              src="../assets/icons/lock.svg"
-              onclick="showPassword('login-password-icon', 'login-password')"
+              id="remember-checkbox-hover"
+              class="hover-cb"
+              src="../assets/icons/hover_default.svg"
             />
-          </div>
-          <div class="input-checkbox">
-            <img class="default-cb" src="../assets/icons/default.svg" />
-            <img class="hover-cb" src="../assets/icons/hover_default.svg" />
             <p class="small-print">Remember me</p>
           </div>
           <div class="login-btn-row">
-            <button class="btn-filled-medium">Log in</button>
-            <button class="btn-outlined-medium">Guest Log in</button>
+            <button
+              type="submit"
+              class="btn-filled-medium"
+              onclick="isValidCredential(event)"
+            >
+              Log in
+            </button>
+            <button
+              class="btn-outlined-medium"
+              onclick="window.location.href='./pages/summary.html'"
+            >
+              Guest Log in
+            </button>
           </div>
         </form>
       </div>

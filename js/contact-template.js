@@ -37,6 +37,7 @@ function getAddContactDialog() {
                   <img class="hover-icon" src="../assets/icons/iconoir_cancel.svg" />
                 </button>
                 <button
+                  type="submit"
                   id="add-contact-btn"
                   class="contact-form-btn btn-filled"
                   onclick="getNewContactsInfo(event), showSuccessMessage()"
@@ -88,9 +89,10 @@ function getEditContactDialog(contact, id) {
                   <img class="hover-icon" src="../assets/icons/iconoir_cancel.svg" />
                 </button>
                 <button
+                type="submit"
                   id="edit-contact-btn"
                   class="contact-form-btn btn-filled"
-                  onclick="updateContactInfo('${id}')"
+                  onclick="updateContactInfo(event, '${id}')"
                 >
                   <p>Save</p>
                   <img src="../assets/icons/check.svg" />
