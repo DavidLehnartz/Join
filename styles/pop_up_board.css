@@ -110,6 +110,7 @@ h4 {
 .task-info-value {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .pop-up-assigned-to-wrapper {
@@ -145,7 +146,7 @@ h4 {
   font-size: 20px;
 }
 
-.single-subtasks {
+.single-subtasks-wrapper {
   display: flex;
   /* width: 344px; */
   gap: 16px;
@@ -154,10 +155,16 @@ h4 {
   font-size: 16px;
 }
 
-.single-subtasks:hover {
+.single-subtasks-wrapper:hover {
   background-color: rgb(246, 247, 248);
   border-radius: 8px;
   cursor: pointer;
+}
+
+.subtask{
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .pop-up-footer {

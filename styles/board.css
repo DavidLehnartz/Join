@@ -35,6 +35,7 @@ p {
 .searchbox-wrapper {
   display: flex;
   justify-content: end;
+  align-items: center;
   height: 48px;
   cursor: pointer;
 }
@@ -151,21 +152,21 @@ p {
   margin-bottom: 24px;
 }
 
-.kanban-task{
+.kanban-task {
   display: flex;
   flex-direction: column;
   /* width: 100%; */
-  height: 244px;
+  /* height: 244px; */
   border-radius: 24px;
   background: rgb(255, 255, 255);
   padding: 16px;
   gap: 24px;
-  cursor:pointer;
+  cursor: pointer;
   margin-bottom: 24px;
 }
 
 .kanban-task:active {
-  cursor: grabbing; 
+  cursor: grabbing;
 }
 
 .kanban-task-header {
@@ -184,6 +185,10 @@ p {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.kanban-task-description {
+  color: #a8a8a8;
 }
 
 .kanban-task-subtasks {
@@ -211,8 +216,7 @@ progress {
   font-size: 12px;
 }
 
-.test{
-  
+.test {
 }
 
 .asignees-profil {
@@ -237,6 +241,7 @@ nav {
   position: sticky;
   bottom: 0px;
   background-color: rgb(42, 54, 71);
+  height: 80px;
 }
 
 .navbar-links-responsive {
@@ -351,9 +356,9 @@ nav {
 }
 
 @media (max-width: 770px) {
-header{
-  padding: 0px 16px;
-}
+  header {
+    padding: 0px 16px;
+  }
 
   .headline {
     display: none;
@@ -373,12 +378,12 @@ header{
     right: 15px;
   }
 
-  .navbar-links{
+  .navbar-links {
     font-size: 14px;
     padding: 8px;
   }
 
-  progress{
+  progress {
     width: 80%;
   }
 }

@@ -7,7 +7,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-   z-index: 999;
+  z-index: 999;
 }
 
 .pop-up-edit-task-wrapper {
@@ -123,17 +123,7 @@
   gap: 16px;
 }
 
-.prio-urgent {
-  border: 1px solid rgb(244, 244, 244);
-  border-radius: 10px;
-  padding: 10px 16px;
-}
-.prio-medium {
-  border: 1px solid rgb(244, 244, 244);
-  border-radius: 10px;
-  padding: 10px 16px;
-}
-.prio-low {
+.prio-btn {
   border: 1px solid rgb(244, 244, 244);
   border-radius: 10px;
   padding: 10px 16px;
@@ -143,19 +133,40 @@
   width: 20px;
 }
 
-.prio-urgent:hover {
+.prio-btn:hover {
   cursor: pointer;
   box-shadow: 0px 2px 4px 0px rgb(170 170 170);
 }
 
-.prio-medium:hover {
+.prio-low-active {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  background-color: #7ae22b;
+  border-radius: 10px;
+  padding: 10px 16px;
   cursor: pointer;
-  box-shadow: 0px 2px 4px 0px rgb(170 170 170);
 }
 
-.prio-low:hover {
-  cursor: pointer;
-  box-shadow: 0px 2px 4px 0px rgb(170 170 170);
+.prio-medium-active {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  background-color: #ffa827;
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+
+.prio-urgent-active {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  background-color: #fe3d19;
+  border-radius: 10px;
+  padding: 10px 16px;
 }
 
 .pop-up-edit-task-assigned-to {
@@ -203,20 +214,20 @@ select {
   border: 1px solid rgb(41, 171, 226);
 }
 
-.input-box{
+.input-box {
   position: relative;
   width: 100%;
 }
 
 .pop-up-edit-task-input-btn {
   display: flex;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    align-items: center;
-    border: none;
-    background-color: transparent;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  align-items: center;
+  border: none;
+  background-color: transparent;
 }
 
 .pop-up-edit-task-input-btn-img {
@@ -279,16 +290,20 @@ li:hover {
   height: 24px;
 }
 
-/* +++++++++ */
+/* DROPDOWN */
 
-.custom-dropdown {
+.dropdown {
   position: relative;
   display: inline-block;
 }
 
-.dropdown-input {
+.drop-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 10px;
   border: 1px solid #d1d1d1;
+  background-color: white;
   padding: 12px 21px;
   font-size: 20px;
   width: 100%;
@@ -299,16 +314,17 @@ li:hover {
   box-sizing: border-box;
 }
 
-.dropdown-input:focus {
+.drop-btn:focus {
   border: 1px solid rgb(41, 171, 226);
+}
+
+.show {
+  display: block;
 }
 
 .dropdown-icon {
   width: 25px;
   height: 25px;
-  position: absolute;
-  left: 357px;
-  top: 13px;
   cursor: pointer;
 }
 
@@ -318,18 +334,22 @@ li:hover {
 }
 
 /* Versteckter Inhalt des Dropdowns */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+.dropdown-content-wrapper {
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
   z-index: 1;
   min-width: 160px;
-  flex-direction: column;
-  padding: 10px 0;
+  overflow: auto;
+  scrollbar-width: none;
+  height: 200px;
 }
 
-.dropdown-item {
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-contact {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -339,7 +359,25 @@ li:hover {
   cursor: pointer;
 }
 
-.dropdown-item:hover {
+.dropdown-contact-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-initial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 45px;
+}
+
+.dropdown-contact:hover {
   background-color: #f1f1f1;
 }
 
@@ -355,28 +393,28 @@ li:hover {
 }
 
 /* Dropdown anzeigen, wenn geklickt */
-.custom-dropdown.open .dropdown-content {
+/* .custom-dropdown.open .dropdown-content {
   display: flex;
   border-radius: 10px;
   border: 1px solid rgb(41, 171, 226);
   width: 100%;
   box-sizing: border-box;
-}
+} */
 
 .user-icon {
   width: 42px;
   height: 42px;
 }
 
-.error-message{
+.error-message {
   color: red;
   font-size: 14px;
 }
 
 /* MEDIA QUERY */
 
-@media(max-width:500px){
-  .pop-up-edit-task-wrapper{
+@media (max-width: 500px) {
+  .pop-up-edit-task-wrapper {
     height: 100vh;
     width: 100%;
   }
@@ -385,7 +423,7 @@ li:hover {
     padding: 32px 16px;
   }
 
-  .pop-up-edit-task-footer{
+  .pop-up-edit-task-footer {
     padding: 0px 16px;
     padding-bottom: 32px;
   }

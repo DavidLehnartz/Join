@@ -1,31 +1,33 @@
 'use strict';
 
-/* DROP DOWN 4 EDIT TASK POP UP */
+/* DROP DOWN  */
 
 
-// Dropdown öffnen und schließen
-/* const inputField = document.querySelector('.dropdown-input');
-const dropdown = document.querySelector('.custom-dropdown');
-const dropdownItems = document.querySelectorAll('.dropdown-item');
-const dropDownBtn = document.querySelector('.dropdown-icon');
+function toggleDropdown() {
+  document.getElementById('dropdown_content').classList.toggle('d_none');
+}
 
-// Öffnen des Dropdowns bei Klick auf das Input-Feld
-inputField.addEventListener('click', function () {
-  dropdown.classList.toggle('open');
-  dropDownBtn.classList.toggle('open');
-});
 
-// Text aus dem Dropdown in das Input-Feld setzen
-dropdownItems.forEach(item => {
-  item.addEventListener('click', function () {
-    inputField.value = this.textContent.trim();
-    dropdown.classList.remove('open'); // Schließt das Dropdown nach Auswahl
-  });
-});
-
-// Dropdown schließen, wenn außerhalb geklickt wird
-window.addEventListener('click', function (e) {
-  if (!dropdown.contains(e.target)) {
-    dropdown.classList.remove('open');
+window.onclick = function(event) {
+  if (!event.target.matches('.drop-btn')) {
+    let dropdowns = document.getElementsByClassName("dropdown-content");
+    let i;
+    for (i = 0; i < dropdowns.length; i++) {
+      let openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('d_none')) {
+        openDropdown.classList.remove('d_none');
+      }
+    }
   }
-}); */
+} 
+
+
+function toggleInputImage() {
+  let inputImage = document.getElementById('dropdown_icon');
+
+  if (inputImage.src.includes('arrow_drop_downaa.png')) {
+    inputImage.src = '../assets/img/arrow_drop_up.png';
+  } else {
+    inputImage.src = '../assets/img/arrow_drop_downaa.png';
+  }
+}

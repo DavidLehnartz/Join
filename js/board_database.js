@@ -7,8 +7,9 @@ const BASE_URL =
     "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let tasks = [];
-let subtasks = [];
 let contacts = [];
+let assigneInitials = [];
+let subtasks = [];
 
 
 async function fetchTasksData() {
@@ -53,6 +54,23 @@ async function fetchContactsData() {
 }
 
 
+async function deleteTaskData(taskId) {
+    try {
+        let taskResponse = await fetch(BASE_URL + "/tasks/" + taskId + ".json", {
+            method: "DELETE",
+        });
+        let deletedTask = await taskResponse.json();
+
+        console.log('Task erfolgreich gelöscht:', taskId);
+        await fetchTasksData();
+        closePopUps();
+        return deletedTask;
+    } catch (error) {
+        console.error('Fehler beim Löschen des Tasks:', error);
+    }
+}
+
+
 async function updateTaskInFirebase(task) {
     const taskId = task.id;
     const url = `${BASE_URL}/tasks/${taskId}.json`;
@@ -72,6 +90,8 @@ async function updateTaskInFirebase(task) {
                 dueDate: task.dueDate,
                 priority: task.priority,
                 subtasks: task.subtasks,
+                name: task.name,
+                initials: task.initials
                 /* status:task.status */
             })
         });
