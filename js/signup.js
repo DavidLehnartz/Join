@@ -13,15 +13,6 @@ function checkPrivacyPolicy() {
   }
 }
 
-function validateSignup() {
-  let button = document.getElementById("sign-up-button");
-  if (isInputEmpty() && isPasswordSame() && isPrivacyChecked) {
-    button.disabled = false;
-  } else {
-    button.disabled = true;
-  }
-}
-
 function isInputEmpty() {
   let name = document.getElementById("signup-name").value;
   let email = document.getElementById("signup-mail").value;
@@ -47,6 +38,10 @@ function isPasswordSame() {
   }
 }
 
+function validateInput() {
+  return isPrivacyChecked && isInputEmpty() && isPasswordSame();
+}
+
 function showSignupSuccessMessage() {
   let message = document.getElementById("signup-message");
   message.classList.add("show");
@@ -55,15 +50,32 @@ function showSignupSuccessMessage() {
   }, 3000);
 }
 
-function signUpUser() {
+async function signUpUser(event) {
+  event.preventDefault();
   let name = document.getElementById("signup-name").value;
   let email = document.getElementById("signup-mail").value;
   let password = document.getElementById("signup-password").value;
   let newUser = newUserObject(name, email, password);
   let newContact = newContactObject(name, email, "-");
-  createUser(newUser);
-  createContact(newContact);
+  await createUser(newUser);
+  await createContact(newContact);
   showSignupSuccessMessage();
+  resetForm();
+  window.location.href = "../index.html";
+}
+
+async function validateAndSignupUser(event) {
+  if (validateInput()) {
+    await signUpUser(event);
+  } else {
+    alert("You have to fill out all the fields and accept the privacy policy");
+  }
+}
+
+function resetForm() {
+  let form = document.getElementById("signup-form");
+  form.reset();
+  isPrivacyChecked = false;
 }
 
 function newUserObject(name, mail, password) {

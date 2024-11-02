@@ -13,12 +13,12 @@ async function loadContactList() {
   loadGroupedContactList();
 }
 
-function refreshContactList() {
+async function refreshContactList() {
   let contactList = document.getElementById("contact-list");
   let contactInfo = document.getElementById("contacts-info");
   contactList.innerHTML = "";
   contactInfo.innerHTML = "";
-  loadGroupedContactList();
+  await loadContactList();
 }
 
 async function deleteAndRefreshContactList(id) {

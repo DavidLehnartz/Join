@@ -27,25 +27,31 @@ function closeContactForm(event) {
   event.stopPropagation();
 }
 
-function getNewContactsInfo(event) {
+async function getNewContactsInfo(event) {
+  event.preventDefault();
   let name = document.getElementById("add-contact-name").value;
   let mail = document.getElementById("add-contact-mail").value;
   let phone = document.getElementById("add-contact-phone").value;
   let dialog = document.getElementById("contacts-dialog");
   let newContact = newContactObject(name, mail, phone);
-  createContact(newContact);
+  await createContact(newContact);
   toggleOverlay();
   dialog.classList.remove("show");
   showSuccessMessage();
-  event.stopPropagation();
+  refreshContactList();
 }
 
-function updateContactInfo(id) {
+async function updateContactInfo(event, id) {
+  event.preventDefault();
   let name = document.getElementById("edit-contact-name").value;
   let mail = document.getElementById("edit-contact-mail").value;
   let phone = document.getElementById("edit-contact-phone").value;
+  let dialog = document.getElementById("contacts-dialog");
   let updatedContact = updatedContactObject(name, mail, phone);
-  updateContact(updatedContact, id);
+  await updateContact(updatedContact, id);
+  toggleOverlay();
+  dialog.classList.remove("show");
+  refreshContactList();
 }
 
 function showSuccessMessage() {
