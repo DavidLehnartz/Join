@@ -21,70 +21,9 @@
     <script src="../js/desktop_template.js"></script>
     <script src="../js/contact-template.js"></script>
   </head>
-  <body onload="loadContactList()">
-    <aside>
-      <div class="left-sidebar">
-        <img src="../assets/img/join_logo_white.svg" alt="join logo" />
-        <div class="left-sidebar-links">
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/summary.png"
-              alt="Summary"
-            />
-            <p>Summary</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/add_task.png"
-              alt="Add Task"
-            />
-            <p>Add Task</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/board.png"
-              alt="Board"
-            />
-            <p>Board</p>
-          </a>
-          <a class="links active" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/contacts.png"
-              alt="Contacts"
-            />
-            <p>Contacts</p>
-          </a>
-        </div>
-        <div class="left-sidebar-links">
-          <a class="legacy-links" href="#"> Privacy Policy </a>
-          <a class="legacy-links" href="#"> Legal notice </a>
-        </div>
-      </div>
-    </aside>
-
-    <main>
-      <header>
-        <div class="header-wrapper">
-          <span> Kanban Project Management Tool</span>
-          <div class="header-icons">
-            <img
-              class="header-help-icon"
-              src="../assets/img/help.png"
-              alt="help"
-            />
-            <img
-              class="header-profil-icon"
-              src="../assets/img/profil_icon.png"
-              alt="profil"
-            />
-          </div>
-        </div>
-      </header>
-
+  <body onload="initContacts('contacts-header', 'contacts-sidebar', 'contacts-link')">
+    <div id="contacts-header"></div>
+    <div id="contacts-sidebar"></div>
       <div class="contacts-content-wrapper">
         <div class="contacts-list-container">
           <button

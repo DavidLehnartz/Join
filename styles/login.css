@@ -14,7 +14,27 @@ main {
   max-width: 1440px;
 }
 
+.intro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 274px;
+  transition: all 1s ease;
+  opacity: 1;
+}
+
+.intro-logo.move {
+  position: absolute;
+  top: 50px;
+  left: 15%;
+  width: 100px;
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
 .main-logo {
+  opacity: 1;
   width: 100px;
   position: absolute;
   top: 50px;
@@ -29,9 +49,16 @@ main {
   top: 50px;
   right: 15%;
   gap: 30px;
+  transition: all 0.6s ease;
+}
+
+.login-hidden {
+  display: hidden;
+  opacity: 0;
 }
 
 .login-card {
+  opacity: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,6 +69,7 @@ main {
   padding: 30px 0px 48px 0px;
   gap: 30px;
   margin-top: 130px;
+  transition: all 0.6s ease;
 }
 
 hr {
@@ -93,6 +121,11 @@ hr {
     padding: 10px 0px 28px 0px;
   }
 
+  .intro-logo {
+    width: 200px;
+  }
+
+  .intro-logo.move,
   .main-logo {
     width: 82px;
   }
@@ -111,6 +144,7 @@ hr {
     padding: 20px;
   }
 
+  .intro-logo.move,
   .main-logo {
     width: 64px;
     position: absolute;
@@ -140,5 +174,11 @@ hr {
     top: 50px;
     right: 0%;
     gap: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .intro-logo {
+    width: 150px;
   }
 }
