@@ -59,14 +59,14 @@ async function signUpUser(event) {
   let newContact = newContactObject(name, email, "-");
   await createUser(newUser);
   await createContact(newContact);
-  showSignupSuccessMessage();
   resetForm();
-  window.location.href = "../index.html";
 }
 
 async function validateAndSignupUser(event) {
   if (validateInput()) {
     await signUpUser(event);
+    showSignupSuccessMessage();
+    window.location.href("../pages/login.hmtl");
   } else {
     alert("You have to fill out all the fields and accept the privacy policy");
   }

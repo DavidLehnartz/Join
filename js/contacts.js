@@ -1,5 +1,11 @@
 let groupedContacts = {};
 
+async function initContacts(header, sidebar, link) {
+  createHeader(header);
+  createSidebar(sidebar, link);
+  await loadContactList();
+}
+
 async function showContactInfo(id) {
   let contactInfo = document.getElementById("contacts-info");
   let contact = await getContactById(id);

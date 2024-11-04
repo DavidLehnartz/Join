@@ -27,7 +27,7 @@
         <div class="card-header">
           <div
             class="signup-back-nav"
-            onclick="window.location.href='../index.html'"
+            onclick="window.location.href='../pages/login.html'"
           >
             <img src="../assets/icons/arrow-left-line.svg" />
           </div>
@@ -100,7 +100,7 @@
             type="submit"
             id="sign-up-button"
             class="btn-filled-medium"
-            onclick="validateAndSignupUser(event)"
+            onclick="validateAndSignupUser(event), window.location.href ='../index.html'"
           >
             Sign up
           </button>
@@ -121,9 +121,9 @@
           Legal notice
         </p>
       </div>
-      <div id="signup-message" class="signup-message">
-        <p class="contacts-info-hl">You signed Up successfully</p>
-      </div>
     </main>
+    <div id="signup-message" class="signup-message">
+      <p class="contacts-info-hl">You signed Up successfully</p>
+    </div>
   </body>
 </html>
