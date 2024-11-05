@@ -1,111 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Board</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="../assets/img/join_logo_grey.svg"
-    />
 
-    <link rel="stylesheet" href="../styles/desktop_template.css" />
-    <link rel="stylesheet" href="../styles/fonts.css" />
-    <link rel="stylesheet" href="../styles/board.css" />
-    <link rel="stylesheet" href="../styles/pop_up_board.css" />
-    <link rel="stylesheet" href="../styles/pop_up_board_edit_task.css" />
-    <link rel="stylesheet" href="../styles/color.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Board</title>
+  <link rel="icon" type="image/x-icon" href="../assets/img/join_logo_grey.svg" />
 
-    <script src="../js/board_database.js" defer></script>
-    <script src="../js/board_templates.js" defer></script>
-    <script src="../js/board_drop_down.js" defer></script>
-    <script src="../js/board_drag_and_drop.js" defer></script>
+  <link rel="stylesheet" href="../styles/desktop_template.css" />
+  <link rel="stylesheet" href="../styles/fonts.css" />
+  <link rel="stylesheet" href="../styles/board.css" />
+  <link rel="stylesheet" href="../styles/pop_up_board.css" />
+  <link rel="stylesheet" href="../styles/pop_up_board_edit_task.css" />
+  <link rel="stylesheet" href="../styles/color.css" />
 
-    <script src="../js/board.js" defer></script>
-  </head>
+  <script src="../js/board_database.js" defer></script>
+  <script src="../js/board_templates.js" defer></script>
+  <script src="../js/board_drop_down.js" defer></script>
+  <script src="../js/board_drag_and_drop.js" defer></script>
 
-  <!-- TASKS
+  <script src="../js/board.js" defer></script>
+</head>
+
+<!-- TASKS
    **drop down zeile 420
   ** Plus button on hover blau
   -->
-  <body onload="init()">
-    <!-- SIDEBAR -->
-    <div id="sidebar_template">
-      <div class="left-sidebar">
-        <img src="../assets/img/join_logo_white.svg" alt="join logo" />
-        <div class="left-sidebar-links">
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/summary.png"
-              alt="Summary"
-            />
-            <p>Summary</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/add_task.png"
-              alt="Add Task"
-            />
-            <p>Add Task</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/board.png"
-              alt="Board"
-            />
-            <p>Board</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/contacts.png"
-              alt="Contacts"
-            />
-            <p>Contacts</p>
-          </a>
-        </div>
-        <div class="left-sidebar-links">
-          <a class="legacy-links" href="#"> Privacy Policy </a>
-          <a class="legacy-links" href="#"> Legal notice </a>
-        </div>
+
+<body onload="init()">
+  <!-- SIDEBAR -->
+  <div id="sidebar_template">
+    <div class="left-sidebar">
+      <img src="../assets/img/join_logo_white.svg" alt="join logo" />
+      <div class="left-sidebar-links">
+        <a class="links" href="summary.html">
+          <img class="sidebar-icons" src="../assets/img/summary.png" alt="Summary" />
+          <p>Summary</p>
+        </a>
+        <a class="links" href="add_tasks.html">
+          <img class="sidebar-icons" src="../assets/img/add_task.png" alt="Add Task" />
+          <p>Add Task</p>
+        </a>
+        <a class="links link-active" href="#">
+          <img class="sidebar-icons" src="../assets/img/board.png" alt="Board" />
+          <p>Board</p>
+        </a>
+        <a class="links" href="contacts.html">
+          <img class="sidebar-icons" src="../assets/img/contacts.png" alt="Contacts" />
+          <p>Contacts</p>
+        </a>
+      </div>
+      <div class="left-sidebar-links">
+        <a class="legacy-links" href="#"> Privacy Policy </a>
+        <a class="legacy-links" href="#"> Legal notice </a>
       </div>
     </div>
+  </div>
 
-    <main>
-      <!-- HEADER -->
-      <header id="header_template">
-        <div class="header-wrapper">
-          <span class="app-description"> Kanban Project Management Tool</span>
-          <!-- RESPONSIVE LOGO -->
-          <img
-            class="join-logo-responsive"
-            src="../assets/img/join_logo_grey.svg"
-            alt="logo"
-          />
-          <div class="header-icons">
-            <img
-              class="header-help-icon"
-              src="../assets/img/help.png"
-              alt="help"
-            />
-            <img
-              class="header-profil-icon"
-              src="../assets/img/profil_icon.png"
-              alt="profil"
-            />
-          </div>
+  <main>
+    <!-- HEADER -->
+    <header id="header_template">
+      <div class="header-wrapper">
+        <span class="app-description"> Kanban Project Management Tool</span>
+        <!-- RESPONSIVE LOGO -->
+        <img class="join-logo-responsive" src="../assets/img/join_logo_grey.svg" alt="logo" />
+        <div class="header-icons">
+          <img class="header-help-icon" src="../assets/img/help.png" alt="help" />
+          <img class="header-profil-icon" src="../assets/img/profil_icon.png" alt="profil" />
         </div>
-      </header>
+      </div>
+    </header>
 
-      <!-- MAiN CONTENT -->
-      <div class="main-content-wrapper">
-        <!-- HEADLINE / SEARCHBOX -->
-        <section id="board_headline">
-          <!--  <div class="headline">
+    <!-- MAiN CONTENT -->
+    <div class="main-content-wrapper">
+      <!-- HEADLINE / SEARCHBOX -->
+      <section id="board_headline">
+        <!--  <div class="headline">
             <h1>Board</h1>
             <form class="searchbox-wrapper">
               <div class="searchbox-container"></div>
@@ -140,10 +110,10 @@
               </button>
             </form>
           </div> -->
-        </section>
+      </section>
 
-        <!-- HEADLINE / SEARCHBOX  RESPONSIVE-->
-        <!-- <section>
+      <!-- HEADLINE / SEARCHBOX  RESPONSIVE-->
+      <!-- <section>
           <div class="headline-responsive">
             <h1>Board</h1>
             <button class="add-task-btn-responsive">
@@ -168,89 +138,52 @@
           </button>
         </section> -->
 
-        <!-- KANBAN BOARD -->
-        <section>
-          <div class="kanban-board-wrapper">
-            <div class="kanban-column">
-              <div class="kanban-header">
-                <h2>To Do</h2>
-                <img
-                  class="kanban-header-img"
-                  src="../assets/img/plus_black.png"
-                  alt="plus"
-                />
-              </div>
-              <!-- TASK RENDERN -->
-              <div
-                ondrop="drop(event, 'to_do')"
-                ondragover="allowDrop(event)"
-                id="to_do"
-                class="kanban-task-wrapper"
-              ></div>
+      <!-- KANBAN BOARD -->
+      <section>
+        <div class="kanban-board-wrapper">
+          <div class="kanban-column">
+            <div class="kanban-header">
+              <h2>To Do</h2>
+              <img class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
             </div>
-
-            <div class="kanban-column">
-              <div class="kanban-header">
-                <h2>In progress</h2>
-                <img
-                  class="kanban-header-img"
-                  src="../assets/img/plus_black.png"
-                  alt="plus"
-                />
-              </div>
-              <div
-                id="in_progress"
-                ondrop="drop(event, 'in_progress')"
-                ondragover="allowDrop(event)"
-                class="kanban-task-wrapper"
-              ></div>
-            </div>
-
-            <div class="kanban-column">
-              <div class="kanban-header">
-                <h2>Await feedback</h2>
-                <img
-                  class="kanban-header-img"
-                  src="../assets/img/plus_black.png"
-                  alt="plus"
-                />
-              </div>
-              <div
-                id="await_feedback"
-                ondrop="drop(event, 'await_feedback')"
-                ondragover="allowDrop(event)"
-                class="kanban-task-wrapper"
-              ></div>
-            </div>
-
-            <div class="kanban-column">
-              <div class="kanban-header">
-                <h2>Done</h2>
-              </div>
-              <div
-                id="done"
-                ondrop="drop(event, 'done')"
-                ondragover="allowDrop(event)"
-                class="kanban-task-wrapper"
-              ></div>
+            <!-- TASK RENDERN -->
+            <div ondrop="drop(event, 'to_do')" ondragover="allowDrop(event)" id="to_do" class="kanban-task-wrapper">
             </div>
           </div>
-        </section>
 
-        <!-- OVERLAY / POP UP BOARD TASK RENDERN-->
+          <div class="kanban-column">
+            <div class="kanban-header">
+              <h2>In progress</h2>
+              <img class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+            </div>
+            <div id="in_progress" ondrop="drop(event, 'in_progress')" ondragover="allowDrop(event)"
+              class="kanban-task-wrapper"></div>
+          </div>
 
-        <div
-          onclick=" closePopUps()"
-          id="overlay_task_pop_up"
-          class="overlay-pop-up-board responsive-pop-up-closed"
-        >
-          <!-- d_none  -->
-          <div
-            onclick="event.stopPropagation()"
-            id="task_pop_up"
-            class="pop-up-board-wrapper"
-          >
-            <!--  <div class="pop-up-board-inner-container">
+          <div class="kanban-column">
+            <div class="kanban-header">
+              <h2>Await feedback</h2>
+              <img class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+            </div>
+            <div id="await_feedback" ondrop="drop(event, 'await_feedback')" ondragover="allowDrop(event)"
+              class="kanban-task-wrapper"></div>
+          </div>
+
+          <div class="kanban-column">
+            <div class="kanban-header">
+              <h2>Done</h2>
+            </div>
+            <div id="done" ondrop="drop(event, 'done')" ondragover="allowDrop(event)" class="kanban-task-wrapper"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- OVERLAY / POP UP BOARD TASK RENDERN-->
+
+      <div onclick=" closePopUps()" id="overlay_task_pop_up" class="overlay-pop-up-board responsive-pop-up-closed">
+        <!-- d_none  -->
+        <div onclick="event.stopPropagation()" id="task_pop_up" class="pop-up-board-wrapper">
+          <!--  <div class="pop-up-board-inner-container">
                 <div class="pop-up-task-header">
                   <div class="header-category">
                     <p>$$Ctgry$$</p>
@@ -335,13 +268,13 @@
                   alt="delete"
                 />
               </div>  -->
-          </div>
         </div>
+      </div>
 
-        <!-- POP UP BOARD EDIT TASK RENDERN-->
-        <section id="edit_task_pop_up" class="d_none">
-          <!-- <div class="overlay-pop-up-edit-task"> -->
-          <!--  <div class="pop-up-edit-task-wrapper">
+      <!-- POP UP BOARD EDIT TASK RENDERN-->
+      <section id="edit_task_pop_up" class="d_none">
+        <!-- <div class="overlay-pop-up-edit-task"> -->
+        <!--  <div class="pop-up-edit-task-wrapper">
             <div class="pop-up-edit-task-inner-container">
               <div class="pop-up-edit-task-headline">
                 <h4>Edit task</h4>
@@ -515,49 +448,32 @@
               </button>
             </div>
           </div> -->
-          <!-- </div> -->
-        </section>
+        <!-- </div> -->
+      </section>
+    </div>
+    <!-- FOOTER / NAVBAR RESPONSIVE -->
+    <nav id="navbar_responsive">
+      <div class="navbar-links-responsive">
+        <a class="navbar-links" href="#">
+          <img class="navbar-icons" src="../assets/img/summary.png" alt="Summary" />
+          <p>Summary</p>
+        </a>
+        <a class="navbar-links" href="#">
+          <img class="navbar-icons" src="../assets/img/add_task.png" alt="Add Task" />
+          <p>Add Task</p>
+        </a>
+        <a class="navbar-links" href="#">
+          <img class="navbar-icons" src="../assets/img/board.png" alt="Board" />
+          <p>Board</p>
+        </a>
+        <a class="navbar-links" href="#">
+          <img class="navbar-icons" src="../assets/img/contacts.png" alt="Contacts" />
+          <p>Contacts</p>
+        </a>
       </div>
-      <!-- FOOTER / NAVBAR RESPONSIVE -->
-      <nav id="navbar_responsive">
-        <div class="navbar-links-responsive">
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/summary.png"
-              alt="Summary"
-            />
-            <p>Summary</p>
-          </a>
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/add_task.png"
-              alt="Add Task"
-            />
-            <p>Add Task</p>
-          </a>
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/board.png"
-              alt="Board"
-            />
-            <p>Board</p>
-          </a>
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/contacts.png"
-              alt="Contacts"
-            />
-            <p>Contacts</p>
-          </a>
-        </div>
-  `;
-      </nav>
-    </main>
-  </body>
+      `;
+    </nav>
+  </main>
+</body>
+
 </html>
-
-

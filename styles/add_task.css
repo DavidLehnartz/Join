@@ -72,6 +72,16 @@ h1 {
     color: #b5b6b9;
 }
 
+.links:active {
+    background-color: #091931;
+    color: white;
+}
+
+.link-active {
+    background-color: #091931;
+    color: white;
+}
+
 .legacy-links:hover {
     color: rgb(41, 171, 226);
     transition: transform 125ms;

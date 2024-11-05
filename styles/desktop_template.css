@@ -130,3 +130,13 @@ header {
   width: 56px;
   height: 56px;
 }
+
+.links:active {
+  background-color: #091931;
+  color: white;
+}
+
+.link-active {
+  background-color: #091931;
+  color: white;
+}
