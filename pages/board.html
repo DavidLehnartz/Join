@@ -138,6 +138,7 @@
           </button>
         </section> -->
 
+<<<<<<< HEAD
       <!-- KANBAN BOARD -->
       <section>
         <div class="kanban-board-wrapper">
@@ -148,6 +149,73 @@
             </div>
             <!-- TASK RENDERN -->
             <div ondrop="drop(event, 'to_do')" ondragover="allowDrop(event)" id="to_do" class="kanban-task-wrapper">
+=======
+        <!-- KANBAN BOARD -->
+        <section>
+          <div class="kanban-board-wrapper">
+            <div
+              class="kanban-column"
+              ondrop="drop(event, 'to_do')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="kanban-header">
+                <h2>To Do</h2>
+                <img
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+              <!-- TASK RENDERN -->
+              <div id="to_do" class="kanban-task-wrapper"></div>
+              <!-- <div id="to_do_message" class="kanban-empty-message" style="display: none;">No tasks to do</div> -->
+            </div>
+
+            <div
+              class="kanban-column"
+              ondrop="drop(event, 'in_progress')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="kanban-header">
+                <h2>In progress</h2>
+                <img
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+              <div id="in_progress" class="kanban-task-wrapper"></div>
+              <!-- <div id="in_progress_message" class="kanban-empty-message" style="display: none;">No tasks in progress</div> -->
+            </div>
+
+            <div
+              class="kanban-column"
+              ondrop="drop(event, 'await_feedback')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="kanban-header">
+                <h2>Await feedback</h2>
+                <img
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+              <div id="await_feedback" class="kanban-task-wrapper"></div>
+           <!--    <div id="await_feedback_message" class="kanban-empty-message" style="display: none;">No tasks awaiting feedback</div> -->
+            </div>
+
+            <div
+              class="kanban-column"
+              ondrop="drop(event, 'done')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="kanban-header">
+                <h2>Done</h2>
+              </div>
+              <div id="done" class="kanban-task-wrapper"></div>
+             <!--  <div id="done_message" class="kanban-empty-message" style="display: none;">No tasks done</div> -->
+>>>>>>> d125310533207192ca0927cb18aee632ad84060c
             </div>
           </div>
 
@@ -471,9 +539,52 @@
           <p>Contacts</p>
         </a>
       </div>
+<<<<<<< HEAD
       `;
     </nav>
   </main>
 </body>
 
 </html>
+=======
+      <!-- FOOTER / NAVBAR RESPONSIVE -->
+      <nav id="navbar_responsive">
+        <div class="navbar-links-responsive">
+          <a class="navbar-links" href="#">
+            <img
+              class="navbar-icons"
+              src="../assets/img/summary.png"
+              alt="Summary"
+            />
+            <p>Summary</p>
+          </a>
+          <a class="navbar-links" href="#">
+            <img
+              class="navbar-icons"
+              src="../assets/img/add_task.png"
+              alt="Add Task"
+            />
+            <p>Add Task</p>
+          </a>
+          <a class="navbar-links" href="#">
+            <img
+              class="navbar-icons"
+              src="../assets/img/board.png"
+              alt="Board"
+            />
+            <p>Board</p>
+          </a>
+          <a class="navbar-links" href="#">
+            <img
+              class="navbar-icons"
+              src="../assets/img/contacts.png"
+              alt="Contacts"
+            />
+            <p>Contacts</p>
+          </a>
+        </div>
+      </nav>
+    </main>
+  </body>
+</html>
+>>>>>>> d125310533207192ca0927cb18aee632ad84060c

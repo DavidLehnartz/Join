@@ -70,6 +70,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   color: #b5b6b9;
+  cursor: pointer;
 }
 
 .legacy-links:hover {
@@ -83,7 +84,6 @@ header {
   box-shadow: 4px 0px 8px 0px rgb(170 170 170);
   padding-right: 60px;
   padding-left: 60px;
-
   font-size: 20px;
 }
 
@@ -96,7 +96,7 @@ header {
   margin: 0px auto;
 }
 
-.app-description{
+.app-description {
   font-size: 20px;
 }
 
@@ -130,6 +130,7 @@ header {
   width: 56px;
   height: 56px;
 }
+<<<<<<< HEAD
 
 .links:active {
   background-color: #091931;
@@ -140,3 +141,5 @@ header {
   background-color: #091931;
   color: white;
 }
+=======
+>>>>>>> d125310533207192ca0927cb18aee632ad84060c

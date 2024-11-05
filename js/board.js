@@ -47,6 +47,9 @@ function renderDesktopTemplate() {
 }
 
 
+
+
+
 function renderTasks() {
   let tasksContent = document.getElementById('to_do');
   tasksContent.innerHTML = "";
@@ -55,9 +58,88 @@ function renderTasks() {
     let task = tasks[indexTasks];
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
-    tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor);
+    let assigneeInitials = renderAssigneeInitials(task.assignedTo);
+    tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
+  }
+  // renderAssigneeInitials();
+}
+
+
+/* function renderTasks() {
+  clearColumns();
+ 
+  for (let indexTasks = 0; indexTasks < tasks.length; indexTasks++) {
+    let task = tasks[indexTasks];
+    let priorityImage = getPriorityImage(task.priority);
+    let categoryColor = getCategoryColor(task.category);
+    let assigneeInitials = renderAssigneeInitials(task.assignedTo);
+ 
+    let columnId = task.status;
+    let column = document.getElementById(columnId);
+ 
+    if (column) {
+      column.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
+    } else {
+      console.error(`Spalte mit ID ${columnId} nicht gefunden.`);
+    }
+  }
+   // updateEmptyMessages();
+}  */
+
+
+ function clearColumns() {
+  document.getElementById('to_do').innerHTML = "";
+  document.getElementById('in_progress').innerHTML = "";
+  document.getElementById('await_feedback').innerHTML = "";
+  document.getElementById('done').innerHTML = "";
+}
+
+
+/*  function updateEmptyMessages() {
+   
+   const columnsWithTasks = {
+     to_do: false,
+     in_progress: false,
+     await_feedback: false,
+     done: false
+   };
+ 
+   tasks.forEach(task => {
+     columnsWithTasks[task.status] = true; // Setze den Status auf true, wenn eine Aufgabe vorhanden ist
+   });
+ 
+   for (const columnId in columnsWithTasks) {
+     const messageElement = document.getElementById(`${columnId}_message`);
+     if (!columnsWithTasks[columnId]) {
+       messageElement.style.display = 'block'; 
+     } else {
+       messageElement.style.display = 'none'; 
+     }
+   }
+ } */
+
+
+
+
+function renderAssigneeInitials(assignedTo) {
+
+  let assigneeInitialsContent = ""; 
+
+  if (Array.isArray(assignedTo)) {
+    assignedTo.forEach(assignee => {
+      assigneeInitialsContent += getAssigneeInitialsTemplate(assignee);
+    });
   }
 
+  return assigneeInitialsContent; 
+}
+
+function getAssigneeInitialsTemplate(assignee) {
+  return `
+    <div class="initials bg-${assignee.color}";>
+      ${assignee.initial} 
+    </div>
+  `;
 }
 
 
@@ -83,55 +165,36 @@ function renderTaskPopUp(taskId) {
 
   const task = tasks.find((t) => t.id === taskId);
   if (task) {
+    /*    transformSubtasks(task); */
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
-    taskPopUpContent.innerHTML = getTaskPopUpTemplate(task, priorityImage, categoryColor);
+    let assigneeContent = getAssigneesTemplate(task.assignedTo);
+    taskPopUpContent.innerHTML = getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeContent);
   }
-  renderSubtasks(task);
+  /*   renderSubtasks(task); */
 }
 
 
-function renderSubtasks(task) {
-  let subtasksContent = document.getElementById('single_subtasks');
-  subtasksContent.innerHTML = ""; 
 
-  // Prüfen, ob subtasks ein Array ist
-  if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
-    task.subtasks.forEach(subtask => {
-      subtasksContent.innerHTML += getSubtaskTemplate(subtask);
-    });
-  } 
-  else {
-    subtasksContent.innerHTML = "<p>No subtasks available</p>";
+function getAssigneesTemplate(assignedTo) {
+  if (Array.isArray(assignedTo)) {
+    return assignedTo.map(assignee => {
+      return `
+        <div class="single-assigned-profil-wrapper">
+          <div class="single-assigned-profil">
+            <div class="single-assigned-profil-initials bg-${assignee.color}">
+              ${assignee.initial}
+            </div>
+            <div class="initial-name">
+              ${assignee.name}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join(''); 
   }
+  return `<p>No contacts selected</p> `;
 }
-
-function getSubtaskTemplate(subtask) {
-  return `
-    <div class="subtask">
-      <img src="../assets/img/checkbox_false.png" alt="checkbox">
-      <span>${subtask}</span>
-    </div>
-  `;
-}
-
-/* 
-function renderInitials(task) {
-  let initialsContent = document.getElementById('assignee_initials');
-  initialsContent.innerHTML = "";
-
-  if (Array.isArray(task.assignedTo) && task.assignedTo.length > 0) {
-    task.assignedTo.forEach(assigned => {
-      initialsContent.innerHTML += getInitialTemplate(assigned);
-    })
-  }
-} */
-
-/* function getInitialTemplate(assigned) {
-  return `
-        <div class="test">${assigned}</div>
-  `;
-} */
 
 
 /**
@@ -173,6 +236,11 @@ async function saveTaskChanges(taskId) {
     task.description = document.getElementById('edit_description').value;
     task.dueDate = document.getElementById('edit_due_date').value;
     task.subtasks = document.getElementById('input_subtask_add_subtask').value;
+
+   /*  task.assignedContacts = [...selectedContacts]; */
+
+    /* const priorityButton = document.querySelector('.prio-btn.prio-urgent-active, .prio-btn.prio-medium-active, .prio-btn.prio-low-active');
+    task.priority = priorityButton ? priorityButton.id.replace('prio_', '') : ''; // "urgent", "medium" oder "low" */
 
   }
   renderTasks();
@@ -346,6 +414,52 @@ function resetButtons() {
 }
 
 
+function renderSelectedContacts() {
+  let selectedContactsContent = document.getElementById('selected_contacts');
+  selectedContactsContent.innerHTML = "";
+
+  for (let indexSelectedContacts = 0; indexSelectedContacts < selectedContacts.length; indexSelectedContacts++) {
+    let contact = selectedContacts[indexSelectedContacts];
+    selectedContactsContent.innerHTML += getSelectedContactsTemplate(contact);
+  }
+}
+
+function getSelectedContactsTemplate(contact) {
+  return `
+          <div class="selected-contact bg-${contact.color}">${contact.initial}</div>
+  `;
+}
+
+
+function toggleCheckbox(checkboxId, contactInitial, contactColor) {
+  let checkbox = document.getElementById(checkboxId);
+
+  if (checkbox.src.includes('checkbox_false.png')) {
+    checkbox.src = '../assets/img/checkbox_true.png';
+    selectedContacts.push(
+      {
+        id: checkboxId,
+        initial: contactInitial,
+        color: contactColor
+      });
+  }
+  else {
+    checkbox.src = '../assets/img/checkbox_false.png';
+    const index = selectedContacts.findIndex(contact => contact.id === checkboxId);
+    if (index !== -1) {
+      selectedContacts.splice(index, 1); // Element an Index entfernen
+    }
+  }
+  renderSelectedContacts();
+  console.log(selectedContacts);
+
+}
+
+
+
+
+
+
 
 /*  function renderAddSubtasks(taskId) {
    const task = tasks.find((t) => t.id === taskId);
@@ -371,9 +485,77 @@ function resetButtons() {
  
   const task = tasks.find(t => t.id === taskId);
   if (task) {
-    task.subtasks = task.subtasks || []; // Falls subtasks noch nicht existiert
+    task.subtasks = task.subtasks || []; 
     task.subtasks.push(addedSubtask);
     renderAddSubtasks(taskId);
     clearInputs();
+  }
+} */
+
+
+
+
+/* function renderSubtasks(task) {
+let subtasksContent = document.getElementById('single_subtasks');
+subtasksContent.innerHTML = "";
+
+// Prüfen, ob subtasks ein Array ist
+if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
+  task.subtasks.forEach(subtask => {
+    const subtaskImage = getSubtaskImage(subtask.checked);
+    subtasksContent.innerHTML += getSubtaskTemplate(task, subtaskImage);
+  });
+}
+else {
+  subtasksContent.innerHTML = "<p>No subtasks available</p>";
+} 
+}*/
+
+/* function getSubtaskTemplate(task, subtaskImage) {
+  return `
+    <div class="subtask">
+      <img onclick="toggleSubtaskStatus()"
+           id="subtask_image"
+           src="${subtaskImage}" alt="checkbox">
+      <span>${task.subtasks}</span>
+    </div>
+  `;
+} */
+
+
+/* function getSubtaskImage(isChecked) {
+  return isChecked ? "../assets/img/checkbox_true.png" : "../assets/img/checkbox_false.png";
+} */
+
+/* async function toggleSubtaskStatus(taskId, subtaskId) {
+  const task = tasks.find(t => t.id === taskId);
+  if (!task) return;
+
+  const subtask = task.subtasks.find(s => s.id === subtaskId);
+  if (subtask) {
+    // Status wechseln
+    subtask.checked = !subtask.checked;
+
+    // Bild entsprechend des neuen Status ändern
+    const subtaskElement = document.getElementById(`subtask_image-${taskId}-${subtaskId}`);
+    if (subtaskElement) {
+      subtaskElement.src = getSubtaskImage(subtask.checked);
+    }
+
+    // Task in Firebase aktualisieren
+    await updateTaskInFirebase(task);
+
+    // Fortschrittsanzeige aktualisieren
+    updateTaskProgress(taskId);
+  }
+} */
+
+/* function transformSubtasks(task) {
+  if (Array.isArray(task.subtasks)) {
+    task.subtasks = task.subtasks.map((title, index) => ({
+      id: `subtask-${task.id}-${index}`, // Eindeutige ID generieren
+      title: title,
+      checked: false // Standardmäßig auf unchecked setzen
+    }));
   }
 } */

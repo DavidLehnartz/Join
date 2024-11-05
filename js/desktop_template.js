@@ -1,21 +1,15 @@
-function generateSidebar() {
-  const sidebar = document.createElement("aside");
-  const header = document.getElementById("header");
+function createSidebar(sidebarId, linkId) {
+  let sidebar = document.getElementById(sidebarId);
   sidebar.innerHTML = renderSidebar();
-  document.body.insertBefore(sidebar, header);
-}
-
-function generateHeader() {
-  const header = document.createElement("div");
-  header.innerHTML = renderHeader();
-  document.body.insertBefore(header, document.body.firstChild);
+  let activeLink = document.getElementById(linkId);
+  activeLink.classList.add("active");
 }
 
 function renderSidebar() {
   return `<div class="left-sidebar">
         <img src="../assets/img/join_logo_white.svg" alt="join logo" />
         <div class="left-sidebar-links">
-          <a class="links" href="#">
+          <a id="summary-link" class="links" href="../pages/summary.html">
             <img
               class="sidebar-icons"
               src="../assets/img/summary.png"
@@ -23,7 +17,7 @@ function renderSidebar() {
             />
             <p>Summary</p>
           </a>
-          <a class="links" href="#">
+          <a id="task-link" class="links" href="../pages/add_tasks.html">
             <img
               class="sidebar-icons"
               src="../assets/img/add_task.png"
@@ -31,7 +25,7 @@ function renderSidebar() {
             />
             <p>Add Task</p>
           </a>
-          <a class="links" href="#">
+          <a id="board-link" class="links" href="../pages/board.html">
             <img
               class="sidebar-icons"
               src="../assets/img/board.png"
@@ -39,7 +33,7 @@ function renderSidebar() {
             />
             <p>Board</p>
           </a>
-          <a class="links" href="#">
+          <a id="contacts-link" class="links" href="../pages/contacts.html">
             <img
               class="sidebar-icons"
               src="../assets/img/contacts.png"
@@ -49,13 +43,22 @@ function renderSidebar() {
           </a>
         </div>
         <div class="left-sidebar-links">
-          <a class="legacy-links" href="#"> Privacy Policy </a>
-          <a class="legacy-links" href="#"> Legal notice </a>
+          <a class="legacy-links" href="../pages/privacy_policy.html"> Privacy Policy </a>
+          <a class="legacy-links" href="../pages/legal_notice.html"> Legal notice </a>
         </div>
       </div>`;
 }
 
-function renderHeader() {
+function createHeader(headerId) {
+  let header = document.getElementById(headerId);
+  if (isGuest) {
+    header.innerHTML = renderHeader("G");
+  } else {
+    header.innerHTML = renderHeader("XX");
+  }
+}
+
+function renderHeader(initial) {
   return `<header id="header">
   <div class="header-wrapper">
           <span> Kanban Project Management Tool</span>
@@ -65,11 +68,9 @@ function renderHeader() {
               src="../assets/img/help.png"
               alt="help"
             />
-            <img
-              class="header-profil-icon"
-              src="../assets/img/profil_icon.png"
-              alt="profil"
-            />
+            <div id="header-profil-icon" class="header-profil-icon">
+               ${initial}
+            </div>
           </div>
         </div>
         </header>`;

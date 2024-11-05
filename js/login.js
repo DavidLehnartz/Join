@@ -1,6 +1,14 @@
 let isVisible = false;
 let isRememberOn = false;
 
+function animateIntro() {
+  let logo = document.getElementById("intro-logo");
+  setTimeout(() => {
+    logo.classList.add("move");
+    window.location.href = "../pages/login.html";
+  }, 2000);
+}
+
 function showPassword(iconId, passwordId) {
   let passwordIcon = document.getElementById(iconId);
   let password = document.getElementById(passwordId);
@@ -52,4 +60,9 @@ async function isValidCredential(event) {
     password.classList.add("error-input");
     error.classList.remove("hidden");
   }
+}
+
+function loginAsGuest() {
+  isGuest = true;
+  window.location.href = "../pages/contacts.html";
 }

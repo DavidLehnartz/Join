@@ -181,12 +181,10 @@ select {
   scrollbar-width: none;
 }
 
-.select-contact {
-}
-
 .assigned-contacts {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -391,6 +389,22 @@ li:hover {
   align-items: center;
   gap: 16px;
 }
+
+.selected-contact{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 45px;
+    width: 45px;
+    height: 45px;
+}
+
+
+/* .dropdown-contact.active {
+  background-color: black; 
+  color: white;           
+} */
 
 /* Dropdown anzeigen, wenn geklickt */
 /* .custom-dropdown.open .dropdown-content {

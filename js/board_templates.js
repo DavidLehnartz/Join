@@ -143,9 +143,9 @@ function getBoardHeadlineTemplate() {
 }
 
 
-function getTasksTemplate(task, priorityImage, categoryColor) {
+function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials) {
   return `    
-              <div onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${tasks.id}')" class="kanban-task">
+              <div onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" class="kanban-task">
                 <div class="kanban-task-header"  style="background-color: ${categoryColor};">
                   <p>${task.category}</p>
                 </div>
@@ -157,15 +157,15 @@ function getTasksTemplate(task, priorityImage, categoryColor) {
                 </div>
                 <div class="kanban-task-subtasks">
                   <progress value="0" max="100"></progress>
-                  <span>${task.subtasks}/${task.subtasks.length}</span>
+                  <span>${task.subtasks}/fehler mit length</span>
                   <p>Subtasks</p>
                 </div>
                 <div class="kanban-task-footer">
-                  <div id="assignee_initials" class="asignees-profil">
 
-                 
-
+                  <div class="asignees-profil">
+                   ${assigneeInitials}
                   </div>
+
                   <div class="priority-info">
                      <img src="${priorityImage}" alt="${task.priority}" class="priority-icon">
                   </div>
@@ -175,7 +175,7 @@ function getTasksTemplate(task, priorityImage, categoryColor) {
 }
 
 
-function getTaskPopUpTemplate(task, priorityImage, categoryColor) {
+function getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeContent) {
   return `
              <div class="pop-up-board-inner-container">
                 <div class="pop-up-task-header">
@@ -189,7 +189,9 @@ function getTaskPopUpTemplate(task, priorityImage, categoryColor) {
                   />
                 </div>
                 <div class="pop-up-task-content">
+                <div class="blubb">
                   <h4>${task.title}</h4>
+                  </div>
                   <div class="pop-up-description">
                     <p>
                       ${task.description}
@@ -211,11 +213,8 @@ function getTaskPopUpTemplate(task, priorityImage, categoryColor) {
                 </div>
                 <div class="pop-up-assigned-to-wrapper">
                   <p>Assigned To:</p>
-                  <div class="pop-up-assigned-profils">
-                    <div class="single-assigned-profil">
-                      
-                      <p>${task.assignedTo} </p>
-                    </div>
+                  <div id="message" class="pop-up-assigned-profils">
+                      <p>${assigneeContent}</p>
                   </div>
                 </div>
                 <div class="pop-up-subtasks">
@@ -252,7 +251,7 @@ function getTaskPopUpTemplate(task, priorityImage, categoryColor) {
 
 function getEditTaskPopUpTemplate(task) {
   return `
-          <div class="pop-up-edit-task-wrapper">
+          <div class="pop-up-edit-task-wrapper responsive-pop-up-closed">
             <div class="pop-up-edit-task-inner-container">
               <div class="pop-up-edit-task-headline">
                 <h4>Edit task</h4>
@@ -338,27 +337,16 @@ function getEditTaskPopUpTemplate(task) {
                    </button>
                    <div id="dropdown_content" class="dropdown-content-wrapper d_none">
                      
-                   <div id="dropdown_contacts" class="dropdown-content"></div>
+                      <div id="dropdown_contacts" class="dropdown-content"></div>
 
                    </div>
                   </div>
                   
 
-                  <div class="assigned-contacts">
-                    <div>
-                      <img
-                        class="user-icon"
-                        src="../assets/img/profil_icon_orange.png"
-                        alt=""
-                      />
-                    </div>
-                    <div>
-                      <img
-                        class="user-icon"
-                        src="../assets/img/profil_icon_light_blue_.png"
-                        alt=""
-                      />
-                    </div>
+                  <div id="selected_contacts" class="assigned-contacts">
+                   
+                  
+
                   </div>
                 </div>
 
@@ -410,12 +398,12 @@ function getEditTaskPopUpTemplate(task) {
 
 function getDropdownContactsTemplate(contact) {
   return `
-         <div  class="dropdown-contact">
+         <div  class="dropdown-contact" onclick="toggleCheckbox('checkbox_${contact.name}', '${contact.initial}','${contact.color}')" id="selected_contact">
               <div class="dropdown-contact-name">
                 <span class="dropdown-initial bg-${contact.color}">${contact.initial}</span>
                 <p>${contact.name}</p>
               </div>
-                <img src="../assets/img/checkbox_false.png" alt="checkbox">
+                <img id="checkbox_${contact.name}" src="../assets/img/checkbox_false.png" alt="checkbox">
           </div>
   `;
 }

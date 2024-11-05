@@ -30,4 +30,4 @@ function toggleInputImage() {
   } else {
     inputImage.src = '../assets/img/arrow_drop_downaa.png';
   }
-}
+} 
