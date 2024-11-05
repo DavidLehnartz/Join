@@ -1,6 +1,11 @@
 body {
   display: flex;
-  margin: 0;
+  margin: 0px auto;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  background-color: rgb(246, 247, 248);
   font-family: "Inter", sans-serif;
 }
 
@@ -23,10 +28,9 @@ h1 {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 300px;
+  width: 232px;
   height: 100vh;
   background-color: rgb(42, 54, 71);
-  z-index: 2;
 }
 
 .left-sidebar-links {
@@ -40,10 +44,9 @@ h1 {
   align-items: center;
   color: #b5b6b9;
   background-color: #2a3647;
-  width: 300px;
+  width: 232px;
   height: 46px;
   gap: 8px;
-  cursor: pointer;
 }
 
 .links:hover {
@@ -81,23 +84,16 @@ header {
   box-shadow: 4px 0px 8px 0px rgb(170 170 170);
   padding-right: 60px;
   padding-left: 60px;
-  width: calc(100% - 300px);
   font-size: 20px;
-  position: fixed;
-  top: 0;
-  left: 300px;
-  right: 0;
-  z-index: 1;
 }
 
 .header-wrapper {
   display: flex;
   align-items: center;
   height: 96px;
-  width: calc(100% - 100px);
   justify-content: space-between;
   max-width: 1440px;
-  margin: 0px;
+  margin: 0px auto;
 }
 
 .app-description {
@@ -112,8 +108,10 @@ header {
 }
 
 .main-content-wrapper {
-  margin-top: 90px;
-  margin-left: 300px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1440px;
+  margin: 0px auto;
   padding-left: 60px;
   padding-right: 60px;
 }
@@ -129,15 +127,6 @@ header {
 }
 
 .header-profil-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 56px;
   height: 56px;
-  border-radius: 30px;
-  border: 3px solid #091931;
-  color: #29abe2;
-  font-family: "interbold", sans-serif;
-  font-size: 26px;
-  padding: 0px;
 }
