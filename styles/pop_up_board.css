@@ -1,4 +1,5 @@
 h4 {
+  font-size: 48px;
   margin: 0px;
 }
 
@@ -29,14 +30,12 @@ h4 {
   background-color: white;
   transform: translate(-50%, -50%);
   padding: 48px 40px;
-  gap: 24px;
-
   /* transition: all 250ms ease-in-out; */
 }
 
 
 .responsive-pop-up-closed {
-  transform: translateX(100%);
+  transform: translateX(150%);
 }
 
 .pop-up-board-inner-container {
@@ -82,7 +81,11 @@ h4 {
   display: flex;
   flex-direction: column;
   font-size: 61px;
-  gap: 24px;
+}
+
+.pop-up-title{
+display: flex;
+/* overflow-wrap: anywhere; */
 }
 
 .pop-up-description {
@@ -116,7 +119,6 @@ h4 {
 .pop-up-assigned-to-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 24px;
   font-size: 20px;
 }
 
@@ -126,11 +128,31 @@ h4 {
   gap: 16px;
 }
 
-.single-assigned-profil {
+.single-assigned-profil-wrapper {
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 0px 16px;
+}
+
+.single-assigned-profil{
+display: contents;
+}
+
+.single-assigned-profil-initials{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 42px;
+  width: 42px;
+  border-radius: 45px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.initial-name{
+
 }
 
 .assigned-to-profil-icons {
@@ -148,17 +170,12 @@ h4 {
 
 .single-subtasks-wrapper {
   display: flex;
+  flex-direction: column;
   /* width: 344px; */
   gap: 16px;
   padding: 4px 16px;
 
   font-size: 16px;
-}
-
-.single-subtasks-wrapper:hover {
-  background-color: rgb(246, 247, 248);
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 .subtask{
@@ -167,9 +184,16 @@ h4 {
   gap: 10px;
 }
 
+.subtask:hover {
+  background-color: rgb(246, 247, 248);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 .pop-up-footer {
   display: flex;
   flex-direction: row-reverse;
+  margin-top: 32px;
 }
 
 .pop-up-footer-edit-img {
@@ -213,7 +237,7 @@ h4 {
   }
 
   h4 {
-    font-size: 48px;
+    font-size: 40px;
     text-align: center;
   }
 }

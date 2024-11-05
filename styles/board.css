@@ -23,6 +23,10 @@ p {
   margin: 0px;
 }
 
+label{
+  color: #2a3647;
+}
+
 .d_none {
   display: none;
 }
@@ -220,12 +224,29 @@ progress {
 }
 
 .asignees-profil {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.initials{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 32px;
+  width: 32px;
+  border: 1px solid white;
+  border-radius: 45px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: -5px;
 }
 
 .priority-info {
 }
 
-.kanban-task-no-task-found {
+.kanban-empty-message {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -8,11 +8,12 @@ const BASE_URL =
 
 let tasks = [];
 let contacts = [];
-let assigneInitials = [];
+let selectedContacts = [];
+let assignees = [];
 let subtasks = [];
 
 
-async function fetchTasksData() {
+/* async function fetchTasksData() {
     tasks = [];
 
     let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
@@ -30,7 +31,43 @@ async function fetchTasksData() {
     }
 
     console.log("tasks nach fetch:", tasks);
+} */
+
+async function fetchTasksData() {
+    tasks = []; // Leeren des Tasks-Arrays
+    subtasks = []; // Leeren des Subtasks-Arrays
+
+    let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
+    let tasksToJson = await tasksResponse.json();
+
+    if (tasksToJson) {
+        const taskKeys = Object.keys(tasksToJson);
+
+        taskKeys.forEach((key) => {
+            const task = {
+                id: key,
+                ...tasksToJson[key]
+            };
+
+            tasks.push(task);
+
+            // Hinzufügen von assignedTo in das Assignees-Array, wenn nicht bereits vorhanden
+            if (task.assignedTo && !assignees.includes(task.assignedTo)) {
+                assignees.push(task.assignedTo);
+            }
+
+            // Hinzufügen von subtasks in das Subtasks-Array
+            if (Array.isArray(task.subtasks)) {
+                subtasks.push(...task.subtasks);
+            }
+        });
+    }
+
+    console.log("Tasks nach Fetch:", tasks);
+    console.log("Assigned Users:", assignees);
+    console.log("Subtasks:", subtasks);
 }
+
 
 
 async function fetchContactsData() {
@@ -91,8 +128,8 @@ async function updateTaskInFirebase(task) {
                 priority: task.priority,
                 subtasks: task.subtasks,
                 name: task.name,
-                initials: task.initials
-                /* status:task.status */
+                initials: task.initials,
+                subtasks: task.subtasks,
             })
         });
 

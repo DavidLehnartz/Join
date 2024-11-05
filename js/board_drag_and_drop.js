@@ -8,16 +8,18 @@ let draggedTaskId;
 
 function startDragging(taskId) {
     draggedTaskId = taskId;
-    console.log("Task ID zum Ziehen gesetzt:", draggedTaskId);
+    console.log("startDragging: Task ID gesetzt zum Ziehen:", draggedTaskId);
 }
 
 
 function allowDrop(event) {
     event.preventDefault();
+    console.log("allowDrop: Event erlaubt");
 }
 
 
 async function updateTaskInDatabase(task) {
+    console.log("updateTaskInDatabase: Speichere in Datenbank:", task);
     await fetch(`${BASE_URL}/tasks/${task.id}.json`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -28,17 +30,25 @@ async function updateTaskInDatabase(task) {
 
 async function drop(event, targetColumn) {
     event.preventDefault();
+    console.log("drop: Funktion ausgelöst");
+
+    console.log("drop: Inhalt von tasks:", tasks);
+    console.log("drop: draggedTaskId:", draggedTaskId);
 
     let task = tasks.find(task => task.id === draggedTaskId);
     console.log("Aufgabe gefunden:", task);
     if (task) {
+        console.log("drop: Aufgabe gefunden und Spalte geändert:", task);
         task.status = targetColumn;
 
         await updateTaskInDatabase(task);
 
-        renderTasks();
+        renderTasks(); 
+         /* updateEmptyMessages();  */
+    } else{
+        console.error("drop: Aufgabe mit ID nicht gefunden:", draggedTaskId);
     }
-    console.error("Aufgabe mit ID nicht gefunden:", draggedTaskId);
+    
 }
 
 
