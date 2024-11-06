@@ -420,7 +420,8 @@ async function createTask() {
             ...Array.from(document.querySelectorAll('#subtaskList li')).map(item => item.textContent.trim()),
             document.getElementById('inputFieldSubtask').value.trim()
         ].filter(subtask => subtask !== ''),
-        assignedTo: selectedContacts
+        assignedTo: selectedContacts,
+        status: "todo"
     };
 
     try {
@@ -445,4 +446,3 @@ async function createTask() {
         console.error("Error saving task:", error);
     }
 }
-

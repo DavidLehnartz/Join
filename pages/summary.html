@@ -11,7 +11,7 @@
   <script src="../js/summary.js"></script>
 </head>
 
-<body>
+<body onload="loadData()">
   <aside>
     <div class="left-sidebar">
       <img class="bigLogo" src="../assets/img/join_logo_white.svg" alt="join logo" />
@@ -70,7 +70,7 @@
                 <img class="hoverPicFrame" src="../assets/img/frameWriteWhite.png" alt="hoverPicFrame">
               </div>
               <div class="writeNumberTo-Do">
-                <div class="zeroDone">0</div>
+                <div id="taskToDo" class="zeroDone">0</div>
                 <div class="onlyDone">To-Do</div>
               </div>
             </a>
@@ -80,7 +80,7 @@
                 <img class="hoverPicDone" src="../assets/img/frameOkWhite.png" alt="hoverPicDone">
               </div>
               <div class="writeNumberTo-Do">
-                <div class="zeroDone">0</div>
+                <div id="tasksDoneCount" class="zeroDone">0</div>
                 <div class="onlyDone">Done</div>
               </div>
             </div>
@@ -91,34 +91,34 @@
                 <img src="../assets/img/urgentSummaryred.png" alt="">
               </div>
               <div>
-                <div class="zeroDone">0</div>
+                <div id="urgentCount" class="zeroDone">0</div>
                 <div class="onlyDone">Urgent</div>
               </div>
             </div>
             <div class="seperator2"></div>
             <div class="upComing-Deadline" onclick="navigateToBoard()">
-              <div class="dateSummary">October 16, 2022</div>
+              <div id="nextDate" class="dateSummary">October 16, 2022</div>
               <div class="upComingSummary">Upcoming Deadline</div>
             </div>
           </div>
           <div class="taskBoardProgressFeedback">
             <div class="tasksInBoard" onclick="navigateToBoard()">
-              <div class="zeroDone">0</div>
+              <div id="taskInBoardCount" class="zeroDone">0</div>
               <div class="onlyDone">Tasks in<br>Board</div>
             </div>
             <div class="taskInProgress" onclick="navigateToBoard()">
-              <div class="zeroDone">0</div>
+              <div id="taskInProg" class="zeroDone">0</div>
               <div class="onlyDone">Tasks in<br>Progress</div>
             </div>
             <div class="awaitingFeedback" onclick="navigateToBoard()">
-              <div class="zeroDone">0</div>
+              <div id="tasksAwaitingCount" class="zeroDone">0</div>
               <div class="onlyDone">Awaiting<br>Feedback</div>
             </div>
           </div>
         </div>
         <div class="rightSide">
           <div class="helloThere">
-            <div class="times-of-day">Good Morning</div>
+            <div id="greeting" class="times-of-day">Good Morning</div>
             <div class="name-Of-Guest">Sofia Müller</div>
           </div>
         </div>
