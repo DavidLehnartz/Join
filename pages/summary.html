@@ -11,24 +11,24 @@
   <script src="../js/summary.js"></script>
 </head>
 
-<body>
+<body onload="loadData()">
   <aside>
     <div class="left-sidebar">
       <img class="bigLogo" src="../assets/img/join_logo_white.svg" alt="join logo" />
       <div class="left-sidebar-links">
-        <a class="links" href="#">
+        <a class="links link-active" href="#">
           <img class="sidebar-icons" src="../assets/img/summary.png" alt="Summary" />
           <p>Summary</p>
         </a>
-        <a class="links" href="#">
+        <a class="links" href="add_tasks.html">
           <img class="sidebar-icons" src="../assets/img/add_task.png" alt="Add Task" />
           <p>Add Task</p>
         </a>
-        <a class="links" href="#">
+        <a class="links" href="board.html">
           <img class="sidebar-icons" src="../assets/img/board.png" alt="Board" />
           <p>Board</p>
         </a>
-        <a class="links" href="#">
+        <a class="links" href="contacts.html">
           <img class="sidebar-icons" src="../assets/img/contacts.png" alt="Contacts" />
           <p>Contacts</p>
         </a>
@@ -63,62 +63,62 @@
       </div>
       <div class="belowHeadlineContent">
         <div class="leftSide">
-            <div class="toDoDone">
-                <a class="To-do" onclick="navigateToBoard()">
-                    <div class="writeTo-Do">
-                        <img class="rootPicFrame" src="../assets/img/frameWrite.png" alt="rootPicFrame">
-                        <img class="hoverPicFrame" src="../assets/img/frameWriteWhite.png" alt="hoverPicFrame">
-                    </div>
-                    <div class="writeNumberTo-Do">
-                        <div class="zeroDone">0</div>
-                        <div class="onlyDone">To-Do</div>
-                    </div>
-                </a>
-                <div class="done" onclick="navigateToBoard()">
-                    <div class="doneOk">
-                        <img class="rootPicDone" src="../assets/img/frameOk.png" alt="rootPicDone">
-                        <img class="hoverPicDone" src="../assets/img/frameOkWhite.png" alt="hoverPicDone">
-                    </div>
-                    <div class="writeNumberTo-Do">
-                        <div class="zeroDone">0</div>
-                        <div class="onlyDone">Done</div>
-                    </div>
-                </div>
+          <div class="toDoDone">
+            <a class="To-do" onclick="navigateToBoard()">
+              <div class="writeTo-Do">
+                <img class="rootPicFrame" src="../assets/img/frameWrite.png" alt="rootPicFrame">
+                <img class="hoverPicFrame" src="../assets/img/frameWriteWhite.png" alt="hoverPicFrame">
+              </div>
+              <div class="writeNumberTo-Do">
+                <div id="taskToDo" class="zeroDone">0</div>
+                <div class="onlyDone">To-Do</div>
+              </div>
+            </a>
+            <div class="done" onclick="navigateToBoard()">
+              <div class="doneOk">
+                <img class="rootPicDone" src="../assets/img/frameOk.png" alt="rootPicDone">
+                <img class="hoverPicDone" src="../assets/img/frameOkWhite.png" alt="hoverPicDone">
+              </div>
+              <div class="writeNumberTo-Do">
+                <div id="tasksDoneCount" class="zeroDone">0</div>
+                <div class="onlyDone">Done</div>
+              </div>
             </div>
-            <div class="urgentDateDeadline">
-                <div class="urgentSummary" onclick="navigateToBoard()">
-                    <div class="urgentSummaryPic">
-                        <img src="../assets/img/urgentSummaryred.png" alt="">
-                    </div>
-                    <div>
-                        <div class="zeroDone">0</div>
-                        <div class="onlyDone">Urgent</div>
-                    </div>
-                </div>
-                <div class="seperator2"></div>
-                <div class="upComing-Deadline" onclick="navigateToBoard()">
-                    <div class="dateSummary">October 16, 2022</div>
-                    <div class="upComingSummary">Upcoming Deadline</div>
-                </div>
+          </div>
+          <div class="urgentDateDeadline">
+            <div class="urgentSummary" onclick="navigateToBoard()">
+              <div class="urgentSummaryPic">
+                <img src="../assets/img/urgentSummaryred.png" alt="">
+              </div>
+              <div>
+                <div id="urgentCount" class="zeroDone">0</div>
+                <div class="onlyDone">Urgent</div>
+              </div>
             </div>
-            <div class="taskBoardProgressFeedback">
-                <div class="tasksInBoard" onclick="navigateToBoard()">
-                    <div class="zeroDone">0</div>
-                    <div class="onlyDone">Tasks in<br>Board</div>
-                </div>
-                <div class="taskInProgress" onclick="navigateToBoard()">
-                    <div class="zeroDone">0</div>
-                    <div class="onlyDone">Tasks in<br>Progress</div>
-                </div>
-                <div class="awaitingFeedback" onclick="navigateToBoard()">
-                    <div class="zeroDone">0</div>
-                    <div class="onlyDone">Awaiting<br>Feedback</div>
-                </div>
+            <div class="seperator2"></div>
+            <div class="upComing-Deadline" onclick="navigateToBoard()">
+              <div id="nextDate" class="dateSummary">October 16, 2022</div>
+              <div class="upComingSummary">Upcoming Deadline</div>
             </div>
+          </div>
+          <div class="taskBoardProgressFeedback">
+            <div class="tasksInBoard" onclick="navigateToBoard()">
+              <div id="taskInBoardCount" class="zeroDone">0</div>
+              <div class="onlyDone">Tasks in<br>Board</div>
+            </div>
+            <div class="taskInProgress" onclick="navigateToBoard()">
+              <div id="taskInProg" class="zeroDone">0</div>
+              <div class="onlyDone">Tasks in<br>Progress</div>
+            </div>
+            <div class="awaitingFeedback" onclick="navigateToBoard()">
+              <div id="tasksAwaitingCount" class="zeroDone">0</div>
+              <div class="onlyDone">Awaiting<br>Feedback</div>
+            </div>
+          </div>
         </div>
         <div class="rightSide">
           <div class="helloThere">
-            <div class="times-of-day">Good Morning</div>
+            <div id="greeting" class="times-of-day">Good Morning</div>
             <div class="name-Of-Guest">Sofia Müller</div>
           </div>
         </div>

@@ -57,6 +57,16 @@ h1 {
     transition: all 125ms ease;
 }
 
+.links:active {
+    background-color: #091931;
+    color: white;
+}
+
+.link-active {
+    background-color: #091931;
+    color: white;
+}
+
 .sidebar-icons {
     margin-left: 64px;
 }
@@ -598,7 +608,6 @@ header {
         font-size: 32px;
         font-weight: 600;
     }
-
 }
 
 @media (max-width: 700px) {
@@ -624,7 +633,6 @@ header {
     h1 {
         font-size: 47px;
     }
-
 }
 
 @media (max-width: 350px) {
