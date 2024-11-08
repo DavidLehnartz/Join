@@ -21,6 +21,7 @@
     <script src="../js/board_templates.js" defer></script>
     <script src="../js/board_drop_down.js" defer></script>
     <script src="../js/board_drag_and_drop.js" defer></script>
+    <script src="../js/board_filter.js" defer></script>
 
     <script src="../js/board.js" defer></script>
   </head>
@@ -32,7 +33,7 @@
   <body onload="init()">
     <!-- SIDEBAR -->
     <div id="sidebar_template">
-      <div class="left-sidebar">
+      <!-- <div class="left-sidebar">
         <img src="../assets/img/join_logo_white.svg" alt="join logo" />
         <div class="left-sidebar-links">
           <a class="links" href="#">
@@ -51,7 +52,7 @@
             />
             <p>Add Task</p>
           </a>
-          <a class="links" href="#">
+          <a class="links link-active" href="#">
             <img
               class="sidebar-icons"
               src="../assets/img/board.png"
@@ -72,15 +73,15 @@
           <a class="legacy-links" href="#"> Privacy Policy </a>
           <a class="legacy-links" href="#"> Legal notice </a>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <main>
       <!-- HEADER -->
       <header id="header_template">
-        <div class="header-wrapper">
+        <!-- <div class="header-wrapper">
           <span class="app-description"> Kanban Project Management Tool</span>
-          <!-- RESPONSIVE LOGO -->
+          
           <img
             class="join-logo-responsive"
             src="../assets/img/join_logo_grey.svg"
@@ -98,7 +99,7 @@
               alt="profil"
             />
           </div>
-        </div>
+        </div> -->
       </header>
 
       <!-- MAiN CONTENT -->
@@ -170,6 +171,9 @@
 
         <!-- KANBAN BOARD -->
         <section>
+         <!--  <span class="no-matching-task-found" id="no_matching_task">
+            No matching task found !
+            </span> -->
           <div class="kanban-board-wrapper">
             <div
               class="kanban-column"
@@ -220,7 +224,7 @@
                 />
               </div>
               <div id="await_feedback" class="kanban-task-wrapper"></div>
-           <!--    <div id="await_feedback_message" class="kanban-empty-message" style="display: none;">No tasks awaiting feedback</div> -->
+              <!--    <div id="await_feedback_message" class="kanban-empty-message" style="display: none;">No tasks awaiting feedback</div> -->
             </div>
 
             <div
@@ -232,7 +236,7 @@
                 <h2>Done</h2>
               </div>
               <div id="done" class="kanban-task-wrapper"></div>
-             <!--  <div id="done_message" class="kanban-empty-message" style="display: none;">No tasks done</div> -->
+              <!--  <div id="done_message" class="kanban-empty-message" style="display: none;">No tasks done</div> -->
             </div>
           </div>
         </section>

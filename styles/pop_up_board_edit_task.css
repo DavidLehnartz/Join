@@ -127,6 +127,7 @@
   border: 1px solid rgb(244, 244, 244);
   border-radius: 10px;
   padding: 10px 16px;
+  color: black;
 }
 
 .prio-img {
@@ -138,6 +139,10 @@
   box-shadow: 0px 2px 4px 0px rgb(170 170 170);
 }
 
+/* .prio-urgent-active, .prio-medium-active, .prio-low-active {
+  color: white;
+}
+ */
 .prio-low-active {
   display: flex;
   align-items: center;
@@ -147,6 +152,7 @@
   border-radius: 10px;
   padding: 10px 16px;
   cursor: pointer;
+  border: none;
 }
 
 .prio-medium-active {
@@ -157,6 +163,7 @@
   background-color: #ffa827;
   border-radius: 10px;
   padding: 10px 16px;
+  border: none;
 }
 
 .prio-urgent-active {
@@ -167,6 +174,7 @@
   background-color: #fe3d19;
   border-radius: 10px;
   padding: 10px 16px;
+  border: none;
 }
 
 .pop-up-edit-task-assigned-to {

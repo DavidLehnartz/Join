@@ -24,7 +24,6 @@ async function loadFetchedData() {
     console.error(error);
   }
   renderTasks();
-
 }
 
 
@@ -33,21 +32,14 @@ async function loadFetchedData() {
  * Template can be find at "board_templates.js"
  */
 function renderDesktopTemplate() {
-  /* let sidebarTemplateContent = document.getElementById('sidebar_template'); */
-  /* let headerTemplateContent = document.getElementById('header_template'); */
+  let sidebarTemplateContent = document.getElementById('sidebar_template');
+  let headerTemplateContent = document.getElementById('header_template');
   let boardHeadlineContent = document.getElementById('board_headline');
-  /* let kanbanBoardContent = document.getElementById('kanban_board'); */
-  /* let navbarResponsiveContent = document.getElementById('navbar_responsive'); */
 
-  /*   sidebarTemplateContent.innerHTML = getSidebarTemplate(); */
-  /* headerTemplateContent.innerHTML = getHeaderTemplate(); */
+  sidebarTemplateContent.innerHTML = getSidebarTemplate();
+  headerTemplateContent.innerHTML = getHeaderTemplate();
   boardHeadlineContent.innerHTML = getBoardHeadlineTemplate();
-  /*  kanbanBoardContent.innerHTML = getKanbanBoardTemplate(); */
-  /* navbarResponsiveContent.innerHTML = getNavbarResponsiveTemplate(); */
 }
-
-
-
 
 
 function renderTasks() {
@@ -62,95 +54,6 @@ function renderTasks() {
     tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
   }
   // renderAssigneeInitials();
-}
-
-
-/* function renderTasks() {
-  clearColumns();
- 
-  for (let indexTasks = 0; indexTasks < tasks.length; indexTasks++) {
-    let task = tasks[indexTasks];
-    let priorityImage = getPriorityImage(task.priority);
-    let categoryColor = getCategoryColor(task.category);
-    let assigneeInitials = renderAssigneeInitials(task.assignedTo);
- 
-    let columnId = task.status;
-    let column = document.getElementById(columnId);
- 
-    if (column) {
-      column.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
-    } else {
-      console.error(`Spalte mit ID ${columnId} nicht gefunden.`);
-    }
-  }
-   // updateEmptyMessages();
-}  */
-
-
- function clearColumns() {
-  document.getElementById('to_do').innerHTML = "";
-  document.getElementById('in_progress').innerHTML = "";
-  document.getElementById('await_feedback').innerHTML = "";
-  document.getElementById('done').innerHTML = "";
-}
-
-
-/*  function updateEmptyMessages() {
-   
-   const columnsWithTasks = {
-     to_do: false,
-     in_progress: false,
-     await_feedback: false,
-     done: false
-   };
- 
-   tasks.forEach(task => {
-     columnsWithTasks[task.status] = true; // Setze den Status auf true, wenn eine Aufgabe vorhanden ist
-   });
- 
-   for (const columnId in columnsWithTasks) {
-     const messageElement = document.getElementById(`${columnId}_message`);
-     if (!columnsWithTasks[columnId]) {
-       messageElement.style.display = 'block'; 
-     } else {
-       messageElement.style.display = 'none'; 
-     }
-   }
- } */
-
-
-
-
-function renderAssigneeInitials(assignedTo) {
-
-  let assigneeInitialsContent = ""; 
-
-  if (Array.isArray(assignedTo)) {
-    assignedTo.forEach(assignee => {
-      assigneeInitialsContent += getAssigneeInitialsTemplate(assignee);
-    });
-  }
-
-  return assigneeInitialsContent; 
-}
-
-function getAssigneeInitialsTemplate(assignee) {
-  return `
-    <div class="initials bg-${assignee.color}";>
-      ${assignee.initial} 
-    </div>
-  `;
-}
-
-
-function renderDropdownContacts() {
-  let dropdownContent = document.getElementById('dropdown_contacts');
-  dropdownContent.innerHTML = "";
-
-  for (let indexContacts = 0; indexContacts < contacts.length; indexContacts++) {
-    let contact = contacts[indexContacts];
-    dropdownContent.innerHTML += getDropdownContactsTemplate(contact);
-  }
 }
 
 
@@ -175,25 +78,60 @@ function renderTaskPopUp(taskId) {
 }
 
 
+/**
+ * This function is used to generate the edit task pop up
+ * Template can be found at "board_templates.js"
+ * 
+ */
+function renderEditTaskPopUp(taskId, priorityImage) {
+  currentTaskId = taskId;
 
-function getAssigneesTemplate(assignedTo) {
-  if (Array.isArray(assignedTo)) {
-    return assignedTo.map(assignee => {
-      return `
-        <div class="single-assigned-profil-wrapper">
-          <div class="single-assigned-profil">
-            <div class="single-assigned-profil-initials bg-${assignee.color}">
-              ${assignee.initial}
-            </div>
-            <div class="initial-name">
-              ${assignee.name}
-            </div>
-          </div>
-        </div>
-      `;
-    }).join(''); 
+  let editTaskPopUpContent = document.getElementById('edit_task_pop_up');
+  editTaskPopUpContent.innerHTML = "";
+
+  const task = tasks.find(t => t.id === taskId);
+
+  if (task) {
+    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task, priorityImage);
   }
-  return `<p>No contacts selected</p> `;
+
+  document.getElementById('edit_task_pop_up').classList.remove('responsive-pop-up-closed');
+}
+
+
+function renderDropdownContacts() {
+  let dropdownContent = document.getElementById('dropdown_contacts');
+  dropdownContent.innerHTML = "";
+
+  for (let indexContacts = 0; indexContacts < contacts.length; indexContacts++) {
+    let contact = contacts[indexContacts];
+    dropdownContent.innerHTML += getDropdownContactsTemplate(contact);
+  }
+}
+
+
+function renderSelectedContacts() {
+  let selectedContactsContent = document.getElementById('selected_contacts');
+  selectedContactsContent.innerHTML = "";
+
+  for (let indexSelectedContacts = 0; indexSelectedContacts < selectedContacts.length; indexSelectedContacts++) {
+    let contact = selectedContacts[indexSelectedContacts];
+    selectedContactsContent.innerHTML += getSelectedContactsTemplate(contact);
+  }
+}
+
+
+function renderAssigneeInitials(assignedTo) {
+
+  let assigneeInitialsContent = "";
+
+  if (Array.isArray(assignedTo)) {
+    assignedTo.forEach(assignee => {
+      assigneeInitialsContent += getAssigneeInitialsTemplate(assignee);
+    });
+  }
+
+  return assigneeInitialsContent;
 }
 
 
@@ -206,25 +144,6 @@ function openTaskPopUp(taskId) {
   document.getElementById('overlay_task_pop_up').classList.remove('responsive-pop-up-closed');
 
   renderTaskPopUp(taskId);
-
-}
-
-
-/**
- * This function is used to generate the edit task pop up
- * Template can be found at "board_templates.js"
- * 
- */
-function renderEditTaskPopUp(taskId) {
-  let editTaskPopUpContent = document.getElementById('edit_task_pop_up');
-  editTaskPopUpContent.innerHTML = "";
-
-  const task = tasks.find(t => t.id === taskId);
-
-  if (task) {
-    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task);
-  }
-  document.getElementById('edit_task_pop_up').classList.remove('responsive-pop-up-closed');
 }
 
 
@@ -237,16 +156,139 @@ async function saveTaskChanges(taskId) {
     task.dueDate = document.getElementById('edit_due_date').value;
     task.subtasks = document.getElementById('input_subtask_add_subtask').value;
 
-   /*  task.assignedContacts = [...selectedContacts]; */
+    /*  task.assignedContacts = [...selectedContacts]; */
 
-    /* const priorityButton = document.querySelector('.prio-btn.prio-urgent-active, .prio-btn.prio-medium-active, .prio-btn.prio-low-active');
-    task.priority = priorityButton ? priorityButton.id.replace('prio_', '') : ''; // "urgent", "medium" oder "low" */
+    const priorityButton = document.querySelector('.prio-btn.prio-urgent-active, .prio-btn.prio-medium-active, .prio-btn.prio-low-active');
+    task.priority = priorityButton ? priorityButton.id.replace('prio_', '') : ''; 
 
   }
   renderTasks();
   await updateTaskInFirebase(task);
   closeEditPopUp();
   openTaskPopUp(taskId);
+}
+
+
+function getCategoryColor(category) {
+  if (category === "User Story") {
+    return "rgb(0, 56, 255)";
+  }
+  else if (category === "Technical Task") {
+    return "rgb(31, 215, 193)";
+  }
+  return "gray";
+}
+
+
+let selectedPriority = '';
+
+
+function getPriorityImage(priority) {
+  if (priority === "low") {
+    return "../assets/img/prio_low_green.png";
+  }
+  else if (priority === "medium") {
+    return "../assets/img/prio_medium_orange.png";
+  }
+  else if (priority === "urgent") {
+    return "../assets/img/prio_urgent_red.png";
+  }
+  return "";
+}
+
+
+function changePrioButtons(selectedButton) {
+  resetButtons();
+
+  let img = selectedButton.querySelector('.prio-img');
+
+  if (selectedButton.id === 'prio_urgent') {
+    selectedButton.classList.add('prio-urgent-active');
+    img.src = '../assets/img/urgent21.png';
+    selectedPriority = 'urgent';
+   /* updateTaskPriority('Urgent'); */
+  }
+  else if (selectedButton.id === 'prio_medium') {
+    selectedButton.classList.add('prio-medium-active');
+    img.src = '../assets/img/medium.png';
+    selectedPriority = 'medium';
+    /* updateTaskPriority('Medium'); */
+  }
+  else if (selectedButton.id === 'prio_low') {
+    selectedButton.classList.add('prio-low-active');
+    img.src = '../assets/img/low21.png';
+    selectedPriority = 'low';
+    /* updateTaskPriority('Low'); */
+  }
+}
+
+
+function setPriorityButton(priority) {
+  resetButtons(); 
+
+  if (priority === 'urgent') {
+    document.getElementById('prio_urgent').classList.add('prio-urgent-active');
+    document.getElementById('prio_urgent').querySelector('.prio-img').src = '../assets/img/urgent21.png';
+  } else if (priority === 'medium') {
+    document.getElementById('prio_medium').classList.add('prio-medium-active');
+    document.getElementById('prio_medium').querySelector('.prio-img').src = '../assets/img/medium.png';
+  } else if (priority === 'low') {
+    document.getElementById('prio_low').classList.add('prio-low-active');
+    document.getElementById('prio_low').querySelector('.prio-img').src = '../assets/img/low21.png';
+  }
+}
+
+
+// Hilfsfunktion, um die Task-Priorität zu aktualisieren
+function updateTaskPriority(priority) {
+  const task = tasks.find(t => t.id === currentTaskId); /* currentTaskId für den aktiven Task */
+  if (task) {
+    task.priority = priority; 
+  }
+}
+
+
+function resetButtons() {
+  let buttons = document.querySelectorAll('.prio-btn');
+  buttons.forEach(button => {
+    /*    button.style.color = 'black'; */
+    let img = button.querySelector('.prio-img');
+    if (button.id === 'prio_urgent') {
+      img.src = '../assets/img/prio_urgent_red.png';
+    }
+    else if (button.id === 'prio_medium') {
+      img.src = '../assets/img/prio_medium_orange.png';
+    }
+    else if (button.id === 'prio_low') {
+      img.src = '../assets/img/prio_low_green.png';
+    }
+    button.classList.remove('prio-low-active', 'prio-medium-active', 'prio-urgent-active');
+  });
+}
+
+
+function toggleCheckbox(checkboxId, contactInitial, contactColor) {
+  let checkbox = document.getElementById(checkboxId);
+
+  if (checkbox.src.includes('checkbox_false.png')) {
+    checkbox.src = '../assets/img/checkbox_true.png';
+    selectedContacts.push(
+      {
+        id: checkboxId,
+        initial: contactInitial,
+        color: contactColor
+      });
+  }
+  else {
+    checkbox.src = '../assets/img/checkbox_false.png';
+    const index = selectedContacts.findIndex(contact => contact.id === checkboxId);
+    if (index !== -1) {
+      selectedContacts.splice(index, 1); 
+    }
+  }
+  renderSelectedContacts();
+  console.log(selectedContacts);
+
 }
 
 
@@ -344,119 +386,79 @@ function resetImageDelete() {
 }
 
 
-function getCategoryColor(category) {
-  if (category === "User Story") {
-    return "rgb(0, 56, 255)";
+
+
+
+/* function getPriorityImage(priority) {
+  switch (priority) {
+      case 'urgent':
+          return '../assets/img/prio_urgent_red.png';
+      case 'medium':
+          return '../assets/img/prio_medium_orange.png';
+      case 'low':
+          return '../assets/img/prio_low_green.png';
+      default:
+          console.error('Unbekannte Priorität:', priority);
+          return '';
   }
-  else if (category === "Technical Task") {
-    return "rgb(31, 215, 193)";
-  }
-  return "gray";
-}
+} */
 
 
-function getPriorityImage(priority) {
-  if (priority === "Low") {
-    return "../assets/img/prio_low_green.png";
-  }
-  else if (priority === "Medium") {
-    return "../assets/img/prio_medium_orange.png";
-  }
-  else if (priority === "Urgent") {
-    return "../assets/img/prio_urgent_red.png";
-  }
-  return "";
-}
 
 
-// Funktion zum Ändern des angeklickten Buttons
-function changePrioButtons(selectedButton) {
-  resetButtons();
 
-  selectedButton.style.color = 'white';
-  let img = selectedButton.querySelector('.prio-img');
-  if (selectedButton.id === 'prio_urgent') {
-    selectedButton.classList.add('prio-urgent-active');
-    img.src = '../assets/img/urgent21.png';
-  }
-  else if (selectedButton.id === 'prio_medium') {
-    selectedButton.classList.add('prio-medium-active');
-    img.src = '../assets/img/medium.png';
-  }
-  else if (selectedButton.id === 'prio_low') {
-    selectedButton.classList.add('prio-low-active');
-    img.src = '../assets/img/low21.png';
-  }
-}
-
-
-// Funktion zum Zurücksetzen aller Buttons
-function resetButtons() {
-  let buttons = document.querySelectorAll('.prio-btn');
-  buttons.forEach(button => {
-
-    button.style.color = 'black';
-
-    let img = button.querySelector('.prio-img');
-    if (button.id === 'prio_urgent') {
-      img.src = '../assets/img/prio_urgent_red.png';
-    }
-    else if (button.id === 'prio_medium') {
-      img.src = '../assets/img/prio_medium_orange.png';
-    }
-    else if (button.id === 'prio_low') {
-      img.src = '../assets/img/prio_low_green.png';
-    }
-
-    button.classList.remove('prio-low-active', 'prio-medium-active', 'prio-urgent-active');
-    button.classList.add('prio-btn');
-  });
-}
-
-
-function renderSelectedContacts() {
-  let selectedContactsContent = document.getElementById('selected_contacts');
-  selectedContactsContent.innerHTML = "";
-
-  for (let indexSelectedContacts = 0; indexSelectedContacts < selectedContacts.length; indexSelectedContacts++) {
-    let contact = selectedContacts[indexSelectedContacts];
-    selectedContactsContent.innerHTML += getSelectedContactsTemplate(contact);
-  }
-}
-
-function getSelectedContactsTemplate(contact) {
-  return `
-          <div class="selected-contact bg-${contact.color}">${contact.initial}</div>
-  `;
-}
-
-
-function toggleCheckbox(checkboxId, contactInitial, contactColor) {
-  let checkbox = document.getElementById(checkboxId);
-
-  if (checkbox.src.includes('checkbox_false.png')) {
-    checkbox.src = '../assets/img/checkbox_true.png';
-    selectedContacts.push(
-      {
-        id: checkboxId,
-        initial: contactInitial,
-        color: contactColor
-      });
-  }
-  else {
-    checkbox.src = '../assets/img/checkbox_false.png';
-    const index = selectedContacts.findIndex(contact => contact.id === checkboxId);
-    if (index !== -1) {
-      selectedContacts.splice(index, 1); // Element an Index entfernen
+/* function renderTasks() {
+  clearColumns();
+ 
+  for (let indexTasks = 0; indexTasks < tasks.length; indexTasks++) {
+    let task = tasks[indexTasks];
+    let priorityImage = getPriorityImage(task.priority);
+    let categoryColor = getCategoryColor(task.category);
+    let assigneeInitials = renderAssigneeInitials(task.assignedTo);
+ 
+    let columnId = task.status;
+    let column = document.getElementById(columnId);
+ 
+    if (column) {
+      column.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
+    } else {
+      console.error(`Spalte mit ID ${columnId} nicht gefunden.`);
     }
   }
-  renderSelectedContacts();
-  console.log(selectedContacts);
-
-}
+   // updateEmptyMessages();
+}  */
 
 
+/* function clearColumns() {
+ document.getElementById('to_do').innerHTML = "";
+ document.getElementById('in_progress').innerHTML = "";
+ document.getElementById('await_feedback').innerHTML = "";
+ document.getElementById('done').innerHTML = "";
+} */
 
+
+/*  function updateEmptyMessages() {
+   
+   const columnsWithTasks = {
+     to_do: false,
+     in_progress: false,
+     await_feedback: false,
+     done: false
+   };
+ 
+   tasks.forEach(task => {
+     columnsWithTasks[task.status] = true; 
+   });
+ 
+   for (const columnId in columnsWithTasks) {
+     const messageElement = document.getElementById(`${columnId}_message`);
+     if (!columnsWithTasks[columnId]) {
+       messageElement.style.display = 'block'; 
+     } else {
+       messageElement.style.display = 'none'; 
+     }
+   }
+ } */
 
 
 
@@ -536,16 +538,16 @@ else {
     // Status wechseln
     subtask.checked = !subtask.checked;
 
-    // Bild entsprechend des neuen Status ändern
+  
     const subtaskElement = document.getElementById(`subtask_image-${taskId}-${subtaskId}`);
     if (subtaskElement) {
       subtaskElement.src = getSubtaskImage(subtask.checked);
     }
 
-    // Task in Firebase aktualisieren
+    
     await updateTaskInFirebase(task);
 
-    // Fortschrittsanzeige aktualisieren
+    
     updateTaskProgress(taskId);
   }
 } */
@@ -553,9 +555,9 @@ else {
 /* function transformSubtasks(task) {
   if (Array.isArray(task.subtasks)) {
     task.subtasks = task.subtasks.map((title, index) => ({
-      id: `subtask-${task.id}-${index}`, // Eindeutige ID generieren
+      id: `subtask-${task.id}-${index}`, 
       title: title,
-      checked: false // Standardmäßig auf unchecked setzen
+      checked: false 
     }));
   }
 } */

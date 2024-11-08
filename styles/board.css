@@ -1,3 +1,7 @@
+html{
+  scrollbar-width: none;
+}
+
 .headline {
   display: flex;
   justify-content: space-between;
@@ -29,6 +33,11 @@ label{
 
 .d_none {
   display: none;
+}
+
+.main-content-wrapper{
+  min-height: 100vh;
+  padding-bottom: 64px;
 }
 
 .join-logo-responsive {
@@ -64,6 +73,14 @@ label{
 ::placeholder {
   color: rgb(213, 212, 212);
   opacity: 1;
+}
+
+.no-matching-task-found{
+  display: flex;
+    justify-content: center;
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .input-btn {
@@ -190,6 +207,10 @@ label{
   flex-direction: column;
   gap: 8px;
 }
+
+.task-title{}
+
+.task-description{}
 
 .kanban-task-description {
   color: #a8a8a8;
@@ -393,6 +414,7 @@ nav {
 
   .main-content-wrapper {
     padding: 0px 16px;
+    padding-bottom: 64px;
   }
 
   .input-btn-responsive {

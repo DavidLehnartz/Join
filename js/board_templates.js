@@ -3,78 +3,78 @@
 /* BOARD TEMPLATES */
 
 
-/* function getSidebarTemplate() {
+function getSidebarTemplate() {
   return `
-          <div class="left-sidebar">
-            <img src="../assets/img/join_logo_white.svg" alt="join logo" />
-            <div class="left-sidebar-links">
-              <a class="links" href="#">
-                <img
-                  class="sidebar-icons"
-                  src="../assets/img/summary.png"
-                  alt="Summary"
-                />
-                <p>Summary</p>
-              </a>
-              <a class="links" href="#">
-                <img
-                  class="sidebar-icons"
-                  src="../assets/img/add_task.png"
-                  alt="Add Task"
-                />
-                <p>Add Task</p>
-              </a>
-              <a class="links" href="#">
-                <img
-                  class="sidebar-icons"
-                  src="../assets/img/board.png"
-                  alt="Board"
-                />
-                <p>Board</p>
-              </a>
-              <a class="links" href="#">
-                <img
-                  class="sidebar-icons"
-                  src="../assets/img/contacts.png"
-                  alt="Contacts"
-                />
-                <p>Contacts</p>
-              </a>
-            </div>
-            <div class="left-sidebar-links">
-              <a class="legacy-links" href="#"> Privacy Policy </a>
-              <a class="legacy-links" href="#"> Legal notice </a>
-            </div>
-          </div>
+           <div class="left-sidebar">
+        <img src="../assets/img/join_logo_white.svg" alt="join logo" />
+        <div class="left-sidebar-links">
+          <a class="links" href="#">
+            <img
+              class="sidebar-icons"
+              src="../assets/img/summary.png"
+              alt="Summary"
+            />
+            <p>Summary</p>
+          </a>
+          <a class="links" href="#">
+            <img
+              class="sidebar-icons"
+              src="../assets/img/add_task.png"
+              alt="Add Task"
+            />
+            <p>Add Task</p>
+          </a>
+          <a class="links link-active" href="#">
+            <img
+              class="sidebar-icons"
+              src="../assets/img/board.png"
+              alt="Board"
+            />
+            <p>Board</p>
+          </a>
+          <a class="links" href="#">
+            <img
+              class="sidebar-icons"
+              src="../assets/img/contacts.png"
+              alt="Contacts"
+            />
+            <p>Contacts</p>
+          </a>
+        </div>
+        <div class="left-sidebar-links">
+          <a class="legacy-links" href="#"> Privacy Policy </a>
+          <a class="legacy-links" href="#"> Legal notice </a>
+        </div>
+      </div>
     `;
-} */
+}
 
 
-/* function getHeaderTemplate() {
+function getHeaderTemplate() {
   return `
           <div class="header-wrapper">
-            <span class="app-description"> Kanban Project Management Tool</span>
-            <!-- RESPONSIVE LOGO -->
+          <span class="app-description"> Kanban Project Management Tool</span>
+          
+          <img
+            class="join-logo-responsive"
+            src="../assets/img/join_logo_grey.svg"
+            alt="logo"
+          />
+          <div class="header-icons">
             <img
-              class="join-logo-responsive"
-              src="../assets/img/join_logo_grey.svg"
-              alt="logo"
+              class="header-help-icon"
+              src="../assets/img/help.png"
+              alt="help"
             />
-            <div class="header-icons">
-              <img
-                class="header-help-icon"
-                src="../assets/img/help.png"
-                alt="help"
-              />
-              <img
-                class="header-profil-icon"
-                src="../assets/img/profil_icon.png"
-                alt="profil"
-              />
-            </div>
+            <img
+              class="header-profil-icon"
+              src="../assets/img/profil_icon.png"
+              alt="profil"
+            />
           </div>
+        </div>
     `;
-} */
+}
 
 
 function getBoardHeadlineTemplate() {
@@ -83,7 +83,7 @@ function getBoardHeadlineTemplate() {
               <h1>Board</h1>
               <form class="searchbox-wrapper">
                 <div class="searchbox-container"></div>
-                <input
+                <input  onkeyup=" getFilderedTask()" id="filter_input"
                   class="searchbox-input"
                   type="text"
                   placeholder="Find Task"
@@ -131,8 +131,8 @@ function getBoardHeadlineTemplate() {
               type="text"
               placeholder="Find Task"
             />
-            <button class="input-btn-responsive">
-              <img
+            <button onclick="disableBtn()" id="input_btn" class="input-btn-responsive">
+              <img 
                 class="input-btn-img"
                 src="../assets/img/search_glass.png"
                 alt="search"
@@ -150,8 +150,8 @@ function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials) 
                   <p>${task.category}</p>
                 </div>
                 <div class="kanban-task-content">
-                  <h3>${task.title}</h3>
-                  <p class="kanban-task-description">
+                  <h3 class="task-title" >${task.title}</h3>
+                  <p  class="kanban-task-description">
                     ${task.description}
                   </p>
                 </div>
@@ -405,6 +405,43 @@ function getDropdownContactsTemplate(contact) {
               </div>
                 <img id="checkbox_${contact.name}" src="../assets/img/checkbox_false.png" alt="checkbox">
           </div>
+  `;
+}
+
+
+function getAssigneeInitialsTemplate(assignee) {
+  return `
+    <div class="initials bg-${assignee.color}";>
+      ${assignee.initial} 
+    </div>
+  `;
+}
+
+
+function getAssigneesTemplate(assignedTo) {
+  if (Array.isArray(assignedTo)) {
+    return assignedTo.map(assignee => {
+      return `
+        <div class="single-assigned-profil-wrapper">
+          <div class="single-assigned-profil">
+            <div class="single-assigned-profil-initials bg-${assignee.color}">
+              ${assignee.initial}
+            </div>
+            <div class="initial-name">
+              ${assignee.name}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+  return `<p>No contacts selected</p> `;
+}
+
+
+function getSelectedContactsTemplate(contact) {
+  return `
+          <div class="selected-contact bg-${contact.color}">${contact.initial}</div>
   `;
 }
 

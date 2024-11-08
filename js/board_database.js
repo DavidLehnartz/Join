@@ -6,32 +6,13 @@
 const BASE_URL =
     "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 
+let currentTaskId = null;
 let tasks = [];
 let contacts = [];
 let selectedContacts = [];
 let assignees = [];
 let subtasks = [];
 
-
-/* async function fetchTasksData() {
-    tasks = [];
-
-    let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
-    let tasksToJson = await tasksResponse.json();
-
-    if (tasksToJson) {
-        const taskKeys = Object.keys(tasksToJson);
-
-        taskKeys.forEach((key) => {
-            tasks.push({
-                id: key,
-                ...tasksToJson[key]
-            });
-        });
-    }
-
-    console.log("tasks nach fetch:", tasks);
-} */
 
 async function fetchTasksData() {
     tasks = []; // Leeren des Tasks-Arrays
@@ -56,11 +37,12 @@ async function fetchTasksData() {
                 assignees.push(task.assignedTo);
             }
 
-            // Hinzufügen von subtasks in das Subtasks-Array
+           /*  // Hinzufügen von subtasks in das Subtasks-Array
             if (Array.isArray(task.subtasks)) {
                 subtasks.push(...task.subtasks);
-            }
+            } */
         });
+        renderTasks();
     }
 
     console.log("Tasks nach Fetch:", tasks);
@@ -88,6 +70,8 @@ async function fetchContactsData() {
     }
 
     console.log("contacts nach fetch:", contacts);
+
+    renderTasks();
 }
 
 
@@ -105,6 +89,7 @@ async function deleteTaskData(taskId) {
     } catch (error) {
         console.error('Fehler beim Löschen des Tasks:', error);
     }
+    renderTasks();
 }
 
 
@@ -141,4 +126,26 @@ async function updateTaskInFirebase(task) {
     } catch (error) {
         console.error('Fehler beim Aktualisieren der Aufgabe:', error);
     }
+    renderTasks();
 }
+
+
+/* async function fetchTasksData() {
+    tasks = [];
+
+    let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
+    let tasksToJson = await tasksResponse.json();
+
+    if (tasksToJson) {
+        const taskKeys = Object.keys(tasksToJson);
+
+        taskKeys.forEach((key) => {
+            tasks.push({
+                id: key,
+                ...tasksToJson[key]
+            });
+        });
+    }
+
+    console.log("tasks nach fetch:", tasks);
+} */
