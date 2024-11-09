@@ -51,6 +51,7 @@ h1 {
     color: #b5b6b9;
     background-color: #2a3647;
     width: 232px;
+    height: 46px;
     gap: 8px;
 }
 
@@ -581,6 +582,7 @@ textarea {
     gap: 5px;
     flex-wrap: wrap;
     margin-top: 10px;
+    height: 30px;
 }
 
 .contact-badge {
@@ -606,23 +608,42 @@ textarea {
 }
 
 .category-dropdown.open {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
-    padding: 5px 0;
+    padding: 5px 0px;
     cursor: pointer;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 10px;
-    height: 20px;
+    height: 30px;
     transition: background-color 125ms ease, height 125ms ease;
+}
+
+
+.contact-item.selected {
+    background-color: #091931;
+    color: white;
+    border-radius: 10px;
+}
+
+.contact-item.selected .contact-name {
+    color: white;
+}
+
+.contact-item.selected .contact-initials {
+    color: white;
+    border: 2px solid white;
 }
 
 .contact-item:hover {
     background-color: #D1D1D1;
-    border-radius: 10px;
+    border-radius: 5px;
+
 }
 
 .contact-item span:hover {
@@ -642,9 +663,38 @@ textarea {
     margin-left: 15px;
 }
 
+.nameInitials {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
 .contact-checkbox {
-    margin-left: auto;
-    margin-right: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 17px;
+    height: 17px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    margin-right: 30px;
+}
+
+.contact-checkbox:checked {
+    background-color: #fff;
+    border-color: #000;
+}
+
+.contact-checkbox:checked::before {
+    content: '✔';
+    color: #000;
+    font-size: 14px;
+    position: absolute;
+    top: -2px;
+    left: 2px;
 }
 
 @keyframes slideIn {
@@ -741,7 +791,6 @@ textarea {
         width: 100%;
         max-width: 100vw;
         height: fit-content;
-        padding: 15px 0px;
         position: fixed;
         bottom: 0;
         background-attachment: scroll;
@@ -771,6 +820,7 @@ textarea {
         width: 100%;
         flex-direction: row;
         margin: auto;
+        gap: 0px;
     }
 
     .legacy-links {
@@ -783,6 +833,7 @@ textarea {
         align-items: center;
         flex-direction: column;
         width: 100%;
+        padding: 15px 0px;
     }
 
     .mobileSpanStyle {
@@ -848,4 +899,8 @@ textarea {
     .mobileLogoStyle {
         display: flex;
     }
+}
+
+::-webkit-scrollbar {
+    width: 0px;
 }

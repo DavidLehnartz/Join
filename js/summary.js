@@ -13,6 +13,7 @@ async function loadData() {
     taskDone(data);
     taskAwaiting(data);
     displayGreeting();
+    getUserFromStorage();
 }
 
 function showHowManyTasksUrgent(data) {
@@ -24,7 +25,6 @@ function showHowManyTasksUrgent(data) {
     filterWichDateNearest(urgentTasks);
     console.log("Urgent Tasks:", urgentTasks.length);
 }
-
 
 function taskInProgess(data) {
     const progressTasks = Object.values(data).filter(task =>
@@ -46,7 +46,6 @@ function filterWichDateNearest(urgentTasks) {
     console.log(date.toLocaleDateString('en-US', options)); // Output: November 6, 2024
     let nextDate = document.getElementById('nextDate');
     nextDate.innerHTML = date.toLocaleDateString('en-US', options);
-
 }
 
 function taskToDo(data) {
@@ -55,7 +54,6 @@ function taskToDo(data) {
     );
     let taskToDo = document.getElementById('taskToDo');
     taskToDo.innerHTML = tasksToDo.length;
-
 }
 
 function taskInBoard(data) {
@@ -70,7 +68,6 @@ function taskDone(data) {
     );
     let tasksDoneCount = document.getElementById('tasksDoneCount');
     tasksDoneCount.innerHTML = tasksDone.length;
-
 }
 
 function taskAwaiting(data) {
@@ -84,7 +81,6 @@ function taskAwaiting(data) {
 function displayGreeting() {
     const greetingElement = document.getElementById('greeting');
     const currentHour = new Date().getHours();
-
     let greetingMessage;
     if (currentHour < 12) {
         greetingMessage = "Good Morning";
@@ -96,7 +92,16 @@ function displayGreeting() {
     greetingElement.innerHTML = greetingMessage;
 }
 
-function displayUsername() {
+function getUserFromStorage() {
+    let userDataAsText = localStorage.getItem('user');
+    if (userDataAsText) {
+        user = JSON.parse(userDataAsText);
+    }
+    console.log(user.name);
+    displayUsername(user);
+}
 
-
+function displayUsername(user) {
+    let userName = document.getElementById('userName');
+    userName.innerHTML = user.name;
 }

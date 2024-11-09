@@ -72,14 +72,12 @@
             </div>
             <div class="inputStyle">
               <span class="assignedToSpanStyle" for="inputField">Assigned to</span>
-              <div class="selectContactsToAssign">
+              <div id="selectOnes" class="selectContactsToAssign" onclick="toggleContactDropdown()">
                 <span id="selectedContacts" name="assignedContactsDisplay">Select contacts to assign</span>
-                <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow"
-                  onclick="toggleContactDropdown()">
-                <div class="category-dropdown" id="categoryDropdown2"></div> <!-- Dynamisch gefülltes Dropdown -->
+                <img id="dropdownArrow2" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
+                <div class="category-dropdown" id="categoryDropdown2"></div>
               </div>
               <div id="selectedContactsBadges" class="selected-contacts-badges-container"></div>
-              <!-- Container für die Badges -->
             </div>
           </div>
           <div class="seperator1">
@@ -109,7 +107,7 @@
             </div>
             <div class="inputStyle">
               <span class="spanCategoryStyle" for="inputField">Category<span class="required-asterisk">*</span></span>
-              <div class="selectCategory" onclick="toggleDropdown(event)">
+              <div id="selectCat" class="selectCategory" onclick="toggleDropdown(event)">
                 <span id="selectedCategory">Select task category</span>
                 <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
                 <div class="category-dropdown" id="categoryDropdown">
@@ -126,7 +124,6 @@
                   <img src="../assets/img/Propertyadd.png" id="actionIcon" class="icon" onclick="addSubtask()">
                 </div>
               </div>
-              <!-- Ungeordnete Liste für Subtasks -->
               <ul id="subtaskList" class="subtaskList"></ul>
             </div>
             <div>

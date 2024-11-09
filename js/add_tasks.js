@@ -25,7 +25,6 @@ function selectCategory(category) {
     checkForm();
 }
 
-
 async function loadContacts() {
     let contacts1 = await fetch(BASE_URL + "/contacts" + ".json");
     let contactsToJson = await contacts1.json();
@@ -39,7 +38,6 @@ async function getContactById(id) {
     return contactToJson;
 }
 
-
 async function loadAllContactsInfo() {
     let idArray = await loadContacts();
     for (let i = 0; i < idArray.length; i++) {
@@ -51,67 +49,72 @@ async function loadAllContactsInfo() {
     return contacts;
 }
 
-// Funktion zum Öffnen und Schließen der Dropdown-Liste (beim Klick auf den Dropdown-Pfeil)
 function toggleContactDropdown() {
     const dropdown = document.getElementById("categoryDropdown2");
     const arrowElement = document.getElementById("dropdownArrow");
-
+    const arrowElement2 = document.getElementById("dropdownArrow2");
+    const dropdown1 = document.getElementById('selectOnes');
     if (dropdown.classList.contains("open")) {
         dropdown.classList.remove("open");
         arrowElement.src = "../assets/img/arrow_drop_downaa.png";
+        if (arrowElement2) arrowElement2.src = "../assets/img/arrow_drop_downaa.png";
         removeOutsideClickListener();
     } else {
         dropdown.classList.add("open");
         arrowElement.src = "../assets/img/arrow_drop_up.png";
-
-        // Kontakte in Dropdown-Liste laden
-        dropdown.innerHTML = ''; // Reset der Liste
-
+        if (arrowElement2) arrowElement2.src = "../assets/img/arrow_drop_up.png";
+        dropdown.innerHTML = '';
         contacts.forEach(contact => {
             const contactElement = document.createElement('div');
             contactElement.classList.add('contact-item');
+            if (isSelected(contact.name)) contactElement.classList.add('selected');
             contactElement.innerHTML = `
-                <div class="contact-initials bg-${contact.color}">${contact.initial}</div>
-                <span>${contact.name}</span>
+                <div class="nameInitials">
+                    <div class="contact-initials bg-${contact.color}">${contact.initial}</div>
+                    <span class="contact-name">${contact.name}</span>
+                </div>
                 <input type="checkbox" name="assignedContacts" class="contact-checkbox" data-name="${contact.name}" ${isSelected(contact.name) ? 'checked' : ''}/>
             `;
-
             const checkbox = contactElement.querySelector(".contact-checkbox");
-            checkbox.addEventListener("change", function () {
-                toggleContactSelection(contact);
-            });
-
+            const span = contactElement.querySelector(".nameInitials");
+            preventDropdownCloseOnSelect(checkbox, contactElement, contact);
+            preventDropdownCloseOnSelect(span, contactElement, contact);
             dropdown.appendChild(contactElement);
         });
-
-        addOutsideClickListener(dropdown, arrowElement);
+        addOutsideClickListener(dropdown, arrowElement, dropdown1);
     }
 }
 
-function addOutsideClickListener(dropdown, arrowElement) {
+function preventDropdownCloseOnSelect(element, contactElement, contact) {
+    element.addEventListener("click", function (event) {
+        event.stopPropagation();
+        const checkbox = contactElement.querySelector(".contact-checkbox");
+        checkbox.checked = !checkbox.checked;
+        toggleContactSelection(contact);
+        contactElement.classList.toggle("selected", checkbox.checked);
+    });
+}
+
+function addOutsideClickListener(dropdown, arrowElement, dropdown1) {
     function handleClickOutside(event) {
-        if (!dropdown.contains(event.target) && !arrowElement.contains(event.target)) {
+        if (!dropdown.contains(event.target) && !dropdown1.contains(event.target)) {
             dropdown.classList.remove("open");
             arrowElement.src = "../assets/img/arrow_drop_downaa.png";
-            removeOutsideClickListener(); // Listener entfernen, nachdem er einmal ausgelöst wurde
+            removeOutsideClickListener();
         }
     }
-
     document.addEventListener("click", handleClickOutside);
-    dropdown.setAttribute('data-listener', handleClickOutside); // Speichert die Referenz zum Listener
+    dropdown.setAttribute('data-listener', handleClickOutside);
 }
-
 
 function removeOutsideClickListener() {
     const dropdown = document.getElementById("categoryDropdown2");
     const listener = dropdown.getAttribute('data-listener');
     if (listener) {
-        dropdown.removeAttribute('data-listener'); // Listener entfernen
+        dropdown.removeAttribute('data-listener');
     }
 }
 
-
-// Funktion, um den Status eines Kontakts zu ändern (ausgewählt oder nicht)
 function toggleContactSelection(contact) {
     if (isSelected(contact.name)) {
         selectedContacts = selectedContacts.filter(c => c.name !== contact.name);
@@ -121,20 +124,18 @@ function toggleContactSelection(contact) {
     updateSelectedContactsDisplay();
 }
 
-// Funktion, um zu überprüfen, ob ein Kontakt ausgewählt ist
 function isSelected(contactName) {
     return selectedContacts.some(contact => contact.name === contactName);
 }
 
-// Funktion, um die ausgewählten Kontakte als Namenskürzel (Badges) unterhalb des Dropdowns anzuzeigen
 function updateSelectedContactsDisplay() {
     const badgesContainer = document.getElementById("selectedContactsBadges");
-    badgesContainer.innerHTML = ''; // Inhalt zurücksetzen
+    badgesContainer.innerHTML = '';
 
     if (selectedContacts.length > 0) {
         selectedContacts.forEach(contact => {
             const contactBadge = document.createElement('div');
-            contactBadge.classList.add('contact-badge', `bg-${contact.color}`); // Klasse für die Farbe hinzufügen
+            contactBadge.classList.add('contact-badge', `bg-${contact.color}`);
             contactBadge.textContent = contact.initial;
             badgesContainer.appendChild(contactBadge);
         });
@@ -143,16 +144,18 @@ function updateSelectedContactsDisplay() {
 
 function toggleDropdown() {
     const dropdown = document.getElementById("categoryDropdown");
+    const dropdown2 = document.getElementById("selectCat");
     const arrowElement = document.getElementById("dropdownArrow");
     if (dropdown.classList.contains("open")) {
         dropdown.classList.remove("open");
         arrowElement.src = "../assets/img/arrow_drop_downaa.png";
+        removeOutsideClickListener();
     } else {
         dropdown.classList.add("open");
         arrowElement.src = "../assets/img/arrow_drop_up.png";
+        addOutsideClickListener(dropdown, arrowElement, dropdown2);
     }
 }
-
 
 function resetButtons() {
     const buttons = document.querySelectorAll('.priobtn');
@@ -189,8 +192,6 @@ function restorePriority() {
     const mediumPriorityBtn = document.querySelector('.urgMedLow-btn-medium');
     setPriority(mediumPriorityBtn, 'medium');
 }
-
-
 
 function addSubtask() {
     const inputField = document.getElementById('inputFieldSubtask');
@@ -301,9 +302,6 @@ function deleteSubtask(subtaskItem) {
     subtaskItem.remove();
 }
 
-
-
-
 function clearFormInputs() {
     const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], input[type="email"], input[type="password"]');
     inputs.forEach(input => {
@@ -346,40 +344,26 @@ function clearEverything() {
     clearCheckboxesAndDropdowns();
     resetSpecialFields();
     cancelSubtask();
-
-    // Subtask-Liste leeren
     const subtaskList = document.getElementById('subtaskList');
     subtaskList.innerHTML = '';
-
-    // Kontakte zurücksetzen
     clearSelectedContacts();
 }
 
 function clearSelectedContacts() {
-    // Setzt den Text des Kontaktfeldes zurück
     const selectedContactsElement = document.getElementById('selectedContacts');
     if (selectedContactsElement) {
-        selectedContactsElement.textContent = 'Select Contacts to assign';  // Setzt den Text zurück
+        selectedContactsElement.textContent = 'Select Contacts to assign';
     }
-
-    // Entfernt alle angezeigten Kontakt-Badges
     const selectedContactsBadges = document.getElementById('selectedContactsBadges');
     if (selectedContactsBadges) {
-        selectedContactsBadges.innerHTML = '';  // Entfernt alle Kontakt-Badges
+        selectedContactsBadges.innerHTML = '';
     }
-
-    // Setzt die Kontakt-Checkboxen zurück
     const contactCheckboxes = document.querySelectorAll('.contact-checkbox');
     contactCheckboxes.forEach(checkbox => {
         checkbox.checked = false;
     });
-
-    // Leert das Array der ausgewählten Kontakte
     selectedContacts = [];
 }
-
-
-
 
 function checkForm() {
     const title = document.getElementById('inputFieldTitle');
@@ -432,7 +416,6 @@ async function createTask() {
             },
             body: JSON.stringify(taskData)
         });
-
         if (response.ok) {
             let message = document.querySelector('.showMe');
             message.classList.remove('d-none');
@@ -441,7 +424,6 @@ async function createTask() {
                 message.classList.add('d-none');
             }, 2900);
         }
-
     } catch (error) {
         console.error("Error saving task:", error);
     }
