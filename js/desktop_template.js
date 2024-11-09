@@ -1,3 +1,41 @@
+let headerMenuShown = false;
+
+function renderHeaderMenu() {
+  return `<div class="header-menu-container">
+                <div
+                  class="header-menu-item hidden-desktop"
+                  onclick="window.location.href='../pages/help.html'"
+                >
+                  <p class="header-menu-text">Help</p>
+                </div>
+                <div
+                  class="header-menu-item"
+                  onclick="window.location.href='../pages/legal_notice.html'"
+                >
+                  <p class="header-menu-text">Legal Notice</p>
+                </div>
+                <div
+                  class="header-menu-item"
+                  onclick="window.location.href='../pages/privacy_policy.html'"
+                >
+                  <p class="header-menu-text">Privacy Policy</p>
+                </div>
+                <div class="header-menu-item" onclick="logOut(event)">
+                  <p class="header-menu-text">Log out</p>
+                </div>
+              </div>`;
+}
+
+function showHeaderMenu(headerId) {
+  let headerMenu = document.getElementById(headerId);
+  if (headerMenuShown) {
+    headerMenu.innerHTML = "";
+  } else {
+    headerMenu.innerHTML = renderHeaderMenu();
+  }
+  headerMenuShown = !headerMenuShown;
+}
+
 function createSidebar(sidebarId, linkId) {
   let sidebar = document.getElementById(sidebarId);
   sidebar.innerHTML = renderSidebar();

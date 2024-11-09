@@ -119,6 +119,7 @@ header {
 .header-help-icon {
   width: 32px;
   height: 32px;
+  cursor: pointer;
 }
 
 .header-help-icon:hover {
@@ -127,8 +128,50 @@ header {
 }
 
 .header-profil-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 56px;
   height: 56px;
+  border: 3px solid #2a3647;
+  border-radius: 30px;
+  font-family: "interbold";
+  font-size: 24px;
+  color: #29abe2;
+  cursor: pointer;
+}
+
+.header-profil-icon:hover {
+  background-color: #d1d1d1;
+}
+
+.header-menu-container {
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  gap: 8px;
+  background-color: #2a3647;
+  padding: 20px 10px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: fixed;
+  top: 96px;
+  right: 60px;
+  color: #cdcdcd;
+}
+
+.header-menu-item {
+  width: 120px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.header-menu-item:hover {
+  background-color: rgb(57, 74, 95);
 }
 
 .links:active {

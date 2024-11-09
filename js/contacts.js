@@ -14,6 +14,7 @@ async function showContactInfo(id) {
 }
 
 async function loadContactList() {
+  getInitialOfUser("contact-profile-icon");
   let contactsArray = await loadAllContactsInfo();
   groupContacts(contactsArray);
   loadGroupedContactList();

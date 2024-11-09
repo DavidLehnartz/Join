@@ -14,6 +14,10 @@ main {
   max-width: 1440px;
 }
 
+.mobile-intro {
+  display: none;
+}
+
 .intro-logo {
   position: absolute;
   top: 50%;
@@ -141,7 +145,37 @@ hr {
 
 @media (max-width: 700px) {
   body {
-    padding: 20px;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  main {
+    max-width: 660px;
+  }
+
+  .intro-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 1s ease;
+    opacity: 1;
+  }
+
+  .mobile-intro {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: #2a3647 !important;
+    opacity: 1;
+  }
+
+  .animate-out {
+    -webkit-transition: opacity 1s;
+    transition: opacity 1s;
+    opacity: 0;
   }
 
   .intro-logo.move,
@@ -154,6 +188,7 @@ hr {
 
   .login-card {
     width: 100%;
+    margin-top: 180px;
   }
 
   .login-btn-row {

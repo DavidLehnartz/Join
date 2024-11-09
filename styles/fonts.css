@@ -36,6 +36,12 @@ h2 {
   margin: 0px;
 }
 
+h3 {
+  font-family: "interbold";
+  font-size: 27px;
+  line-height: 20px;
+}
+
 h4 {
   font-family: "interlight";
   font-size: 27px;
@@ -60,6 +66,13 @@ h4 {
   font-family: "interregular";
   font-size: 20px !important;
   line-height: 24px !important;
+  margin: 0px;
+}
+
+.how-to-hl {
+  font-family: "interbold";
+  font-size: 20px;
+  line-height: 24px;
   margin: 0px;
 }
 
@@ -89,6 +102,14 @@ h4 {
   font-size: 16px;
   line-height: 19.2px;
   color: black;
+  margin: 0px;
+}
+
+.header-menu-text {
+  font-family: "interlight";
+  font-size: 16px;
+  line-height: 19.2px;
+  color: #cdcdcd;
   margin: 0px;
 }
 

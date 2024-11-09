@@ -109,6 +109,11 @@ input:focus {
   transition: all 0.3s ease;
 }
 
+input:hover {
+  border-color: #29abe2 !important;
+  color: black;
+}
+
 .error-input {
   border-color: #ff8190 !important;
   outline: none;
