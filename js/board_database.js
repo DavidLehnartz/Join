@@ -7,16 +7,19 @@ const BASE_URL =
     "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let currentTaskId = null;
+let selectedPriority = '';
 let tasks = [];
 let contacts = [];
 let selectedContacts = [];
-let assignees = [];
 let subtasks = [];
+let assignees = [];
+
+
 
 
 async function fetchTasksData() {
-    tasks = []; // Leeren des Tasks-Arrays
-    subtasks = []; // Leeren des Subtasks-Arrays
+    tasks = []; 
+    subtasks = []; 
 
     let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
     let tasksToJson = await tasksResponse.json();
@@ -32,15 +35,14 @@ async function fetchTasksData() {
 
             tasks.push(task);
 
-            // Hinzufügen von assignedTo in das Assignees-Array, wenn nicht bereits vorhanden
             if (task.assignedTo && !assignees.includes(task.assignedTo)) {
                 assignees.push(task.assignedTo);
             }
 
-           /*  // Hinzufügen von subtasks in das Subtasks-Array
-            if (Array.isArray(task.subtasks)) {
-                subtasks.push(...task.subtasks);
-            } */
+            /*  // Hinzufügen von subtasks in das Subtasks-Array
+             if (Array.isArray(task.subtasks)) {
+                 subtasks.push(...task.subtasks);
+             } */
         });
         renderTasks();
     }
@@ -114,7 +116,7 @@ async function updateTaskInFirebase(task) {
                 subtasks: task.subtasks,
                 name: task.name,
                 initials: task.initials,
-                subtasks: task.subtasks,
+                subtasks: task.subtask,
             })
         });
 
@@ -128,24 +130,3 @@ async function updateTaskInFirebase(task) {
     }
     renderTasks();
 }
-
-
-/* async function fetchTasksData() {
-    tasks = [];
-
-    let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
-    let tasksToJson = await tasksResponse.json();
-
-    if (tasksToJson) {
-        const taskKeys = Object.keys(tasksToJson);
-
-        taskKeys.forEach((key) => {
-            tasks.push({
-                id: key,
-                ...tasksToJson[key]
-            });
-        });
-    }
-
-    console.log("tasks nach fetch:", tasks);
-} */

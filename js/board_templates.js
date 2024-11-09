@@ -157,7 +157,7 @@ function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials) 
                 </div>
                 <div class="kanban-task-subtasks">
                   <progress value="0" max="100"></progress>
-                  <span>${task.subtasks}/fehler mit length</span>
+                  <span>${task.subtasks}/${task.subtasks.length}</span>
                   <p>Subtasks</p>
                 </div>
                 <div class="kanban-task-footer">
@@ -398,7 +398,7 @@ function getEditTaskPopUpTemplate(task) {
 
 function getDropdownContactsTemplate(contact) {
   return `
-         <div  class="dropdown-contact" onclick="toggleCheckbox('checkbox_${contact.name}', '${contact.initial}','${contact.color}')" id="selected_contact">
+         <div  class="dropdown-contact" onclick="toggleCheckboxContact('checkbox_${contact.name}', '${contact.initial}','${contact.color}')" id="selected_contact">
               <div class="dropdown-contact-name">
                 <span class="dropdown-initial bg-${contact.color}">${contact.initial}</span>
                 <p>${contact.name}</p>
@@ -446,11 +446,11 @@ function getSelectedContactsTemplate(contact) {
 }
 
 
-function getSubtasksTemplate(tasks) {
+/* function getSubtasksTemplate(tasks) {
   return `
           <li>${tasks.subtasks}</li>
   `;
-}
+} */
 
 
 /* function getNavbarResponsiveTemplate() {
