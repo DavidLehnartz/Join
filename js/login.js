@@ -3,8 +3,14 @@ let isRememberOn = false;
 
 function animateIntro() {
   let logo = document.getElementById("intro-logo");
+  let mobileLogo = document.getElementById("intro-mobile-logo");
+  let bg = document.getElementById("mobile-container");
   setTimeout(() => {
     logo.classList.add("move");
+    mobileLogo.classList.add("move");
+  }, 3000);
+  setTimeout(() => {
+    bg.classList.add("animate-out");
     window.location.href = "../pages/login.html";
   }, 2000);
 }
@@ -47,6 +53,23 @@ async function findUser(mail, password) {
   return validMail && validPassword;
 }
 
+async function getValidUser(mail, password) {
+  let users = await loadAllUsersInfo();
+  let validUser = users.find(
+    (u) => u.email === mail && u.password === password
+  );
+  return validUser;
+}
+
+async function saveContactToLocalStorage(mail, password) {
+  let user = await getValidUser(mail, password);
+  let contacts = await loadAllContactsInfo();
+  let loggedContact = contacts.find(
+    (c) => c.email === user.email && c.name === user.name
+  );
+  localStorage.setItem("user", JSON.stringify(loggedContact));
+}
+
 async function isValidCredential(event) {
   event.preventDefault();
   let password = document.getElementById("login-password");
@@ -54,7 +77,8 @@ async function isValidCredential(event) {
   let error = document.getElementById("login-error-message");
   let userExists = await findUser(mail.value, password.value);
   if (userExists) {
-    window.location.href = "./pages/summary.html";
+    await saveContactToLocalStorage(mail.value, password.value);
+    window.location.href = "../pages/summary.html";
   } else {
     mail.classList.add("error-input");
     password.classList.add("error-input");
@@ -63,6 +87,6 @@ async function isValidCredential(event) {
 }
 
 function loginAsGuest() {
-  isGuest = true;
-  window.location.href = "../pages/contacts.html";
+  localStorage.setItem("user", JSON.stringify({ name: "Guest", initial: "G" }));
+  window.location.href = "../pages/summary.html";
 }

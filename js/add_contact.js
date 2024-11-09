@@ -62,15 +62,6 @@ function showSuccessMessage() {
   }, 3000);
 }
 
-function createInitial(name) {
-  let fullName = name.split(" "),
-    initials = fullName[0].substring(0, 1).toUpperCase();
-  if (fullName.length > 1) {
-    initials += fullName[fullName.length - 1].substring(0, 1).toUpperCase();
-  }
-  return initials;
-}
-
 const colors = [
   "orange",
   "lila",

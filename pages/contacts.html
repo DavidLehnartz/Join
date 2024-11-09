@@ -42,8 +42,8 @@
         </a>
       </div>
       <div class="left-sidebar-links">
-        <a class="legacy-links" href="#"> Privacy Policy </a>
-        <a class="legacy-links" href="#"> Legal notice </a>
+        <a class="legacy-links" href="privacy_policy.html"> Privacy Policy </a>
+        <a class="legacy-links" href="legal_notice.html"> Legal notice </a>
       </div>
     </div>
   </aside>
@@ -53,8 +53,9 @@
       <div class="header-wrapper">
         <span> Kanban Project Management Tool</span>
         <div class="header-icons">
-          <img class="header-help-icon" src="../assets/img/help.png" alt="help" />
-          <img class="header-profil-icon" src="../assets/img/profil_icon.png" alt="profil" />
+          <img class="header-help-icon" src="../assets/img/help.png" alt="help" onclick="window.location.href='./help.html'"/>
+          <div id="contact-profile-icon" class="header-profil-icon" onclick="showHeaderMenu('contacts-header-menu')"></div>
+          <div id="contacts-header-menu"></div>
         </div>
       </div>
     </header>

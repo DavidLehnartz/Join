@@ -43,7 +43,12 @@
         </div>
         <form class="login-form">
           <div class="icon-input-field">
-            <input id="login-mail" type="email" placeholder="Email" />
+            <input
+              id="login-mail"
+              type="email"
+              placeholder="Email"
+              maxlength="30"
+            />
             <img class="input-icon" src="../assets/icons/mail-grey.svg" />
           </div>
           <div>
@@ -53,6 +58,8 @@
                 type="password"
                 placeholder="Password"
                 onfocus="showVisibilityIcon('login-password-icon')"
+                maxlength="30"
+                minlength="8"
               />
               <img
                 id="login-password-icon"
