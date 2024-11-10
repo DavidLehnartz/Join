@@ -97,11 +97,17 @@ function getUserFromStorage() {
     if (userDataAsText) {
         user = JSON.parse(userDataAsText);
     }
-    console.log(user.name);
+    console.log(user);
     displayUsername(user);
+    displayInitial(user);
 }
 
 function displayUsername(user) {
     let userName = document.getElementById('userName');
     userName.innerHTML = user.name;
+}
+
+function displayInitial(user) {
+    let userInitial = document.getElementById('userInitial');
+    userInitial.innerHTML = user.initial;
 }

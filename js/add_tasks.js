@@ -6,6 +6,7 @@ window.onload = function () {
     restorePriority();
     setTodayDate();
     loadAllContactsInfo();
+    getUserFromStorage();
 };
 
 function setTodayDate() {
@@ -128,17 +129,26 @@ function isSelected(contactName) {
     return selectedContacts.some(contact => contact.name === contactName);
 }
 
-function updateSelectedContactsDisplay() {
+function updateSelectedContactsDisplay() { 
     const badgesContainer = document.getElementById("selectedContactsBadges");
+    const maxContactsContainer = document.querySelector(".maxContacts");
     badgesContainer.innerHTML = '';
+    maxContactsContainer.innerHTML = '';
 
     if (selectedContacts.length > 0) {
-        selectedContacts.forEach(contact => {
-            const contactBadge = document.createElement('div');
-            contactBadge.classList.add('contact-badge', `bg-${contact.color}`);
-            contactBadge.textContent = contact.initial;
-            badgesContainer.appendChild(contactBadge);
+        selectedContacts.forEach((contact, index) => {
+            if (index < 5) {
+                const contactBadge = document.createElement('div');
+                contactBadge.classList.add('contact-badge', `bg-${contact.color}`);
+                contactBadge.textContent = contact.initial;
+                badgesContainer.appendChild(contactBadge);
+            }
         });
+        if (selectedContacts.length > 5) {
+            const remainingContacts = selectedContacts.length - 5;
+            maxContactsContainer.textContent = `+${remainingContacts}`;
+            maxContactsContainer.classList.add('remaining-contacts-indicator');
+        }
     }
 }
 
@@ -200,6 +210,7 @@ function addSubtask() {
     inputField.disabled = false;
     inputField.focus();
     actionIcon.src = "../assets/img/Propertycheck.png";
+
     if (!document.getElementById('closeIcon')) {
         const closeIcon = document.createElement('img');
         closeIcon.src = "../assets/img/close.png";
@@ -208,34 +219,54 @@ function addSubtask() {
         closeIcon.onclick = cancelSubtask;
         iconWrapper.prepend(closeIcon);
     }
+
     actionIcon.onclick = function () {
         const subtaskText = inputField.value.trim();
         if (subtaskText !== '') {
             const subtaskList = document.getElementById('subtaskList');
-            const newSubtask = document.createElement('li');
-            newSubtask.classList.add('subtask-item');
+
+            // Wrapper für den gesamten Subtask erstellen
+            const subtaskWrapper = document.createElement('div');
+            subtaskWrapper.classList.add('subtask-item'); // Haupt-Container für den Subtask
+
+            // <p>-Element für den Subtask-Text erstellen
+            const newSubtask = document.createElement('p');
+            newSubtask.classList.add('underSub');
             newSubtask.textContent = subtaskText;
+
+            // Icons-Wrapper erstellen
             const iconsWrapper = document.createElement('div');
             iconsWrapper.classList.add('subtask-icons');
+
             const editIcon = document.createElement('img');
             editIcon.src = '../assets/img/edit.png';
             editIcon.alt = 'Edit';
             editIcon.onclick = function () {
-                editSubtask(newSubtask);
+                editSubtask(subtaskWrapper);
             };
+
             const separator = document.createElement('div');
             separator.classList.add('separator');
+
             const deleteIcon = document.createElement('img');
             deleteIcon.src = '../assets/img/delete.png';
             deleteIcon.alt = 'Delete';
             deleteIcon.onclick = function () {
-                deleteSubtask(newSubtask);
+                deleteSubtask(subtaskWrapper);
             };
+
             iconsWrapper.appendChild(editIcon);
             iconsWrapper.appendChild(separator);
             iconsWrapper.appendChild(deleteIcon);
-            newSubtask.appendChild(iconsWrapper);
-            subtaskList.appendChild(newSubtask);
+
+            // Füge das <p>-Element und den Icons-Wrapper zum Subtask-Wrapper hinzu
+            subtaskWrapper.appendChild(newSubtask); // Der Text
+            subtaskWrapper.appendChild(iconsWrapper); // Die Icons unterhalb des <p>-Elements
+
+            // Füge den Subtask-Wrapper zur Subtask-Liste hinzu
+            subtaskList.appendChild(subtaskWrapper);
+
+            // Inputfeld zurücksetzen
             inputField.value = '';
             inputField.focus();
         }
@@ -427,4 +458,18 @@ async function createTask() {
     } catch (error) {
         console.error("Error saving task:", error);
     }
+}
+
+function getUserFromStorage() {
+    let userDataAsText = localStorage.getItem('user');
+    if (userDataAsText) {
+        user = JSON.parse(userDataAsText);
+    }
+    console.log(user);
+    displayInitial(user);
+}
+
+function displayInitial(user) {
+    let userInitial = document.getElementById('userInitial');
+    userInitial.innerHTML = user.initial;
 }

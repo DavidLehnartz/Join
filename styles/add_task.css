@@ -118,6 +118,45 @@ header {
     gap: 16px;
 }
 
+.header-menu-container {
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    gap: 8px;
+    background-color: #2a3647;
+    padding: 20px 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position: fixed;
+    top: 96px;
+    right: 60px;
+    color: #cdcdcd;
+  }
+  
+  .header-menu-item {
+    width: 120px;
+    padding: 10px 16px;
+    cursor: pointer;
+  }
+  
+  .header-menu-item:hover {
+    background-color: rgb(57, 74, 95);
+  }
+  
+  .links:active {
+    background-color: #091931;
+    color: white;
+  }
+  
+  .link-active {
+    background-color: #091931;
+    color: white;
+  }
+
 .main-content-wrapper {
     max-width: 1440px;
 }
@@ -125,12 +164,6 @@ header {
 .header-help-icon {
     width: 32px;
     height: 32px;
-    cursor: pointer;
-}
-
-.header-profil-icon {
-    width: 56px;
-    height: 56px;
     cursor: pointer;
 }
 
@@ -165,6 +198,24 @@ header {
     display: flex;
     flex-direction: column;
     width: 440px;
+}
+
+.userInitial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border: 3px solid #2a3647;
+    border-radius: 30px;
+    font-family: "interbold";
+    font-size: 24px;
+    color: #29abe2;
+    cursor: pointer;
+}
+
+.userInitial:hover {
+    background-color: #D1D1D1;
 }
 
 .seperator1 {
@@ -391,6 +442,7 @@ header {
     border: 1px solid #D1D1D1;
     font-family: "Inter", sans-serif;
     background-color: white;
+    padding-right: 70px;
 }
 
 .required-asterisk {
@@ -585,6 +637,22 @@ textarea {
     height: 30px;
 }
 
+.remaining-contacts-indicator {
+    color: black;
+    font-size: 16px;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #A8A8A8;
+    border-radius: 100%;
+    padding: 7px;
+}
+
+.completeContacts {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 .contact-badge {
     width: 30px;
     height: 30px;
@@ -763,7 +831,7 @@ textarea {
         display: flex;
         flex-direction: column;
         width: 100%;
-        margin-top: 65px;
+        margin-top: 35px;
     }
 
     h1 {
@@ -814,6 +882,10 @@ textarea {
 
     .placeholder {
         font-size: 15px !important;
+    }
+
+    .userInitial {
+        font-size: 24px !important;
     }
 
     .left-sidebar-links {

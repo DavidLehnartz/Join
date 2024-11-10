@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../styles/summary.css">
   <link rel="stylesheet" href="../styles/fonts.css">
   <script src="../js/summary.js"></script>
+  <script src="../js/desktop_template.js"></script>
 </head>
 
 <body onload="loadData()">
@@ -47,8 +48,11 @@
           <span class="KanbanSpanStyle">Kanban Project Management Tool</span>
         </div>
         <div class="header-icons">
-          <img class="header-help-icon" src="../assets/img/help.png" alt="help" />
-          <img class="header-profil-icon" src="../assets/img/profil_icon.png" alt="profil" />
+          <a href="./help.html">
+            <img class="header-help-icon" src="../assets/img/help.png" alt="help" />
+          </a>
+          <div id="userInitial" onclick="showHeaderMenu('contacts-header-menu')" class="userInitial"></div>
+          <div id="contacts-header-menu"></div>
         </div>
       </div>
     </header>

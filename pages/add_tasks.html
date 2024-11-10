@@ -8,8 +8,10 @@
   <link rel="icon" type="image/x-icon" href="../assets/img/join_logo_grey.svg" />
   <link rel="stylesheet" href="../styles/add_task.css">
   <link rel="stylesheet" href="../styles/fonts.css">
-  <script src="../js/add_tasks.js"></script>
   <link rel="stylesheet" href="../styles/color.css">
+  <script src="../js/desktop_template.js"></script>
+  <script src="../js/add_tasks.js"></script>
+
 </head>
 
 <body>
@@ -48,8 +50,11 @@
           <span class="KanbanSpanStyle">Kanban Project Management Tool</span>
         </div>
         <div class="header-icons">
-          <img class="header-help-icon" src="../assets/img/help.png" alt="help" />
-          <img class="header-profil-icon" src="../assets/img/profil_icon.png" alt="profil" />
+          <a href="./help.html">
+            <img class="header-help-icon" src="../assets/img/help.png" alt="help" />
+          </a>
+          <div id="userInitial" onclick="showHeaderMenu('contacts-header-menu')" class="userInitial"></div>
+          <div id="contacts-header-menu"></div>
         </div>
       </div>
     </header>
@@ -77,7 +82,10 @@
                 <img id="dropdownArrow2" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow">
                 <div class="category-dropdown" id="categoryDropdown2"></div>
               </div>
-              <div id="selectedContactsBadges" class="selected-contacts-badges-container"></div>
+              <div class="completeContacts">
+                <div id="selectedContactsBadges" class="selected-contacts-badges-container"></div>
+                <div class="maxContacts"></div>
+              </div>
             </div>
           </div>
           <div class="seperator1">
@@ -124,7 +132,8 @@
                   <img src="../assets/img/Propertyadd.png" id="actionIcon" class="icon" onclick="addSubtask()">
                 </div>
               </div>
-              <ul id="subtaskList" class="subtaskList"></ul>
+              <div id="subtaskList" class="subtaskList"></div>
+              <!-- Ersetzt das `<ul>` mit einem `<div>` für Paragraphen -->
             </div>
             <div>
               <div class="clear-task-button">
@@ -139,7 +148,7 @@
           </div>
         </div>
         <span class="mobileSpanStyle" style="color: black; position: relative">
-          <span style="position: absolute; left: -10px; top: -5px; color: red;">*</span>
+          <span style="position: absolute; left: -5px; top: -7px; color: red;">*</span>
           This Field is required
         </span>
       </div>
