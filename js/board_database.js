@@ -6,8 +6,7 @@
 const BASE_URL =
     "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 
-let currentTaskId = null;
-let selectedPriority = '';
+    
 let tasks = [];
 let contacts = [];
 let selectedContacts = [];
@@ -38,11 +37,6 @@ async function fetchTasksData() {
             if (task.assignedTo && !assignees.includes(task.assignedTo)) {
                 assignees.push(task.assignedTo);
             }
-
-            /*  // Hinzufügen von subtasks in das Subtasks-Array
-             if (Array.isArray(task.subtasks)) {
-                 subtasks.push(...task.subtasks);
-             } */
         });
         renderTasks();
     }
@@ -51,6 +45,10 @@ async function fetchTasksData() {
     console.log("Assigned Users:", assignees);
     console.log("Subtasks:", subtasks);
 }
+
+
+    
+    
 
 
 
@@ -113,10 +111,9 @@ async function updateTaskInFirebase(task) {
                 assignedTo: task.assignedTo,
                 dueDate: task.dueDate,
                 priority: task.priority,
-                subtasks: task.subtasks,
                 name: task.name,
                 initials: task.initials,
-                subtasks: task.subtask,
+                subtasks: task.subtask, 
             })
         });
 
@@ -130,3 +127,6 @@ async function updateTaskInFirebase(task) {
     }
     renderTasks();
 }
+
+    
+      

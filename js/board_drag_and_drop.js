@@ -18,14 +18,7 @@ function allowDrop(event) {
 }
 
 
-async function updateTaskInDatabase(task) {
-    console.log("updateTaskInDatabase: Speichere in Datenbank:", task);
-    await fetch(`${BASE_URL}/tasks/${task.id}.json`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(task)
-    });
-}
+
 
 
 async function drop(event, targetColumn) {
@@ -52,5 +45,24 @@ async function drop(event, targetColumn) {
 }
 
 
+async function updateTaskInDatabase(task) {
+    console.log("updateTaskInDatabase: Speichere in Datenbank:", task);
 
+    try {
+        const response = await fetch(`${BASE_URL}/tasks/${task.id}.json`, {
+            method: "PUT",  
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(task)
+        });
 
+        if (!response.ok) {
+            throw new Error(`Fehler beim Speichern der Aufgabe in der Datenbank. Status: ${response.status}`);
+        }
+
+        console.log("Aufgabe erfolgreich in der Datenbank gespeichert:", task);
+    } catch (error) {
+        console.error("Fehler beim Speichern der Aufgabe:", error);
+    }
+}

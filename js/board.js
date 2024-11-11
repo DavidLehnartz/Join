@@ -2,6 +2,10 @@
 
 /* BOARD MAIN SCRIPT */
 
+let headerMenuShown = false;
+let currentTaskId = null;
+let selectedPriority = '';
+
 
 function init() {
   renderDesktopTemplate();
@@ -34,7 +38,21 @@ function renderDesktopTemplate() {
 }
 
 
-function renderTasks() {
+function showHeaderMenu(headerId) {
+  let headerMenu = document.getElementById(headerId);
+  if (headerMenuShown) {
+    headerMenu.innerHTML = "";
+  } else {
+    headerMenu.innerHTML = renderHeaderMenu();
+  }
+  headerMenuShown = !headerMenuShown;
+}
+
+
+/* ----- FÜR DRAG AND DROP ----- */
+
+
+/* function renderTasks() {
   let tasksContent = document.getElementById('to_do');
   tasksContent.innerHTML = "";
 
@@ -43,9 +61,50 @@ function renderTasks() {
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
     let assigneeInitials = renderAssigneeInitials(task.assignedTo);
-    tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
+
+    const { completedSubtasksCount, totalSubtasks, progressPercent } = calculateSubtaskProgress(task);
+
+    tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials,  completedSubtasksCount, totalSubtasks, progressPercent);
   }
   // renderAssigneeInitials();
+} */
+
+
+/* function renderTasks() {
+  const columns = ['to_do', 'in_progress', 'await_feedback', 'done'];
+
+  columns.forEach(columnId => {
+    let tasksContent = document.getElementById(columnId);
+    tasksContent.innerHTML = "";
+
+    // Filtern der Aufgaben nach dem aktuellen Spaltenstatus
+    let filteredTasks = tasks.filter(task => task.status === columnId);
+
+    // Aufgaben in der aktuellen Spalte rendern
+    filteredTasks.forEach(task => {
+      let priorityImage = getPriorityImage(task.priority);
+      let categoryColor = getCategoryColor(task.category);
+      let assigneeInitials = renderAssigneeInitials(task.assignedTo);
+
+      // Füge das Template für jede Aufgabe hinzu
+      tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
+    });
+  });
+} */
+
+/* ----------------------------------------------------- */
+
+function renderTasks() {
+  let tasksContent = document.getElementById('to_do');
+  tasksContent.innerHTML = "";
+
+  tasks.forEach(task => {
+    let priorityImage = getPriorityImage(task.priority);
+    let categoryColor = getCategoryColor(task.category);
+    let assigneeInitials = renderAssigneeInitials(task.assignedTo);
+
+    tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
+  });
 }
 
 
@@ -58,9 +117,10 @@ function renderTaskPopUp(taskId) {
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
     let assigneeContent = getAssigneesTemplate(task.assignedTo);
+
     taskPopUpContent.innerHTML = getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeContent);
   }
- 
+
   renderSubtasks(taskId);
 }
 
@@ -104,7 +164,6 @@ function renderSelectedContacts() {
 
 
 function renderAssigneeInitials(assignedTo) {
-
   let assigneeInitialsContent = "";
 
   if (Array.isArray(assignedTo)) {
@@ -131,15 +190,15 @@ async function saveTaskChanges(taskId) {
     task.title = document.getElementById('edit_title').value;
     task.description = document.getElementById('edit_description').value;
     task.dueDate = document.getElementById('edit_due_date').value;
-    task.subtasks = document.getElementById('input_subtask_add_subtask').value;
-    /*   task.assignedContacts = [...selectedContacts]; */
+
+    //   task.assignedContacts = [...selectedContacts]; 
 
     if (selectedPriority) {
-      task.priority = selectedPriority; 
+      task.priority = selectedPriority;
     }
 
-    /*  const priorityButton = document.querySelector('.prio-btn.prio-urgent-active, .prio-btn.prio-medium-active, .prio-btn.prio-low-active');
-     task.priority = priorityButton ? priorityButton.id.replace('prio_', '') : '';  */
+    //  const priorityButton = document.querySelector('.prio-btn.prio-urgent-active, .prio-btn.prio-medium-active, .prio-btn.prio-low-active');
+    //task.priority = priorityButton ? priorityButton.id.replace('prio_', '') : '';  
   }
   renderTasks();
   await updateTaskInFirebase(task);
@@ -196,7 +255,7 @@ function changePrioButtons(selectedButton) {
     selectedPriority = 'Low';
     updateTaskPriority('Low');
   }
-  
+
 }
 
 
@@ -265,34 +324,47 @@ function toggleCheckboxContact(checkboxId, contactInitial, contactColor) {
 }
 
 
-function toggleCheckboxSubtasks() {
-  let checkbox = document.getElementById('checkbox_subtask');
+
+/* function toggleCheckboxSubtasks(subtaskId) {
+  let checkbox = document.getElementById(`checkbox_${subtaskId}`);
 
   if (checkbox.src.includes('checkbox_false.png')) {
     checkbox.src = '../assets/img/checkbox_true.png';
-
-  }
-  else {
+    // Optional: Subtask zum Array hinzufügen, wenn nicht vorhanden
+    const subtask = subtasks.find(subtask => subtask.id === subtaskId);
+    if (!subtask) {
+      subtasks.push(
+        {
+          id: subtaskId,
+          completed: true
+        });
+    } else {
+      subtask.completed = true; // Setze completed auf true
+    }
+  } else {
     checkbox.src = '../assets/img/checkbox_false.png';
 
-    const index = subtasks.findIndex(subtask => subtask.id === checkboxId);
+    const index = subtasks.findIndex(subtask => subtask.id === subtaskId);
     if (index !== -1) {
-      subtasks.splice(index, 1);
+      subtasks[index].completed = false; // Setze completed auf false
+      subtasks.splice(index, 1)
     }
   }
-  console.log(subtasks);
-}
+  renderTasks();
+  console.log(subtasks); // Zeigt die aktuelle Liste der Subtasks an
+} */
+
 
 
 function renderSubtasks(taskId) {
   let subtaskContent = document.getElementById('single_subtasks');
-  subtaskContent.innerHTML = '';
+  subtaskContent.innerHTML = '';  // Leert das Container-Element
 
   const task = tasks.find(t => t.id === taskId);
 
   if (task && Array.isArray(task.subtasks) && task.subtasks.length > 0) {
-    task.subtasks.forEach(subtask => {
-      subtaskContent.innerHTML += getSubtasksTemplate(subtask);
+    task.subtasks.forEach((subtask, index) => {
+      subtaskContent.innerHTML += getSubtasksTemplate(taskId, subtask, index);
     });
   } else {
     subtaskContent.innerHTML = "<p>No subtasks found</p>";
@@ -300,16 +372,72 @@ function renderSubtasks(taskId) {
 }
 
 
-function getSubtasksTemplate(subtask) {
+/* function getSubtasksTemplate(taskId, subtask, index) { // anfangs ohne index
   return `
-  <div class="subtask">
-    <img onclick="toggleCheckboxSubtasks()" id="checkbox_subtask" 
+  <div  class="subtask">
+    <img onclick="toggleCheckboxSubtasks('${taskId}','${index}')"
+         id="checkbox_${index}" 
          src="../assets/img/checkbox_false.png" 
          alt="checkbox">
-    <span>${subtask}</span>
+    <span>${subtask.name}</span>
   </div>
   `;
+} */
+
+
+function getSubtasksTemplate(taskId, subtask, index) {
+  return `
+    <div class="subtask" id="subtask_${taskId}_${index}">
+      <img class="checkbox" onclick="toggleCheckboxSubtasks('${taskId}', ${index})" 
+           id="checkbox_${taskId}_${index}" 
+           src="../assets/img/checkbox_false.png" 
+           alt="checkbox">
+      <span>${subtask.name}</span>
+    </div>
+  `;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function errorMessage() {
@@ -384,7 +512,7 @@ function resetImageDelete() {
 /**
  * This function is used to add a subtask to subtasks at edit task pop up
  *
- * @returns 
+ * 
  */
 /* function addSubtask() {
   let inputAddedSubtask = document.getElementById('input_subtask_add_subtask');
@@ -575,3 +703,5 @@ else {
     }));
   }
 } */
+
+

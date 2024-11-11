@@ -3,12 +3,39 @@
 /* BOARD TEMPLATES */
 
 
+function renderHeaderMenu() {
+  return `<div class="header-menu-container">
+                <div
+                  class="header-menu-item hidden-desktop"
+                  onclick="window.location.href='../pages/help.html'"
+                >
+                  <p class="header-menu-text">Help</p>
+                </div>
+                <div
+                  class="header-menu-item"
+                  onclick="window.location.href='../pages/legal_notice.html'"
+                >
+                  <p class="header-menu-text">Legal Notice</p>
+                </div>
+                <div
+                  class="header-menu-item"
+                  onclick="window.location.href='../pages/privacy_policy.html'"
+                >
+                  <p class="header-menu-text">Privacy Policy</p>
+                </div>
+                <div class="header-menu-item" onclick="logOut(event)">
+                  <p class="header-menu-text">Log out</p>
+                </div>
+              </div>`;
+}
+
+
 function getSidebarTemplate() {
   return `
            <div class="left-sidebar">
         <img src="../assets/img/join_logo_white.svg" alt="join logo" />
         <div class="left-sidebar-links">
-          <a class="links" href="#">
+          <a class="links" href="summary.html">
             <img
               class="sidebar-icons"
               src="../assets/img/summary.png"
@@ -16,7 +43,7 @@ function getSidebarTemplate() {
             />
             <p>Summary</p>
           </a>
-          <a class="links" href="#">
+          <a class="links" href="add_tasks.html">
             <img
               class="sidebar-icons"
               src="../assets/img/add_task.png"
@@ -32,7 +59,7 @@ function getSidebarTemplate() {
             />
             <p>Board</p>
           </a>
-          <a class="links" href="#">
+          <a class="links" href="contacts.html">
             <img
               class="sidebar-icons"
               src="../assets/img/contacts.png"
@@ -61,16 +88,13 @@ function getHeaderTemplate() {
             alt="logo"
           />
           <div class="header-icons">
-            <img
+            <img onclick="window.location.href='./help.html'"
               class="header-help-icon"
               src="../assets/img/help.png"
               alt="help"
             />
-            <img
-              class="header-profil-icon"
-              src="../assets/img/profil_icon.png"
-              alt="profil"
-            />
+            <div id="contact-profile-icon" class="header-profil-icon" onclick="showHeaderMenu('contacts-header-menu')"></div>
+            <div id="contacts-header-menu"></div>
           </div>
         </div>
     `;
@@ -143,7 +167,7 @@ function getBoardHeadlineTemplate() {
 }
 
 
-function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials) {
+function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials )  {
   return `    
               <div onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" class="kanban-task">
                 <div class="kanban-task-header"  style="background-color: ${categoryColor};">
@@ -156,9 +180,8 @@ function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials) 
                   </p>
                 </div>
                 <div class="kanban-task-subtasks">
-                  <progress value="0" max="100"></progress>
-                  <span>${task.subtasks}/${task.subtasks.length}</span>
-                  <p>Subtasks</p>
+                      <progress value="0" max="100"></progress>
+        <span>Subtasks Completed</span>
                 </div>
                 <div class="kanban-task-footer">
 

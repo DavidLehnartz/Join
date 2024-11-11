@@ -171,6 +171,15 @@ label{
   /* gap: 24px; */
   cursor: pointer;
   margin-bottom: 24px;
+  
+}
+
+.kanban-task-wrapper .task {
+  transition: transform 0.2s ease;  /* Übergang für den Kipp-Effekt */
+}
+
+.kanban-task-wrapper .task.dragging {
+  transform: rotate(10deg);  /* Drehung um 10 Grad, wenn das Element gezogen wird */
 }
 
 .kanban-task {
