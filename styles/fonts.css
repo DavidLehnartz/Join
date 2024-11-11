@@ -69,6 +69,13 @@ h4 {
   margin: 0px;
 }
 
+.contacts-info-hl h4 {
+  font-family: "interregular";
+  font-size: 20px !important;
+  line-height: 24px !important;
+  margin: 0px;
+}
+
 .how-to-hl {
   font-family: "interbold";
   font-size: 20px;
@@ -147,16 +154,37 @@ h4 {
   h2 {
     font-size: 55px;
   }
+
+  .name-container h3 {
+    font-size: 40px;
+  }
+
+  .contacts-headline p {
+    font-size: 20px;
+  }
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 950px) {
   h2 {
     font-size: 47px;
+  }
+
+  .name-container h3 {
+    font-size: 37px;
+  }
+
+  .contacts-headline p {
+    font-size: 18px;
   }
 }
 
 @media (max-width: 390px) {
   .contacts-info-hl {
     font-size: 16px !important;
+  }
+
+  .copy-mail {
+    font-size: 14px;
+    line-height: 18px;
   }
 }

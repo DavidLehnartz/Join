@@ -1,280 +1,124 @@
-body {
-    display: flex;
-    margin: 0px auto;
-    width: 100%;
-    min-height: 100vh;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    background-color: rgb(246, 247, 248);
-    font-family: "Inter", sans-serif;
-}
-
 main {
-    flex: 1;
+  flex: 1;
 }
 
 a {
-    text-decoration: none;
-}
-
-.KanbanSpanStyle {
-    font-size: 20px;
+  text-decoration: none;
 }
 
 h1 {
-    font-size: 50px;
-}
-
-.left-sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    width: 232px;
-    height: 100vh;
-    background-color: rgb(42, 54, 71);
-}
-
-.left-sidebar-links {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.links {
-    display: flex;
-    align-items: center;
-    color: #b5b6b9;
-    background-color: #2a3647;
-    width: 232px;
-    height: 46px;
-    gap: 8px;
-}
-
-.links:hover {
-    color: white;
-    background-color: rgb(57, 74, 95);
-    filter: brightness(1.2);
-    transition: all 125ms ease;
-}
-
-.links:active {
-    background-color: #091931;
-    color: white;
-}
-
-.link-active {
-    background-color: #091931;
-    color: white;
-}
-
-.sidebar-icons {
-    margin-left: 64px;
-}
-
-.legacy-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #b5b6b9;
-}
-
-.legacy-links:hover {
-    color: rgb(41, 171, 226);
-    transition: transform 125ms;
-    transform: scale(1.05);
-}
-
-header {
-    background-color: rgb(255, 255, 255);
-    box-shadow: 4px 0px 8px 0px rgb(170 170 170);
-    padding-right: 40px;
-    padding-left: 120px;
-    font-size: 24px;
-}
-
-.header-wrapper {
-    display: flex;
-    align-items: center;
-    height: 96px;
-    justify-content: space-between;
-    max-width: 1440px;
-    margin: 0px auto;
-}
-
-.mobileLogoStyle {
-    width: 50px;
-    height: 50px;
-    display: none;
-}
-
-.header-icons {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.header-menu-container {
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    gap: 8px;
-    background-color: #2a3647;
-    padding: 20px 10px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    position: fixed;
-    top: 96px;
-    right: 60px;
-    color: #cdcdcd;
-  }
-  
-  .header-menu-item {
-    width: 120px;
-    padding: 10px 16px;
-    cursor: pointer;
-  }
-  
-  .header-menu-item:hover {
-    background-color: rgb(57, 74, 95);
-  }
-  
-  .links:active {
-    background-color: #091931;
-    color: white;
-  }
-  
-  .link-active {
-    background-color: #091931;
-    color: white;
-  }
-
-.main-content-wrapper {
-    max-width: 1440px;
-}
-
-.header-help-icon {
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-}
-
-.header-help-icon:hover {
-    transition: transform 0.1s;
-    transform: scale(1.1);
+  font-size: 50px;
 }
 
 .headlineContent {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin-left: 150px;
-    gap: 75px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-left: 150px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  gap: 75px;
 }
 
 .userInitial {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    border: 3px solid #2a3647;
-    border-radius: 30px;
-    font-family: "interbold";
-    font-size: 24px;
-    color: #29abe2;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 3px solid #2a3647;
+  border-radius: 30px;
+  font-family: "interbold";
+  font-size: 24px;
+  color: #29abe2;
+  cursor: pointer;
 }
 
 .userInitial:hover {
-    background-color: #D1D1D1;
+  background-color: #d1d1d1;
 }
 
 .seperator1 {
-    width: 3px;
-    background-color: #29ABE2;
-    border: 1px;
-    height: 50px;
+  width: 3px;
+  background-color: #29abe2;
+  border: 1px;
+  height: 50px;
 }
 
 .metricsAtGlance {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 27px;
 }
 
 .belowHeadlineContent {
-    display: flex;
-    align-items: center;
-    margin-left: 150px;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  margin-left: 150px;
+  gap: 20px;
 }
 
 .leftSide {
-    display: flex;
-    flex-direction: column;
-    width: 560px;
-    height: 562px;
-    gap: 28px;
+  display: flex;
+  flex-direction: column;
+  width: 560px;
+  height: 562px;
+  gap: 28px;
 }
 
 .toDoDone {
-    display: flex;
-    justify-content: space-between;
-    width: 560px;
-    height: 168px;
+  display: flex;
+  justify-content: space-between;
+  width: 560px;
+  height: 168px;
 }
 
 .To-do,
 .done {
-    display: flex;
-    align-items: center;
-    width: 264px;
-    height: 168px;
-    border-radius: 30px;
-    background-color: white;
-    position: relative;
-    transition: background-color 125ms ease, transform 125ms ease;
-    border-color: #D1D1D1;
-    box-shadow: 0 0 3px #D1D1D1;
-    transition: all 125ms ease;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 264px;
+  height: 168px;
+  border-radius: 30px;
+  background-color: white;
+  position: relative;
+  transition: background-color 125ms ease, transform 125ms ease;
+  border-color: #d1d1d1;
+  box-shadow: 0 0 3px #d1d1d1;
+  transition: all 125ms ease;
+  cursor: pointer;
 }
 
 .writeTo-Do,
 .doneOk {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 69px;
-    height: 69px;
-    margin-left: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 69px;
+  height: 69px;
+  margin-left: 60px;
 }
 
 .rootPicFrame,
 .hoverPicFrame,
 .rootPicDone,
 .hoverPicDone {
-    position: absolute;
-    width: 69px;
-    height: 69px;
-    transition: opacity 125ms ease, transform 125ms ease;
+  position: absolute;
+  width: 69px;
+  height: 69px;
+  transition: opacity 125ms ease, transform 125ms ease;
 }
 
 .rootPicFrame,
 .rootPicDone {
-    opacity: 1;
+  opacity: 1;
 }
 
 .hoverPicFrame,
 .hoverPicDone {
-    opacity: 0;
+  opacity: 0;
 }
 
 .To-do:hover,
@@ -283,8 +127,8 @@ header {
 .taskInProgress:hover,
 .awaitingFeedback:hover,
 .urgentDateDeadline:hover {
-    background-color: #2A3647;
-    transform: scale(1.05);
+  background-color: #2a3647;
+  transform: scale(1.05);
 }
 
 .To-do:hover .writeNumberTo-Do,
@@ -293,411 +137,349 @@ header {
 .taskInProgress:hover,
 .awaitingFeedback:hover,
 .urgentDateDeadline:hover {
-    color: white;
+  color: white;
 }
 
 .To-do:hover .rootPicFrame,
 .done:hover .rootPicDone {
-    opacity: 0;
+  opacity: 0;
 }
 
 .To-do:hover .hoverPicFrame,
 .done:hover .hoverPicDone {
-    opacity: 1;
+  opacity: 1;
 }
 
 .writeNumberTo-Do {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-left: 20px;
-    transition: color 125ms ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 20px;
+  transition: color 125ms ease;
 }
-
 
 .zeroDone {
-    font-size: 64px;
-    font-weight: 600;
+  font-size: 64px;
+  font-weight: 600;
 }
 
-
 .onlyDone {
-    font-size: 20px;
-    font-weight: 400;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .onlyUrgent {
-    font-size: 16px;
-    font-weight: 400;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .urgentDateDeadline {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 560px;
-    height: 168px;
-    border-radius: 30px;
-    background-color: white;
-    transition: background-color 125ms ease, transform 125ms ease;
-    border-color: #D1D1D1;
-    box-shadow: 0 0 3px #D1D1D1;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 560px;
+  height: 168px;
+  border-radius: 30px;
+  background-color: white;
+  transition: background-color 125ms ease, transform 125ms ease;
+  border-color: #d1d1d1;
+  box-shadow: 0 0 3px #d1d1d1;
+  cursor: pointer;
 }
 
 .urgentSummary {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 18px;
-    flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
 }
 
 .urgentSummaryPic {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 60px;
-    height: 60px;
-    margin-left: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 60px;
+  height: 60px;
+  margin-left: 20px;
 }
 
 .seperator2 {
-    width: 2px;
-    background-color: #D1D1D1;
-    border: 1px;
-    height: 80px;
+  width: 2px;
+  background-color: #d1d1d1;
+  border: 1px;
+  height: 80px;
 }
 
 .upComing-Deadline {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 13px;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 13px;
+  flex: 1;
 }
 
 .dateSummary {
-    font-size: 21px;
-    font-weight: 700;
+  font-size: 21px;
+  font-weight: 700;
 }
 
 .upComingSummary {
-    font-size: 16px;
-    font-weight: 400;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .taskBoardProgressFeedback {
-    display: flex;
-    width: 560px;
-    height: 170px;
-    gap: 28px;
+  display: flex;
+  width: 560px;
+  height: 170px;
+  gap: 28px;
 }
 
 .tasksInBoard,
 .taskInProgress,
 .awaitingFeedback {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-    width: 168px;
-    height: 168px;
-    border-radius: 30px;
-    background-color: white;
-    transition: background-color 125ms ease, transform 125ms ease;
-    border-color: #D1D1D1;
-    box-shadow: 0 0 3px #D1D1D1;
-    transition: all 125ms ease;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 168px;
+  height: 168px;
+  border-radius: 30px;
+  background-color: white;
+  transition: background-color 125ms ease, transform 125ms ease;
+  border-color: #d1d1d1;
+  box-shadow: 0 0 3px #d1d1d1;
+  transition: all 125ms ease;
+  cursor: pointer;
 }
 
 .rightSide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 385px;
-    height: 136px;
-    margin-left: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 385px;
+  height: 136px;
+  margin-left: 40px;
 }
 
 .helloThere {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .times-of-day {
-    font-size: 47px;
-    font-weight: 500;
+  font-size: 47px;
+  font-weight: 500;
 }
 
 .name-Of-Guest {
-    font-size: 64px;
-    font-weight: 700;
-    color: #29ABE2;
+  font-size: 64px;
+  font-weight: 700;
+  color: #29abe2;
 }
 
 .sepMobile {
-    display: none;
-    height: 3px;
-    width: 100px;
+  display: none;
+  height: 3px;
+  width: 100px;
 }
 
 @media (max-width: 1390px) {
-    .KanbanSpanStyle {
-        display: none;
-    }
+  .belowHeadlineContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    width: 100%;
+    margin-left: 0px;
+  }
 
-    .belowHeadlineContent {
-        display: flex;
-        flex-direction: column;
-        gap: 0px;
-        width: 100%;
-        margin-left: 0px;
-    }
+  p {
+    margin: 0px;
+    font-size: 15px !important;
+  }
 
-    .left-sidebar {
-        width: 100%;
-        max-width: 100vw;
-        height: fit-content;
-        position: fixed;
-        bottom: 0;
-        background-attachment: scroll;
-        z-index: 90;
-        justify-content: space-between;
-    }
+  .headlineContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    padding: 20px 0px;
+    margin-left: 0px;
+  }
 
-    .left-sidebar-links {
-        width: 100%;
-        flex-direction: row;
-        margin: auto;
-        gap: 0px;
-    }
+  h1 {
+    font-size: 47px;
+    margin: 0px;
+    margin-right: 20px;
+  }
 
-    .links {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-        padding: 15px 0px;
-    }
+  .metricsAtGlance {
+    font-size: 20px;
+  }
 
-    .sidebar-icons {
-        margin-left: 0;
-        margin-right: 0px;
-        width: 24px;
-        height: 24px;
-    }
+  .seperator1 {
+    display: none;
+  }
 
-    p {
-        margin: 0px;
-        font-size: 15px !important;
-    }
+  .sepMobile {
+    display: flex;
+    background-color: #29abe2;
+    margin-right: 110px;
+  }
 
-    .bigLogo {
-        display: none;
-    }
+  .main-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 120px;
+    max-width: calc(100vw - 40px);
+  }
 
-    .legacy-links {
-        display: none;
-    }
+  .rightSide {
+    display: none;
+  }
 
-    header {
-        padding: 0px;
-    }
+  .To-do,
+  .done {
+    width: fit-content;
+    height: 90px;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
-    .header-wrapper {
-        padding: 0px 10px;
-    }
+  .hoverPicDone {
+    width: 10px;
+  }
 
-    .headlineContent {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-        padding: 20px 0px;
-        margin-left: 0px;
-    }
+  .rootPicFrame,
+  .hoverPicFrame,
+  .rootPicDone,
+  .hoverPicDone {
+    width: 32px;
+    height: 32px;
+  }
 
-    h1 {
-        font-size: 47px;
-        margin: 0px;
-        margin-right: 20px;
-    }
+  .leftSide {
+    max-width: 100vw;
+    height: 100%;
+    width: 100%;
+  }
 
-    .metricsAtGlance {
-        font-size: 20px;
-    }
+  .toDoDone,
+  .urgentDateDeadline,
+  .taskBoardProgressFeedback {
+    display: flex;
+    justify-content: space-between;
+    max-width: 100vw;
+    height: 100%;
+    gap: 0px;
+    margin: 0 auto;
+    border-radius: 20px;
+  }
 
-    .mobileLogoStyle {
-        display: flex;
-    }
+  .tasksInBoard,
+  .taskInProgress,
+  .awaitingFeedback {
+    width: fit-content;
+    height: 68px;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 
-    .seperator1 {
-        display: none;
-    }
+  .writeTo-Do,
+  .doneOk {
+    width: 32px;
+    height: 32px;
+    margin-left: 0px;
+  }
 
-    .sepMobile {
-        display: flex;
-        background-color: #29ABE2;
-        margin-right: 110px;
-    }
+  .urgentDateDeadline {
+    display: flex;
+    justify-content: space-around;
+    max-width: 100vw;
+    height: 100%;
+    margin: 0 auto;
+  }
 
-    .main-content-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 120px;
-        max-width: calc(100vw - 40px);
-    }
+  .dateSummary {
+    font-size: 16px;
+  }
 
-    .rightSide {
-        display: none;
-    }
+  .onlyDone,
+  .upComingSummary {
+    font-size: 13px;
+    font-weight: 400;
+  }
 
-    .To-do,
-    .done {
-        width: fit-content;
-        height: 90px;
-        border-radius: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+  .urgentSummary {
+    width: fit-content;
+  }
 
-    .hoverPicDone {
-        width: 10px;
-    }
+  .upComing-Deadline {
+    width: fit-content;
+  }
 
-    .rootPicFrame,
-    .hoverPicFrame,
-    .rootPicDone,
-    .hoverPicDone {
-        width: 32px;
-        height: 32px;
-    }
+  .urgentSummaryPic img {
+    width: 32px;
+    height: 32px;
+    margin-left: 0px;
+  }
 
-    .leftSide {
-        max-width: 100vw;
-        height: 100%;
-        width: 100%;
-    }
+  .urgentSummaryPic {
+    margin-left: 0px;
+  }
 
-    .toDoDone,
-    .urgentDateDeadline,
-    .taskBoardProgressFeedback {
-        display: flex;
-        justify-content: space-between;
-        max-width: 100vw;
-        height: 100%;
-        gap: 0px;
-        margin: 0 auto;
-        border-radius: 20px;
-    }
-
-    .tasksInBoard,
-    .taskInProgress,
-    .awaitingFeedback {
-        width: fit-content;
-        height: 68px;
-        border-radius: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-    .writeTo-Do,
-    .doneOk {
-        width: 32px;
-        height: 32px;
-        margin-left: 0px;
-    }
-
-    .urgentDateDeadline {
-        display: flex;
-        justify-content: space-around;
-        max-width: 100vw;
-        height: 100%;
-        margin: 0 auto;
-    }
-
-    .dateSummary {
-        font-size: 16px;
-    }
-
-    .onlyDone,
-    .upComingSummary {
-        font-size: 13px;
-        font-weight: 400;
-    }
-
-    .urgentSummary {
-        width: fit-content;
-    }
-
-    .upComing-Deadline {
-        width: fit-content;
-    }
-
-    .urgentSummaryPic img {
-        width: 32px;
-        height: 32px;
-        margin-left: 0px;
-    }
-
-    .urgentSummaryPic {
-        margin-left: 0px;
-    }
-
-    .zeroDone {
-        font-size: 32px;
-        font-weight: 600;
-    }
+  .zeroDone {
+    font-size: 32px;
+    font-weight: 600;
+  }
 }
 
 @media (max-width: 700px) {
+  .main-content-wrapper {
+    max-width: calc(100vw - 40px);
+    margin: 0 auto;
+  }
 
-    .main-content-wrapper {
-        max-width: calc(100vw - 40px);
-        margin: 0 auto;
-    }
+  .headlineContent {
+    max-width: calc(100vw - 40px);
+    align-items: flex-start;
+  }
 
-    .headlineContent {
-        max-width: calc(100vw - 40px);
-        align-items: flex-start;
-    }
+  .toDoDone,
+  .urgentDateDeadline,
+  .taskBoardProgressFeedback {
+    width: 100%;
+    max-width: calc(100vw - 40px);
+    margin: 0 auto;
+  }
 
-    .toDoDone,
-    .urgentDateDeadline,
-    .taskBoardProgressFeedback {
-        width: 100%;
-        max-width: calc(100vw - 40px);
-        margin: 0 auto;
-    }
-
-    h1 {
-        font-size: 47px;
-    }
+  h1 {
+    font-size: 47px;
+  }
 }
 
 @media (max-width: 350px) {
-
-    .toDoDone,
-    .urgentDateDeadline,
-    .taskBoardProgressFeedback {
-        width: 100%;
-        max-width: calc(100vw - 40px);
-        margin: 0 auto;
-    }
+  .toDoDone,
+  .urgentDateDeadline,
+  .taskBoardProgressFeedback {
+    width: 100%;
+    max-width: calc(100vw - 40px);
+    margin: 0 auto;
+  }
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
+  width: 0px;
 }

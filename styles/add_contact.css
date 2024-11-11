@@ -16,7 +16,7 @@
   display: flex;
   position: fixed;
   top: 50%;
-  right: -300px;
+  right: -1500px;
   align-items: flex-start;
   justify-content: center;
   max-width: 1250px;
@@ -24,9 +24,9 @@
   height: 60%;
   border-radius: 30px;
   background-color: white;
-  opacity: 0;
   transform: translateX(-50%);
   transition: right 0.5s ease;
+  opacity: 0;
 }
 
 .contacts-overlay-container.show {

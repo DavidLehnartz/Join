@@ -1,20 +1,17 @@
-'use strict';
+"use strict";
 
 /* BOARD MAIN SCRIPT */
 
-let headerMenuShown = false;
+//let headerMenuShown = false;
 let currentTaskId = null;
-let selectedPriority = '';
+let selectedPriority = "";
 
-
-function init() {
-  renderDesktopTemplate();
+function init(header, sidebar, link) {
+  renderDesktopTemplate(header, sidebar, link);
   loadFetchedData();
 
   console.log(tasks);
-
 }
-
 
 async function loadFetchedData() {
   try {
@@ -26,17 +23,17 @@ async function loadFetchedData() {
   renderTasks();
 }
 
+function renderDesktopTemplate(header, sidebar, link) {
+  createHeader(header);
+  createSidebar(sidebar, link);
+  //let sidebarTemplateContent = document.getElementById('sidebar_template');
+  //let headerTemplateContent = document.getElementById('header_template');
+  let boardHeadlineContent = document.getElementById("board_headline");
 
-function renderDesktopTemplate() {
-  let sidebarTemplateContent = document.getElementById('sidebar_template');
-  let headerTemplateContent = document.getElementById('header_template');
-  let boardHeadlineContent = document.getElementById('board_headline');
-
-  sidebarTemplateContent.innerHTML = getSidebarTemplate();
-  headerTemplateContent.innerHTML = getHeaderTemplate();
+  //sidebarTemplateContent.innerHTML = getSidebarTemplate();
+  //headerTemplateContent.innerHTML = getHeaderTemplate();
   boardHeadlineContent.innerHTML = getBoardHeadlineTemplate();
 }
-
 
 function showHeaderMenu(headerId) {
   let headerMenu = document.getElementById(headerId);
@@ -48,9 +45,7 @@ function showHeaderMenu(headerId) {
   headerMenuShown = !headerMenuShown;
 }
 
-
 /* ----- FÜR DRAG AND DROP ----- */
-
 
 /* function renderTasks() {
   let tasksContent = document.getElementById('to_do');
@@ -68,7 +63,6 @@ function showHeaderMenu(headerId) {
   }
   // renderAssigneeInitials();
 } */
-
 
 /* function renderTasks() {
   const columns = ['to_do', 'in_progress', 'await_feedback', 'done'];
@@ -95,21 +89,25 @@ function showHeaderMenu(headerId) {
 /* ----------------------------------------------------- */
 
 function renderTasks() {
-  let tasksContent = document.getElementById('to_do');
+  let tasksContent = document.getElementById("to_do");
   tasksContent.innerHTML = "";
 
-  tasks.forEach(task => {
+  tasks.forEach((task) => {
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
     let assigneeInitials = renderAssigneeInitials(task.assignedTo);
 
-    tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
+    tasksContent.innerHTML += getTasksTemplate(
+      task,
+      priorityImage,
+      categoryColor,
+      assigneeInitials
+    );
   });
 }
 
-
 function renderTaskPopUp(taskId) {
-  let taskPopUpContent = document.getElementById('task_pop_up');
+  let taskPopUpContent = document.getElementById("task_pop_up");
   taskPopUpContent.innerHTML = "";
 
   const task = tasks.find((t) => t.id === taskId);
@@ -118,56 +116,70 @@ function renderTaskPopUp(taskId) {
     let categoryColor = getCategoryColor(task.category);
     let assigneeContent = getAssigneesTemplate(task.assignedTo);
 
-    taskPopUpContent.innerHTML = getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeContent);
+    taskPopUpContent.innerHTML = getTaskPopUpTemplate(
+      task,
+      priorityImage,
+      categoryColor,
+      assigneeContent
+    );
   }
 
   renderSubtasks(taskId);
 }
 
-
 function renderEditTaskPopUp(taskId, priorityImage) {
   currentTaskId = taskId;
 
-  let editTaskPopUpContent = document.getElementById('edit_task_pop_up');
+  let editTaskPopUpContent = document.getElementById("edit_task_pop_up");
   editTaskPopUpContent.innerHTML = "";
 
-  const task = tasks.find(t => t.id === taskId);
+  const task = tasks.find((t) => t.id === taskId);
 
   if (task) {
-    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task, priorityImage);
+    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(
+      task,
+      priorityImage
+    );
   }
 
-  document.getElementById('edit_task_pop_up').classList.remove('responsive-pop-up-closed');
+  document
+    .getElementById("edit_task_pop_up")
+    .classList.remove("responsive-pop-up-closed");
 }
 
-
 function renderDropdownContacts() {
-  let dropdownContent = document.getElementById('dropdown_contacts');
+  let dropdownContent = document.getElementById("dropdown_contacts");
   dropdownContent.innerHTML = "";
 
-  for (let indexContacts = 0; indexContacts < contacts.length; indexContacts++) {
+  for (
+    let indexContacts = 0;
+    indexContacts < contacts.length;
+    indexContacts++
+  ) {
     let contact = contacts[indexContacts];
     dropdownContent.innerHTML += getDropdownContactsTemplate(contact);
   }
 }
 
-
 function renderSelectedContacts() {
-  let selectedContactsContent = document.getElementById('selected_contacts');
+  let selectedContactsContent = document.getElementById("selected_contacts");
   selectedContactsContent.innerHTML = "";
 
-  for (let indexSelectedContacts = 0; indexSelectedContacts < selectedContacts.length; indexSelectedContacts++) {
+  for (
+    let indexSelectedContacts = 0;
+    indexSelectedContacts < selectedContacts.length;
+    indexSelectedContacts++
+  ) {
     let contact = selectedContacts[indexSelectedContacts];
     selectedContactsContent.innerHTML += getSelectedContactsTemplate(contact);
   }
 }
 
-
 function renderAssigneeInitials(assignedTo) {
   let assigneeInitialsContent = "";
 
   if (Array.isArray(assignedTo)) {
-    assignedTo.forEach(assignee => {
+    assignedTo.forEach((assignee) => {
       assigneeInitialsContent += getAssigneeInitialsTemplate(assignee);
     });
   }
@@ -175,30 +187,30 @@ function renderAssigneeInitials(assignedTo) {
   return assigneeInitialsContent;
 }
 
-
 function openTaskPopUp(taskId) {
-  document.getElementById('overlay_task_pop_up').classList.remove('responsive-pop-up-closed');
+  document
+    .getElementById("overlay_task_pop_up")
+    .classList.remove("responsive-pop-up-closed");
 
   renderTaskPopUp(taskId);
 }
 
-
 async function saveTaskChanges(taskId) {
-  const task = tasks.find(t => t.id === taskId);
+  const task = tasks.find((t) => t.id === taskId);
 
   if (task) {
-    task.title = document.getElementById('edit_title').value;
-    task.description = document.getElementById('edit_description').value;
-    task.dueDate = document.getElementById('edit_due_date').value;
+    task.title = document.getElementById("edit_title").value;
+    task.description = document.getElementById("edit_description").value;
+    task.dueDate = document.getElementById("edit_due_date").value;
 
-    //   task.assignedContacts = [...selectedContacts]; 
+    //   task.assignedContacts = [...selectedContacts];
 
     if (selectedPriority) {
       task.priority = selectedPriority;
     }
 
     //  const priorityButton = document.querySelector('.prio-btn.prio-urgent-active, .prio-btn.prio-medium-active, .prio-btn.prio-low-active');
-    //task.priority = priorityButton ? priorityButton.id.replace('prio_', '') : '';  
+    //task.priority = priorityButton ? priorityButton.id.replace('prio_', '') : '';
   }
   renderTasks();
   await updateTaskInFirebase(task);
@@ -206,115 +218,110 @@ async function saveTaskChanges(taskId) {
   openTaskPopUp(taskId);
 }
 
-
 function getCategoryColor(category) {
   if (category === "User Story") {
     return "rgb(0, 56, 255)";
-  }
-  else if (category === "Technical Task") {
+  } else if (category === "Technical Task") {
     return "rgb(31, 215, 193)";
   }
   return "gray";
 }
 
-
 function getPriorityImage(priority) {
   if (priority === "Low") {
     return "../assets/img/prio_low_green.png";
-  }
-  else if (priority === "Medium") {
+  } else if (priority === "Medium") {
     return "../assets/img/prio_medium_orange.png";
-  }
-  else if (priority === "Urgent") {
+  } else if (priority === "Urgent") {
     return "../assets/img/prio_urgent_red.png";
   }
   return "";
 }
 
-
 function changePrioButtons(selectedButton) {
   resetButtons();
 
-  let img = selectedButton.querySelector('.prio-img');
+  let img = selectedButton.querySelector(".prio-img");
 
-  if (selectedButton.id === 'prio_urgent') {
-    selectedButton.classList.add('prio-urgent-active');
-    img.src = '../assets/img/urgent21.png';
-    selectedPriority = 'Urgent';
-    updateTaskPriority('Urgent');
+  if (selectedButton.id === "prio_urgent") {
+    selectedButton.classList.add("prio-urgent-active");
+    img.src = "../assets/img/urgent21.png";
+    selectedPriority = "Urgent";
+    updateTaskPriority("Urgent");
+  } else if (selectedButton.id === "prio_medium") {
+    selectedButton.classList.add("prio-medium-active");
+    img.src = "../assets/img/medium.png";
+    selectedPriority = "Medium";
+    updateTaskPriority("Medium");
+  } else if (selectedButton.id === "prio_low") {
+    selectedButton.classList.add("prio-low-active");
+    img.src = "../assets/img/low21.png";
+    selectedPriority = "Low";
+    updateTaskPriority("Low");
   }
-  else if (selectedButton.id === 'prio_medium') {
-    selectedButton.classList.add('prio-medium-active');
-    img.src = '../assets/img/medium.png';
-    selectedPriority = 'Medium';
-    updateTaskPriority('Medium');
-  }
-  else if (selectedButton.id === 'prio_low') {
-    selectedButton.classList.add('prio-low-active');
-    img.src = '../assets/img/low21.png';
-    selectedPriority = 'Low';
-    updateTaskPriority('Low');
-  }
-
 }
-
 
 function setPriorityButton(priority) {
   resetButtons();
 
-  if (priority === 'Urgent') {
-    document.getElementById('prio_urgent').classList.add('prio-urgent-active');
-    document.getElementById('prio_urgent').querySelector('.prio-img').src = '../assets/img/urgent21.png';
-  } else if (priority === 'Medium') {
-    document.getElementById('prio_medium').classList.add('prio-medium-active');
-    document.getElementById('prio_medium').querySelector('.prio-img').src = '../assets/img/medium.png';
-  } else if (priority === 'Low') {
-    document.getElementById('prio_low').classList.add('prio-low-active');
-    document.getElementById('prio_low').querySelector('.prio-img').src = '../assets/img/low21.png';
+  if (priority === "Urgent") {
+    document.getElementById("prio_urgent").classList.add("prio-urgent-active");
+    document.getElementById("prio_urgent").querySelector(".prio-img").src =
+      "../assets/img/urgent21.png";
+  } else if (priority === "Medium") {
+    document.getElementById("prio_medium").classList.add("prio-medium-active");
+    document.getElementById("prio_medium").querySelector(".prio-img").src =
+      "../assets/img/medium.png";
+  } else if (priority === "Low") {
+    document.getElementById("prio_low").classList.add("prio-low-active");
+    document.getElementById("prio_low").querySelector(".prio-img").src =
+      "../assets/img/low21.png";
   }
 }
 
-
 function updateTaskPriority(priority) {
-  const task = tasks.find(t => t.id === currentTaskId); /* currentTaskId für den aktiven Task */
+  const task = tasks.find(
+    (t) => t.id === currentTaskId
+  ); /* currentTaskId für den aktiven Task */
   if (task) {
     task.priority = priority;
   }
 }
 
-
 function resetButtons() {
-  let buttons = document.querySelectorAll('.prio-btn');
-  buttons.forEach(button => {
-    let img = button.querySelector('.prio-img');
-    if (button.id === 'prio_urgent') {
-      img.src = '../assets/img/prio_urgent_red.png';
+  let buttons = document.querySelectorAll(".prio-btn");
+  buttons.forEach((button) => {
+    let img = button.querySelector(".prio-img");
+    if (button.id === "prio_urgent") {
+      img.src = "../assets/img/prio_urgent_red.png";
+    } else if (button.id === "prio_medium") {
+      img.src = "../assets/img/prio_medium_orange.png";
+    } else if (button.id === "prio_low") {
+      img.src = "../assets/img/prio_low_green.png";
     }
-    else if (button.id === 'prio_medium') {
-      img.src = '../assets/img/prio_medium_orange.png';
-    }
-    else if (button.id === 'prio_low') {
-      img.src = '../assets/img/prio_low_green.png';
-    }
-    button.classList.remove('prio-low-active', 'prio-medium-active', 'prio-urgent-active');
+    button.classList.remove(
+      "prio-low-active",
+      "prio-medium-active",
+      "prio-urgent-active"
+    );
   });
 }
-
 
 function toggleCheckboxContact(checkboxId, contactInitial, contactColor) {
   let checkbox = document.getElementById(checkboxId);
 
-  if (checkbox.src.includes('checkbox_false.png')) {
-    checkbox.src = '../assets/img/checkbox_true.png';
-    selectedContacts.push(
-      {
-        id: checkboxId,
-        initial: contactInitial,
-        color: contactColor
-      });
+  if (checkbox.src.includes("checkbox_false.png")) {
+    checkbox.src = "../assets/img/checkbox_true.png";
+    selectedContacts.push({
+      id: checkboxId,
+      initial: contactInitial,
+      color: contactColor,
+    });
   } else {
-    checkbox.src = '../assets/img/checkbox_false.png';
-    const index = selectedContacts.findIndex(contact => contact.id === checkboxId);
+    checkbox.src = "../assets/img/checkbox_false.png";
+    const index = selectedContacts.findIndex(
+      (contact) => contact.id === checkboxId
+    );
     if (index !== -1) {
       selectedContacts.splice(index, 1);
     }
@@ -322,8 +329,6 @@ function toggleCheckboxContact(checkboxId, contactInitial, contactColor) {
   renderSelectedContacts();
   console.log(selectedContacts);
 }
-
-
 
 /* function toggleCheckboxSubtasks(subtaskId) {
   let checkbox = document.getElementById(`checkbox_${subtaskId}`);
@@ -354,13 +359,11 @@ function toggleCheckboxContact(checkboxId, contactInitial, contactColor) {
   console.log(subtasks); // Zeigt die aktuelle Liste der Subtasks an
 } */
 
-
-
 function renderSubtasks(taskId) {
-  let subtaskContent = document.getElementById('single_subtasks');
-  subtaskContent.innerHTML = '';  // Leert das Container-Element
+  let subtaskContent = document.getElementById("single_subtasks");
+  subtaskContent.innerHTML = ""; // Leert das Container-Element
 
-  const task = tasks.find(t => t.id === taskId);
+  const task = tasks.find((t) => t.id === taskId);
 
   if (task && Array.isArray(task.subtasks) && task.subtasks.length > 0) {
     task.subtasks.forEach((subtask, index) => {
@@ -370,7 +373,6 @@ function renderSubtasks(taskId) {
     subtaskContent.innerHTML = "<p>No subtasks found</p>";
   }
 }
-
 
 /* function getSubtasksTemplate(taskId, subtask, index) { // anfangs ohne index
   return `
@@ -384,7 +386,6 @@ function renderSubtasks(taskId) {
   `;
 } */
 
-
 function getSubtasksTemplate(taskId, subtask, index) {
   return `
     <div class="subtask" id="subtask_${taskId}_${index}">
@@ -397,107 +398,60 @@ function getSubtasksTemplate(taskId, subtask, index) {
   `;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function errorMessage() {
-  let inputAddedSubtask = document.getElementById('input_subtask_add_subtask').value.trim();
+  let inputAddedSubtask = document
+    .getElementById("input_subtask_add_subtask")
+    .value.trim();
 
   if (inputAddedSubtask === "") {
-    document.getElementById('error_message').innerHTML = `Please enter a subtask!`;
+    document.getElementById(
+      "error_message"
+    ).innerHTML = `Please enter a subtask!`;
     return true;
   }
 
-  document.getElementById('error_message').innerHTML = "";
+  document.getElementById("error_message").innerHTML = "";
   return false;
 }
 
-
 function closeEditPopUp() {
-  document.getElementById('edit_task_pop_up').classList.add('responsive-pop-up-closed');
+  document
+    .getElementById("edit_task_pop_up")
+    .classList.add("responsive-pop-up-closed");
 }
-
 
 function closePopUps() {
-  document.getElementById('overlay_task_pop_up').classList.add('responsive-pop-up-closed');
+  document
+    .getElementById("overlay_task_pop_up")
+    .classList.add("responsive-pop-up-closed");
 }
-
 
 function clearInputs() {
-  document.getElementById('input_subtask_add_subtask').value = "";
+  document.getElementById("input_subtask_add_subtask").value = "";
 }
 
-
 function changeImageEdit() {
-  document.getElementById('edit_img').src = '../assets/img/edit_blue.png';
+  document.getElementById("edit_img").src = "../assets/img/edit_blue.png";
 }
 
 function resetImageEdit() {
-  document.getElementById('edit_img').src = '../assets/img/edit_black.png';
+  document.getElementById("edit_img").src = "../assets/img/edit_black.png";
 }
 
-
 function changeImageDelete() {
-  document.getElementById('delete_img').src = '../assets/img/delete_blue.png';
+  document.getElementById("delete_img").src = "../assets/img/delete_blue.png";
 }
 
 function resetImageDelete() {
-  document.getElementById('delete_img').src = '../assets/img/delete_black.png';
+  document.getElementById("delete_img").src = "../assets/img/delete_black.png";
 }
-
-
-
-
-
-
 
 /* ---------- WIRD NOCH GEBRAUCHT ---------- */
 
-
 /**
  * This function is used to render added subtasks
- * 
- * 
+ *
+ *
  */
 /* function renderAddSubtasks() {
   let subtasksContent = document.getElementById('subtasks');
@@ -508,11 +462,10 @@ function resetImageDelete() {
   }
 } */
 
-
 /**
  * This function is used to add a subtask to subtasks at edit task pop up
  *
- * 
+ *
  */
 /* function addSubtask() {
   let inputAddedSubtask = document.getElementById('input_subtask_add_subtask');
@@ -527,10 +480,6 @@ function resetImageDelete() {
   clearInputs();
 } */
 
-
-
-
-
 /* function getPriorityImage(priority) {
   switch (priority) {
       case 'urgent':
@@ -544,10 +493,6 @@ function resetImageDelete() {
           return '';
   }
 } */
-
-
-
-
 
 /* function renderTasks() {
   clearColumns();
@@ -570,14 +515,12 @@ function resetImageDelete() {
    // updateEmptyMessages();
 }  */
 
-
 /* function clearColumns() {
  document.getElementById('to_do').innerHTML = "";
  document.getElementById('in_progress').innerHTML = "";
  document.getElementById('await_feedback').innerHTML = "";
  document.getElementById('done').innerHTML = "";
 } */
-
 
 /*  function updateEmptyMessages() {
    
@@ -602,9 +545,6 @@ function resetImageDelete() {
    }
  } */
 
-
-
-
 /*  function renderAddSubtasks(taskId) {
    const task = tasks.find((t) => t.id === taskId);
    const subtasksContent = document.getElementById('subtasks');
@@ -616,7 +556,6 @@ function resetImageDelete() {
      });
    }
  } */
-
 
 /* function addSubtask(taskId) {
   let inputAddedSubtask = document.getElementById('input_subtask_add_subtask');
@@ -635,9 +574,6 @@ function resetImageDelete() {
     clearInputs();
   }
 } */
-
-
-
 
 /* function renderSubtasks(task) {
 let subtasksContent = document.getElementById('single_subtasks');
@@ -665,7 +601,6 @@ else {
     </div>
   `;
 } */
-
 
 /* function getSubtaskImage(isChecked) {
   return isChecked ? "../assets/img/checkbox_true.png" : "../assets/img/checkbox_false.png";
@@ -703,5 +638,3 @@ else {
     }));
   }
 } */
-
-
