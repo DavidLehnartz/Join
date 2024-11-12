@@ -464,7 +464,7 @@ function getAssigneesTemplate(assignedTo) {
 
 function getSelectedContactsTemplate(contact) {
   return `
-          <div class="selected-contact bg-${contact.color}">${contact.initial}</div>
+          <div id="selected_contact" class="selected-contact bg-${contact.color}">${contact.initial}</div>
   `;
 }
 

@@ -135,20 +135,11 @@ function renderEditTaskPopUp(taskId, priorityImage) {
 
   if (task) {
     editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task, priorityImage);
+
+    setPriorityButton(task.priority);
   }
 
   document.getElementById('edit_task_pop_up').classList.remove('responsive-pop-up-closed');
-}
-
-
-function renderDropdownContacts() {
-  let dropdownContent = document.getElementById('dropdown_contacts');
-  dropdownContent.innerHTML = "";
-
-  for (let indexContacts = 0; indexContacts < contacts.length; indexContacts++) {
-    let contact = contacts[indexContacts];
-    dropdownContent.innerHTML += getDropdownContactsTemplate(contact);
-  }
 }
 
 
@@ -255,7 +246,6 @@ function changePrioButtons(selectedButton) {
     selectedPriority = 'Low';
     updateTaskPriority('Low');
   }
-
 }
 
 
@@ -301,29 +291,10 @@ function resetButtons() {
 }
 
 
-function toggleCheckboxContact(checkboxId, contactInitial, contactColor) {
-  let checkbox = document.getElementById(checkboxId);
-
-  if (checkbox.src.includes('checkbox_false.png')) {
-    checkbox.src = '../assets/img/checkbox_true.png';
-    selectedContacts.push(
-      {
-        id: checkboxId,
-        initial: contactInitial,
-        color: contactColor
-      });
-  } else {
-    checkbox.src = '../assets/img/checkbox_false.png';
-    const index = selectedContacts.findIndex(contact => contact.id === checkboxId);
-    if (index !== -1) {
-      selectedContacts.splice(index, 1);
-    }
-  }
-  renderSelectedContacts();
-  console.log(selectedContacts);
-}
 
 
+
+/* ----- versuch subtasks in ein globales array zu pushen ----- */
 
 /* function toggleCheckboxSubtasks(subtaskId) {
   let checkbox = document.getElementById(`checkbox_${subtaskId}`);
@@ -372,34 +343,37 @@ function renderSubtasks(taskId) {
 }
 
 
-/* function getSubtasksTemplate(taskId, subtask, index) { // anfangs ohne index
-  return `
-  <div  class="subtask">
-    <img onclick="toggleCheckboxSubtasks('${taskId}','${index}')"
-         id="checkbox_${index}" 
-         src="../assets/img/checkbox_false.png" 
-         alt="checkbox">
-    <span>${subtask.name}</span>
-  </div>
-  `;
-} */
-
-
 function getSubtasksTemplate(taskId, subtask, index) {
   return `
-    <div class="subtask" id="subtask_${taskId}_${index}">
-      <img class="checkbox" onclick="toggleCheckboxSubtasks('${taskId}', ${index})" 
-           id="checkbox_${taskId}_${index}" 
-           src="../assets/img/checkbox_false.png" 
-           alt="checkbox">
-      <span>${subtask.name}</span>
-    </div>
+          <div class="subtask" id="subtask_${taskId}_${index}">
+            <img class="checkbox" onclick="toggleCheckboxSubtasks('${taskId}', ${index})" 
+                 id="checkbox_${taskId}_${index}" 
+                 src="../assets/img/checkbox_false.png" 
+                 alt="checkbox">
+            <span>${subtask.name}</span>
+          </div>
   `;
 }
 
 
 
+/* ----------------------------------------------------------------- */
 
+
+// GPT
+async function toggleCheckboxSubtasks(taskId, subtaskIndex) {
+  const task = tasks.find(t => t.id === taskId);
+  if (!task) return;
+
+  // Toggle the completion status of the specified subtask
+  task.subtasks[subtaskIndex].completed = !task.subtasks[subtaskIndex].completed;
+
+  // Update the task in Firebase
+  await updateTaskInFirebase(task);
+
+  // Re-render the subtasks to reflect the change in the UI
+  renderSubtasks(taskId);
+}
 
 
 
@@ -531,23 +505,11 @@ function resetImageDelete() {
 
 
 
-/* function getPriorityImage(priority) {
-  switch (priority) {
-      case 'urgent':
-          return '../assets/img/prio_urgent_red.png';
-      case 'medium':
-          return '../assets/img/prio_medium_orange.png';
-      case 'low':
-          return '../assets/img/prio_low_green.png';
-      default:
-          console.error('Unbekannte Priorität:', priority);
-          return '';
-  }
-} */
 
 
 
 
+/* --------- drag and drop mit empty kanban wrapper message -------- */
 
 /* function renderTasks() {
   clearColumns();
@@ -603,7 +565,7 @@ function resetImageDelete() {
  } */
 
 
-
+/* ---- neuen subtask erstellen ---- */
 
 /*  function renderAddSubtasks(taskId) {
    const task = tasks.find((t) => t.id === taskId);
@@ -635,73 +597,3 @@ function resetImageDelete() {
     clearInputs();
   }
 } */
-
-
-
-
-/* function renderSubtasks(task) {
-let subtasksContent = document.getElementById('single_subtasks');
-subtasksContent.innerHTML = "";
-
-// Prüfen, ob subtasks ein Array ist
-if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
-  task.subtasks.forEach(subtask => {
-    const subtaskImage = getSubtaskImage(subtask.checked);
-    subtasksContent.innerHTML += getSubtaskTemplate(task, subtaskImage);
-  });
-}
-else {
-  subtasksContent.innerHTML = "<p>No subtasks available</p>";
-} 
-}*/
-
-/* function getSubtaskTemplate(task, subtaskImage) {
-  return `
-    <div class="subtask">
-      <img onclick="toggleSubtaskStatus()"
-           id="subtask_image"
-           src="${subtaskImage}" alt="checkbox">
-      <span>${task.subtasks}</span>
-    </div>
-  `;
-} */
-
-
-/* function getSubtaskImage(isChecked) {
-  return isChecked ? "../assets/img/checkbox_true.png" : "../assets/img/checkbox_false.png";
-} */
-
-/* async function toggleSubtaskStatus(taskId, subtaskId) {
-  const task = tasks.find(t => t.id === taskId);
-  if (!task) return;
-
-  const subtask = task.subtasks.find(s => s.id === subtaskId);
-  if (subtask) {
-    // Status wechseln
-    subtask.checked = !subtask.checked;
-
-  
-    const subtaskElement = document.getElementById(`subtask_image-${taskId}-${subtaskId}`);
-    if (subtaskElement) {
-      subtaskElement.src = getSubtaskImage(subtask.checked);
-    }
-
-    
-    await updateTaskInFirebase(task);
-
-    
-    updateTaskProgress(taskId);
-  }
-} */
-
-/* function transformSubtasks(task) {
-  if (Array.isArray(task.subtasks)) {
-    task.subtasks = task.subtasks.map((title, index) => ({
-      id: `subtask-${task.id}-${index}`, 
-      title: title,
-      checked: false 
-    }));
-  }
-} */
-
-
