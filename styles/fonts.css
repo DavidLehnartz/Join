@@ -150,11 +150,17 @@ h4 {
   color: #ff8190;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1320px) {
   h2 {
     font-size: 55px;
   }
 
+  h4 {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 1250px) {
   .name-container h3 {
     font-size: 40px;
   }
@@ -179,6 +185,10 @@ h4 {
 }
 
 @media (max-width: 390px) {
+  h2 {
+    font-size: 40px;
+  }
+
   .contacts-info-hl {
     font-size: 16px !important;
   }

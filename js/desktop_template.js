@@ -87,7 +87,7 @@ function renderHeader(initial) {
           <span class="KanbanSpanStyle">Kanban Project Management Tool</span>
         </div>
         <div class="header-icons">
-          <img class="header-help-icon" src="../assets/img/help.png" alt="help" onclick="window.location.href='./help.html'"/>
+          <img class="header-help-icon hidden-mobile" src="../assets/img/help.png" alt="help" onclick="window.location.href='./help.html'"/>
           <div id="contact-profile-icon" class="header-profil-icon" onclick="showHeaderMenu('contacts-header-menu')">${initial}</div>
           <div id="contacts-header-menu"></div>
         </div>

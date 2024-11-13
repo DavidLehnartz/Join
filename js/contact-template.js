@@ -1,12 +1,19 @@
 function getAddContactDialog() {
   return `<div class="contacts-overlay-header">
-          <img src="../assets/img/join_logo_white.svg" />
+            <div class="contacts-close hide-desktop">
+              <img
+                src="../assets/icons/close_white.svg"
+                onclick="closeContactForm(event)"
+              />
+            </div>
+            <div class="overlay-header-content">
+          <img class="hide-mobile" src="../assets/img/join_logo_white.svg" />
           <h2>Add contact</h2>
           <h4>Tasks are better with a team!</h4>
-          <hr />
+          <hr /></div>
         </div>
         <div class="contacts-overlay-info">
-          <div class="contacts-close">
+          <div class="contacts-close hide-mobile">
             <img
               src="../assets/icons/close.svg"
               onclick="closeContactForm(event)"
@@ -29,7 +36,7 @@ function getAddContactDialog() {
               </div>
               <div class="add-contact-buttons">
                 <button
-                  class="contact-form-btn btn-outline"
+                  class="contact-form-btn btn-outline hide-mobile"
                   onclick="closeContactForm(event)"
                 >
                   <p>Cancel</p>
@@ -52,13 +59,19 @@ function getAddContactDialog() {
 
 function getEditContactDialog(contact, id) {
   return `<div class="contacts-overlay-header">
-          <img src="../assets/img/join_logo_white.svg" />
-          <h2>Add contact</h2>
-          <h4>Tasks are better with a team!</h4>
-          <hr />
+          <div class="contacts-close hide-desktop">
+              <img
+                src="../assets/icons/close_white.svg"
+                onclick="closeContactForm(event)"
+              />
+            </div>
+            <div class="overlay-header-content">
+          <img class="hide-mobile" src="../assets/img/join_logo_white.svg" />
+          <h2>Edit contact</h2>
+          <hr /></div>
         </div>
         <div class="contacts-overlay-info">
-          <div class="contacts-close">
+          <div class="contacts-close hide-mobile">
             <img
               src="../assets/icons/close.svg"
               onclick="closeContactForm(event)"

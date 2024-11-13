@@ -29,6 +29,10 @@ h1 {
   margin: 0px;
 }
 
+.hidden-desktop {
+  display: none !important;
+}
+
 .left-sidebar {
   z-index: 90;
   display: flex;
@@ -242,6 +246,13 @@ header {
 }
 
 @media (max-width: 1320px) {
+  .hidden-desktop {
+    display: flex !important;
+  }
+
+  .hidden-mobile {
+    display: none;
+  }
   .bigLogo {
     display: none;
   }
