@@ -30,8 +30,9 @@ let howToUseArray = [
   },
 ];
 
-function initHelp(profileId) {
-  getInitialOfUser(profileId);
+function initHelp(header, sidebar, link) {
+  createHeader(header);
+  createSidebar(sidebar, link);
   showHowToUseSteps();
 }
 

@@ -1,4 +1,9 @@
+.hide-desktop {
+  display: none !important;
+}
+
 .contacts-overlay {
+  z-index: 110;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -10,23 +15,25 @@
   justify-content: center;
   align-items: center;
   border-radius: 0px;
+  overflow: hidden;
 }
 
 .contacts-overlay-container {
   display: flex;
   position: fixed;
   top: 50%;
-  right: -300px;
+  right: -1500px;
   align-items: flex-start;
   justify-content: center;
   max-width: 1250px;
-  width: 80%;
+  width: 90%;
   height: 60%;
   border-radius: 30px;
   background-color: white;
-  opacity: 0;
   transform: translateX(-50%);
   transition: right 0.5s ease;
+  opacity: 0;
+  overflow: hidden;
 }
 
 .contacts-overlay-container.show {
@@ -37,6 +44,7 @@
 
 .contacts-overlay-header {
   display: flex;
+  flex: 2;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
@@ -44,13 +52,17 @@
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
   color: white;
-  width: 35%;
+  width: 100%;
   height: 100%;
+}
+
+.overlay-header-content {
   padding: 0px 50px;
 }
 
 .contacts-overlay-header img {
   width: 55px;
+  margin-bottom: 15px;
 }
 
 .contacts-overlay-header hr {
@@ -64,10 +76,11 @@
 
 .contacts-overlay-info {
   display: flex;
+  flex: 3;
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-start;
-  width: 65%;
+  width: 100%;
   height: 100%;
 }
 
@@ -186,10 +199,161 @@
   right: -300px;
   transform: translateX(-50%);
   transition: right 0.5s ease, opacity 0.5s ease;
+  overflow: hidden;
 }
 
 .add-contact-message.show {
   right: 50%;
   transform: translate(50%, -50%);
   opacity: 1;
+}
+
+@media (max-width: 1320px) {
+  .contacts-overlay-header {
+    width: 30%;
+  }
+
+  .contacts-overlay-info {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1120px) {
+  .hide-desktop {
+    display: flex !important;
+  }
+
+  .hide-mobile {
+    display: none;
+  }
+
+  .contacts-close {
+    width: 95%;
+    margin: 0px;
+  }
+
+  .contacts-overlay {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contacts-overlay-container {
+    z-index: 120;
+    justify-content: top;
+    flex-direction: column;
+    top: 45%;
+    width: 70%;
+    height: 85%;
+  }
+
+  .contacts-overlay-header {
+    align-items: top;
+    justify-content: top;
+    border-bottom-left-radius: 0px;
+    width: 100%;
+    height: 40%;
+  }
+
+  .overlay-header-content {
+    margin-bottom: 60px;
+  }
+
+  .contacts-overlay-header hr {
+    display: flex;
+    max-width: 90px;
+    border: 1.5px solid #29abe2;
+    border-radius: 3px;
+    margin-top: 7px;
+    margin-left: 0px;
+  }
+
+  .contacts-overlay-info {
+    width: 100%;
+    height: 60%;
+  }
+
+  .add-contact-section {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: -60px 0px 0px 0px;
+    gap: 30px;
+  }
+
+  .add-contacts-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 90%;
+    margin-top: 30px;
+  }
+
+  .add-contacts-form input {
+    width: 500px;
+  }
+
+  .add-contact-buttons {
+    display: flex;
+    align-items: center;
+    width: auto;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 800px) {
+  .add-contacts-form input {
+    width: 422px;
+  }
+}
+
+@media (max-width: 700px) {
+  .contacts-overlay-container {
+    width: 90%;
+    height: 85%;
+  }
+
+  .add-contacts-form input {
+    width: 500px;
+  }
+}
+
+@media (max-width: 630px) {
+  .add-contacts-form input {
+    width: 400px;
+  }
+}
+
+@media (max-width: 550px) {
+  .add-contacts-form input {
+    width: 350px;
+  }
+
+  .add-contact-section {
+    margin: -50px 0px 0px 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay-header-content {
+    padding: 0px 30px;
+    margin-bottom: 60px;
+  }
+
+  .add-contacts-form input {
+    width: 300px;
+  }
+}
+
+@media (max-width: 400px) {
+  .add-contacts-form input {
+    width: 250px;
+  }
+}
+
+@media (max-width: 350px) {
+  .add-contacts-form input {
+    width: 200px;
+  }
 }

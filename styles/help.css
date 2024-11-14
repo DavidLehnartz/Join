@@ -1,3 +1,17 @@
+.help-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 1440px;
+  position: absolute;
+  top: 96px;
+  left: 280px;
+  bottom: 0px;
+  overflow: scroll;
+  padding: 0px 60px;
+}
+
 .help-header-row {
   display: flex;
   width: 100%;
@@ -28,4 +42,18 @@
 .help-how-to-step h3 {
   margin-top: 3px;
   margin-right: 40px;
+}
+
+@media (max-width: 1320px) {
+  .help-content-wrapper {
+    max-width: 1280px;
+    left: 0px;
+    padding: 0px 60px;
+  }
+}
+
+@media (max-width: 500px) {
+  .help-content-wrapper {
+    padding: 0px 30px;
+  }
 }

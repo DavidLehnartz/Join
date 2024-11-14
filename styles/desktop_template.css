@@ -17,18 +17,29 @@ a {
   text-decoration: none;
 }
 
+span {
+  font-family: "Inter", sans-serif;
+}
+
+.KanbanSpanStyle {
+  font-size: 20px;
+}
+
 h1 {
   margin: 0px;
 }
 
+.hidden-desktop {
+  display: none !important;
+}
+
 .left-sidebar {
+  z-index: 90;
   display: flex;
-  position: sticky;
-  top: 0px;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 232px;
+  width: 280px;
   height: 100vh;
   background-color: rgb(42, 54, 71);
 }
@@ -44,7 +55,7 @@ h1 {
   align-items: center;
   color: #b5b6b9;
   background-color: #2a3647;
-  width: 232px;
+  width: 280px;
   height: 46px;
   gap: 8px;
 }
@@ -53,12 +64,7 @@ h1 {
   color: white;
   background-color: rgb(57, 74, 95);
   filter: brightness(1.2);
-  transition: filter 0.3s ease;
-}
-
-.active {
-  background-color: #091931;
-  filter: brightness(1.2);
+  transition: all 125ms ease;
 }
 
 .sidebar-icons {
@@ -70,21 +76,30 @@ h1 {
   flex-direction: column;
   align-items: center;
   color: #b5b6b9;
-  cursor: pointer;
+}
+
+.links:active {
+  background-color: #091931;
+  color: white;
+}
+
+.link-active {
+  background-color: #091931;
+  color: white;
 }
 
 .legacy-links:hover {
   color: rgb(41, 171, 226);
-  transition: transform 0.5s;
+  transition: transform 125ms;
   transform: scale(1.05);
 }
 
 header {
   background-color: rgb(255, 255, 255);
   box-shadow: 4px 0px 8px 0px rgb(170 170 170);
-  padding-right: 60px;
+  padding-right: 40px;
   padding-left: 60px;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .header-wrapper {
@@ -96,24 +111,70 @@ header {
   margin: 0px auto;
 }
 
-.app-description {
-  font-size: 20px;
+.mobileLogoStyle {
+  width: 50px;
+  height: 50px;
+  display: none;
 }
 
 .header-icons {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.header-menu-container {
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  gap: 8px;
+  background-color: #2a3647;
+  padding: 20px 10px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: fixed;
+  top: 96px;
+  right: 60px;
+  color: #cdcdcd;
+}
+
+.header-menu-item {
+  width: 120px;
+  padding: 10px 16px;
   cursor: pointer;
 }
 
+.header-menu-item:hover {
+  background-color: rgb(57, 74, 95);
+}
+
+.links:active {
+  background-color: #091931;
+  color: white;
+}
+
+.link-active {
+  background-color: #091931;
+  color: white;
+}
+
 .main-content-wrapper {
-  display: flex;
-  flex-direction: column;
   max-width: 1440px;
-  margin: 0px auto;
-  padding-left: 60px;
-  padding-right: 60px;
+}
+
+.header-help-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.header-help-icon:hover {
+  transition: transform 0.1s;
+  transform: scale(1.1);
 }
 
 .header-help-icon {
@@ -182,4 +243,100 @@ header {
 .link-active {
   background-color: #091931;
   color: white;
+}
+
+@media (max-width: 1320px) {
+  .hidden-desktop {
+    display: flex !important;
+  }
+
+  .hidden-mobile {
+    display: none;
+  }
+  .bigLogo {
+    display: none;
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .sidebar-icons {
+    margin-left: 0;
+    margin-right: 0px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .left-sidebar {
+    width: 100%;
+    max-width: 100vw;
+    height: fit-content;
+    position: fixed;
+    bottom: 0;
+    background-attachment: scroll;
+    z-index: 90;
+    justify-content: space-between;
+  }
+
+  .links p {
+    margin: 0px;
+    font-size: 15px !important;
+  }
+
+  .left-sidebar-links {
+    width: 100%;
+    flex-direction: row;
+    margin: auto;
+    gap: 0px;
+  }
+
+  .legacy-links {
+    display: none;
+  }
+
+  .links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 15px 0px !important;
+  }
+
+  .mobileSpanStyle {
+    margin-bottom: 140px;
+    margin-left: 80px;
+  }
+
+  .main-content-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  header {
+    padding: 0px;
+  }
+
+  .KanbanSpanStyle {
+    display: none;
+  }
+
+  .header-wrapper {
+    padding: 0px 30px;
+  }
+
+  .mobileLogoStyle {
+    display: flex;
+  }
+
+  .header-menu-container {
+    right: 40px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0px;
 }
