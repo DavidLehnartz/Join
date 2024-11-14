@@ -120,7 +120,7 @@ function getContactInfoTemplate(contact, id) {
               <div id="contact-initial" class="profile-icon-big bg-${contact.color}">${contact.initial}</div>
               <div id="contact-name" class="name-container">
                 <h3>${contact.name}</h3>
-                <div class="contacts-btn-row">
+                <div class="contacts-btn-row hide-mobile">
                   <div
                     id="btn-contact-edit"
                     class="text-button"
@@ -168,4 +168,72 @@ function getContactListItemTemplate(contact, id) {
                 <p id="list-mail" class="copy-mail">${contact.email}</p>
               </div>
             </button>`;
+}
+
+function renderMobileEditMenu(id) {
+  return `<div class="edit-menu-container">
+                <div
+                    id="btn-contact-edit"
+                    class="text-button"
+                    onclick="showEditContactForm(event, '${id}')"
+                  >
+                    <img class="default-icon" src="../assets/icons/edit.svg" />
+                    <img class="hover-icon" src="../assets/icons/edit_blue.svg" />
+                    <p>Edit</p>
+                  </div>
+                  <div id="btn-contact-delete" class="text-button" onclick="deleteAndRefreshContactListMobile('${id}')">
+                    <img class="default-icon" src="../assets/icons/delete.svg" />
+                    <img class="hover-icon" src="../assets/icons/delete_blue.svg" />
+                    <p>Delete</p>
+                  </div>
+              </div>`;
+}
+
+function renderMobileInfoSection(contact, id) {
+  return `<div class="mobile-contacts-header">
+            <div class="contacts-headline">
+              <h2>Contacts</h2>
+              <div class="vl"></div>
+              <p>Better with a team</p>
+            </div>
+            <img
+              src="../assets/icons/arrow-left-line.svg"
+              onclick="closeMobileInfoDialog()"
+            />
+          </div>
+          <div class="contacts-name">
+              <div id="contact-initial" class="profile-icon-big bg-${contact.color}">${contact.initial}</div>
+              <div id="contact-name" class="name-container">
+                <h3>${contact.name}</h3>
+                <div class="contacts-btn-row hide-mobile">
+                  <div
+                    id="btn-contact-edit"
+                    class="text-button"
+                    onclick="showEditContactForm(event, '${id}')"
+                  >
+                    <img class="default-icon" src="../assets/icons/edit.svg" />
+                    <img class="hover-icon" src="../assets/icons/edit_blue.svg" />
+                    <p>Edit</p>
+                  </div>
+                  <div id="btn-contact-delete" class="text-button" onclick="deleteAndRefreshContactList('${id}')">
+                    <img class="default-icon" src="../assets/icons/delete.svg" />
+                    <img class="hover-icon" src="../assets/icons/delete_blue.svg" />
+                    <p>Delete</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="contacts-info-hl">
+              <h4>Contact Information</h4>
+            </div>
+            <div class="contacts-info-content">
+              <p class="label">Email</p>
+              <p id="contact-mail" class="copy-mail">${contact.email}</p>
+              <p class="label">Phone</p>
+              <p id="contact-phone" class="copy-text">${contact.phone}</p>
+            </div>
+            <div id="edit-menu"></div>
+            <div class="add-btn-mobile" onclick="showMobileEditMenu('${id}')">
+            <img src="../assets/icons/more_vert.svg" />
+            </div>`;
 }

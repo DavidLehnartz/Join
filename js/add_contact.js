@@ -51,6 +51,7 @@ async function updateContactInfo(event, id) {
   await updateContact(updatedContact, id);
   toggleOverlay();
   dialog.classList.remove("show");
+  await showContactInfo(id);
   refreshContactList();
 }
 
