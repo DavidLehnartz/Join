@@ -53,6 +53,7 @@ label {
   transition: 0.5s;
   outline: none;
   padding: 12px 21px;
+  padding-right: 50px;
   font-size: 20px;
   padding-left: 16px;
 }
@@ -210,10 +211,14 @@ label {
   gap: 8px;
 }
 
-.task-title {
+.task-title{
+  display: flex;
+    flex-wrap: wrap;
 }
 
-.task-description {
+.task-description{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .kanban-task-description {

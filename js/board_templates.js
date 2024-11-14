@@ -365,39 +365,36 @@ function getEditTaskPopUpTemplate(task) {
                    </div>
                   </div>
                   
+                  <div id="selected_contacts" class="assigned-contacts"></div>
 
-                  <div id="selected_contacts" class="assigned-contacts">
-                   
-                  
-
-                  </div>
                 </div>
 
                 <div class="pop-up-edit-task-subtasks">
                   Subtasks
                   <div class="input-box">
-                    <input
-                      id="input_subtask_add_subtask"
+                    <input onkeyup="updateButtonImage();"
+                      id="input_add_subtask"
                       class="pop-up-edit-subtask-input"
                       type="text"
                       placeholder="Add new subtask"
                     />
+                    
                     <button class="pop-up-edit-task-input-btn">
-                      <img
-                        onclick="addSubtask()"
+                    <div id="input_image_content">
+                      <img onclick="errorMessage()" id="input_button_image"
                         class="pop-up-edit-task-input-btn-img"
                         src="../assets/img/add_black.png"
                         alt=""
                       />
+                      </div>
                     </button>
+                    
                   </div>
 
                   <div id="error_message" class="error-message"></div>
-                  <div
-                    id="subtasks"
-                    class="pop-up-edit-task-list-container"
-                  >
-                  </div>
+
+                  <ul id="added_subtasks" class="pop-up-edit-task-list-container"></ul>
+
                 </div>
               </div>
             </div>
@@ -464,16 +461,12 @@ function getAssigneesTemplate(assignedTo) {
 
 function getSelectedContactsTemplate(contact) {
   return `
-          <div class="selected-contact bg-${contact.color}">${contact.initial}</div>
+          <div id="selected_contact" class="selected-contact bg-${contact.color}">${contact.initial}</div>
   `;
 }
 
 
-/* function getSubtasksTemplate(tasks) {
-  return `
-          <li>${tasks.subtasks}</li>
-  `;
-} */
+
 
 
 /* function getNavbarResponsiveTemplate() {

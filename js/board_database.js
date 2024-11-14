@@ -9,11 +9,12 @@ let tasks = [];
 let contacts = [];
 let selectedContacts = [];
 let subtasks = [];
+let addedSubtasks = [];
 let assignees = [];
 
 async function fetchTasksData() {
-  tasks = [];
-  subtasks = [];
+    tasks = [];
+    subtasks = [];
 
   let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
   let tasksToJson = await tasksResponse.json();
@@ -29,17 +30,58 @@ async function fetchTasksData() {
 
       tasks.push(task);
 
-      if (task.assignedTo && !assignees.includes(task.assignedTo)) {
-        assignees.push(task.assignedTo);
-      }
-    });
-    renderTasks();
-  }
+            /* if (task.assignedTo && !assignees.includes(task.assignedTo)) {
+                assignees.push(task.assignedTo);
+            } */
+
+            if (task.assignedTo) {
+                assignees.push(...task.assignedTo);
+            }
+
+        });
+        renderTasks();
+    }
 
   console.log("Tasks nach Fetch:", tasks);
   console.log("Assigned Users:", assignees);
   console.log("Subtasks:", subtasks);
 }
+
+// GPT
+/*   async function fetchTasksData() {
+      tasks = [];
+      subtasks = [];
+  
+      let tasksResponse = await fetch(BASE_URL + "/tasks.json");
+      let tasksToJson = await tasksResponse.json();
+  
+      if (tasksToJson) {
+          const taskKeys = Object.keys(tasksToJson);
+  
+          taskKeys.forEach((key) => {
+              const task = {
+                  id: key,
+                  ...tasksToJson[key]
+              };
+  
+              // Sicherstellen, dass `subtasks` ein Array ist
+              if (!Array.isArray(task.subtasks)) {
+                  task.subtasks = Object.values(task.subtasks || {});
+              }
+  
+              tasks.push(task);
+  
+              if (task.assignedTo && !assignees.includes(task.assignedTo)) {
+                  assignees.push(task.assignedTo);
+              }
+          });
+          renderTasks();
+      }
+  
+      console.log("Tasks nach Fetch:", tasks);
+      console.log("Assigned Users:", assignees);
+      console.log("Subtasks:", subtasks);
+  } */
 
 async function fetchContactsData() {
   contacts = [];
@@ -81,36 +123,58 @@ async function deleteTaskData(taskId) {
 }
 
 async function updateTaskInFirebase(task) {
-  const taskId = task.id;
-  const url = `${BASE_URL}/tasks/${taskId}.json`;
+    const taskId = task.id;
+    const url = `${BASE_URL}/tasks/${taskId}.json`;
 
-  try {
-    const response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: task.id,
-        title: task.title,
-        description: task.description,
-        category: task.category,
-        assignedTo: task.assignedTo,
-        dueDate: task.dueDate,
-        priority: task.priority,
-        name: task.name,
-        initials: task.initials,
-        subtasks: task.subtask,
-      }),
-    });
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: task.id,
+                title: task.title,
+                description: task.description,
+                category: task.category,
+                assignedTo: task.assignedTo,
+                dueDate: task.dueDate,
+                priority: task.priority,
+                name: task.name,
+                initials: task.initials,
+                subtasks: task.subtasks,
+            })
+        });
 
-    if (!response.ok) {
-      throw new Error("Fehler beim Aktualisieren der Aufgabe in Firebase");
+        if (!response.ok) {
+            throw new Error('Fehler beim Aktualisieren der Aufgabe in Firebase');
+        }
+
+        console.log('Aufgabe erfolgreich aktualisiert in Firebase:', task);
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren der Aufgabe:', error);
     }
 
-    console.log("Aufgabe erfolgreich aktualisiert in Firebase:", task);
-  } catch (error) {
-    console.error("Fehler beim Aktualisieren der Aufgabe:", error);
-  }
-  renderTasks();
-}
+/* async function updateTaskInFirebase(task) {
+    const taskId = task.id;
+    const url = `${BASE_URL}/tasks/${taskId}.json`;
+ 
+    try {
+        // Übergebe das gesamte Task-Objekt, damit alle Eigenschaften, einschließlich subtasks, erhalten bleiben
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(task)  // Übergibt das gesamte `task` Objekt
+        });
+ 
+        if (!response.ok) {
+            throw new Error('Fehler beim Aktualisieren der Aufgabe in Firebase');
+        }
+ 
+        console.log('Aufgabe erfolgreich aktualisiert in Firebase:', task);
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren der Aufgabe:', error);
+    }
+} */

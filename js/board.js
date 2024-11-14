@@ -136,29 +136,14 @@ function renderEditTaskPopUp(taskId, priorityImage) {
   const task = tasks.find((t) => t.id === taskId);
 
   if (task) {
-    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(
-      task,
-      priorityImage
-    );
+    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task, priorityImage);
+
+    setPriorityButton(task.priority);
   }
 
   document
     .getElementById("edit_task_pop_up")
     .classList.remove("responsive-pop-up-closed");
-}
-
-function renderDropdownContacts() {
-  let dropdownContent = document.getElementById("dropdown_contacts");
-  dropdownContent.innerHTML = "";
-
-  for (
-    let indexContacts = 0;
-    indexContacts < contacts.length;
-    indexContacts++
-  ) {
-    let contact = contacts[indexContacts];
-    dropdownContent.innerHTML += getDropdownContactsTemplate(contact);
-  }
 }
 
 function renderSelectedContacts() {
@@ -203,7 +188,7 @@ async function saveTaskChanges(taskId) {
     task.description = document.getElementById("edit_description").value;
     task.dueDate = document.getElementById("edit_due_date").value;
 
-    //   task.assignedContacts = [...selectedContacts];
+    task.assignedContacts = [...selectedContacts];
 
     if (selectedPriority) {
       task.priority = selectedPriority;
@@ -259,6 +244,12 @@ function changePrioButtons(selectedButton) {
     selectedPriority = "Low";
     updateTaskPriority("Low");
   }
+  else if (selectedButton.id === 'prio_low') {
+    selectedButton.classList.add('prio-low-active');
+    img.src = '../assets/img/low21.png';
+    selectedPriority = 'Low';
+    updateTaskPriority('Low');
+  }
 }
 
 function setPriorityButton(priority) {
@@ -307,28 +298,7 @@ function resetButtons() {
   });
 }
 
-function toggleCheckboxContact(checkboxId, contactInitial, contactColor) {
-  let checkbox = document.getElementById(checkboxId);
-
-  if (checkbox.src.includes("checkbox_false.png")) {
-    checkbox.src = "../assets/img/checkbox_true.png";
-    selectedContacts.push({
-      id: checkboxId,
-      initial: contactInitial,
-      color: contactColor,
-    });
-  } else {
-    checkbox.src = "../assets/img/checkbox_false.png";
-    const index = selectedContacts.findIndex(
-      (contact) => contact.id === checkboxId
-    );
-    if (index !== -1) {
-      selectedContacts.splice(index, 1);
-    }
-  }
-  renderSelectedContacts();
-  console.log(selectedContacts);
-}
+/* ----- versuch subtasks in ein globales array zu pushen ----- */
 
 /* function toggleCheckboxSubtasks(subtaskId) {
   let checkbox = document.getElementById(`checkbox_${subtaskId}`);
@@ -356,12 +326,12 @@ function toggleCheckboxContact(checkboxId, contactInitial, contactColor) {
     }
   }
   renderTasks();
-  console.log(subtasks); // Zeigt die aktuelle Liste der Subtasks an
+  console.log(subtasks); 
 } */
 
 function renderSubtasks(taskId) {
-  let subtaskContent = document.getElementById("single_subtasks");
-  subtaskContent.innerHTML = ""; // Leert das Container-Element
+  let subtaskContent = document.getElementById('single_subtasks');
+  subtaskContent.innerHTML = '';  
 
   const task = tasks.find((t) => t.id === taskId);
 
@@ -374,34 +344,112 @@ function renderSubtasks(taskId) {
   }
 }
 
-/* function getSubtasksTemplate(taskId, subtask, index) { // anfangs ohne index
-  return `
-  <div  class="subtask">
-    <img onclick="toggleCheckboxSubtasks('${taskId}','${index}')"
-         id="checkbox_${index}" 
-         src="../assets/img/checkbox_false.png" 
-         alt="checkbox">
-    <span>${subtask.name}</span>
-  </div>
-  `;
-} */
-
 function getSubtasksTemplate(taskId, subtask, index) {
   return `
-    <div class="subtask" id="subtask_${taskId}_${index}">
-      <img class="checkbox" onclick="toggleCheckboxSubtasks('${taskId}', ${index})" 
-           id="checkbox_${taskId}_${index}" 
-           src="../assets/img/checkbox_false.png" 
-           alt="checkbox">
-      <span>${subtask.name}</span>
-    </div>
+          <div class="subtask" id="subtask_${taskId}_${index}">
+            <img class="checkbox" onclick="toggleCheckboxSubtasks('${taskId}', ${index})" 
+                 id="checkbox_${taskId}_${index}" 
+                 src="../assets/img/checkbox_false.png" 
+                 alt="checkbox">
+            <span>${subtask.name}</span>
+          </div>
   `;
 }
 
+function updateButtonImage() {
+  /* let ButtonImage = document.getElementById('input_button_image'); */
+  let buttonContainer = document.getElementById('input_image_content');
+  let inputAddedSubtask = document.getElementById('input_add_subtask').value.trim();
+
+
+  if (inputAddedSubtask.length > 0) {
+    buttonContainer.innerHTML = ` <button class="pop-up-edit-task-input-btn">
+                                    <div id="button_content_with_images" class="pop-up-edit-task-input-btn-img-container">
+                                       <img onclick="clearInputs()" class="pop-up-edit-task-input-btn-img" src="../assets/img/iconoir_cancel.png" alt="image 1">
+                                       <div class="vertical_line"></div>
+                                       <img onclick="addSubtask()" class="pop-up-edit-task-input-btn-img" src="../assets/img/check_black.png" alt="image 2">
+                                    </div>
+                                  </button>
+                                `;
+  } else {
+    buttonContainer.innerHTML = ` <button class="pop-up-edit-task-input-btn">
+                                    <img id="input_button_image"
+                                    class="pop-up-edit-task-input-btn-img"
+                                    src="../assets/img/add_black.png"
+                                    alt=""
+                                    />
+                                  </button> 
+                                `;
+
+  }
+}
+
+
+function addSubtask() {
+  let inputAddedSubtask = document.getElementById('input_add_subtask');
+  let addedSubtaskTitle = inputAddedSubtask.value.trim();
+  let addedSubtask = {
+    id: generateUniqueId(),
+    title: addedSubtaskTitle
+  };
+
+  if (errorMessage()) {
+    return;
+  } else {
+    addedSubtasks.push(addedSubtask);
+    console.log("added subtasks arr", addedSubtasks);
+
+    renderAddSubtasks();
+    clearInputs();
+  }
+
+  updateButtonImage();
+}
+
+
+function generateUniqueId() {
+  return '_' + Math.random().toString(36).substr(2, 9);
+}
+
+
+function renderAddSubtasks() {
+  let addedSubtasksContent = document.getElementById('added_subtasks');
+  addedSubtasksContent.innerHTML = "";
+
+  addedSubtasks.forEach(addedSubtask => {
+    addedSubtasksContent.innerHTML += getAddedSubtasksTemplate(addedSubtask);
+  });
+}
+
+
+function getAddedSubtasksTemplate(addedSubtask) {
+  return `
+          <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item">
+             <span>${addedSubtask.title}</span>
+              <div class="list-icon-container">
+                <img  class="icon-container-images " src="../assets/img/edit.png" alt="edit icon">
+                <div class="vertical_line"></div>
+                <img onclick="deleteAddedSubtask('${addedSubtask.id}')" class="icon-container-images " src="../assets/img/delete.png" alt="delete icon">
+              </div>
+          </li>
+  `;
+}
+
+
+
+function showIcons(listItem) {
+  const iconContainer = listItem.querySelector('.list-icon-container');
+  iconContainer.style.visibility = "visible";
+}
+
+function hideIcons(listItem) {
+  const iconContainer = listItem.querySelector('.list-icon-container');
+  iconContainer.style.visibility = "hidden";
+}
+
+
 function errorMessage() {
-  let inputAddedSubtask = document
-    .getElementById("input_subtask_add_subtask")
-    .value.trim();
+  let inputAddedSubtask = document.getElementById('input_add_subtask').value.trim();
 
   if (inputAddedSubtask === "") {
     document.getElementById(
@@ -409,9 +457,21 @@ function errorMessage() {
     ).innerHTML = `Please enter a subtask!`;
     return true;
   }
-
-  document.getElementById("error_message").innerHTML = "";
+  document.getElementById('error_message').innerHTML = "";
   return false;
+
+}
+
+
+function deleteAddedSubtask(id) {
+  let index = addedSubtasks.findIndex(addedSubtask => addedSubtask.id === id);
+
+  if (index !== -1) {
+    addedSubtasks.splice(index, 1);
+    renderAddSubtasks();
+  }
+
+  console.log(addedSubtasks);
 }
 
 function closeEditPopUp() {
@@ -427,7 +487,8 @@ function closePopUps() {
 }
 
 function clearInputs() {
-  document.getElementById("input_subtask_add_subtask").value = "";
+  document.getElementById('input_add_subtask').value = '';
+  updateButtonImage();
 }
 
 function changeImageEdit() {
@@ -457,10 +518,11 @@ function resetImageDelete() {
   let subtasksContent = document.getElementById('subtasks');
   subtasksContent.innerHTML = "";
 
-  for (let indexTasks = 0; indexTasks < subtasks.length; indexTasks++) {
-    subtasksContent.innerHTML += getSubtasksTemplate(tasks[indexTasks]);
-  }
-} */
+/* ------------------------------- GPT ---------------------------------- */
+
+async function toggleCheckboxSubtasks(taskId, subtaskIndex) {
+  const task = tasks.find(t => t.id === taskId);
+  if (!task) return;
 
 /**
  * This function is used to add a subtask to subtasks at edit task pop up
@@ -470,15 +532,18 @@ function resetImageDelete() {
 /* function addSubtask() {
   let inputAddedSubtask = document.getElementById('input_subtask_add_subtask');
   let addedSubtask = inputAddedSubtask.value.trim();
+  // Toggle the completion status of the specified subtask
+  task.subtasks[subtaskIndex].completed = !task.subtasks[subtaskIndex].completed;
 
-  if (errorMessage()) {
-    return;
-  }
+  // Update the task in Firebase
+  await updateTaskInFirebase(task);
 
-  subtasks.push(addedSubtask);
-  renderAddSubtasks();
-  clearInputs();
-} */
+  // Re-render the subtasks to reflect the change in the UI
+  renderSubtasks(taskId);
+}
+
+/* ------------------------------------------------------------------- */
+
 
 /* function getPriorityImage(priority) {
   switch (priority) {
@@ -493,6 +558,8 @@ function resetImageDelete() {
           return '';
   }
 } */
+
+/* --------- drag and drop mit empty kanban wrapper message -------- */
 
 /* function renderTasks() {
   clearColumns();
@@ -545,6 +612,8 @@ function resetImageDelete() {
    }
  } */
 
+/* ---- neuen subtask erstellen ---- */
+
 /*  function renderAddSubtasks(taskId) {
    const task = tasks.find((t) => t.id === taskId);
    const subtasksContent = document.getElementById('subtasks');
@@ -558,7 +627,7 @@ function resetImageDelete() {
  } */
 
 /* function addSubtask(taskId) {
-  let inputAddedSubtask = document.getElementById('input_subtask_add_subtask');
+  let inputAddedSubtask = document.getElementById('input_add_subtask');
   let addedSubtask = inputAddedSubtask.value.trim();
  
   if (!addedSubtask) {
