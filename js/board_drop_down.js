@@ -72,12 +72,17 @@ function addContactToSelected(checkboxId, contactInitial, contactColor) {
 }
 
 
+
+
 function removeContactFromSelected(checkboxId) {
   const index = selectedContacts.findIndex(contact => contact.id === checkboxId);
   if (index !== -1) {
     selectedContacts.splice(index, 1);
   }
 }
+
+
+
 
 /* window.onclick = function (event) {
   if (!event.target.matches('.drop-btn')) {
@@ -92,6 +97,4 @@ function removeContactFromSelected(checkboxId) {
   }
 }  */
 
-
-  /*  */
   

@@ -208,6 +208,7 @@ select {
   width: 100%;
   border: 1px solid #d1d1d1;
   padding: 12px 21px;
+  padding-right: 100px;
   font-size: 20px;
   cursor: pointer;
   -webkit-transition: 0.5s;
@@ -250,21 +251,109 @@ select {
   border-radius: 100%;
 }
 
+.pop-up-edit-task-input-btn-img-container{
+  display: flex;
+}
+
+.vertical_line {
+  width: 1px;
+  height: 24px;
+  background-color: #ccc;
+  margin: 0 5px;
+}
+
 .pop-up-edit-task-list-container {
   display: flex;
   flex-direction: column;
 }
 
+/* .added-subtask-item{
+
+}
+
 li {
-  padding: 4px 16px;
-  font-size: 16px;
-  cursor: pointer;
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    list-style-type: disc;
+    list-style-position: inside; 
 }
 
 li:hover {
   border-radius: 10px;
   background-color: rgb(246, 247, 248);
+  list-style-type: disc;
 }
+
+.list-icon-container{
+  display: flex;
+  align-items: center;
+}
+
+.icon-container-images {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.icon-container-images:hover{
+  transition: transform 0.1s;
+  transform: scale(1.1);
+} */
+
+ul{
+  margin: 0px;
+  padding: 0px;
+}
+
+li.added-subtask-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  list-style-type: none; 
+}
+
+
+li.added-subtask-item::before {
+  content: "•";           
+  color: black;           
+  font-size: 16px;
+  margin-right: 8px;
+  position: absolute;
+  left: 0;
+}
+
+li.added-subtask-item:hover {
+  border-radius: 10px;
+  background-color: rgb(246, 247, 248);
+  visibility: visible;
+}
+
+.list-icon-container {
+  display: flex;
+  align-items: center;
+  gap: 4px; 
+  visibility: hidden;
+}
+
+.icon-container-images {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.icon-container-images:hover {
+  transition: transform 0.1s;
+  transform: scale(1.1);
+}
+
 
 .pop-up-edit-task-footer {
   display: flex;

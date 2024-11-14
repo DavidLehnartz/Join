@@ -36,7 +36,7 @@ async function drop(event, targetColumn) {
 
         await updateTaskInDatabase(task);
 
-        renderTasks(); 
+        /* renderTasks();  */
          /* updateEmptyMessages();  */
     } else{
         console.error("drop: aufgabe mit ID nicht gefunden:", draggedTaskId);

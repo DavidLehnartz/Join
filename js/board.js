@@ -182,7 +182,7 @@ async function saveTaskChanges(taskId) {
     task.description = document.getElementById('edit_description').value;
     task.dueDate = document.getElementById('edit_due_date').value;
 
-    //   task.assignedContacts = [...selectedContacts]; 
+    task.assignedContacts = [...selectedContacts];
 
     if (selectedPriority) {
       task.priority = selectedPriority;
@@ -322,14 +322,14 @@ function resetButtons() {
     }
   }
   renderTasks();
-  console.log(subtasks); // Zeigt die aktuelle Liste der Subtasks an
+  console.log(subtasks); 
 } */
 
 
 
 function renderSubtasks(taskId) {
   let subtaskContent = document.getElementById('single_subtasks');
-  subtaskContent.innerHTML = '';  // Leert das Container-Element
+  subtaskContent.innerHTML = '';  
 
   const task = tasks.find(t => t.id === taskId);
 
@@ -356,74 +356,120 @@ function getSubtasksTemplate(taskId, subtask, index) {
 }
 
 
+function updateButtonImage() {
+  /* let ButtonImage = document.getElementById('input_button_image'); */
+  let buttonContainer = document.getElementById('input_image_content');
+  let inputAddedSubtask = document.getElementById('input_add_subtask').value.trim();
 
-/* ----------------------------------------------------------------- */
+
+  if (inputAddedSubtask.length > 0) {
+    buttonContainer.innerHTML = ` <button class="pop-up-edit-task-input-btn">
+                                    <div id="button_content_with_images" class="pop-up-edit-task-input-btn-img-container">
+                                       <img onclick="clearInputs()" class="pop-up-edit-task-input-btn-img" src="../assets/img/iconoir_cancel.png" alt="image 1">
+                                       <div class="vertical_line"></div>
+                                       <img onclick="addSubtask()" class="pop-up-edit-task-input-btn-img" src="../assets/img/check_black.png" alt="image 2">
+                                    </div>
+                                  </button>
+                                `;
+  } else {
+    buttonContainer.innerHTML = ` <button class="pop-up-edit-task-input-btn">
+                                    <img id="input_button_image"
+                                    class="pop-up-edit-task-input-btn-img"
+                                    src="../assets/img/add_black.png"
+                                    alt=""
+                                    />
+                                  </button> 
+                                `;
+
+  }
+}
 
 
-// GPT
-async function toggleCheckboxSubtasks(taskId, subtaskIndex) {
-  const task = tasks.find(t => t.id === taskId);
-  if (!task) return;
+function addSubtask() {
+  let inputAddedSubtask = document.getElementById('input_add_subtask');
+  let addedSubtaskTitle = inputAddedSubtask.value.trim();
+  let addedSubtask = {
+    id: generateUniqueId(),
+    title: addedSubtaskTitle
+  };
 
-  // Toggle the completion status of the specified subtask
-  task.subtasks[subtaskIndex].completed = !task.subtasks[subtaskIndex].completed;
+  if (errorMessage()) {
+    return;
+  } else {
+    addedSubtasks.push(addedSubtask);
+    console.log("added subtasks arr", addedSubtasks);
 
-  // Update the task in Firebase
-  await updateTaskInFirebase(task);
+    renderAddSubtasks();
+    clearInputs();
+  }
 
-  // Re-render the subtasks to reflect the change in the UI
-  renderSubtasks(taskId);
+  updateButtonImage();
+}
+
+
+function generateUniqueId() {
+  return '_' + Math.random().toString(36).substr(2, 9);
+}
+
+
+function renderAddSubtasks() {
+  let addedSubtasksContent = document.getElementById('added_subtasks');
+  addedSubtasksContent.innerHTML = "";
+
+  addedSubtasks.forEach(addedSubtask => {
+    addedSubtasksContent.innerHTML += getAddedSubtasksTemplate(addedSubtask);
+  });
+}
+
+
+function getAddedSubtasksTemplate(addedSubtask) {
+  return `
+          <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item">
+             <span>${addedSubtask.title}</span>
+              <div class="list-icon-container">
+                <img  class="icon-container-images " src="../assets/img/edit.png" alt="edit icon">
+                <div class="vertical_line"></div>
+                <img onclick="deleteAddedSubtask('${addedSubtask.id}')" class="icon-container-images " src="../assets/img/delete.png" alt="delete icon">
+              </div>
+          </li>
+  `;
 }
 
 
 
+function showIcons(listItem) {
+  const iconContainer = listItem.querySelector('.list-icon-container');
+  iconContainer.style.visibility = "visible";
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function hideIcons(listItem) {
+  const iconContainer = listItem.querySelector('.list-icon-container');
+  iconContainer.style.visibility = "hidden";
+}
 
 
 function errorMessage() {
-  let inputAddedSubtask = document.getElementById('input_subtask_add_subtask').value.trim();
+  let inputAddedSubtask = document.getElementById('input_add_subtask').value.trim();
 
   if (inputAddedSubtask === "") {
     document.getElementById('error_message').innerHTML = `Please enter a subtask!`;
     return true;
   }
-
   document.getElementById('error_message').innerHTML = "";
   return false;
+
+}
+
+
+function deleteAddedSubtask(id) {
+  let index = addedSubtasks.findIndex(addedSubtask => addedSubtask.id === id);
+
+  if (index !== -1) {
+    addedSubtasks.splice(index, 1);
+    renderAddSubtasks();
+  }
+
+  console.log(addedSubtasks);
 }
 
 
@@ -438,7 +484,8 @@ function closePopUps() {
 
 
 function clearInputs() {
-  document.getElementById('input_subtask_add_subtask').value = "";
+  document.getElementById('input_add_subtask').value = '';
+  updateButtonImage();
 }
 
 
@@ -468,38 +515,24 @@ function resetImageDelete() {
 /* ---------- WIRD NOCH GEBRAUCHT ---------- */
 
 
-/**
- * This function is used to render added subtasks
- * 
- * 
- */
-/* function renderAddSubtasks() {
-  let subtasksContent = document.getElementById('subtasks');
-  subtasksContent.innerHTML = "";
+/* ------------------------------- GPT ---------------------------------- */
 
-  for (let indexTasks = 0; indexTasks < subtasks.length; indexTasks++) {
-    subtasksContent.innerHTML += getSubtasksTemplate(tasks[indexTasks]);
-  }
-} */
+async function toggleCheckboxSubtasks(taskId, subtaskIndex) {
+  const task = tasks.find(t => t.id === taskId);
+  if (!task) return;
 
+  // Toggle the completion status of the specified subtask
+  task.subtasks[subtaskIndex].completed = !task.subtasks[subtaskIndex].completed;
 
-/**
- * This function is used to add a subtask to subtasks at edit task pop up
- *
- * 
- */
-/* function addSubtask() {
-  let inputAddedSubtask = document.getElementById('input_subtask_add_subtask');
-  let addedSubtask = inputAddedSubtask.value.trim();
+  // Update the task in Firebase
+  await updateTaskInFirebase(task);
 
-  if (errorMessage()) {
-    return;
-  }
+  // Re-render the subtasks to reflect the change in the UI
+  renderSubtasks(taskId);
+}
 
-  subtasks.push(addedSubtask);
-  renderAddSubtasks();
-  clearInputs();
-} */
+/* ------------------------------------------------------------------- */
+
 
 
 
@@ -581,7 +614,7 @@ function resetImageDelete() {
 
 
 /* function addSubtask(taskId) {
-  let inputAddedSubtask = document.getElementById('input_subtask_add_subtask');
+  let inputAddedSubtask = document.getElementById('input_add_subtask');
   let addedSubtask = inputAddedSubtask.value.trim();
  
   if (!addedSubtask) {
