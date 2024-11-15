@@ -8,6 +8,8 @@ async function loadData(header, sidebar, link) {
   );
   const data = await response.json();
   console.log(data);
+  createHeader(header);
+  createSidebar(sidebar, link);
   showHowManyTasksUrgent(data);
   taskInProgess(data);
   taskToDo(data);
@@ -16,8 +18,6 @@ async function loadData(header, sidebar, link) {
   taskAwaiting(data);
   displayGreeting();
   displayUsername();
-  createHeader(header);
-  createSidebar(sidebar, link);
   //getUserFromStorage();
 }
 

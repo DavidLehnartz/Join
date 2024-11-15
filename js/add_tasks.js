@@ -12,11 +12,11 @@ window.onload = function () {
 };*/
 
 function init(header, sidebar, link) {
+  createHeader(header);
+  createSidebar(sidebar, link);
   restorePriority();
   setTodayDate();
   loadAllContactsInfo();
-  createHeader(header);
-  createSidebar(sidebar, link);
 }
 
 function setTodayDate() {

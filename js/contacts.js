@@ -4,7 +4,7 @@ let editMenuShown = false;
 async function initContacts(header, sidebar, link) {
   createHeader(header);
   createSidebar(sidebar, link);
-  await loadContactList();
+  loadContactList();
 }
 
 async function showContactInfo(id) {
