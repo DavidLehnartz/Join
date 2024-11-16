@@ -25,12 +25,12 @@ async function loadFetchedData() {
 function renderDesktopTemplate(header, sidebar, link) {
   createHeader(header);
   createSidebar(sidebar, link);
-  //let sidebarTemplateContent = document.getElementById('sidebar_template');
-  //let headerTemplateContent = document.getElementById('header_template');
+  // let sidebarTemplateContent = document.getElementById('sidebar_template');
+  // let headerTemplateContent = document.getElementById('header_template');
   let boardHeadlineContent = document.getElementById("board_headline");
 
-  //sidebarTemplateContent.innerHTML = getSidebarTemplate();
-  //headerTemplateContent.innerHTML = getHeaderTemplate();
+  // sidebarTemplateContent.innerHTML = getSidebarTemplate();
+  // headerTemplateContent.innerHTML = getHeaderTemplate();
   boardHeadlineContent.innerHTML = getBoardHeadlineTemplate();
 }
 
@@ -331,13 +331,8 @@ function resetButtons() {
 } */
 
 function renderSubtasks(taskId) {
-<<<<<<< HEAD
-  let subtaskContent = document.getElementById('single_subtasks');
-  subtaskContent.innerHTML = '';
-=======
   let subtaskContent = document.getElementById("single_subtasks");
   subtaskContent.innerHTML = "";
->>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
 
   const task = tasks.find((t) => t.id === taskId);
 
@@ -362,36 +357,6 @@ function getSubtasksTemplate(taskId, subtask, index) {
   `;
 }
 
-<<<<<<< HEAD
-
-
-function renderAddSubtasks() {
-  let addedSubtasksContent = document.getElementById('added_subtasks');
-  addedSubtasksContent.innerHTML = "";
-
-  addedSubtasks.forEach(addedSubtask => {
-    addedSubtasksContent.innerHTML += getAddedSubtasksTemplate(addedSubtask);
-  });
-}
-
-
-function getAddedSubtasksTemplate(addedSubtask) {
-  return `
-          <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item" data-id="${addedSubtask.id}">
-            <span>${addedSubtask.title}</span>
-            <div class="list-icon-container">
-              <img onclick="editSubtask('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/edit.png" alt="edit icon">
-              <div class="vertical_line"></div>
-              <img onclick="deleteAddedSubtask('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/delete.png" alt="delete icon">
-            </div>
-          </li>
-        `;
-}
-
-
-
-
-=======
 function updateButtonImage() {
   /* let ButtonImage = document.getElementById('input_button_image'); */
   let buttonContainer = document.getElementById("input_image_content");
@@ -420,7 +385,6 @@ function updateButtonImage() {
   }
 }
 
->>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
 function addSubtask() {
   let inputAddedSubtask = document.getElementById("input_add_subtask");
   let addedSubtaskTitle = inputAddedSubtask.value.trim();
@@ -446,8 +410,6 @@ function generateUniqueId() {
   return "_" + Math.random().toString(36).substr(2, 9);
 }
 
-<<<<<<< HEAD
-=======
 function renderAddSubtasks() {
   let addedSubtasksContent = document.getElementById("added_subtasks");
   addedSubtasksContent.innerHTML = "";
@@ -469,7 +431,6 @@ function getAddedSubtasksTemplate(addedSubtask) {
           </li>
   `;
 }
->>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
 
 function showIcons(listItem) {
   const iconContainer = listItem.querySelector(".list-icon-container");
@@ -482,100 +443,6 @@ function hideIcons(listItem) {
   iconContainer.style.visibility = "hidden";
 }
 
-<<<<<<< HEAD
-
-function deleteAddedSubtask(id) {
-  let index = addedSubtasks.findIndex(addedSubtask => addedSubtask.id === id);
-
-  if (index !== -1) {
-    addedSubtasks.splice(index, 1);
-    renderAddSubtasks();
-    console.log('subtask deleted successfully', addedSubtasks);
-  } else {
-    console.error('subtask not found!', addedSubtasks);
-  }
-}
-
-
-function updateButtonImage() {
-  /* let ButtonImage = document.getElementById('input_button_image'); */
-  let buttonContainer = document.getElementById('input_image_content');
-  let inputAddedSubtask = document.getElementById('input_add_subtask').value.trim();
-
-
-  if (inputAddedSubtask.length > 0) {
-    buttonContainer.innerHTML = ` <button class="pop-up-edit-task-input-btn">
-                                    <div id="button_content_with_images" class="pop-up-edit-task-input-btn-img-container">
-                                       <img onclick="clearInputs()" class="pop-up-edit-task-input-btn-img" src="../assets/img/iconoir_cancel.png" alt="cancel">
-                                       <div class="vertical_line"></div>
-                                       <img onclick="addSubtask()" class="pop-up-edit-task-input-btn-img" src="../assets/img/check_black.png" alt="check">
-                                    </div>
-                                  </button>
-                                `;
-  } else {
-    buttonContainer.innerHTML = ` <button class="pop-up-edit-task-input-btn">
-                                    <img id="input_button_image"
-                                    class="pop-up-edit-task-input-btn-img"
-                                    src="../assets/img/add_black.png"
-                                    alt=""
-                                    />
-                                  </button> 
-                                `;
-
-  }
-}
-
-
-function editSubtask(id) {
-  const subtask = addedSubtasks.find(sub => sub.id === id);
-  if (!subtask) return;
-
-  const listItem = document.querySelector(`li[data-id="${id}"]`);
-  if (!listItem) return;
-
-  listItem.classList.add("editing");
-
-  listItem.innerHTML = `
-                        <input type="text" value="${subtask.title}" 
-                              onblur="saveEditedSubtask('${id}', this.value)"  
-                              onkeydown="handleEnterKey(event, '${id}', this)" 
-                               class="edit-subtask-input">
-                        <div class="list-icon-container">
-                              <img onclick="deleteAddedSubtask('${id}')" 
-                              class="icon-container-images" 
-                              src="../assets/img/delete.png" 
-                              alt="check icon">
-                        <div class="vertical_line"></div>
-                              <img onclick="saveEditedSubtask('${id}')"
-                              class="icon-container-images" 
-                              src="../assets/img/check_black.png" 
-                        </div>
-                     `;
-
-  console.log('save edit subtask', addedSubtasks);
-}
-
-
-function saveEditedSubtask(id, newTitle) {
-  const subtaskIndex = addedSubtasks.findIndex(sub => sub.id === id);
-  if (subtaskIndex !== -1 && newTitle.trim() !== "") {
-    addedSubtasks[subtaskIndex].title = newTitle.trim();
-  }
-
-  renderAddSubtasks();
-  console.log(addedSubtasks);
-}
-
-
-function handleEnterKey(event, id, inputElement) {
-  if (event.key === "Enter") {
-    saveEditedSubtask(id, inputElement.value);
-  }
-}
-
-
-=======
->>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
 function errorMessage() {
   let inputAddedSubtask = document
     .getElementById("input_add_subtask")
@@ -589,8 +456,6 @@ function errorMessage() {
   }
   document.getElementById("error_message").innerHTML = "";
   return false;
-<<<<<<< HEAD
-=======
 }
 
 function deleteAddedSubtask(id) {
@@ -602,7 +467,6 @@ function deleteAddedSubtask(id) {
   }
 
   console.log(addedSubtasks);
->>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
 }
 
 function closeEditPopUp() {

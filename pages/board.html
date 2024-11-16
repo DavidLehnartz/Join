@@ -15,31 +15,19 @@
     <link rel="stylesheet" href="../styles/board.css" />
     <link rel="stylesheet" href="../styles/pop_up_board.css" />
     <link rel="stylesheet" href="../styles/pop_up_board_edit_task.css" />
-    <!-- <link rel="stylesheet" href="../styles/pop_up_add_task.css"> -->
+    <link rel="stylesheet" href="../styles/pop_up_add_task.css">
     <link rel="stylesheet" href="../styles/color.css" />
     <link rel="stylesheet" href="../styles/floatingAddTaskBacklog.css" />
 
     <script src="../js/board_database.js" defer></script>
+    <script src="../js/desktop_template.js"></script>
     <script src="../js/board_templates.js" defer></script>
     <script src="../js/board_drop_down.js" defer></script>
     <script src="../js/board_drag_and_drop.js" defer></script>
     <script src="../js/board_filter.js" defer></script>
-<<<<<<< HEAD
-    <script src="../js/floatingAddTaskBacklog.js" defer></script>
-    <script src="../js/add_tasks.js" defer></script>
     <script src="../js/board.js" defer></script>
   </head>
-
-  <!-- TASKS
-=======
-    <script src="../js/desktop_template.js"></script>
-    <script src="../js/board.js" defer></script>
-  </head>
-
-  <body onload="init('board-header', 'board-sidebar', 'board-link')">
-    <div id="board-sidebar"></div>
 <!-- TASKS
->>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
 * subtasks rendern in task pop up ********
 * subtasks progres bar *******
 * subtasks completed count  ******
@@ -55,36 +43,11 @@
 
 * filter funktion muss noch ausgebessert werden
 -->
-    <main>
-<<<<<<< HEAD
-      <!-- HEADER -->
-      <header id="header_template">
-        <!--  <div class="header-wrapper">
-          <span class="app-description"> Kanban Project Management Tool</span>
-          
-          <img
-            class="join-logo-responsive"
-            src="../assets/img/join_logo_grey.svg"
-            alt="logo"
-          />
-          <div class="header-icons">
-            <img
-              class="header-help-icon"
-              src="../assets/img/help.png"
-              alt="help"
-            />
-            <img
-              class="header-profil-icon"
-              src="../assets/img/profil_icon.png"
-              alt="profil"
-            />
-          </div>
-        </div> -->
-      </header>
+  <body onload="init('board-header', 'board-sidebar', 'board-link')">
+    <div id="board-sidebar"></div>
 
-=======
+    <main>
       <div id="board-header"></div>
->>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
       <!-- MAiN CONTENT -->
       <div class="main-content-wrapper">
         <!-- HEADLINE / SEARCHBOX -->
@@ -506,7 +469,7 @@
 
         <!-- POP UP BOARD ADD TASK RENDERN -->
         <section>
-          <div id="overlay_add_task_pop_up" class="overlay-pop-up-add-task">
+          <div id="overlay_add_task_pop_up" class="overlay-pop-up-add-task d_none">
             <div class="pop-up-add-task-wrapper">
               <!-- <div class="addTaskContent"> -->
               <div class="headingAndAnEx">
@@ -712,47 +675,6 @@
           </div>
         </section>
       </div>
-<<<<<<< HEAD
-
-      <!-- FOOTER / NAVBAR RESPONSIVE -->
-      <nav id="navbar_responsive">
-        <div class="navbar-links-responsive">
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/summary.png"
-              alt="Summary"
-            />
-            <p>Summary</p>
-          </a>
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/add_task.png"
-              alt="Add Task"
-            />
-            <p>Add Task</p>
-          </a>
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/board.png"
-              alt="Board"
-            />
-            <p>Board</p>
-          </a>
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/contacts.png"
-              alt="Contacts"
-            />
-            <p>Contacts</p>
-          </a>
-        </div>
-      </nav>
-=======
->>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
     </main>
   </body>
   <script src="../js/database.js"></script>
