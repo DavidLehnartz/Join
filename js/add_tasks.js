@@ -54,7 +54,6 @@ function toggleContactDropdown() {
     const dropdown = document.getElementById("categoryDropdown2");
     const arrowElement = document.getElementById("dropdownArrow2");
     const dropdown1 = document.getElementById('selectOnes');
-
     if (dropdown.classList.contains("open")) {
         dropdown.classList.remove("open");
         arrowElement.src = "../assets/img/arrow_drop_downaa.png";
@@ -62,14 +61,11 @@ function toggleContactDropdown() {
     } else {
         dropdown.classList.add("open");
         arrowElement.src = "../assets/img/arrow_drop_up.png";
-
         dropdown.innerHTML = '';
         contacts.forEach(contact => {
             const contactElement = document.createElement('div');
             contactElement.classList.add('contact-item');
-
             if (isSelected(contact.name)) contactElement.classList.add('selected');
-
             contactElement.innerHTML = `
                 <div class="nameInitials">
                     <div class="contact-initials bg-${contact.color}">${contact.initial}</div>
@@ -222,14 +218,10 @@ function addSubtask() {
                     </div>
                 </div>
             `);
-
-            // Subtask-Daten aktualisieren
             subtasksData.push({
                 name: subtaskText,
                 completed: false
             });
-
-            // Eingabefeld zurücksetzen und Fokus setzen
             inputField.value = '';
             inputField.focus();
         }
@@ -270,7 +262,6 @@ function editSubtask(subtaskItem) {
             finishEditing(input, textElement, subtaskItem);
         }
     });
-
     input.addEventListener('blur', function () {
         finishEditing(input, textElement, subtaskItem);
     });
@@ -292,8 +283,6 @@ function finishEditing(input, textElement, subtaskItem) {
     <img src="../assets/img/delete.png" alt="Löschen" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
 `;
 }
-
-
 
 function deleteSubtask(subtaskItem) {
     subtaskItem.remove();
