@@ -18,7 +18,6 @@ async function loadData(header, sidebar, link) {
   taskAwaiting(data);
   displayGreeting();
   displayUsername();
-  //getUserFromStorage();
 }
 
 function showHowManyTasksUrgent(data) {
@@ -48,7 +47,7 @@ function filterWichDateNearest(urgentTasks) {
   });
   date = new Date(sortedTasks[0].dueDate);
   const options = { year: "numeric", month: "long", day: "numeric" };
-  console.log(date.toLocaleDateString("en-US", options)); // Output: November 6, 2024
+  console.log(date.toLocaleDateString("en-US", options));
   let nextDate = document.getElementById("nextDate");
   nextDate.innerHTML = date.toLocaleDateString("en-US", options);
 }
