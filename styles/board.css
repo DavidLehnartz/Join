@@ -1,4 +1,4 @@
-html{
+html {
   scrollbar-width: none;
 }
 
@@ -7,6 +7,7 @@ html{
   justify-content: space-between;
   align-items: center;
   margin-top: 56px;
+  padding: 0px 60px;
 }
 
 h1 {
@@ -27,22 +28,12 @@ p {
   margin: 0px;
 }
 
-label{
+label {
   color: #2a3647;
 }
 
 .d_none {
   display: none;
-}
-
-.main-content-wrapper{
-  min-height: 100vh;
-  padding-bottom: 64px;
-}
-
-.join-logo-responsive {
-  width: 32px;
-  height: 39px;
 }
 
 .searchbox-wrapper {
@@ -76,12 +67,12 @@ label{
   opacity: 1;
 }
 
-.no-matching-task-found{
+.no-matching-task-found {
   display: flex;
-    justify-content: center;
-    color: red;
-    font-size: 16px;
-    font-weight: bold;
+  justify-content: center;
+  color: red;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .input-btn {
@@ -138,6 +129,7 @@ label{
   justify-content: space-between;
   gap: 24px;
   margin-top: 24px;
+  padding: 0px 60px;
 }
 
 .kanban-column {
@@ -172,15 +164,16 @@ label{
   /* gap: 24px; */
   cursor: pointer;
   margin-bottom: 24px;
-  
 }
 
 .kanban-task-wrapper .task {
-  transition: transform 0.2s ease;  /* Übergang für den Kipp-Effekt */
+  transition: transform 0.2s ease; /* Übergang für den Kipp-Effekt */
 }
 
 .kanban-task-wrapper .task.dragging {
-  transform: rotate(10deg);  /* Drehung um 10 Grad, wenn das Element gezogen wird */
+  transform: rotate(
+    10deg
+  ); /* Drehung um 10 Grad, wenn das Element gezogen wird */
 }
 
 .kanban-task {
@@ -265,8 +258,7 @@ progress {
   flex-wrap: wrap;
 }
 
-
-.initials{
+.initials {
   display: flex;
   justify-content: center;
   align-items: center;

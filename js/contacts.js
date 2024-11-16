@@ -1,4 +1,5 @@
 let groupedContacts = {};
+let editMenuShown = false;
 
 async function initContacts(header, sidebar, link) {
   createHeader(header);
@@ -7,10 +8,30 @@ async function initContacts(header, sidebar, link) {
 }
 
 async function showContactInfo(id) {
-  let contactInfo = document.getElementById("contacts-info");
   let contact = await getContactById(id);
-  contactInfo.innerHTML = "";
-  contactInfo.innerHTML += getContactInfoTemplate(contact, id);
+  if (window.innerWidth > 800) {
+    let contactInfo = document.getElementById("contacts-info");
+    contactInfo.innerHTML = "";
+    contactInfo.innerHTML += getContactInfoTemplate(contact, id);
+  } else {
+    showMobileInfoDialog(contact, id);
+  }
+}
+
+function showMobileInfoDialog(contact, id) {
+  let mobileInfo = document.getElementById("mobile-contacts-dialog");
+  let contactList = document.getElementById("contacts-list-container");
+  mobileInfo.classList.remove("hidden");
+  contactList.classList.add("hidden");
+  mobileInfo.innerHTML = "";
+  mobileInfo.innerHTML = renderMobileInfoSection(contact, id);
+}
+
+function closeMobileInfoDialog() {
+  let mobileInfo = document.getElementById("mobile-contacts-dialog");
+  let contactList = document.getElementById("contacts-list-container");
+  mobileInfo.classList.add("hidden");
+  contactList.classList.remove("hidden");
 }
 
 async function loadContactList() {
@@ -37,6 +58,14 @@ async function deleteAndRefreshContactList(id) {
   await loadContactList();
 }
 
+async function deleteAndRefreshContactListMobile(id) {
+  let contactList = document.getElementById("contact-list");
+  await deleteContact(id);
+  contactList.innerHTML = "";
+  closeMobileInfoDialog();
+  await loadContactList();
+}
+
 function groupContacts(arrayName) {
   groupedContacts = Object.groupBy(arrayName, ({ name }) => name.slice(0, 1));
   return groupedContacts;
@@ -59,4 +88,14 @@ function loadContactListItems(arrayName) {
     const contact = arrayName[i];
     contactList.innerHTML += getContactListItemTemplate(contact, contact.id);
   }
+}
+
+function showMobileEditMenu(id) {
+  let editMenu = document.getElementById("edit-menu");
+  if (editMenuShown) {
+    editMenu.innerHTML = "";
+  } else {
+    editMenu.innerHTML = renderMobileEditMenu(id);
+  }
+  editMenuShown = !editMenuShown;
 }

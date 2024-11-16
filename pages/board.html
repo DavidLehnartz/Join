@@ -22,9 +22,12 @@
     <script src="../js/board_drop_down.js" defer></script>
     <script src="../js/board_drag_and_drop.js" defer></script>
     <script src="../js/board_filter.js" defer></script>
+    <script src="../js/desktop_template.js"></script>
     <script src="../js/board.js" defer></script>
   </head>
 
+  <body onload="init('board-header', 'board-sidebar', 'board-link')">
+    <div id="board-sidebar"></div>
 <!-- TASKS
 * subtasks rendern in task pop up ********
 * subtasks progres bar *******
@@ -41,79 +44,8 @@
 
 * filter funktion muss noch ausgebessert werden
 -->
-
-  <body onload="init()">
-    <!-- SIDEBAR -->
-    <div id="sidebar_template">
-      <!-- <div class="left-sidebar">
-        <img src="../assets/img/join_logo_white.svg" alt="join logo" />
-        <div class="left-sidebar-links">
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/summary.png"
-              alt="Summary"
-            />
-            <p>Summary</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/add_task.png"
-              alt="Add Task"
-            />
-            <p>Add Task</p>
-          </a>
-          <a class="links link-active" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/board.png"
-              alt="Board"
-            />
-            <p>Board</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/contacts.png"
-              alt="Contacts"
-            />
-            <p>Contacts</p>
-          </a>
-        </div>
-        <div class="left-sidebar-links">
-          <a class="legacy-links" href="#"> Privacy Policy </a>
-          <a class="legacy-links" href="#"> Legal notice </a>
-        </div>
-      </div> -->
-    </div>
-
     <main>
-      <!-- HEADER -->
-      <header id="header_template">
-       <!--  <div class="header-wrapper">
-          <span class="app-description"> Kanban Project Management Tool</span>
-          
-          <img
-            class="join-logo-responsive"
-            src="../assets/img/join_logo_grey.svg"
-            alt="logo"
-          />
-          <div class="header-icons">
-            <img
-              class="header-help-icon"
-              src="../assets/img/help.png"
-              alt="help"
-            />
-            <img
-              class="header-profil-icon"
-              src="../assets/img/profil_icon.png"
-              alt="profil"
-            />
-          </div>
-        </div> -->
-      </header>
-
+      <div id="board-header"></div>
       <!-- MAiN CONTENT -->
       <div class="main-content-wrapper">
         <!-- HEADLINE / SEARCHBOX -->
@@ -183,7 +115,7 @@
 
         <!-- KANBAN BOARD -->
         <section>
-         <!--  <span class="no-matching-task-found" id="no_matching_task">
+          <!--  <span class="no-matching-task-found" id="no_matching_task">
             No matching task found !
             </span> -->
           <div class="kanban-board-wrapper">
@@ -201,7 +133,7 @@
                 />
               </div>
               <!-- TASK RENDERN -->
-              <div id="to_do" class="kanban-task-wrapper "></div>
+              <div id="to_do" class="kanban-task-wrapper"></div>
               <!-- <div id="to_do_message" class="kanban-empty-message" style="display: none;">No tasks to do</div> -->
             </div>
 
@@ -534,43 +466,7 @@
           <!-- </div> -->
         </section>
       </div>
-      <!-- FOOTER / NAVBAR RESPONSIVE -->
-      <nav id="navbar_responsive">
-        <div class="navbar-links-responsive">
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/summary.png"
-              alt="Summary"
-            />
-            <p>Summary</p>
-          </a>
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/add_task.png"
-              alt="Add Task"
-            />
-            <p>Add Task</p>
-          </a>
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/board.png"
-              alt="Board"
-            />
-            <p>Board</p>
-          </a>
-          <a class="navbar-links" href="#">
-            <img
-              class="navbar-icons"
-              src="../assets/img/contacts.png"
-              alt="Contacts"
-            />
-            <p>Contacts</p>
-          </a>
-        </div>
-      </nav>
     </main>
   </body>
+  <script src="../js/database.js"></script>
 </html>

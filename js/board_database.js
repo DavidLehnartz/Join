@@ -1,11 +1,9 @@
-'use strict';
+"use strict";
 
 /* BOARD DATABASE */
 
-
 const BASE_URL =
-    "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
-
+  "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let tasks = [];
 let contacts = [];
@@ -14,26 +12,23 @@ let subtasks = [];
 let addedSubtasks = [];
 let assignees = [];
 
-
-
-
 async function fetchTasksData() {
     tasks = [];
     subtasks = [];
 
-    let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
-    let tasksToJson = await tasksResponse.json();
+  let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
+  let tasksToJson = await tasksResponse.json();
 
-    if (tasksToJson) {
-        const taskKeys = Object.keys(tasksToJson);
+  if (tasksToJson) {
+    const taskKeys = Object.keys(tasksToJson);
 
-        taskKeys.forEach((key) => {
-            const task = {
-                id: key,
-                ...tasksToJson[key]
-            };
+    taskKeys.forEach((key) => {
+      const task = {
+        id: key,
+        ...tasksToJson[key],
+      };
 
-            tasks.push(task);
+      tasks.push(task);
 
             /* if (task.assignedTo && !assignees.includes(task.assignedTo)) {
                 assignees.push(task.assignedTo);
@@ -47,9 +42,9 @@ async function fetchTasksData() {
         renderTasks();
     }
 
-    console.log("Tasks nach Fetch:", tasks);
-    console.log("Assigned Users:", assignees);
-    console.log("Subtasks:", subtasks);
+  console.log("Tasks nach Fetch:", tasks);
+  console.log("Assigned Users:", assignees);
+  console.log("Subtasks:", subtasks);
 }
 
 // GPT
@@ -88,49 +83,44 @@ async function fetchTasksData() {
       console.log("Subtasks:", subtasks);
   } */
 
-
-
-
 async function fetchContactsData() {
-    contacts = [];
+  contacts = [];
 
-    let contactsResponse = await fetch(BASE_URL + "/contacts" + ".json");
-    let contactsToJson = await contactsResponse.json();
+  let contactsResponse = await fetch(BASE_URL + "/contacts" + ".json");
+  let contactsToJson = await contactsResponse.json();
 
-    if (contactsToJson) {
-        const contactKeys = Object.keys(contactsToJson);
+  if (contactsToJson) {
+    const contactKeys = Object.keys(contactsToJson);
 
-        contactKeys.forEach((key) => {
-            contacts.push({
-                id: key,
-                ...contactsToJson[key]
-            });
-        });
-    }
+    contactKeys.forEach((key) => {
+      contacts.push({
+        id: key,
+        ...contactsToJson[key],
+      });
+    });
+  }
 
-    console.log("contacts nach fetch:", contacts);
+  console.log("contacts nach fetch:", contacts);
 
-    renderTasks();
+  renderTasks();
 }
-
 
 async function deleteTaskData(taskId) {
-    try {
-        let taskResponse = await fetch(BASE_URL + "/tasks/" + taskId + ".json", {
-            method: "DELETE",
-        });
-        let deletedTask = await taskResponse.json();
+  try {
+    let taskResponse = await fetch(BASE_URL + "/tasks/" + taskId + ".json", {
+      method: "DELETE",
+    });
+    let deletedTask = await taskResponse.json();
 
-        console.log('Task erfolgreich gelöscht:', taskId);
-        await fetchTasksData();
-        closePopUps();
-        return deletedTask;
-    } catch (error) {
-        console.error('Fehler beim Löschen des Tasks:', error);
-    }
-    renderTasks();
+    console.log("Task erfolgreich gelöscht:", taskId);
+    await fetchTasksData();
+    closePopUps();
+    return deletedTask;
+  } catch (error) {
+    console.error("Fehler beim Löschen des Tasks:", error);
+  }
+  renderTasks();
 }
-
 
 async function updateTaskInFirebase(task) {
     const taskId = task.id;
@@ -164,9 +154,6 @@ async function updateTaskInFirebase(task) {
     } catch (error) {
         console.error('Fehler beim Aktualisieren der Aufgabe:', error);
     }
-    renderTasks();
-}
-
 
 /* async function updateTaskInFirebase(task) {
     const taskId = task.id;
@@ -191,6 +178,3 @@ async function updateTaskInFirebase(task) {
         console.error('Fehler beim Aktualisieren der Aufgabe:', error);
     }
 } */
-
-
-
