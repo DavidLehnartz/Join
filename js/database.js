@@ -6,6 +6,7 @@ let selectedContacts = [];
 let subtasks = [];
 let addedSubtasks = [];
 let assignees = [];
+let subtasksData = [];
 
 function createInitial(name) {
   let fullName = name.split(" "),
