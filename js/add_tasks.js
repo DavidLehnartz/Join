@@ -65,14 +65,12 @@ function toggleContactDropdown() {
       if (isSelected(contact.name)) contactElement.classList.add("selected");
       contactElement.innerHTML = `
                 <div class="nameInitials">
-                    <div class="contact-initials bg-${contact.color}">${
-        contact.initial
-      }</div>
+                    <div class="contact-initials bg-${contact.color}">${contact.initial
+        }</div>
                     <span class="contact-name">${contact.name}</span>
                 </div>
-                <input type="checkbox" name="assignedContacts" class="contact-checkbox" data-name="${
-                  contact.name
-                }" ${isSelected(contact.name) ? "checked" : ""}/>
+                <input type="checkbox" name="assignedContacts" class="contact-checkbox" data-name="${contact.name
+        }" ${isSelected(contact.name) ? "checked" : ""}/>
             `;
       const checkbox = contactElement.querySelector(".contact-checkbox");
       const span = contactElement.querySelector(".nameInitials");
@@ -392,29 +390,36 @@ function checkForm() {
   document.getElementById("createTaskBtn").disabled = !formIsValid;
 }
 
-async function createTask() {
-  const taskData = {
-    title: document.getElementById("inputFieldTitle").value,
-    description: document.getElementById("inputFieldDescription").value,
-    dueDate: document.getElementById("inputFieldDueDate").value,
-    priority: document
-      .getElementById("inputFieldUrgent")
-      .classList.contains("active-urgent")
-      ? "Urgent"
-      : document
-          .getElementById("inputFieldMedium")
-          .classList.contains("active-medium")
-      ? "Medium"
-      : document
-          .getElementById("inputFieldLow")
-          .classList.contains("active-low")
-      ? "Low"
-      : "None",
-    category: document.getElementById("selectedCategory").textContent,
+function gatherTaskData() {
+  const title = document.getElementById("inputFieldTitle").value;
+  const description = document.getElementById("inputFieldDescription").value;
+  const dueDate = document.getElementById("inputFieldDueDate").value;
+  const priority = getPriority();
+  const category = document.getElementById("selectedCategory").textContent;
+  return {
+    title,
+    description,
+    dueDate,
+    priority,
+    category,
     subtasks: subtasksData,
     assignedTo: selectedContacts,
     status: "todo",
   };
+}
+
+function getPriority() {
+  if (document.getElementById("inputFieldUrgent").classList.contains("active-urgent")) {
+    return "Urgent";
+  } else if (document.getElementById("inputFieldMedium").classList.contains("active-medium")) {
+    return "Medium";
+  } else if (document.getElementById("inputFieldLow").classList.contains("active-low")) {
+    return "Low";
+  }
+  return "None";
+}
+
+async function sendTaskToApi(taskData) {
   try {
     const response = await fetch(`${BASE_URL}/tasks.json`, {
       method: "POST",
@@ -424,15 +429,28 @@ async function createTask() {
       body: JSON.stringify(taskData),
     });
 
-    if (response.ok) {
-      let message = document.querySelector(".showMe");
-      message.classList.remove("d-none");
-      setTimeout(() => {
-        window.location.href = "board.html";
-        message.classList.add("d-none");
-      }, 2900);
-    }
+    return response.ok;
   } catch (error) {
     console.error("Error saving task:", error);
+    return false;
   }
+}
+
+function handleTaskCreationResponse(success) {
+  if (success) {
+    const message = document.querySelector(".showMe");
+    message.classList.remove("d-none");
+    setTimeout(() => {
+      window.location.href = "board.html";
+      message.classList.add("d-none");
+    }, 2900);
+  } else {
+    console.error("Task creation failed.");
+  }
+}
+
+async function createTask() {
+  const taskData = gatherTaskData();
+  const success = await sendTaskToApi(taskData);
+  handleTaskCreationResponse(success);
 }
