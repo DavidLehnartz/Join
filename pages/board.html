@@ -24,12 +24,22 @@
     <script src="../js/board_drop_down.js" defer></script>
     <script src="../js/board_drag_and_drop.js" defer></script>
     <script src="../js/board_filter.js" defer></script>
+<<<<<<< HEAD
     <script src="../js/floatingAddTaskBacklog.js" defer></script>
     <script src="../js/add_tasks.js" defer></script>
     <script src="../js/board.js" defer></script>
   </head>
 
   <!-- TASKS
+=======
+    <script src="../js/desktop_template.js"></script>
+    <script src="../js/board.js" defer></script>
+  </head>
+
+  <body onload="init('board-header', 'board-sidebar', 'board-link')">
+    <div id="board-sidebar"></div>
+<!-- TASKS
+>>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
 * subtasks rendern in task pop up ********
 * subtasks progres bar *******
 * subtasks completed count  ******
@@ -45,54 +55,8 @@
 
 * filter funktion muss noch ausgebessert werden
 -->
-
-  <body onload="init()">
-    <!-- SIDEBAR -->
-    <div id="sidebar_template">
-      <!-- <div class="left-sidebar">
-        <img src="../assets/img/join_logo_white.svg" alt="join logo" />
-        <div class="left-sidebar-links">
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/summary.png"
-              alt="Summary"
-            />
-            <p>Summary</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/add_task.png"
-              alt="Add Task"
-            />
-            <p>Add Task</p>
-          </a>
-          <a class="links link-active" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/board.png"
-              alt="Board"
-            />
-            <p>Board</p>
-          </a>
-          <a class="links" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/contacts.png"
-              alt="Contacts"
-            />
-            <p>Contacts</p>
-          </a>
-        </div>
-        <div class="left-sidebar-links">
-          <a class="legacy-links" href="#"> Privacy Policy </a>
-          <a class="legacy-links" href="#"> Legal notice </a>
-        </div>
-      </div> -->
-    </div>
-
     <main>
+<<<<<<< HEAD
       <!-- HEADER -->
       <header id="header_template">
         <!--  <div class="header-wrapper">
@@ -118,6 +82,9 @@
         </div> -->
       </header>
 
+=======
+      <div id="board-header"></div>
+>>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
       <!-- MAiN CONTENT -->
       <div class="main-content-wrapper">
         <!-- HEADLINE / SEARCHBOX -->
@@ -745,6 +712,7 @@
           </div>
         </section>
       </div>
+<<<<<<< HEAD
 
       <!-- FOOTER / NAVBAR RESPONSIVE -->
       <nav id="navbar_responsive">
@@ -783,6 +751,9 @@
           </a>
         </div>
       </nav>
+=======
+>>>>>>> 637129fe87c6878b9c72b5dbe6f3586014f817cf
     </main>
   </body>
+  <script src="../js/database.js"></script>
 </html>

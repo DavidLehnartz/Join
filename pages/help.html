@@ -18,75 +18,11 @@
     <script src="../js/desktop_template.js"></script>
     <script src="../js/help.js"></script>
   </head>
-  <body onload="initHelp('help-profile-icon')">
-    <aside>
-      <div class="left-sidebar">
-        <img src="../assets/img/join_logo_white.svg" alt="join logo" />
-        <div class="left-sidebar-links">
-          <a class="links" href="summary.html">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/summary.png"
-              alt="Summary"
-            />
-            <p>Summary</p>
-          </a>
-          <a class="links" href="add_tasks.html">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/add_task.png"
-              alt="Add Task"
-            />
-            <p>Add Task</p>
-          </a>
-          <a class="links" href="board.html">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/board.png"
-              alt="Board"
-            />
-            <p>Board</p>
-          </a>
-          <a class="links link-active" href="contacts.html">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/contacts.png"
-              alt="Contacts"
-            />
-            <p>Contacts</p>
-          </a>
-        </div>
-        <div class="left-sidebar-links">
-          <a class="legacy-links" href="privacy_policy.html">
-            Privacy Policy
-          </a>
-          <a class="legacy-links" href="legal_notice.html"> Legal notice </a>
-        </div>
-      </div>
-    </aside>
-
+  <body onload="initHelp('help-header', 'help-sidebar', '')">
+    <div id="help-sidebar"></div>
     <main>
-      <header>
-        <div class="header-wrapper">
-          <span> Kanban Project Management Tool</span>
-          <div class="header-icons">
-            <img
-              class="header-help-icon"
-              src="../assets/img/help.png"
-              alt="help"
-              onclick="window.location.href='./help.html'"
-            />
-            <div
-              id="help-profile-icon"
-              class="header-profil-icon"
-              onclick="showHeaderMenu('help-header-menu')"
-            ></div>
-            <div id="help-header-menu"></div>
-          </div>
-        </div>
-      </header>
-
-      <div class="main-content-wrapper">
+      <div id="help-header"></div>
+      <div class="help-content-wrapper">
         <div class="help-header-row">
           <h2>Help</h2>
           <img class="help-arrow" src="../assets/icons/arrow-left-line.svg" />

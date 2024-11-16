@@ -1,11 +1,9 @@
-'use strict';
+"use strict";
 
 /* BOARD DATABASE */
 
-
 const BASE_URL =
-    "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
-
+  "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let tasks = [];
 let contacts = [];
@@ -14,42 +12,38 @@ let subtasks = [];
 let addedSubtasks = [];
 let assignees = [];
 
-
-
-
 async function fetchTasksData() {
-    tasks = [];
-    subtasks = [];
+  tasks = [];
+  subtasks = [];
 
-    let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
-    let tasksToJson = await tasksResponse.json();
+  let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
+  let tasksToJson = await tasksResponse.json();
 
-    if (tasksToJson) {
-        const taskKeys = Object.keys(tasksToJson);
+  if (tasksToJson) {
+    const taskKeys = Object.keys(tasksToJson);
 
-        taskKeys.forEach((key) => {
-            const task = {
-                id: key,
-                ...tasksToJson[key]
-            };
+    taskKeys.forEach((key) => {
+      const task = {
+        id: key,
+        ...tasksToJson[key],
+      };
 
-            tasks.push(task);
+      tasks.push(task);
 
-            /* if (task.assignedTo && !assignees.includes(task.assignedTo)) {
+      /* if (task.assignedTo && !assignees.includes(task.assignedTo)) {
                 assignees.push(task.assignedTo);
             } */
 
-            if (task.assignedTo) {
-                assignees.push(...task.assignedTo);
-            }
+      if (task.assignedTo) {
+        assignees.push(...task.assignedTo);
+      }
+    });
+    renderTasks();
+  }
 
-        });
-        renderTasks();
-    }
-
-    console.log("Tasks nach Fetch:", tasks);
-    console.log("Assigned Users:", assignees);
-    console.log("Subtasks:", subtasks);
+  console.log("Tasks nach Fetch:", tasks);
+  console.log("Assigned Users:", assignees);
+  console.log("Subtasks:", subtasks);
 }
 
 // GPT
@@ -88,86 +82,78 @@ async function fetchTasksData() {
       console.log("Subtasks:", subtasks);
   } */
 
-
-
-
 async function fetchContactsData() {
-    contacts = [];
+  contacts = [];
 
-    let contactsResponse = await fetch(BASE_URL + "/contacts" + ".json");
-    let contactsToJson = await contactsResponse.json();
+  let contactsResponse = await fetch(BASE_URL + "/contacts" + ".json");
+  let contactsToJson = await contactsResponse.json();
 
-    if (contactsToJson) {
-        const contactKeys = Object.keys(contactsToJson);
+  if (contactsToJson) {
+    const contactKeys = Object.keys(contactsToJson);
 
-        contactKeys.forEach((key) => {
-            contacts.push({
-                id: key,
-                ...contactsToJson[key]
-            });
-        });
-    }
+    contactKeys.forEach((key) => {
+      contacts.push({
+        id: key,
+        ...contactsToJson[key],
+      });
+    });
+  }
 
-    console.log("contacts nach fetch:", contacts);
+  console.log("contacts nach fetch:", contacts);
 
-    renderTasks();
+  renderTasks();
 }
-
 
 async function deleteTaskData(taskId) {
-    try {
-        let taskResponse = await fetch(BASE_URL + "/tasks/" + taskId + ".json", {
-            method: "DELETE",
-        });
-        let deletedTask = await taskResponse.json();
+  try {
+    let taskResponse = await fetch(BASE_URL + "/tasks/" + taskId + ".json", {
+      method: "DELETE",
+    });
+    let deletedTask = await taskResponse.json();
 
-        console.log('Task erfolgreich gelöscht:', taskId);
-        await fetchTasksData();
-        closePopUps();
-        return deletedTask;
-    } catch (error) {
-        console.error('Fehler beim Löschen des Tasks:', error);
-    }
-    renderTasks();
+    console.log("Task erfolgreich gelöscht:", taskId);
+    await fetchTasksData();
+    closePopUps();
+    return deletedTask;
+  } catch (error) {
+    console.error("Fehler beim Löschen des Tasks:", error);
+  }
+  renderTasks();
 }
-
 
 async function updateTaskInFirebase(task) {
-    const taskId = task.id;
-    const url = `${BASE_URL}/tasks/${taskId}.json`;
+  const taskId = task.id;
+  const url = `${BASE_URL}/tasks/${taskId}.json`;
 
-    try {
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: task.id,
-                title: task.title,
-                description: task.description,
-                category: task.category,
-                assignedTo: task.assignedTo,
-                dueDate: task.dueDate,
-                priority: task.priority,
-                name: task.name,
-                initials: task.initials,
-                subtasks: task.subtasks,
-            })
-        });
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        category: task.category,
+        assignedTo: task.assignedTo,
+        dueDate: task.dueDate,
+        priority: task.priority,
+        name: task.name,
+        initials: task.initials,
+        subtasks: task.subtasks,
+      }),
+    });
 
-        if (!response.ok) {
-            throw new Error('Fehler beim Aktualisieren der Aufgabe in Firebase');
-        }
-
-        console.log('Aufgabe erfolgreich aktualisiert in Firebase:', task);
-    } catch (error) {
-        console.error('Fehler beim Aktualisieren der Aufgabe:', error);
+    if (!response.ok) {
+      throw new Error("Fehler beim Aktualisieren der Aufgabe in Firebase");
     }
-    renderTasks();
+
+    console.log("Aufgabe erfolgreich aktualisiert in Firebase:", task);
+  } catch (error) {
+    console.error("Fehler beim Aktualisieren der Aufgabe:", error);
+  }
 }
-
-
 /* async function updateTaskInFirebase(task) {
     const taskId = task.id;
     const url = `${BASE_URL}/tasks/${taskId}.json`;
@@ -191,6 +177,3 @@ async function updateTaskInFirebase(task) {
         console.error('Fehler beim Aktualisieren der Aufgabe:', error);
     }
 } */
-
-
-

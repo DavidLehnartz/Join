@@ -1,13 +1,22 @@
 const BASE_URL = "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
 let selectedContacts = [];
+let subtasksData = [];
 
 window.onload = function () {
-    restorePriority();
-    setTodayDate();
-    loadAllContactsInfo();
-    getUserFromStorage();
-};
+  restorePriority();
+  setTodayDate();
+  loadAllContactsInfo();
+  getUserFromStorage();
+};*/
+
+function init(header, sidebar, link) {
+  createHeader(header);
+  createSidebar(sidebar, link);
+  restorePriority();
+  setTodayDate();
+  loadAllContactsInfo();
+}
 
 function setTodayDate() {
     const dateInput = document.getElementById('inputFieldDueDate');
@@ -52,18 +61,15 @@ async function loadAllContactsInfo() {
 
 function toggleContactDropdown() {
     const dropdown = document.getElementById("categoryDropdown2");
-    const arrowElement = document.getElementById("dropdownArrow");
-    const arrowElement2 = document.getElementById("dropdownArrow2");
+    const arrowElement = document.getElementById("dropdownArrow2");
     const dropdown1 = document.getElementById('selectOnes');
     if (dropdown.classList.contains("open")) {
         dropdown.classList.remove("open");
         arrowElement.src = "../assets/img/arrow_drop_downaa.png";
-        if (arrowElement2) arrowElement2.src = "../assets/img/arrow_drop_downaa.png";
         removeOutsideClickListener();
     } else {
         dropdown.classList.add("open");
         arrowElement.src = "../assets/img/arrow_drop_up.png";
-        if (arrowElement2) arrowElement2.src = "../assets/img/arrow_drop_up.png";
         dropdown.innerHTML = '';
         contacts.forEach(contact => {
             const contactElement = document.createElement('div');
@@ -129,26 +135,17 @@ function isSelected(contactName) {
     return selectedContacts.some(contact => contact.name === contactName);
 }
 
-function updateSelectedContactsDisplay() { 
+function updateSelectedContactsDisplay() {
     const badgesContainer = document.getElementById("selectedContactsBadges");
-    const maxContactsContainer = document.querySelector(".maxContacts");
     badgesContainer.innerHTML = '';
-    maxContactsContainer.innerHTML = '';
 
     if (selectedContacts.length > 0) {
-        selectedContacts.forEach((contact, index) => {
-            if (index < 5) {
-                const contactBadge = document.createElement('div');
-                contactBadge.classList.add('contact-badge', `bg-${contact.color}`);
-                contactBadge.textContent = contact.initial;
-                badgesContainer.appendChild(contactBadge);
-            }
+        selectedContacts.forEach(contact => {
+            const contactBadge = document.createElement('div');
+            contactBadge.classList.add('contact-badge', `bg-${contact.color}`);
+            contactBadge.textContent = contact.initial;
+            badgesContainer.appendChild(contactBadge);
         });
-        if (selectedContacts.length > 5) {
-            const remainingContacts = selectedContacts.length - 5;
-            maxContactsContainer.textContent = `+${remainingContacts}`;
-            maxContactsContainer.classList.add('remaining-contacts-indicator');
-        }
     }
 }
 
@@ -210,67 +207,34 @@ function addSubtask() {
     inputField.disabled = false;
     inputField.focus();
     actionIcon.src = "../assets/img/Propertycheck.png";
-
     if (!document.getElementById('closeIcon')) {
-        const closeIcon = document.createElement('img');
-        closeIcon.src = "../assets/img/close.png";
-        closeIcon.classList.add('icon');
-        closeIcon.id = 'closeIcon';
-        closeIcon.onclick = cancelSubtask;
-        iconWrapper.prepend(closeIcon);
+        iconWrapper.insertAdjacentHTML('afterbegin', `
+            <img src="../assets/img/close.png" class="icon" id="closeIcon" onclick="cancelSubtask()">
+        `);
     }
 
     actionIcon.onclick = function () {
         const subtaskText = inputField.value.trim();
         if (subtaskText !== '') {
             const subtaskList = document.getElementById('subtaskList');
-
-            // Wrapper für den gesamten Subtask erstellen
-            const subtaskWrapper = document.createElement('div');
-            subtaskWrapper.classList.add('subtask-item'); // Haupt-Container für den Subtask
-
-            // <p>-Element für den Subtask-Text erstellen
-            const newSubtask = document.createElement('p');
-            newSubtask.classList.add('underSub');
-            newSubtask.textContent = subtaskText;
-
-            // Icons-Wrapper erstellen
-            const iconsWrapper = document.createElement('div');
-            iconsWrapper.classList.add('subtask-icons');
-
-            const editIcon = document.createElement('img');
-            editIcon.src = '../assets/img/edit.png';
-            editIcon.alt = 'Edit';
-            editIcon.onclick = function () {
-                editSubtask(subtaskWrapper);
-            };
-
-            const separator = document.createElement('div');
-            separator.classList.add('separator');
-
-            const deleteIcon = document.createElement('img');
-            deleteIcon.src = '../assets/img/delete.png';
-            deleteIcon.alt = 'Delete';
-            deleteIcon.onclick = function () {
-                deleteSubtask(subtaskWrapper);
-            };
-
-            iconsWrapper.appendChild(editIcon);
-            iconsWrapper.appendChild(separator);
-            iconsWrapper.appendChild(deleteIcon);
-
-            // Füge das <p>-Element und den Icons-Wrapper zum Subtask-Wrapper hinzu
-            subtaskWrapper.appendChild(newSubtask); // Der Text
-            subtaskWrapper.appendChild(iconsWrapper); // Die Icons unterhalb des <p>-Elements
-
-            // Füge den Subtask-Wrapper zur Subtask-Liste hinzu
-            subtaskList.appendChild(subtaskWrapper);
-
-            // Inputfeld zurücksetzen
+            subtaskList.insertAdjacentHTML('beforeend', `
+                <div class="subtask-item">
+                    <span class="subtask-text">${subtaskText}</span>
+                    <div class="subtask-icons">
+                        <img src="../assets/img/edit.png" alt="Edit" class="icon" onclick="editSubtask(this.closest('.subtask-item'))">
+                        <div class="separator"></div>
+                        <img src="../assets/img/delete.png" alt="Delete" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
+                    </div>
+                </div>
+            `);
+            subtasksData.push({
+                name: subtaskText,
+                completed: false
+            });
             inputField.value = '';
             inputField.focus();
         }
-    }.bind(this);
+    };
 }
 
 function cancelSubtask() {
@@ -288,45 +252,45 @@ function cancelSubtask() {
 }
 
 function editSubtask(subtaskItem) {
-    const currentText = subtaskItem.firstChild.textContent.trim();
+    const textElement = subtaskItem.querySelector('.subtask-text');
+    const currentText = textElement.textContent.trim();
     subtaskItem.classList.add('editing');
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = currentText;
-    input.classList.add('subtaskInput');
-    input.style.width = '100%';
-    input.style.height = subtaskItem.offsetHeight + 'px';
-    input.style.backgroundColor = '#fff';
-    input.style.border = 'none';
-    input.style.outline = 'none';
-    input.style.paddingLeft = '40px';
-    subtaskItem.firstChild.replaceWith(input);
+    subtaskItem.querySelector('.subtask-text').outerHTML = `
+        <input type="text" class="subtaskInput" value="${currentText}" style="width: 100%; height: ${subtaskItem.offsetHeight}px; background-color: #fff; border: none; outline: none;">
+    `;
+    const iconsWrapper = subtaskItem.querySelector('.subtask-icons');
+    iconsWrapper.innerHTML = `
+        <img src="../assets/img/delete.png" alt="Löschen" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
+        <div class="separator"></div>
+        <img src="../assets/img/propertychecktwo.png" alt="Speichern" class="icon" onclick="finishEditing(this.closest('.subtask-item').querySelector('.subtaskInput'), this.closest('.subtask-item').querySelector('.subtask-text'), this.closest('.subtask-item'))">
+    `;
+    const input = subtaskItem.querySelector('.subtaskInput');
     input.focus();
     input.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
-            const newText = input.value.trim();
-            if (newText !== '') {
-                const textNode = document.createTextNode(newText);
-                input.replaceWith(textNode);
-                subtaskItem.classList.remove('editing');
-            } else {
-                const textNode = document.createTextNode(currentText);
-                input.replaceWith(textNode);
-                subtaskItem.classList.remove('editing');
-            }
+            finishEditing(input, textElement, subtaskItem);
         }
     });
     input.addEventListener('blur', function () {
-        const newText = input.value.trim();
-        if (newText !== '') {
-            const textNode = document.createTextNode(newText);
-            input.replaceWith(textNode);
-        } else {
-            const textNode = document.createTextNode(currentText);
-            input.replaceWith(textNode);
-        }
-        subtaskItem.classList.remove('editing');
+        finishEditing(input, textElement, subtaskItem);
     });
+}
+
+function finishEditing(input, textElement, subtaskItem) {
+    const newText = input.value.trim();
+    textElement.textContent = newText !== '' ? newText : input.value;
+    input.replaceWith(textElement);
+    subtaskItem.classList.remove('editing');
+    const subtask = subtasksData.find(sub => sub.name === textElement.textContent);
+    if (subtask) {
+        subtask.name = newText;
+    }
+    const iconsWrapper = subtaskItem.querySelector('.subtask-icons');
+    iconsWrapper.innerHTML = `
+    <img src="../assets/img/edit.png" alt="Bearbeiten" class="icon" onclick="editSubtask(this.closest('.subtask-item'))">
+    <div class="separator"></div>
+    <img src="../assets/img/delete.png" alt="Löschen" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
+`;
 }
 
 function deleteSubtask(subtaskItem) {
@@ -431,14 +395,10 @@ async function createTask() {
             document.getElementById('inputFieldMedium').classList.contains('active-medium') ? 'Medium' :
                 document.getElementById('inputFieldLow').classList.contains('active-low') ? 'Low' : 'None',
         category: document.getElementById('selectedCategory').textContent,
-        subtasks: [
-            ...Array.from(document.querySelectorAll('#subtaskList li')).map(item => item.textContent.trim()),
-            document.getElementById('inputFieldSubtask').value.trim()
-        ].filter(subtask => subtask !== ''),
+        subtasks: subtasksData,
         assignedTo: selectedContacts,
         status: "todo"
     };
-
     try {
         const response = await fetch(`${BASE_URL}/tasks.json`, {
             method: "POST",
@@ -447,6 +407,7 @@ async function createTask() {
             },
             body: JSON.stringify(taskData)
         });
+
         if (response.ok) {
             let message = document.querySelector('.showMe');
             message.classList.remove('d-none');
@@ -458,18 +419,4 @@ async function createTask() {
     } catch (error) {
         console.error("Error saving task:", error);
     }
-}
-
-function getUserFromStorage() {
-    let userDataAsText = localStorage.getItem('user');
-    if (userDataAsText) {
-        user = JSON.parse(userDataAsText);
-    }
-    console.log(user);
-    displayInitial(user);
-}
-
-function displayInitial(user) {
-    let userInitial = document.getElementById('userInitial');
-    userInitial.innerHTML = user.initial;
 }

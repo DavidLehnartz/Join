@@ -1,8 +1,7 @@
 body {
     display: flex;
     margin: 0px auto;
-    width: 100%;
-    min-height: 100vh;
+      min-height: 100vh;
     box-sizing: border-box;
     scroll-behavior: smooth;
     background-color: rgb(246, 247, 248);
@@ -173,12 +172,13 @@ header {
 }
 
 .addTaskContent {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-left: 150px;
-    gap: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 60px;
+  margin-top: 50px;
+  gap: 20px;
 }
 
 .bothSides {
@@ -363,6 +363,7 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
+    width: fit-content;
 }
 
 .icon {
@@ -383,15 +384,21 @@ header {
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 5px 0 5px 40px;
-    height: 20px;
-    line-height: 20px;
+    padding: 0px 0px 0px 30px;
+    height: 32px;
     border-radius: 10px;
     background-color: #F6F7F8;
     transition: all 125ms ease;
     font-family: "Inter", sans-serif;
     font-size: 20px;
     cursor: text;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.subtask-text{
+    width: 85%;
+    overflow: hidden;
 }
 
 .subtask-item::before {
@@ -422,6 +429,13 @@ header {
 }
 
 .separator {
+    width: 1px;
+    height: 20px;
+    background-color: #2A3647;
+    margin: 0 5px;
+}
+
+.separator3 {
     width: 1px;
     height: 20px;
     background-color: #2A3647;
@@ -604,7 +618,12 @@ textarea {
 
 .clear-btn:hover {
     border-color: #29ABE2;
+    color: #29ABE2;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.clear-btn:hover #cancelIcon {
+    filter: invert(50%) sepia(1) saturate(4) hue-rotate(160deg);
 }
 
 .create-task-btn {
@@ -620,6 +639,7 @@ textarea {
 .create-task-btn:hover {
     border-color: #29ABE2;
     box-shadow: 0 0 10px rgba(42, 54, 71, 0.5);
+    background-color: #29ABE2;
 }
 
 .buttonWrapper {
