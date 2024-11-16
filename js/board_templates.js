@@ -103,6 +103,7 @@ function getHeaderTemplate() {
 
 function getBoardHeadlineTemplate() {
   return `
+ 
           <div class="headline">
               <h1>Board</h1>
               <form class="searchbox-wrapper">
@@ -140,6 +141,7 @@ function getBoardHeadlineTemplate() {
           </div>
   
           <section>
+          <div class="headline-responsive-wrapper">
             <div class="headline-responsive">
               <h1>Board</h1>
               <button class="add-task-btn-responsive">
@@ -162,6 +164,7 @@ function getBoardHeadlineTemplate() {
                 alt="search"
               />
             </button>
+            </div>
           </section>
     `;
 }

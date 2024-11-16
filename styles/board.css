@@ -375,92 +375,122 @@ nav {
   box-shadow: 0px 4px 4px 0px rgb(170 170 170);
 }
 
+/* .headline-responsive-wrapper{
+  display: flex;
+  padding: 0px 32px;
+} */
+
 /* MEDIA QUERY */
 
-@media (max-width: 1400px) {
-  .kanban-board-wrapper {
-    flex-wrap: wrap;
-  }
-}
 
-@media (max-width: 1130px) {
-  .add-task-btn {
-    display: none;
+@media (min-width: 1440px) {
+  .main-content-wrapper{
+    margin: 0px auto;
   }
-  .left-sidebar {
-    display: none;
   }
-
-  .app-description {
-    display: none;
-  }
-
-  .header-profil-icon {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 770px) {
-  header {
-    padding: 0px 16px;
-  }
-
-  .headline {
-    display: none;
-  }
-}
-
-@media (max-width: 630px) {
-  .kanban-column {
+  
+  
+  @media (max-width: 1400px) {
+    .kanban-board-wrapper {
+      flex-wrap: wrap;
+    }
+  .main-content-wrapper{
     width: 100%;
   }
-
-  .main-content-wrapper {
-    padding: 0px 16px;
-    padding-bottom: 64px;
   }
-
-  .input-btn-responsive {
-    right: 15px;
+  
+  @media (max-width: 1320px) {
+  
   }
-
-  .navbar-links {
-    font-size: 14px;
-    padding: 8px;
+  
+  @media (max-width: 1130px) {
+    .add-task-btn {
+      display: none;
+    }
+    .left-sidebar {
+      /* display: none; */
+    }
+  
+    .app-description {
+      display: none;
+    }
+  
+    .header-profil-icon {
+      width: 40px;
+      height: 40px;
+    }
   }
+  
+  @media (max-width: 770px) {
+    .header-wrapper {
+      padding: 0px 16px;
+    }
+  
+    .headline {
+      display: none;
+    }
+  
+    .headline-responsive-wrapper{
+      padding: 0px 16px;
+    }
+    .main-content-wrapper{
+      padding: 0px 0px;
+    }
 
-  progress {
-    width: 80%;
-  }
-}
+    .kanban-board-wrapper {
+      padding: 0px 16px;
+    }
 
-@media (min-width: 1130px) {
-  .add-task-btn-responsive {
-    display: none;
+    .input-btn-responsive {
+      top: 224px;
+      right: 15px;
+    }
   }
+  
+  @media (max-width: 630px) {
+    .kanban-column {
+      width: 100%;
+    }
 
-  .join-logo-responsive {
-    display: none;
-    width: 32px;
-    height: 39px;
+    
+  
+    .navbar-links {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    progress {
+      width: 80%;
+    }
   }
-
-  nav {
-    display: none;
+  
+  @media (min-width: 1130px) {
+    .add-task-btn-responsive {
+      display: none;
+    }
+  
+    .join-logo-responsive {
+      display: none;
+      width: 32px;
+      height: 39px;
+    }
+  
+    nav {
+      display: none;
+    }
   }
-}
-
-@media (min-width: 770px) {
-  .headline-responsive {
-    display: none;
+  
+  @media (min-width: 770px) {
+    .headline-responsive {
+      display: none;
+    }
+  
+    .input-btn-responsive {
+      display: none;
+    }
+  
+    .searchbox-input-responsive {
+      display: none;
+    }
   }
-
-  .input-btn-responsive {
-    display: none;
-  }
-
-  .searchbox-input-responsive {
-    display: none;
-  }
-}
+  
