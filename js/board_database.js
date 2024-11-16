@@ -2,15 +2,7 @@
 
 /* BOARD DATABASE */
 
-const BASE_URL =
-  "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
-
-let tasks = [];
-let contacts = [];
-let selectedContacts = [];
-let subtasks = [];
-let addedSubtasks = [];
-let assignees = [];
+//const BASE_URL = "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 
 async function fetchTasksData() {
   tasks = [];

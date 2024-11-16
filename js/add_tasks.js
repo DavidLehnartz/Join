@@ -1,8 +1,8 @@
-const BASE_URL =
+/*const BASE_URL =
   "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
 let selectedContacts = [];
-let subtasksData = [];
+let subtasksData = [];*/
 
 /*
 window.onload = function () {

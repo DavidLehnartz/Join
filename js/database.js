@@ -1,3 +1,12 @@
+const BASE_URL =
+  "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
+let tasks = [];
+let contacts = [];
+let selectedContacts = [];
+let subtasks = [];
+let addedSubtasks = [];
+let assignees = [];
+
 function createInitial(name) {
   let fullName = name.split(" "),
     initials = fullName[0].substring(0, 1).toUpperCase();

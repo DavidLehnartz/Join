@@ -33,17 +33,6 @@ function renderDesktopTemplate(header, sidebar, link) {
   // headerTemplateContent.innerHTML = getHeaderTemplate();
   boardHeadlineContent.innerHTML = getBoardHeadlineTemplate();
 }
-
-function showHeaderMenu(headerId) {
-  let headerMenu = document.getElementById(headerId);
-  if (headerMenuShown) {
-    headerMenu.innerHTML = "";
-  } else {
-    headerMenu.innerHTML = renderHeaderMenu();
-  }
-  headerMenuShown = !headerMenuShown;
-}
-
 /* ----- FÜR DRAG AND DROP ----- */
 
 /* function renderTasks() {
@@ -436,7 +425,6 @@ function showIcons(listItem) {
   const iconContainer = listItem.querySelector(".list-icon-container");
   iconContainer.style.visibility = "visible";
 }
-
 
 function hideIcons(listItem) {
   const iconContainer = listItem.querySelector(".list-icon-container");
