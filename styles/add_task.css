@@ -1,8 +1,7 @@
 body {
     display: flex;
     margin: 0px auto;
-    width: 100%;
-    min-height: 100vh;
+      min-height: 100vh;
     box-sizing: border-box;
     scroll-behavior: smooth;
     background-color: rgb(246, 247, 248);
@@ -173,12 +172,13 @@ header {
 }
 
 .addTaskContent {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-left: 150px;
-    gap: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 60px;
+  margin-top: 50px;
+  gap: 20px;
 }
 
 .bothSides {

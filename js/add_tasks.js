@@ -4,10 +4,19 @@ let selectedContacts = [];
 let subtasksData = [];
 
 window.onload = function () {
-    restorePriority();
-    setTodayDate();
-    loadAllContactsInfo();
-};
+  restorePriority();
+  setTodayDate();
+  loadAllContactsInfo();
+  getUserFromStorage();
+};*/
+
+function init(header, sidebar, link) {
+  createHeader(header);
+  createSidebar(sidebar, link);
+  restorePriority();
+  setTodayDate();
+  loadAllContactsInfo();
+}
 
 function setTodayDate() {
     const dateInput = document.getElementById('inputFieldDueDate');
