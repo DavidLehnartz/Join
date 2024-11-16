@@ -317,7 +317,8 @@ li.added-subtask-item {
   font-size: 16px;
   cursor: pointer;
   position: relative;
-  list-style-type: none; 
+  list-style-type: disc; /* Standard-Punkt */
+  transition: background-color 0.3s ease; /* Weicher Übergang */
 }
 
 
@@ -343,6 +344,13 @@ li.added-subtask-item:hover {
   visibility: hidden;
 }
 
+li.added-subtask-item.editing {
+  background-color: transparent; /* Entfernt Hover-Hintergrund */
+  list-style-type: none; /* Entfernt den Punkt */
+  cursor: default; /* Kein Pointer-Cursor */
+}
+
+
 .icon-container-images {
   width: 16px;
   height: 16px;
@@ -352,6 +360,16 @@ li.added-subtask-item:hover {
 .icon-container-images:hover {
   transition: transform 0.1s;
   transform: scale(1.1);
+}
+
+.edit-subtask-input {
+  font-size: 16px;
+  padding: 4px;
+  border: none;
+  border-bottom: 1px solid rgb(41, 171, 226); /* Blauer horizontaler Streifen */
+  outline: none; /* Entfernt den Fokusrahmen */
+  width: 100%; /* Passt die Breite an */
+  box-sizing: border-box; /* Bezieht Padding und Border in die Breite ein */
 }
 
 
