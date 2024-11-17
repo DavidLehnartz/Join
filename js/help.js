@@ -36,19 +36,6 @@ function initHelp(header, sidebar, link) {
   showHowToUseSteps();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  highlightJoinText();
-});
-
-function highlightJoinText() {
-  const paragraph = document.querySelector("p");
-  if (!paragraph || !paragraph.innerHTML) return;
-  paragraph.innerHTML = paragraph.innerHTML.replace(
-    /\b(Join)\b/g,
-    '<span class="text-secondary">$1</span>'
-  );
-}
-
 function renderHowToUseTemplate(number, headline, content) {
   return `<div class="help-how-to-step">
               <h3>${number}</h3>
