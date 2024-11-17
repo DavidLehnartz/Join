@@ -1,13 +1,10 @@
-//const BASE_URL = "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/";
-//let contacts = [];
-//let selectedContacts = [];
-
-/*
-window.onload = function () {
+function init(header, sidebar, link) {
+  createHeader(header);
+  createSidebar(sidebar, link);
   restorePriority();
   setTodayDate();
   loadAllContactsInfo();
-};*/
+}
 
 function setTodayDate() {
   const dateInput = document.getElementById("inputFieldDueDate");
@@ -50,11 +47,10 @@ async function loadAllContactsInfo() {
   return contacts;
 }
 
-// Funktion zum Öffnen und Schließen der Dropdown-Liste (beim Klick auf den Dropdown-Pfeil)
 function toggleContactDropdown() {
   const dropdown = document.getElementById("categoryDropdown2");
-  const arrowElement = document.getElementById("dropdownArrow");
-
+  const arrowElement = document.getElementById("dropdownArrow2");
+  const dropdown1 = document.getElementById("selectOnes");
   if (dropdown.classList.contains("open")) {
     dropdown.classList.remove("open");
     arrowElement.src = "../assets/img/arrow_drop_downaa.png";
@@ -62,60 +58,60 @@ function toggleContactDropdown() {
   } else {
     dropdown.classList.add("open");
     arrowElement.src = "../assets/img/arrow_drop_up.png";
-
-    // Kontakte in Dropdown-Liste laden
-    dropdown.innerHTML = ""; // Reset der Liste
-
+    dropdown.innerHTML = "";
     contacts.forEach((contact) => {
       const contactElement = document.createElement("div");
       contactElement.classList.add("contact-item");
+      if (isSelected(contact.name)) contactElement.classList.add("selected");
       contactElement.innerHTML = `
-                <div class="contact-initials bg-${contact.color}">${
-        contact.initial
-      }</div>
-                <span>${contact.name}</span>
-                <input type="checkbox" name="assignedContacts" class="contact-checkbox" data-name="${
-                  contact.name
-                }" ${isSelected(contact.name) ? "checked" : ""}/>
+                <div class="nameInitials">
+                    <div class="contact-initials bg-${contact.color}">${contact.initial
+        }</div>
+                    <span class="contact-name">${contact.name}</span>
+                </div>
+                <input type="checkbox" name="assignedContacts" class="contact-checkbox" data-name="${contact.name
+        }" ${isSelected(contact.name) ? "checked" : ""}/>
             `;
-
       const checkbox = contactElement.querySelector(".contact-checkbox");
-      checkbox.addEventListener("change", function () {
-        toggleContactSelection(contact);
-      });
-
+      const span = contactElement.querySelector(".nameInitials");
+      preventDropdownCloseOnSelect(checkbox, contactElement, contact);
+      preventDropdownCloseOnSelect(span, contactElement, contact);
       dropdown.appendChild(contactElement);
     });
-
-    addOutsideClickListener(dropdown, arrowElement);
+    addOutsideClickListener(dropdown, arrowElement, dropdown1);
   }
 }
 
-function addOutsideClickListener(dropdown, arrowElement) {
+function preventDropdownCloseOnSelect(element, contactElement, contact) {
+  element.addEventListener("click", function (event) {
+    event.stopPropagation();
+    const checkbox = contactElement.querySelector(".contact-checkbox");
+    checkbox.checked = !checkbox.checked;
+    toggleContactSelection(contact);
+    contactElement.classList.toggle("selected", checkbox.checked);
+  });
+}
+
+function addOutsideClickListener(dropdown, arrowElement, dropdown1) {
   function handleClickOutside(event) {
-    if (
-      !dropdown.contains(event.target) &&
-      !arrowElement.contains(event.target)
-    ) {
+    if (!dropdown.contains(event.target) && !dropdown1.contains(event.target)) {
       dropdown.classList.remove("open");
       arrowElement.src = "../assets/img/arrow_drop_downaa.png";
-      removeOutsideClickListener(); // Listener entfernen, nachdem er einmal ausgelöst wurde
+      removeOutsideClickListener();
     }
   }
-
   document.addEventListener("click", handleClickOutside);
-  dropdown.setAttribute("data-listener", handleClickOutside); // Speichert die Referenz zum Listener
+  dropdown.setAttribute("data-listener", handleClickOutside);
 }
 
 function removeOutsideClickListener() {
   const dropdown = document.getElementById("categoryDropdown2");
   const listener = dropdown.getAttribute("data-listener");
   if (listener) {
-    dropdown.removeAttribute("data-listener"); // Listener entfernen
+    dropdown.removeAttribute("data-listener");
   }
 }
 
-// Funktion, um den Status eines Kontakts zu ändern (ausgewählt oder nicht)
 function toggleContactSelection(contact) {
   if (isSelected(contact.name)) {
     selectedContacts = selectedContacts.filter((c) => c.name !== contact.name);
@@ -125,20 +121,18 @@ function toggleContactSelection(contact) {
   updateSelectedContactsDisplay();
 }
 
-// Funktion, um zu überprüfen, ob ein Kontakt ausgewählt ist
 function isSelected(contactName) {
   return selectedContacts.some((contact) => contact.name === contactName);
 }
 
-// Funktion, um die ausgewählten Kontakte als Namenskürzel (Badges) unterhalb des Dropdowns anzuzeigen
 function updateSelectedContactsDisplay() {
   const badgesContainer = document.getElementById("selectedContactsBadges");
-  badgesContainer.innerHTML = ""; // Inhalt zurücksetzen
+  badgesContainer.innerHTML = "";
 
   if (selectedContacts.length > 0) {
     selectedContacts.forEach((contact) => {
       const contactBadge = document.createElement("div");
-      contactBadge.classList.add("contact-badge", `bg-${contact.color}`); // Klasse für die Farbe hinzufügen
+      contactBadge.classList.add("contact-badge", `bg-${contact.color}`);
       contactBadge.textContent = contact.initial;
       badgesContainer.appendChild(contactBadge);
     });
@@ -147,13 +141,16 @@ function updateSelectedContactsDisplay() {
 
 function toggleDropdown() {
   const dropdown = document.getElementById("categoryDropdown");
+  const dropdown2 = document.getElementById("selectCat");
   const arrowElement = document.getElementById("dropdownArrow");
   if (dropdown.classList.contains("open")) {
     dropdown.classList.remove("open");
     arrowElement.src = "../assets/img/arrow_drop_downaa.png";
+    removeOutsideClickListener();
   } else {
     dropdown.classList.add("open");
     arrowElement.src = "../assets/img/arrow_drop_up.png";
+    addOutsideClickListener(dropdown, arrowElement, dropdown2);
   }
 }
 
@@ -201,45 +198,39 @@ function addSubtask() {
   inputField.focus();
   actionIcon.src = "../assets/img/Propertycheck.png";
   if (!document.getElementById("closeIcon")) {
-    const closeIcon = document.createElement("img");
-    closeIcon.src = "../assets/img/close.png";
-    closeIcon.classList.add("icon");
-    closeIcon.id = "closeIcon";
-    closeIcon.onclick = cancelSubtask;
-    iconWrapper.prepend(closeIcon);
+    iconWrapper.insertAdjacentHTML(
+      "afterbegin",
+      `
+            <img src="../assets/img/close.png" class="icon" id="closeIcon" onclick="cancelSubtask()">
+        `
+    );
   }
+
   actionIcon.onclick = function () {
     const subtaskText = inputField.value.trim();
     if (subtaskText !== "") {
       const subtaskList = document.getElementById("subtaskList");
-      const newSubtask = document.createElement("li");
-      newSubtask.classList.add("subtask-item");
-      newSubtask.textContent = subtaskText;
-      const iconsWrapper = document.createElement("div");
-      iconsWrapper.classList.add("subtask-icons");
-      const editIcon = document.createElement("img");
-      editIcon.src = "../assets/img/edit.png";
-      editIcon.alt = "Edit";
-      editIcon.onclick = function () {
-        editSubtask(newSubtask);
-      };
-      const separator = document.createElement("div");
-      separator.classList.add("separator");
-      const deleteIcon = document.createElement("img");
-      deleteIcon.src = "../assets/img/delete.png";
-      deleteIcon.alt = "Delete";
-      deleteIcon.onclick = function () {
-        deleteSubtask(newSubtask);
-      };
-      iconsWrapper.appendChild(editIcon);
-      iconsWrapper.appendChild(separator);
-      iconsWrapper.appendChild(deleteIcon);
-      newSubtask.appendChild(iconsWrapper);
-      subtaskList.appendChild(newSubtask);
+      subtaskList.insertAdjacentHTML(
+        "beforeend",
+        `
+                <div class="subtask-item">
+                    <span class="subtask-text">${subtaskText}</span>
+                    <div class="subtask-icons">
+                        <img src="../assets/img/edit.png" alt="Edit" class="icon" onclick="editSubtask(this.closest('.subtask-item'))">
+                        <div class="separator"></div>
+                        <img src="../assets/img/delete.png" alt="Delete" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
+                    </div>
+                </div>
+            `
+      );
+      subtasksData.push({
+        name: subtaskText,
+        completed: false,
+      });
       inputField.value = "";
       inputField.focus();
     }
-  }.bind(this);
+  };
 }
 
 function cancelSubtask() {
@@ -257,45 +248,47 @@ function cancelSubtask() {
 }
 
 function editSubtask(subtaskItem) {
-  const currentText = subtaskItem.firstChild.textContent.trim();
+  const textElement = subtaskItem.querySelector(".subtask-text");
+  const currentText = textElement.textContent.trim();
   subtaskItem.classList.add("editing");
-  const input = document.createElement("input");
-  input.type = "text";
-  input.value = currentText;
-  input.classList.add("subtaskInput");
-  input.style.width = "100%";
-  input.style.height = subtaskItem.offsetHeight + "px";
-  input.style.backgroundColor = "#fff";
-  input.style.border = "none";
-  input.style.outline = "none";
-  input.style.paddingLeft = "40px";
-  subtaskItem.firstChild.replaceWith(input);
+  subtaskItem.querySelector(".subtask-text").outerHTML = `
+        <input type="text" class="subtaskInput" value="${currentText}" style="width: 100%; height: ${subtaskItem.offsetHeight}px; background-color: #fff; border: none; outline: none;">
+    `;
+  const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
+  iconsWrapper.innerHTML = `
+        <img src="../assets/img/delete.png" alt="Löschen" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
+        <div class="separator"></div>
+        <img src="../assets/img/propertychecktwo.png" alt="Speichern" class="icon" onclick="finishEditing(this.closest('.subtask-item').querySelector('.subtaskInput'), this.closest('.subtask-item').querySelector('.subtask-text'), this.closest('.subtask-item'))">
+    `;
+  const input = subtaskItem.querySelector(".subtaskInput");
   input.focus();
   input.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-      const newText = input.value.trim();
-      if (newText !== "") {
-        const textNode = document.createTextNode(newText);
-        input.replaceWith(textNode);
-        subtaskItem.classList.remove("editing");
-      } else {
-        const textNode = document.createTextNode(currentText);
-        input.replaceWith(textNode);
-        subtaskItem.classList.remove("editing");
-      }
+      finishEditing(input, textElement, subtaskItem);
     }
   });
   input.addEventListener("blur", function () {
-    const newText = input.value.trim();
-    if (newText !== "") {
-      const textNode = document.createTextNode(newText);
-      input.replaceWith(textNode);
-    } else {
-      const textNode = document.createTextNode(currentText);
-      input.replaceWith(textNode);
-    }
-    subtaskItem.classList.remove("editing");
+    finishEditing(input, textElement, subtaskItem);
   });
+}
+
+function finishEditing(input, textElement, subtaskItem) {
+  const newText = input.value.trim();
+  textElement.textContent = newText !== "" ? newText : input.value;
+  input.replaceWith(textElement);
+  subtaskItem.classList.remove("editing");
+  const subtask = subtasksData.find(
+    (sub) => sub.name === textElement.textContent
+  );
+  if (subtask) {
+    subtask.name = newText;
+  }
+  const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
+  iconsWrapper.innerHTML = `
+    <img src="../assets/img/edit.png" alt="Bearbeiten" class="icon" onclick="editSubtask(this.closest('.subtask-item'))">
+    <div class="separator"></div>
+    <img src="../assets/img/delete.png" alt="Löschen" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
+`;
 }
 
 function deleteSubtask(subtaskItem) {
@@ -348,37 +341,26 @@ function clearEverything() {
   clearCheckboxesAndDropdowns();
   resetSpecialFields();
   cancelSubtask();
-
-  // Subtask-Liste leeren
   const subtaskList = document.getElementById("subtaskList");
   subtaskList.innerHTML = "";
-
-  // Kontakte zurücksetzen
   clearSelectedContacts();
 }
 
 function clearSelectedContacts() {
-  // Setzt den Text des Kontaktfeldes zurück
   const selectedContactsElement = document.getElementById("selectedContacts");
   if (selectedContactsElement) {
-    selectedContactsElement.textContent = "Select Contacts to assign"; // Setzt den Text zurück
+    selectedContactsElement.textContent = "Select Contacts to assign";
   }
-
-  // Entfernt alle angezeigten Kontakt-Badges
   const selectedContactsBadges = document.getElementById(
     "selectedContactsBadges"
   );
   if (selectedContactsBadges) {
-    selectedContactsBadges.innerHTML = ""; // Entfernt alle Kontakt-Badges
+    selectedContactsBadges.innerHTML = "";
   }
-
-  // Setzt die Kontakt-Checkboxen zurück
   const contactCheckboxes = document.querySelectorAll(".contact-checkbox");
   contactCheckboxes.forEach((checkbox) => {
     checkbox.checked = false;
   });
-
-  // Leert das Array der ausgewählten Kontakte
   selectedContacts = [];
 }
 
@@ -408,34 +390,36 @@ function checkForm() {
   document.getElementById("createTaskBtn").disabled = !formIsValid;
 }
 
-async function createTask() {
-  const taskData = {
-    title: document.getElementById("inputFieldTitle").value,
-    description: document.getElementById("inputFieldDescription").value,
-    dueDate: document.getElementById("inputFieldDueDate").value,
-    priority: document
-      .getElementById("inputFieldUrgent")
-      .classList.contains("active-urgent")
-      ? "Urgent"
-      : document
-          .getElementById("inputFieldMedium")
-          .classList.contains("active-medium")
-      ? "Medium"
-      : document
-          .getElementById("inputFieldLow")
-          .classList.contains("active-low")
-      ? "Low"
-      : "None",
-    category: document.getElementById("selectedCategory").textContent,
-    subtasks: [
-      ...Array.from(document.querySelectorAll("#subtaskList li")).map((item) =>
-        item.textContent.trim()
-      ),
-      document.getElementById("inputFieldSubtask").value.trim(),
-    ].filter((subtask) => subtask !== ""),
+function gatherTaskData() {
+  const title = document.getElementById("inputFieldTitle").value;
+  const description = document.getElementById("inputFieldDescription").value;
+  const dueDate = document.getElementById("inputFieldDueDate").value;
+  const priority = getPriority();
+  const category = document.getElementById("selectedCategory").textContent;
+  return {
+    title,
+    description,
+    dueDate,
+    priority,
+    category,
+    subtasks: subtasksData,
     assignedTo: selectedContacts,
+    status: "todo",
   };
+}
 
+function getPriority() {
+  if (document.getElementById("inputFieldUrgent").classList.contains("active-urgent")) {
+    return "Urgent";
+  } else if (document.getElementById("inputFieldMedium").classList.contains("active-medium")) {
+    return "Medium";
+  } else if (document.getElementById("inputFieldLow").classList.contains("active-low")) {
+    return "Low";
+  }
+  return "None";
+}
+
+async function sendTaskToApi(taskData) {
   try {
     const response = await fetch(`${BASE_URL}/tasks.json`, {
       method: "POST",
@@ -445,15 +429,28 @@ async function createTask() {
       body: JSON.stringify(taskData),
     });
 
-    if (response.ok) {
-      let message = document.querySelector(".showMe");
-      message.classList.remove("d-none");
-      setTimeout(() => {
-        window.location.href = "board.html";
-        message.classList.add("d-none");
-      }, 2900);
-    }
+    return response.ok;
   } catch (error) {
     console.error("Error saving task:", error);
+    return false;
   }
+}
+
+function handleTaskCreationResponse(success) {
+  if (success) {
+    const message = document.querySelector(".showMe");
+    message.classList.remove("d-none");
+    setTimeout(() => {
+      window.location.href = "board.html";
+      message.classList.add("d-none");
+    }, 2900);
+  } else {
+    console.error("Task creation failed.");
+  }
+}
+
+async function createTask() {
+  const taskData = gatherTaskData();
+  const success = await sendTaskToApi(taskData);
+  handleTaskCreationResponse(success);
 }
