@@ -469,6 +469,20 @@ function getSelectedContactsTemplate(contact) {
 }
 
 
+function getAddedSubtasksTemplate(addedSubtask) {
+  return `
+          <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item" data-id="${addedSubtask.id}">
+            <span>${addedSubtask.title}</span>
+            <div class="list-icon-container">
+              <img onclick="editSubtask('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/edit.png" alt="edit icon">
+              <div class="vertical_line"></div>
+              <img onclick="deleteAddedSubtask('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/delete.png" alt="delete icon">
+            </div>
+          </li>
+        `;
+}
+
+
 
 
 

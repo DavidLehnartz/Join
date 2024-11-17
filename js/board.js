@@ -12,6 +12,7 @@ async function init(header, sidebar, link) {
   console.log(tasks);
 }
 
+
 async function loadFetchedData() {
   try {
     await fetchTasksData();
@@ -21,6 +22,7 @@ async function loadFetchedData() {
   }
   renderTasks();
 }
+
 
 function renderDesktopTemplate(header, sidebar, link) {
   createHeader(header);
@@ -94,6 +96,7 @@ function renderTasks() {
   });
 }
 
+
 function renderTaskPopUp(taskId) {
   let taskPopUpContent = document.getElementById("task_pop_up");
   taskPopUpContent.innerHTML = "";
@@ -115,6 +118,7 @@ function renderTaskPopUp(taskId) {
   renderSubtasks(taskId);
 }
 
+
 function renderEditTaskPopUp(taskId, priorityImage) {
   currentTaskId = taskId;
 
@@ -132,10 +136,9 @@ function renderEditTaskPopUp(taskId, priorityImage) {
     setPriorityButton(task.priority);
   }
 
-  document
-    .getElementById("edit_task_pop_up")
-    .classList.remove("responsive-pop-up-closed");
+  document.getElementById("edit_task_pop_up").classList.remove("responsive-pop-up-closed");
 }
+
 
 function renderSelectedContacts() {
   let selectedContactsContent = document.getElementById("selected_contacts");
@@ -151,6 +154,7 @@ function renderSelectedContacts() {
   }
 }
 
+
 function renderAssigneeInitials(assignedTo) {
   let assigneeInitialsContent = "";
 
@@ -163,6 +167,7 @@ function renderAssigneeInitials(assignedTo) {
   return assigneeInitialsContent;
 }
 
+
 function openTaskPopUp(taskId) {
   document
     .getElementById("overlay_task_pop_up")
@@ -170,6 +175,7 @@ function openTaskPopUp(taskId) {
 
   renderTaskPopUp(taskId);
 }
+
 
 async function saveTaskChanges(taskId) {
   const task = tasks.find((t) => t.id === taskId);
@@ -194,6 +200,7 @@ async function saveTaskChanges(taskId) {
   openTaskPopUp(taskId);
 }
 
+
 function getCategoryColor(category) {
   if (category === "User Story") {
     return "rgb(0, 56, 255)";
@@ -202,6 +209,7 @@ function getCategoryColor(category) {
   }
   return "gray";
 }
+
 
 function getPriorityImage(priority) {
   if (priority === "Low") {
@@ -213,6 +221,7 @@ function getPriorityImage(priority) {
   }
   return "";
 }
+
 
 function changePrioButtons(selectedButton) {
   resetButtons();
@@ -242,6 +251,7 @@ function changePrioButtons(selectedButton) {
   }
 }
 
+
 function setPriorityButton(priority) {
   resetButtons();
 
@@ -260,6 +270,7 @@ function setPriorityButton(priority) {
   }
 }
 
+
 function updateTaskPriority(priority) {
   const task = tasks.find(
     (t) => t.id === currentTaskId
@@ -268,6 +279,7 @@ function updateTaskPriority(priority) {
     task.priority = priority;
   }
 }
+
 
 function resetButtons() {
   let buttons = document.querySelectorAll(".prio-btn");
@@ -334,6 +346,7 @@ function renderSubtasks(taskId) {
   }
 }
 
+
 function getSubtasksTemplate(taskId, subtask, index) {
   return `
           <div class="subtask" id="subtask_${taskId}_${index}">
@@ -345,6 +358,52 @@ function getSubtasksTemplate(taskId, subtask, index) {
           </div>
   `;
 }
+
+
+function renderAddSubtasks() {
+  let addedSubtasksContent = document.getElementById("added_subtasks");
+  addedSubtasksContent.innerHTML = "";
+
+  addedSubtasks.forEach((addedSubtask) => {
+    addedSubtasksContent.innerHTML += getAddedSubtasksTemplate(addedSubtask);
+  });
+}
+
+
+function addSubtask() {
+  let inputAddedSubtask = document.getElementById("input_add_subtask");
+  let addedSubtaskTitle = inputAddedSubtask.value.trim();
+  let addedSubtask = {
+    id: generateUniqueId(),
+    title: addedSubtaskTitle,
+  };
+
+  if (errorMessage()) {
+    return;
+  } else {
+    addedSubtasks.push(addedSubtask);
+    console.log("added subtasks arr", addedSubtasks);
+
+    renderAddSubtasks();
+    clearInputs();
+  }
+
+  updateButtonImage();
+}
+
+
+function deleteAddedSubtask(id) {
+  let index = addedSubtasks.findIndex(addedSubtask => addedSubtask.id === id);
+
+  if (index !== -1) {
+    addedSubtasks.splice(index, 1);
+    renderAddSubtasks();
+    console.log('subtask deleted successfully', addedSubtasks);
+  } else {
+    console.error('subtask not found!', addedSubtasks);
+  }
+}
+
 
 function updateButtonImage() {
   /* let ButtonImage = document.getElementById('input_button_image'); */
@@ -374,62 +433,54 @@ function updateButtonImage() {
   }
 }
 
-function addSubtask() {
-  let inputAddedSubtask = document.getElementById("input_add_subtask");
-  let addedSubtaskTitle = inputAddedSubtask.value.trim();
-  let addedSubtask = {
-    id: generateUniqueId(),
-    title: addedSubtaskTitle,
-  };
 
-  if (errorMessage()) {
-    return;
-  } else {
-    addedSubtasks.push(addedSubtask);
-    console.log("added subtasks arr", addedSubtasks);
+function editSubtask(id) {
+  const subtask = addedSubtasks.find(sub => sub.id === id);
+  if (!subtask) return;
 
-    renderAddSubtasks();
-    clearInputs();
+  const listItem = document.querySelector(`li[data-id="${id}"]`);
+  if (!listItem) return;
+
+  listItem.classList.add("editing");
+
+  listItem.innerHTML = `
+                        <input type="text" value="${subtask.title}" 
+                              onblur="saveEditedSubtask('${id}', this.value)"  
+                              onkeydown="handleEnterKey(event, '${id}', this)" 
+                               class="edit-subtask-input">
+                        <div class="list-icon-container">
+                              <img onclick="deleteAddedSubtask('${id}')" 
+                              class="icon-container-images" 
+                              src="../assets/img/delete.png" 
+                              alt="check icon">
+                        <div class="vertical_line"></div>
+                              <img onclick="saveEditedSubtask('${id}')"
+                              class="icon-container-images" 
+                              src="../assets/img/check_black.png" 
+                        </div>
+                     `;
+
+  console.log('save edit subtask', addedSubtasks);
+}
+
+
+function saveEditedSubtask(id, newTitle) {
+  const subtaskIndex = addedSubtasks.findIndex(sub => sub.id === id);
+  if (subtaskIndex !== -1 && newTitle.trim() !== "") {
+    addedSubtasks[subtaskIndex].title = newTitle.trim();
   }
 
-  updateButtonImage();
+  renderAddSubtasks();
+  console.log(addedSubtasks);
 }
 
-function generateUniqueId() {
-  return "_" + Math.random().toString(36).substr(2, 9);
+
+function handleEnterKey(event, id, inputElement) {
+  if (event.key === "Enter") {
+    saveEditedSubtask(id, inputElement.value);
+  }
 }
 
-function renderAddSubtasks() {
-  let addedSubtasksContent = document.getElementById("added_subtasks");
-  addedSubtasksContent.innerHTML = "";
-
-  addedSubtasks.forEach((addedSubtask) => {
-    addedSubtasksContent.innerHTML += getAddedSubtasksTemplate(addedSubtask);
-  });
-}
-
-function getAddedSubtasksTemplate(addedSubtask) {
-  return `
-          <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item">
-             <span>${addedSubtask.title}</span>
-              <div class="list-icon-container">
-                <img  class="icon-container-images " src="../assets/img/edit.png" alt="edit icon">
-                <div class="vertical_line"></div>
-                <img onclick="deleteAddedSubtask('${addedSubtask.id}')" class="icon-container-images " src="../assets/img/delete.png" alt="delete icon">
-              </div>
-          </li>
-  `;
-}
-
-function showIcons(listItem) {
-  const iconContainer = listItem.querySelector(".list-icon-container");
-  iconContainer.style.visibility = "visible";
-}
-
-function hideIcons(listItem) {
-  const iconContainer = listItem.querySelector(".list-icon-container");
-  iconContainer.style.visibility = "hidden";
-}
 
 function errorMessage() {
   let inputAddedSubtask = document
@@ -446,16 +497,23 @@ function errorMessage() {
   return false;
 }
 
-function deleteAddedSubtask(id) {
-  let index = addedSubtasks.findIndex((addedSubtask) => addedSubtask.id === id);
 
-  if (index !== -1) {
-    addedSubtasks.splice(index, 1);
-    renderAddSubtasks();
-  }
-
-  console.log(addedSubtasks);
+function generateUniqueId() {
+  return "_" + Math.random().toString(36).substr(2, 9);
 }
+
+
+function showIcons(listItem) {
+  const iconContainer = listItem.querySelector(".list-icon-container");
+  iconContainer.style.visibility = "visible";
+}
+
+
+function hideIcons(listItem) {
+  const iconContainer = listItem.querySelector(".list-icon-container");
+  iconContainer.style.visibility = "hidden";
+}
+
 
 function closeEditPopUp() {
   document
@@ -463,16 +521,19 @@ function closeEditPopUp() {
     .classList.add("responsive-pop-up-closed");
 }
 
+
 function closePopUps() {
   document
     .getElementById("overlay_task_pop_up")
     .classList.add("responsive-pop-up-closed");
 }
 
+
 function clearInputs() {
   document.getElementById("input_add_subtask").value = "";
   updateButtonImage();
 }
+
 
 function changeImageEdit() {
   document.getElementById("edit_img").src = "../assets/img/edit_blue.png";
