@@ -67,6 +67,11 @@ h1 {
   gap: 28px;
 }
 
+.left-sidebar {
+  height: 100% !important;
+  min-height: 100vh;
+}
+
 .toDoDone {
   display: flex;
   justify-content: space-between;
@@ -334,6 +339,11 @@ h1 {
     margin-right: 110px;
   }
 
+  .left-sidebar {
+    height: fit-content;
+    min-height: 20px;
+  }
+
   .rightSide {
     display: none;
   }
@@ -463,6 +473,7 @@ h1 {
 }
 
 @media (max-width: 350px) {
+
   .toDoDone,
   .urgentDateDeadline,
   .taskBoardProgressFeedback {
