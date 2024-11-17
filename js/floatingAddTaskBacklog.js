@@ -45,9 +45,9 @@ async function loadAllContactsInfo() {
   return contacts;
 }
 
-function toggleContactDropdown2() {
+function toggleContactDropdownw() {
   const dropdown = document.getElementById("categoryDropdown2");
-  const arrowElement = document.getElementById("dropdownArrow2");
+  const arrowElement = document.getElementById("dropdownArrow2w");
   const dropdown1 = document.getElementById("selectOnes");
   if (dropdown.classList.contains("open")) {
     dropdown.classList.remove("open");
@@ -140,7 +140,7 @@ function updateSelectedContactsDisplay() {
 function toggleDropdown() {
   const dropdown = document.getElementById("categoryDropdown");
   const dropdown2 = document.getElementById("selectCat");
-  const arrowElement = document.getElementById("dropdownArrow");
+  const arrowElement = document.getElementById("dropdownArroww");
   if (dropdown.classList.contains("open")) {
     dropdown.classList.remove("open");
     arrowElement.src = "../assets/img/arrow_drop_downaa.png";
