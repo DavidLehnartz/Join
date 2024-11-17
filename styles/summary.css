@@ -296,7 +296,7 @@ h1 {
   width: 100px;
 }
 
-@media (max-width: 1390px) {
+@media (max-width: 1320px) {
   .belowHeadlineContent {
     display: flex;
     flex-direction: column;
