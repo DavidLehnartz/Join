@@ -50,7 +50,7 @@ h1 {
 .left-sidebar-links {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 5px;
 }
 
 .links {
@@ -76,7 +76,10 @@ h1 {
 
 .legacy-links {
   display: flex;
+  width: 280px;
+  height: 35px;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   color: #b5b6b9;
 }

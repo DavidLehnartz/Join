@@ -67,8 +67,8 @@ function renderSidebar() {
         </a>
       </div>
       <div class="left-sidebar-links">
-        <a class="legacy-links" href="../pages/privacy_policy.html"> Privacy Policy </a>
-        <a class="legacy-links" href="../pages/legal_notice.html"> Legal notice </a>
+        <a id="privacy-link" class="legacy-links" href="../pages/privacy_policy.html"> Privacy Policy </a>
+        <a id="legal-link" class="legacy-links" href="../pages/legal_notice.html"> Legal notice </a>
       </div>
     </div>`;
 }
