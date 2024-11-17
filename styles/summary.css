@@ -340,7 +340,7 @@ h1 {
   }
 
   .left-sidebar {
-    height: fit-content;
+    height: fit-content !important;
     min-height: 20px;
   }
 
