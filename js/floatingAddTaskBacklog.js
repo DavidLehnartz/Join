@@ -45,7 +45,7 @@ async function loadAllContactsInfo() {
   return contacts;
 }
 
-function toggleContactDropdown() {
+function toggleContactDropdown2() {
   const dropdown = document.getElementById("categoryDropdown2");
   const arrowElement = document.getElementById("dropdownArrow2");
   const dropdown1 = document.getElementById("selectOnes");
