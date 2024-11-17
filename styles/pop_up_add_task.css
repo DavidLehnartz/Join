@@ -21,7 +21,7 @@
   top: 50%;
   left: 50%;
   width: 900px;
- /*  height: 500px; */
+  height: 570px;
   border-radius: 30px;
   background-color: white;
   transform: translate(-50%, -50%);
@@ -589,12 +589,12 @@ textarea {
 }
 
 .addTaskFooter{
-
     display: flex;
     justify-content: space-between;
+    align-items: end;
 }  /* hinzugefügt */
 
-.addTaskFooterLeftSide{
+/* .addTaskFooterLeftSide{
     display: flex;
     align-items: end;
-}
+} */
