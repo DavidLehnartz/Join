@@ -51,6 +51,7 @@ function toggleContactDropdown() {
   const dropdown = document.getElementById("categoryDropdown2");
   const arrowElement = document.getElementById("dropdownArrow2");
   const dropdown1 = document.getElementById("selectOnes");
+
   if (dropdown.classList.contains("open")) {
     dropdown.classList.remove("open");
     arrowElement.src = "../assets/img/arrow_drop_downaa.png";
@@ -58,26 +59,7 @@ function toggleContactDropdown() {
   } else {
     dropdown.classList.add("open");
     arrowElement.src = "../assets/img/arrow_drop_up.png";
-    dropdown.innerHTML = "";
-    contacts.forEach((contact) => {
-      const contactElement = document.createElement("div");
-      contactElement.classList.add("contact-item");
-      if (isSelected(contact.name)) contactElement.classList.add("selected");
-      contactElement.innerHTML = `
-                <div class="nameInitials">
-                    <div class="contact-initials bg-${contact.color}">${contact.initial
-        }</div>
-                    <span class="contact-name">${contact.name}</span>
-                </div>
-                <input type="checkbox" name="assignedContacts" class="contact-checkbox" data-name="${contact.name
-        }" ${isSelected(contact.name) ? "checked" : ""}/>
-            `;
-      const checkbox = contactElement.querySelector(".contact-checkbox");
-      const span = contactElement.querySelector(".nameInitials");
-      preventDropdownCloseOnSelect(checkbox, contactElement, contact);
-      preventDropdownCloseOnSelect(span, contactElement, contact);
-      dropdown.appendChild(contactElement);
-    });
+    populateDropdown(dropdown);
     addOutsideClickListener(dropdown, arrowElement, dropdown1);
   }
 }
@@ -86,9 +68,53 @@ function preventDropdownCloseOnSelect(element, contactElement, contact) {
   element.addEventListener("click", function (event) {
     event.stopPropagation();
     const checkbox = contactElement.querySelector(".contact-checkbox");
-    checkbox.checked = !checkbox.checked;
-    toggleContactSelection(contact);
-    contactElement.classList.toggle("selected", checkbox.checked);
+    if (event.target === checkbox) {
+      handleContactSelection(contactElement, contact, checkbox.checked);
+    } else {
+      checkbox.checked = !checkbox.checked;
+      handleContactSelection(contactElement, contact, checkbox.checked);
+    }
+  });
+}
+
+function handleContactSelection(contactElement, contact, isChecked) {
+  const checkbox = contactElement.querySelector(".contact-checkbox");
+  checkbox.checked = isChecked;
+  if (isChecked) {
+    if (!isSelected(contact.name)) {
+      selectedContacts.push(contact);
+    }
+  } else {
+    selectedContacts = selectedContacts.filter((c) => c.name !== contact.name);
+  }
+  contactElement.classList.toggle("selected", isChecked);
+  updateSelectedContactsDisplay();
+}
+
+function populateDropdown(dropdown) {
+  dropdown.innerHTML = "";
+  contacts.forEach((contact) => {
+    const contactElement = document.createElement("div");
+    contactElement.classList.add("contact-item");
+    if (isSelected(contact.name)) contactElement.classList.add("selected");
+    contactElement.innerHTML = `
+      <div class="nameInitials">
+          <div class="contact-initials bg-${contact.color}">
+            ${contact.initial}
+          </div>
+          <span class="contact-name">${contact.name}</span>
+      </div>
+      <input type="checkbox" 
+             name="assignedContacts" 
+             class="contact-checkbox" 
+             data-name="${contact.name}" 
+             ${isSelected(contact.name) ? "checked" : ""} />
+    `;
+
+    const checkbox = contactElement.querySelector(".contact-checkbox");
+    preventDropdownCloseOnSelect(checkbox, contactElement, contact);
+    preventDropdownCloseOnSelect(contactElement, contactElement, contact);
+    dropdown.appendChild(contactElement);
   });
 }
 
@@ -205,7 +231,6 @@ function addSubtask() {
         `
     );
   }
-
   actionIcon.onclick = function () {
     const subtaskText = inputField.value.trim();
     if (subtaskText !== "") {
@@ -271,6 +296,12 @@ function editSubtask(subtaskItem) {
     finishEditing(input, textElement, subtaskItem);
   });
 }
+
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("contact-checkbox")) {
+    console.log("Checkbox clicked:", event.target.dataset.name);
+  }
+});
 
 function finishEditing(input, textElement, subtaskItem) {
   const newText = input.value.trim();
