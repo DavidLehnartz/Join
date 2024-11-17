@@ -377,7 +377,7 @@ function addSubtask() {
     id: generateUniqueId(),
     title: addedSubtaskTitle,
   };
-
+ 
   if (errorMessage()) {
     return;
   } else {
