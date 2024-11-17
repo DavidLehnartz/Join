@@ -12,6 +12,8 @@
   <script src="../js/floatingAddTaskBacklog.js"></script>
 
 
+
+
 </head>
 
 <body onload="init('add-task-header', 'add-task-sidebar', 'add-task-link')">
@@ -37,9 +39,9 @@
             </div>
             <div class="inputStyle">
               <span class="assignedToSpanStyle" for="inputField">Assigned to</span>
-              <div id="selectOnes" class="selectContactsToAssign" onclick="toggleContactDropdownw()">
+              <div id="selectOnes" class="selectContactsToAssign" onclick="toggleContactDropdown()">
                 <span id="selectedContacts" name="assignedContactsDisplay">Select contacts to assign</span>
-                <img id="dropdownArrow2w" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow" />
+                <img id="dropdownArrow2" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow" />
                 <div class="category-dropdown" id="categoryDropdown2"></div>
               </div>
               <div class="completeContacts">
@@ -76,7 +78,7 @@
               <span class="spanCategoryStyle" for="inputField">Category<span class="required-asterisk">*</span></span>
               <div id="selectCat" class="selectCategory" onclick="toggleDropdown(event)">
                 <span id="selectedCategory">Select task category</span>
-                <img id="dropdownArroww" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow" />
+                <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow" />
                 <div class="category-dropdown" id="categoryDropdown">
                   <span onclick="selectCategory('Technical Task')">Technical Task</span>
                   <span onclick="selectCategory('User Story')">User Story</span>
