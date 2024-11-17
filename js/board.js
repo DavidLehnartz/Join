@@ -526,6 +526,10 @@ function closePopUps() {
   document
     .getElementById("overlay_task_pop_up")
     .classList.add("responsive-pop-up-closed");
+
+    document
+    .getElementById("overlay_add_task_pop_up")
+    .classList.add("responsive-pop-up-closed");
 }
 
 
@@ -750,3 +754,7 @@ else {
     }));
   }
 } */
+
+
+
+  

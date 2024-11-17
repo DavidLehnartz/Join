@@ -22,9 +22,11 @@
     <script src="../js/board_drop_down.js" defer></script>
     <script src="../js/board_drag_and_drop.js" defer></script>
     <script src="../js/board_filter.js" defer></script>
-    <!-- <script src="../js/floatingAddTaskBacklog.js" defer></script> -->
+    
     <!-- <script src="../js/add_tasks.js" defer></script> -->
     <script src="../js/board.js" defer></script>
+    <script src="../js/floatingAddTaskBacklog.js"></script>
+    
     
   </head>
 
@@ -441,201 +443,108 @@
           
         <div id="overlay_add_task_pop_up" class="overlay-pop-up-add-task">
           <div class="pop-up-add-task-wrapper">
-            <!-- <div class="addTaskContent"> -->
-            <div class="headingAndAnEx">
+            <div>
               <h1>Add Task</h1>
-              <img class="makeEnEx" src="../assets/img/makeEnEx.png" alt="" />
             </div>
             <div class="bothSides">
               <div class="leftSide">
                 <div class="inputStyle">
-                  <span for="inputField"
-                    >Title<span class="required-asterisk">*</span></span
-                  >
-                  <input
-                    type="text"
-                    id="inputFieldTitle"
-                    placeholder="Enter a title"
-                    class="titleInput"
-                    oninput="checkForm()"
-                  />
+                  <span for="inputField">Title<span class="required-asterisk">*</span></span>
+                  <input type="text" id="inputFieldTitle" placeholder="Enter a title" class="titleInput"
+                    oninput="checkForm()" />
                 </div>
                 <div class="inputStyle">
                   <span for="inputField">Description</span>
-                  <textarea
-                    id="inputFieldDescription"
-                    placeholder="Enter a Description"
-                    class="titleInputDescription"
-                  ></textarea>
+                  <textarea id="inputFieldDescription" placeholder="Enter a Description"
+                    class="titleInputDescription"></textarea>
                 </div>
                 <div class="inputStyle">
-                  <span class="assignedToSpanStyle" for="inputField"
-                    >Assigned to</span
-                  >
-                  <div class="selectContactsToAssign">
-                    <span id="selectedContacts" name="assignedContactsDisplay"
-                      >Select contacts to assign</span
-                    >
-                    <img
-                      id="dropdownArrow"
-                      src="../assets/img/arrow_drop_downaa.png"
-                      class="dropdown-arrow"
-                      onclick="toggleContactDropdown()"
-                    />
-                    <div
-                      class="category-dropdown"
-                      id="categoryDropdown2"
-                    ></div>
-                    <!-- Dynamisch gefülltes Dropdown -->
+                  <span class="assignedToSpanStyle" for="inputField">Assigned to</span>
+                  <div id="selectOnes" class="selectContactsToAssign" onclick="toggleContactDropdown()">
+                    <span id="selectedContacts" name="assignedContactsDisplay">Select contacts to assign</span>
+                    <img id="dropdownArrow2" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow" />
+                    <div class="category-dropdown" id="categoryDropdown2"></div>
                   </div>
-                  <div
-                    id="selectedContactsBadges"
-                    class="selected-contacts-badges-container"
-                  ></div>
-                  <!-- Container für die Badges -->
+                  <div class="completeContacts">
+                    <div id="selectedContactsBadges" class="selected-contacts-badges-container"></div>
+                    <div class="maxContacts"></div>
+                  </div>
                 </div>
               </div>
               <div class="seperator1"></div>
               <div class="rightSide">
                 <div class="inputStyle">
-                  <span for="inputField"
-                    >Due date<span class="required-asterisk">*</span></span
-                  >
-                  <input
-                    type="date"
-                    id="inputFieldDueDate"
-                    class="titleInput"
-                    oninput="checkForm()"
-                  />
+                  <span for="inputField">Due date<span class="required-asterisk">*</span></span>
+                  <input type="date" id="inputFieldDueDate" class="titleInput" oninput="checkForm()" />
                 </div>
                 <div class="priorityStyle">
                   <span for="inputField">Prio</span>
                   <div class="priority-button">
-                    <button
-                      id="inputFieldUrgent"
-                      class="priobtn urgMedLow-btn"
-                      onclick="setPriority(this, 'urgent')"
-                    >
+                    <button id="inputFieldUrgent" class="priobtn urgMedLow-btn" onclick="setPriority(this, 'urgent')">
                       Urgent
-                      <img
-                        src="../assets/img/urgent.png"
-                        class="priority-icon"
-                      />
+                      <img src="../assets/img/urgent.png" class="priority-icon" />
                     </button>
-                    <button
-                      id="inputFieldMedium"
-                      class="priobtn urgMedLow-btn-medium"
-                      onclick="setPriority(this, 'medium')"
-                    >
+                    <button id="inputFieldMedium" class="priobtn urgMedLow-btn-medium"
+                      onclick="setPriority(this, 'medium')">
                       Medium
-                      <img
-                        src="../assets/img/medium21.png"
-                        class="priority-icon"
-                      />
+                      <img src="../assets/img/medium21.png" class="priority-icon" />
                     </button>
-                    <button
-                      id="inputFieldLow"
-                      class="priobtn urgMedLow-btn"
-                      onclick="setPriority(this, 'low')"
-                    >
+                    <button id="inputFieldLow" class="priobtn urgMedLow-btn" onclick="setPriority(this, 'low')">
                       Low
-                      <img
-                        src="../assets/img/low.png"
-                        class="priority-icon"
-                      />
+                      <img src="../assets/img/low.png" class="priority-icon" />
                     </button>
                   </div>
                 </div>
                 <div class="inputStyle">
-                  <span class="spanCategoryStyle" for="inputField"
-                    >Category<span class="required-asterisk">*</span></span
-                  >
-                  <div class="selectCategory" onclick="toggleDropdown(event)">
+                  <span class="spanCategoryStyle" for="inputField">Category<span class="required-asterisk">*</span></span>
+                  <div id="selectCat" class="selectCategory" onclick="toggleDropdown(event)">
                     <span id="selectedCategory">Select task category</span>
-                    <img
-                      id="dropdownArrow"
-                      src="../assets/img/arrow_drop_downaa.png"
-                      class="dropdown-arrow"
-                    />
+                    <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow" />
                     <div class="category-dropdown" id="categoryDropdown">
-                      <span onclick="selectCategory('Technical Task')"
-                        >Technical Task</span
-                      >
-                      <span onclick="selectCategory('User Story')"
-                        >User Story</span
-                      >
+                      <span onclick="selectCategory('Technical Task')">Technical Task</span>
+                      <span onclick="selectCategory('User Story')">User Story</span>
                     </div>
                   </div>
                 </div>
                 <div class="inputStyle">
-                  <span class="SubtaskSpanStyle" for="inputField"
-                    >Subtasks</span
-                  >
+                  <span class="SubtaskSpanStyle" for="inputField">Subtasks</span>
                   <div class="subtaskInputWrapper">
-                    <input
-                      type="text"
-                      id="inputFieldSubtask"
-                      placeholder="Add new subtask"
-                      class="subtaskInput"
-                    />
+                    <input type="text" id="inputFieldSubtask" placeholder="Add new subtask" class="subtaskInput" />
                     <div class="iconWrapper" id="iconWrapper">
-                      <img
-                        src="../assets/img/Propertyadd.png"
-                        id="actionIcon"
-                        class="icon"
-                        onclick="addSubtask()"
-                      />
+                      <img src="../assets/img/Propertyadd.png" id="actionIcon" class="icon" onclick="addSubtask()" />
                     </div>
                   </div>
-                  <!-- Ungeordnete Liste für Subtasks -->
-                  <ul id="subtaskList" class="subtaskList"></ul>
+                  <div id="subtaskList" class="subtaskList">
+                    <!-- Subtask-Elemente werden hier dynamisch hinzugefügt -->
+                  </div>
+                </div>
+                <div>
+                  <div class="clear-task-button">
+                    <button class="btn clear-btn" onclick="clearEverything()">
+                      Clear
+                      <img id="cancelIcon" src="../assets/img/iconoir_cancel.png" alt="Cancel Icon" />
+                    </button>
+                    <button id="createTaskBtn" class="btn create-task-btn" onclick="createTask()" disabled>
+                      Create Task
+                      <img id="checkIcon" src="../assets/img/check_white.png" alt="Check Icon" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="addTaskFooter">
-              <div class="addTaskFooterLeftSide">
-                <span
-                  class="mobileSpanStyle"
-                  style="color: black; position: relative"
-                >
-                  <span
-                    style="
-                      position: absolute;
-                      left: -10px;
-                      top: -5px;
-                      color: red;
-                    "
-                    >*</span
-                  >
-                  This Field is required
-                </span>
-              </div>
-
-              <div class="clear-task-button">
-                <button class="btn clear-btn" onclick="clearEverything()">
-                  Clear
-                  <img
-                    id="cancelIcon"
-                    src="../assets/img/iconoir_cancel.png"
-                    alt="Cancel Icon"
-                  />
-                </button>
-                <button
-                  id="createTaskBtn"
-                  class="btn create-task-btn"
-                  onclick="createTask()"
-                  disabled
-                >
-                  Create Task
-                  <img
-                    id="checkIcon"
-                    src="../assets/img/check_white.png"
-                    alt="Check Icon"
-                  />
-                </button>
-              </div>
+            <span class="mobileSpanStyle" style="color: black; position: relative">
+              <span style="position: absolute; left: -5px; top: -7px; color: red">*</span>
+              This Field is required
+            </span>
+          </div>
+        </div>
+      </main>
+      <div class="showMe d-none">
+        Task Added To Board
+        <img src="../assets/img/board.png" alt="" />
+      </div> 
              
-      
+      </div>
     </div>
   </main>
 </body>
