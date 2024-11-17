@@ -177,6 +177,19 @@ function openTaskPopUp(taskId) {
 }
 
 
+function renderAddTaskPopUp() {
+  let addTaskPopUpContent = document.getElementById('add_task_pop_up');
+  addTaskPopUpContent.innerHTML = getAddTaskPopUpTemplate();
+}
+
+
+function openAddTaskPopUp() {
+  document.getElementById('overlay_add_task_pop_up').classList.remove('responsive-pop-up-closed');
+
+  renderAddTaskPopUp();
+}
+
+
 async function saveTaskChanges(taskId) {
   const task = tasks.find((t) => t.id === taskId);
 
@@ -223,8 +236,8 @@ function getPriorityImage(priority) {
 }
 
 
-function changePrioButtons(selectedButton) {
-  resetButtons();
+function changePrioButtonsEditPopUp(selectedButton) {
+  resetButtonsEditPopUp();
 
   let img = selectedButton.querySelector(".prio-img");
 
@@ -253,7 +266,7 @@ function changePrioButtons(selectedButton) {
 
 
 function setPriorityButton(priority) {
-  resetButtons();
+  resetButtonsEditPopUp();
 
   if (priority === "Urgent") {
     document.getElementById("prio_urgent").classList.add("prio-urgent-active");
@@ -281,7 +294,7 @@ function updateTaskPriority(priority) {
 }
 
 
-function resetButtons() {
+function resetButtonsEditPopUp() {
   let buttons = document.querySelectorAll(".prio-btn");
   buttons.forEach((button) => {
     let img = button.querySelector(".prio-img");
@@ -360,7 +373,7 @@ function getSubtasksTemplate(taskId, subtask, index) {
 }
 
 
-function renderAddSubtasks() {
+function renderAddSubtasksEditPopUp() {
   let addedSubtasksContent = document.getElementById("added_subtasks");
   addedSubtasksContent.innerHTML = "";
 
@@ -370,21 +383,21 @@ function renderAddSubtasks() {
 }
 
 
-function addSubtask() {
+function addSubtaskEditPopUp() {
   let inputAddedSubtask = document.getElementById("input_add_subtask");
   let addedSubtaskTitle = inputAddedSubtask.value.trim();
   let addedSubtask = {
     id: generateUniqueId(),
     title: addedSubtaskTitle,
   };
- 
+
   if (errorMessage()) {
     return;
   } else {
     addedSubtasks.push(addedSubtask);
     console.log("added subtasks arr", addedSubtasks);
 
-    renderAddSubtasks();
+    renderAddSubtasksEditPopUp();
     clearInputs();
   }
 
@@ -392,12 +405,12 @@ function addSubtask() {
 }
 
 
-function deleteAddedSubtask(id) {
+function deleteAddedSubtaskEditPopUp(id) {
   let index = addedSubtasks.findIndex(addedSubtask => addedSubtask.id === id);
 
   if (index !== -1) {
     addedSubtasks.splice(index, 1);
-    renderAddSubtasks();
+    renderAddSubtasksEditPopUp();
     console.log('subtask deleted successfully', addedSubtasks);
   } else {
     console.error('subtask not found!', addedSubtasks);
@@ -417,7 +430,7 @@ function updateButtonImage() {
                                     <div id="button_content_with_images" class="pop-up-edit-task-input-btn-img-container">
                                        <img onclick="clearInputs()" class="pop-up-edit-task-input-btn-img" src="../assets/img/iconoir_cancel.png" alt="image 1">
                                        <div class="vertical_line"></div>
-                                       <img onclick="addSubtask()" class="pop-up-edit-task-input-btn-img" src="../assets/img/check_black.png" alt="image 2">
+                                       <img onclick="addSubtaskEditPopUp()" class="pop-up-edit-task-input-btn-img" src="../assets/img/check_black.png" alt="image 2">
                                     </div>
                                   </button>
                                 `;
@@ -434,7 +447,7 @@ function updateButtonImage() {
 }
 
 
-function editSubtask(id) {
+function editSubtaskEditPopUp(id) {
   const subtask = addedSubtasks.find(sub => sub.id === id);
   if (!subtask) return;
 
@@ -445,16 +458,16 @@ function editSubtask(id) {
 
   listItem.innerHTML = `
                         <input type="text" value="${subtask.title}" 
-                              onblur="saveEditedSubtask('${id}', this.value)"  
+                              onblur="saveEditedSubtaskEditPopUp('${id}', this.value)"  
                               onkeydown="handleEnterKey(event, '${id}', this)" 
                                class="edit-subtask-input">
                         <div class="list-icon-container">
-                              <img onclick="deleteAddedSubtask('${id}')" 
+                              <img onclick="deleteAddedSubtaskEditPopUp('${id}')" 
                               class="icon-container-images" 
                               src="../assets/img/delete.png" 
                               alt="check icon">
                         <div class="vertical_line"></div>
-                              <img onclick="saveEditedSubtask('${id}')"
+                              <img onclick="saveEditedSubtaskEditPopUp('${id}')"
                               class="icon-container-images" 
                               src="../assets/img/check_black.png" 
                         </div>
@@ -464,20 +477,20 @@ function editSubtask(id) {
 }
 
 
-function saveEditedSubtask(id, newTitle) {
+function saveEditedSubtaskEditPopUp(id, newTitle) {
   const subtaskIndex = addedSubtasks.findIndex(sub => sub.id === id);
   if (subtaskIndex !== -1 && newTitle.trim() !== "") {
     addedSubtasks[subtaskIndex].title = newTitle.trim();
   }
 
-  renderAddSubtasks();
+  renderAddSubtasksEditPopUp();
   console.log(addedSubtasks);
 }
 
 
 function handleEnterKey(event, id, inputElement) {
   if (event.key === "Enter") {
-    saveEditedSubtask(id, inputElement.value);
+    saveEditedSubtaskEditPopUp(id, inputElement.value);
   }
 }
 
@@ -527,7 +540,7 @@ function closePopUps() {
     .getElementById("overlay_task_pop_up")
     .classList.add("responsive-pop-up-closed");
 
-    document
+  document
     .getElementById("overlay_add_task_pop_up")
     .classList.add("responsive-pop-up-closed");
 }
@@ -757,4 +770,3 @@ else {
 
 
 
-  

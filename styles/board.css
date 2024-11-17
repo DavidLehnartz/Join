@@ -160,6 +160,10 @@ label {
   /* gap: 24px; */
   cursor: pointer;
   margin-bottom: 24px;
+
+  overflow: scroll;
+    scrollbar-width: auto;
+    height: 100vh;
 }
 
 .kanban-task-wrapper .task {

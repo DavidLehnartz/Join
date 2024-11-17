@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="../styles/pop_up_board.css" />
   <link rel="stylesheet" href="../styles/pop_up_board_edit_task.css" />
   <link rel="stylesheet" href="../styles/color.css" />
-  <!-- <link rel="stylesheet" href="../styles/floatingAddTaskBacklog.css" /> -->
-  <link rel="stylesheet" href="../styles/pop_up_add_task.css">
+  <link rel="stylesheet" href="../styles/pop_up_board_add_task.css" />
+  <!-- <link rel="stylesheet" href="../styles/pop_up_add_task.css"> -->
 
     <script src="../js/board_database.js" defer></script>
     <script src="../js/desktop_template.js"></script>
@@ -25,7 +25,7 @@
     
     <!-- <script src="../js/add_tasks.js" defer></script> -->
     <script src="../js/board.js" defer></script>
-    <script src="../js/floatingAddTaskBacklog.js"></script>
+    <script src="../js/board_add_task_pop_up.js"></script>
     
     
   </head>
@@ -51,7 +51,7 @@
 -->
 
 <body onload="init('board-header', 'board-sidebar', 'board-link')">
-  <div id="board-sidebar"></div>
+  <div id="board-sidebar" class="board-sidebar-wrapper"></div>
 
   <main>
     <div id="board-header"></div>
@@ -439,12 +439,11 @@
       </section>
 
         <!-- POP UP BOARD ADD TASK RENDERN -->
-        
-          
-        <div id="overlay_add_task_pop_up" class="overlay-pop-up-add-task">
-          <div class="pop-up-add-task-wrapper">
-            <div>
+        <div onclick="closePopUps()" id="overlay_add_task_pop_up" class="overlay-pop-up-add-task responsive-pop-up-closed">
+          <div onclick="event.stopPropagation()" id="add_task_pop_up" class="pop-up-add-task-wrapper">
+            <div class="headingAndAnEx">
               <h1>Add Task</h1>
+              <img onclick="closePopUps()" class="makeEnEx" src="../assets/img/makeEnEx.png" alt="">
             </div>
             <div class="bothSides">
               <div class="leftSide">
@@ -514,35 +513,39 @@
                       <img src="../assets/img/Propertyadd.png" id="actionIcon" class="icon" onclick="addSubtask()" />
                     </div>
                   </div>
-                  <div id="subtaskList" class="subtaskList">
-                    <!-- Subtask-Elemente werden hier dynamisch hinzugefügt -->
-                  </div>
-                </div>
-                <div>
-                  <div class="clear-task-button">
-                    <button class="btn clear-btn" onclick="clearEverything()">
-                      Clear
-                      <img id="cancelIcon" src="../assets/img/iconoir_cancel.png" alt="Cancel Icon" />
-                    </button>
-                    <button id="createTaskBtn" class="btn create-task-btn" onclick="createTask()" disabled>
-                      Create Task
-                      <img id="checkIcon" src="../assets/img/check_white.png" alt="Check Icon" />
-                    </button>
-                  </div>
+
+                  <div id="subtaskList" class="subtaskList"></div>
+
                 </div>
               </div>
             </div>
-            <span class="mobileSpanStyle" style="color: black; position: relative">
-              <span style="position: absolute; left: -5px; top: -7px; color: red">*</span>
-              This Field is required
-            </span>
+            <div class="addTaskFooter">
+              <div class="addTaskFooterLeftSide">
+                <span class="mobileSpanStyle" style="color: black; position: relative">
+                  <span style="position: absolute; left: -5px; top: -7px; color: red">*</span>
+                  This Field is required
+                </span>
+              </div>
+              
+              <div class="clear-task-button">
+                <button class="btn clear-btn" onclick="clearEverything()">
+                  Clear
+                  <img id="cancelIcon" src="../assets/img/iconoir_cancel.png" alt="Cancel Icon" />
+                </button>
+                <button id="createTaskBtn" class="btn create-task-btn" onclick="createTask()" disabled>
+                  Create Task
+                  <img id="checkIcon" src="../assets/img/check_white.png" alt="Check Icon" />
+                </button>
+              </div>
+            </div>
+           
           </div>
-          <div class="showMe d_none">
+          <div class="showMe d-none">
             Task Added To Board
             <img src="../assets/img/board.png" alt="" />
           </div> 
         </div>
-
+      
 
 
       </main>

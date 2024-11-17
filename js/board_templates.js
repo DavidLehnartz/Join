@@ -106,9 +106,9 @@ function getBoardHeadlineTemplate() {
  
           <div class="headline">
               <h1>Board</h1>
-              <form class="searchbox-wrapper">
+              <div class="searchbox-wrapper">
                 <div class="searchbox-container"></div>
-                <input  onkeyup=" getFilderedTask()" id="filter_input"
+                <input onkeyup="getFilderedTask()" id="filter_input"
                   class="searchbox-input"
                   type="text"
                   placeholder="Find Task"
@@ -121,7 +121,7 @@ function getBoardHeadlineTemplate() {
                   />
                 </button>
   
-                <button class="add-task-btn">
+                <button onclick="openAddTaskPopUp()" class="add-task-btn">
                   Add task
                   <img
                     class="add-task-btn-img"
@@ -137,7 +137,7 @@ function getBoardHeadlineTemplate() {
                     alt="plus"
                   />
                 </button>
-              </form>
+              </div>
           </div>
   
           <section>
@@ -323,7 +323,7 @@ function getEditTaskPopUpTemplate(task) {
                 <div class="pop-up-edit-task-priority">
                   <label for=""> Priority </label>
                   <div class="prio-status">
-                    <div onclick="changePrioButtons(this)" id="prio_urgent" class="prio-btn">
+                    <div onclick="changePrioButtonsEditPopUp(this)" id="prio_urgent" class="prio-btn">
                       Urgent
                       <img
                         class="prio-img"
@@ -331,7 +331,7 @@ function getEditTaskPopUpTemplate(task) {
                         alt="urgent"
                       />
                     </div>
-                    <div onclick="changePrioButtons(this)" id="prio_medium" class="prio-btn">
+                    <div onclick="changePrioButtonsEditPopUp(this)" id="prio_medium" class="prio-btn">
                       Medium
                       <img
                         class="prio-img"
@@ -339,7 +339,7 @@ function getEditTaskPopUpTemplate(task) {
                         alt="medium"
                       />
                     </div>
-                    <div onclick="changePrioButtons(this)" id="prio_low" class="prio-btn">
+                    <div onclick="changePrioButtonsEditPopUp(this)" id="prio_low" class="prio-btn">
                       Low
                       <img
                         class="prio-img"
@@ -357,7 +357,7 @@ function getEditTaskPopUpTemplate(task) {
                   </div>
             
                   <div class="dropdown">
-                   <button onclick="toggleDropdown(), toggleInputImage()" id="dropdown" class="drop-btn">
+                   <button onclick="toggleDropdownTaskPopUp(), toggleInputImage()" id="dropdown" class="drop-btn">
                      Select contacts to assign
                      <img id="dropdown_icon" class="dropdown-icon" src="../assets/img/arrow_drop_downaa.png" alt="arrow">
                    </button>
@@ -474,13 +474,118 @@ function getAddedSubtasksTemplate(addedSubtask) {
           <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item" data-id="${addedSubtask.id}">
             <span>${addedSubtask.title}</span>
             <div class="list-icon-container">
-              <img onclick="editSubtask('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/edit.png" alt="edit icon">
+              <img onclick="editSubtaskEditPopUp('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/edit.png" alt="edit icon">
               <div class="vertical_line"></div>
-              <img onclick="deleteAddedSubtask('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/delete.png" alt="delete icon">
+              <img onclick="deleteAddedSubtaskEditPopUp('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/delete.png" alt="delete icon">
             </div>
           </li>
         `;
 }
+
+
+/* function getAddTaskPopUpTemplate() {
+  return `
+         <div class="headingAndAnEx">
+              <h1>Add Task</h1>
+              <img onclick="closePopUps()" class="makeEnEx" src="../assets/img/makeEnEx.png" alt="">
+            </div>
+            <div class="bothSides">
+              <div class="leftSide">
+                <div class="inputStyle">
+                  <span for="inputField">Title<span class="required-asterisk">*</span></span>
+                  <input type="text" id="inputFieldTitle" placeholder="Enter a title" class="titleInput"
+                    oninput="checkForm()" />
+                </div>
+                <div class="inputStyle">
+                  <span for="inputField">Description</span>
+                  <textarea id="inputFieldDescription" placeholder="Enter a Description"
+                    class="titleInputDescription"></textarea>
+                </div>
+                <div class="inputStyle">
+                  <span class="assignedToSpanStyle" for="inputField">Assigned to</span>
+                  <div id="selectOnes" class="selectContactsToAssign" onclick="toggleContactDropdown()">
+                    <span id="selectedContacts" name="assignedContactsDisplay">Select contacts to assign</span>
+                    <img id="dropdownArrow2" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow" />
+                    <div class="category-dropdown" id="categoryDropdown2"></div>
+                  </div>
+                  <div class="completeContacts">
+                    <div id="selectedContactsBadges" class="selected-contacts-badges-container"></div>
+                    <div class="maxContacts"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="seperator1"></div>
+              <div class="rightSide">
+                <div class="inputStyle">
+                  <span for="inputField">Due date<span class="required-asterisk">*</span></span>
+                  <input type="date" id="inputFieldDueDate" class="titleInput" oninput="checkForm()" />
+                </div>
+                <div class="priorityStyle">
+                  <span for="inputField">Prio</span>
+                  <div class="priority-button">
+                    <button id="inputFieldUrgent" class="priobtn urgMedLow-btn" onclick="setPriority(this, 'urgent')">
+                      Urgent
+                      <img src="../assets/img/urgent.png" class="priority-icon" />
+                    </button>
+                    <button id="inputFieldMedium" class="priobtn urgMedLow-btn-medium"
+                      onclick="setPriority(this, 'medium')">
+                      Medium
+                      <img src="../assets/img/medium21.png" class="priority-icon" />
+                    </button>
+                    <button id="inputFieldLow" class="priobtn urgMedLow-btn" onclick="setPriority(this, 'low')">
+                      Low
+                      <img src="../assets/img/low.png" class="priority-icon" />
+                    </button>
+                  </div>
+                </div>
+                <div class="inputStyle">
+                  <span class="spanCategoryStyle" for="inputField">Category<span class="required-asterisk">*</span></span>
+                  <div id="selectCat" class="selectCategory" onclick="toggleDropdown(event)">
+                    <span id="selectedCategory">Select task category</span>
+                    <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow" />
+                    <div class="category-dropdown" id="categoryDropdown">
+                      <span onclick="selectCategory('Technical Task')">Technical Task</span>
+                      <span onclick="selectCategory('User Story')">User Story</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="inputStyle">
+                  <span class="SubtaskSpanStyle" for="inputField">Subtasks</span>
+                  <div class="subtaskInputWrapper">
+                    <input type="text" id="inputFieldSubtask" placeholder="Add new subtask" class="subtaskInput" />
+                    <div class="iconWrapper" id="iconWrapper">
+                      <img src="../assets/img/Propertyadd.png" id="actionIcon" class="icon" onclick="addSubtask()" />
+                    </div>
+                  </div>
+
+                  <div id="subtaskList" class="subtaskList"></div>
+                  
+                </div>
+                <div>
+                  <div class="clear-task-button">
+                    <button class="btn clear-btn" onclick="clearEverything()">
+                      Clear
+                      <img id="cancelIcon" src="../assets/img/iconoir_cancel.png" alt="Cancel Icon" />
+                    </button>
+                    <button id="createTaskBtn" class="btn create-task-btn" onclick="createTask()" disabled>
+                      Create Task
+                      <img id="checkIcon" src="../assets/img/check_white.png" alt="Check Icon" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="mobileSpanStyle" style="color: black; position: relative">
+              <span style="position: absolute; left: -5px; top: -7px; color: red">*</span>
+              This Field is required
+            </span>
+          </div>
+          <div class="showMe d-none">
+            Task Added To Board
+            <img src="../assets/img/board.png" alt="" />
+          </div> 
+  `;
+} */
 
 
 
