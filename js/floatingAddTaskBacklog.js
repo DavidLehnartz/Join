@@ -280,7 +280,7 @@ function editSubtask(subtaskItem) {
   const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
   iconsWrapper.innerHTML = `
         <img src="../assets/img/delete.png" alt="Löschen" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
-        <div class="separator"></div>
+        <div class="separator3"></div>
         <img src="../assets/img/propertychecktwo.png" alt="Speichern" class="icon" onclick="finishEditing(this.closest('.subtask-item').querySelector('.subtaskInput'), this.closest('.subtask-item').querySelector('.subtask-text'), this.closest('.subtask-item'))">
     `;
   const input = subtaskItem.querySelector(".subtaskInput");
