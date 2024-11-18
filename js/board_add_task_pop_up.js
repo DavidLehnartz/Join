@@ -134,6 +134,7 @@ function removeOutsideClickListener() {
   if (listener) {
     dropdown.removeAttribute("data-listener");
   }
+  
 }
 
 function toggleContactSelection(contact) {
