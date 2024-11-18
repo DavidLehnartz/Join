@@ -660,7 +660,20 @@ textarea {
     flex-wrap: wrap;
     margin-top: 10px;
     height: 30px;
+}
 
+.remaining-contacts-badge {
+    background-color: #ccc;
+    color: #000;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 10px;
 }
 
 .remaining-contacts-indicator {

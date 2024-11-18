@@ -153,15 +153,31 @@ function isSelected(contactName) {
 
 function updateSelectedContactsDisplay() {
   const badgesContainer = document.getElementById("selectedContactsBadges");
+  const maxContactsContainer = document.querySelector(".maxContacts");
   badgesContainer.innerHTML = "";
-
+  maxContactsContainer.innerHTML = "";
   if (selectedContacts.length > 0) {
-    selectedContacts.forEach((contact) => {
-      const contactBadge = document.createElement("div");
-      contactBadge.classList.add("contact-badge", `bg-${contact.color}`);
-      contactBadge.textContent = contact.initial;
-      badgesContainer.appendChild(contactBadge);
-    });
+    if (selectedContacts.length > 5) {
+      for (let i = 0; i < 5; i++) {
+        const contact = selectedContacts[i];
+        const contactBadge = document.createElement("div");
+        contactBadge.classList.add("contact-badge", `bg-${contact.color}`);
+        contactBadge.textContent = contact.initial;
+        badgesContainer.appendChild(contactBadge);
+      }
+      const remainingCount = selectedContacts.length - 5;
+      const remainingBadge = document.createElement("div");
+      remainingBadge.classList.add("contact-badge", "remaining-contacts-badge");
+      remainingBadge.textContent = `+${remainingCount}`;
+      maxContactsContainer.appendChild(remainingBadge);
+    } else {
+      selectedContacts.forEach((contact) => {
+        const contactBadge = document.createElement("div");
+        contactBadge.classList.add("contact-badge", `bg-${contact.color}`);
+        contactBadge.textContent = contact.initial;
+        badgesContainer.appendChild(contactBadge);
+      });
+    }
   }
 }
 
