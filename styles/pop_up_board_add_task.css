@@ -623,6 +623,7 @@ textarea {
 .contact-item.selected .contact-initials {
   color: white;
   border: 2px solid white;
+  margin-left: 13px;
 }
 
 .contact-item:not(.selected):hover {
