@@ -42,11 +42,12 @@ function validateInput() {
   return isPrivacyChecked && isInputEmpty() && isPasswordSame();
 }
 
-function showSignupSuccessMessage() {
+function showSignupSuccessMessage(url) {
   let message = document.getElementById("signup-message");
   message.classList.add("show");
   setTimeout(() => {
     message.classList.remove("show");
+    window.location.href = url;
   }, 3000);
 }
 
@@ -62,11 +63,10 @@ async function signUpUser(event) {
   resetForm();
 }
 
-async function validateAndSignupUser(event) {
+async function validateAndSignupUser(event, url) {
   if (validateInput()) {
     await signUpUser(event);
-    showSignupSuccessMessage();
-    window.location.href("../pages/login.hmtl");
+    showSignupSuccessMessage(url);
   } else {
     alert("You have to fill out all the fields and accept the privacy policy");
   }

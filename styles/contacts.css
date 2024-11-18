@@ -73,6 +73,11 @@ body {
   color: white;
 }
 
+.contact-list-item.active {
+  background-color: #2a3647;
+  color: white;
+}
+
 .contact-list-info {
   display: flex;
   flex-direction: column;
