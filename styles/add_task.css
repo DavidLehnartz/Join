@@ -644,7 +644,7 @@ textarea {
 .create-task-btn:hover {
     border-color: #29ABE2;
     box-shadow: 0 0 10px rgba(42, 54, 71, 0.5);
-    background-color: #29ABE2;
+    background-color: #29ABE2 !important;
 }
 
 .buttonWrapper {
