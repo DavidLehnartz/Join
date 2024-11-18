@@ -609,20 +609,29 @@ textarea {
   transition: background-color 125ms ease, height 125ms ease;
 }
 
-
 .contact-item.selected {
-  background-color: #091931;
+  background-color: #2A3647;
   color: white;
   border-radius: 10px;
 }
 
 .contact-item.selected .contact-name {
   color: white;
+  margin-left: -4px;
 }
 
 .contact-item.selected .contact-initials {
   color: white;
   border: 2px solid white;
+}
+
+.contact-item:not(.selected):hover {
+  background-color: #D1D1D1;
+  border-radius: 5px;
+}
+
+.contact-item.selected:hover {
+  background-color: #091931;
 }
 
 .contact-item:hover {
