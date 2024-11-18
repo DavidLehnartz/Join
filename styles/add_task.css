@@ -638,6 +638,7 @@ textarea {
     background-color: rgb(42, 54, 71);
     color: #fff;
     border-color: #2a3647;
+    background-color: #2a3647 !important;
 }
 
 .create-task-btn:hover {
