@@ -32,10 +32,6 @@ label {
   display: none;
 }
 
-.board-sidebar-wrapper{
-
-}
-
 .searchbox-wrapper {
   display: flex;
   justify-content: end;
@@ -255,9 +251,6 @@ progress {
   font-size: 12px;
 }
 
-.test {
-}
-
 .asignees-profil {
   display: flex;
   flex-wrap: wrap;
@@ -275,9 +268,6 @@ progress {
   font-size: 12px;
   font-weight: bold;
   margin-right: -5px;
-}
-
-.priority-info {
 }
 
 .kanban-empty-message {
