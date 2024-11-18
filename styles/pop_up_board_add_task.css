@@ -683,6 +683,16 @@ textarea {
   left: 2px;
 }
 
+.addTaskFooter{
+  display: flex;
+  justify-content: space-between;
+}
+
+.addTaskFooterLeftSide{
+ display: flex;
+ align-items: end;
+}
+
 
 /* MEDIA QUERY */
 
