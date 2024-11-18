@@ -673,14 +673,14 @@ textarea {
   background-image: url('../assets/img/check-button-contacts-filled.png');
 }
 
-.addTaskFooter{
+.addTaskFooter {
   display: flex;
   justify-content: space-between;
 }
 
-.addTaskFooterLeftSide{
- display: flex;
- align-items: end;
+.addTaskFooterLeftSide {
+  display: flex;
+  align-items: end;
 }
 
 
@@ -739,25 +739,25 @@ textarea {
     flex-direction: column;
     gap: 0px;
     width: 100%;
-}
+  }
 
   .seperator1 {
     display: none;
-}
+  }
 
-.leftSide {
+  .leftSide {
     display: flex;
     flex-direction: column;
     gap: 0px;
     width: 100%;
-}
+  }
 
-.rightSide {
+  .rightSide {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-top: 65px;
-}
+  }
 }
 
 
