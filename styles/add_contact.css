@@ -19,6 +19,7 @@
 }
 
 .contacts-overlay-container {
+  z-index: 200;
   display: flex;
   position: fixed;
   top: 50%;

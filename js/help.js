@@ -31,9 +31,13 @@ let howToUseArray = [
 ];
 
 function initHelp(header, sidebar, link) {
+  let helpContent = document.getElementById("help-content-container");
   createHeader(header);
   createSidebar(sidebar, link);
-  showHowToUseSteps();
+  setTimeout(() => {
+    showHowToUseSteps();
+    helpContent.classList.remove("hidden");
+  }, 100);
 }
 
 function renderHowToUseTemplate(number, headline, content) {

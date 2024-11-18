@@ -1,10 +1,14 @@
 let groupedContacts = {};
 let editMenuShown = false;
 
-async function initContacts(header, sidebar, link) {
+function initContacts(header, sidebar, link) {
+  let contactContent = document.getElementById("contacts-list-container");
   createHeader(header);
   createSidebar(sidebar, link);
-  loadContactList();
+  setTimeout(() => {
+    loadContactList();
+    contactContent.classList.remove("hidden");
+  }, 100);
 }
 
 async function showContactInfo(id) {
