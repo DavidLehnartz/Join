@@ -594,6 +594,8 @@ textarea {
 
 .urgMedLow-btn-medium {
     background-color: white;
+    color: #000;
+    border-color: #ccc;
 }
 
 .urgMedLow-btn:hover,
