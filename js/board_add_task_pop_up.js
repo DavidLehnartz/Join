@@ -4,6 +4,10 @@ function init() {
   loadAllContactsInfo();
 }
 
+window.onload = function () {
+  restorePriority();
+};
+
 function setTodayDate() {
   const dateInput = document.getElementById("inputFieldDueDate");
   const today = new Date();
@@ -134,7 +138,7 @@ function removeOutsideClickListener() {
   if (listener) {
     dropdown.removeAttribute("data-listener");
   }
-  
+
 }
 
 function toggleContactSelection(contact) {
