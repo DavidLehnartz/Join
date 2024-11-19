@@ -631,7 +631,7 @@ textarea {
 
 .contact-item.selected .contact-name {
   color: white;
-  margin-left: -4px;
+  margin-left: -2px;
 }
 
 .contact-item.selected .contact-initials {
