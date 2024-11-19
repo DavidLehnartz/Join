@@ -1,6 +1,6 @@
 body {
   display: flex;
-  padding: 50px;
+  padding: 50px !important;
   flex-direction: column;
   align-items: center;
 }
@@ -12,29 +12,6 @@ main {
   justify-content: center;
   width: 100%;
   max-width: 1440px;
-}
-
-.mobile-intro {
-  display: none;
-}
-
-.intro-logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 274px;
-  transition: all 1s ease;
-  opacity: 1;
-}
-
-.intro-logo.move {
-  position: absolute;
-  top: 50px;
-  left: 15%;
-  width: 100px;
-  transform: translate(0, 0);
-  opacity: 1;
 }
 
 .main-logo {
@@ -129,7 +106,6 @@ hr {
     width: 200px;
   }
 
-  .intro-logo.move,
   .main-logo {
     width: 82px;
   }
@@ -145,8 +121,8 @@ hr {
 
 @media (max-width: 700px) {
   body {
-    padding: 0px;
-    margin: 0px;
+    padding: 20px !important;
+    margin: 20px !important;
   }
 
   main {
@@ -157,8 +133,6 @@ hr {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 1s ease;
     opacity: 1;
   }
 
@@ -172,13 +146,6 @@ hr {
     opacity: 1;
   }
 
-  .animate-out {
-    -webkit-transition: opacity 1s;
-    transition: opacity 1s;
-    opacity: 0;
-  }
-
-  .intro-logo.move,
   .main-logo {
     width: 64px;
     position: absolute;
@@ -215,5 +182,10 @@ hr {
 @media (max-width: 500px) {
   .intro-logo {
     width: 150px;
+  }
+
+  body {
+    padding: 10px !important;
+    margin: 10px !important;
   }
 }

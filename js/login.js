@@ -2,17 +2,29 @@ let isVisible = false;
 let isRememberOn = false;
 
 function animateIntro() {
-  let logo = document.getElementById("intro-logo");
-  let mobileLogo = document.getElementById("intro-mobile-logo");
-  let bg = document.getElementById("mobile-container");
-  setTimeout(() => {
-    logo.classList.add("move");
-    mobileLogo.classList.add("move");
-  }, 3000);
-  setTimeout(() => {
-    bg.classList.add("animate-out");
-    window.location.href = "../pages/login.html";
-  }, 2000);
+  if (window.innerWidth > 700) {
+    introAnimationDesktop();
+  } else {
+    introAnimationMobile();
+  }
+}
+
+function introAnimationDesktop() {
+  const logo = document.getElementById("intro-logo");
+  logo.addEventListener("animationend", (event) => {
+    if (event.animationName === "fadeOut") {
+      window.location.href = "../pages/login.html";
+    }
+  });
+}
+
+function introAnimationMobile() {
+  const mobileLogo = document.getElementById("intro-mobile-logo");
+  mobileLogo.addEventListener("animationend", (event) => {
+    if (event.animationName === "fadeOut") {
+      window.location.href = "../pages/login.html";
+    }
+  });
 }
 
 function showPassword(iconId, passwordId) {
