@@ -18,9 +18,6 @@ function allowDrop(event) {
 }
 
 
-
-
-
 async function drop(event, targetColumn) {
     event.preventDefault();
     console.log("drop: funktion ausgelöst");
@@ -36,12 +33,12 @@ async function drop(event, targetColumn) {
 
         await updateTaskInDatabase(task);
 
-        /* renderTasks();  */
-         /* updateEmptyMessages();  */
+         /* renderTasks(); */  
+          /* updateEmptyMessages();  */ 
+          await fetchTasksData(); 
     } else{
         console.error("drop: aufgabe mit ID nicht gefunden:", draggedTaskId);
     }
-    
 }
 
 

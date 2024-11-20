@@ -32,6 +32,10 @@ label {
   display: none;
 }
 
+.d-none{
+  display: none;
+}
+
 .searchbox-wrapper {
   display: flex;
   justify-content: end;
@@ -149,12 +153,19 @@ label {
   cursor: pointer;
 }
 
+.kanban-header-img:hover {
+  transition: transform 0.5s;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 .kanban-task-wrapper {
   display: flex;
   flex-direction: column;
   /* width: 100%; */
   /* height: 244px; */
   height: 530px;
+  height: 370px;
   /* border-radius: 24px; */
   /* background: rgb(255, 255, 255); */
   /* padding: 16px; */
@@ -254,6 +265,7 @@ progress {
 .asignees-profil {
   display: flex;
   flex-wrap: wrap;
+  margin-right: 16px;
 }
 
 .initials {

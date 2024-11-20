@@ -78,6 +78,37 @@ function renderDesktopTemplate(header, sidebar, link) {
 
 /* ----------------------------------------------------- */
 
+/* function renderTasks() {
+  const columns = {
+      to_do: document.getElementById("to_do"),
+      in_progress: document.getElementById("in_progress"),
+      await_feedback: document.getElementById("await_feedback"),
+      done: document.getElementById("done"),
+  };
+
+  // Alle Spalten leeren
+  for (let column in columns) {
+      columns[column].innerHTML = "";
+  }
+
+  tasks.forEach((task) => {
+      let priorityImage = getPriorityImage(task.priority);
+      let categoryColor = getCategoryColor(task.category);
+      let assigneeInitials = renderAssigneeInitials(task.assignedTo);
+
+      const column = columns[task.status];
+      if (column) {
+          column.innerHTML += getTasksTemplate(
+              task,
+              priorityImage,
+              categoryColor,
+              assigneeInitials
+          );
+      }
+  });
+} */
+
+
 function renderTasks() {
   let tasksContent = document.getElementById("to_do");
   tasksContent.innerHTML = "";

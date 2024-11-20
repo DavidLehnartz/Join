@@ -38,41 +38,7 @@ async function fetchTasksData() {
   console.log("Subtasks:", subtasks);
 }
 
-// GPT
-/*   async function fetchTasksData() {
-      tasks = [];
-      subtasks = [];
-  
-      let tasksResponse = await fetch(BASE_URL + "/tasks.json");
-      let tasksToJson = await tasksResponse.json();
-  
-      if (tasksToJson) {
-          const taskKeys = Object.keys(tasksToJson);
-  
-          taskKeys.forEach((key) => {
-              const task = {
-                  id: key,
-                  ...tasksToJson[key]
-              };
-  
-              // Sicherstellen, dass `subtasks` ein Array ist
-              if (!Array.isArray(task.subtasks)) {
-                  task.subtasks = Object.values(task.subtasks || {});
-              }
-  
-              tasks.push(task);
-  
-              if (task.assignedTo && !assignees.includes(task.assignedTo)) {
-                  assignees.push(task.assignedTo);
-              }
-          });
-          renderTasks();
-      }
-  
-      console.log("Tasks nach Fetch:", tasks);
-      console.log("Assigned Users:", assignees);
-      console.log("Subtasks:", subtasks);
-  } */
+
 
 async function fetchContactsData() {
   contacts = [];
@@ -145,7 +111,10 @@ async function updateTaskInFirebase(task) {
   } catch (error) {
     console.error("Fehler beim Aktualisieren der Aufgabe:", error);
   }
+  /* await fetchTasksData(); */
 }
+
+
 /* async function updateTaskInFirebase(task) {
     const taskId = task.id;
     const url = `${BASE_URL}/tasks/${taskId}.json`;
@@ -169,3 +138,40 @@ async function updateTaskInFirebase(task) {
         console.error('Fehler beim Aktualisieren der Aufgabe:', error);
     }
 } */
+
+
+    // GPT
+/*   async function fetchTasksData() {
+      tasks = [];
+      subtasks = [];
+  
+      let tasksResponse = await fetch(BASE_URL + "/tasks.json");
+      let tasksToJson = await tasksResponse.json();
+  
+      if (tasksToJson) {
+          const taskKeys = Object.keys(tasksToJson);
+  
+          taskKeys.forEach((key) => {
+              const task = {
+                  id: key,
+                  ...tasksToJson[key]
+              };
+  
+              // Sicherstellen, dass `subtasks` ein Array ist
+              if (!Array.isArray(task.subtasks)) {
+                  task.subtasks = Object.values(task.subtasks || {});
+              }
+  
+              tasks.push(task);
+  
+              if (task.assignedTo && !assignees.includes(task.assignedTo)) {
+                  assignees.push(task.assignedTo);
+              }
+          });
+          renderTasks();
+      }
+  
+      console.log("Tasks nach Fetch:", tasks);
+      console.log("Assigned Users:", assignees);
+      console.log("Subtasks:", subtasks);
+  } */

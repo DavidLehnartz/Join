@@ -131,7 +131,7 @@
           <div class="kanban-column" ondrop="drop(event, 'to_do')" ondragover="allowDrop(event)">
             <div class="kanban-header">
               <h2>To Do</h2>
-              <img class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+              <img onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
             </div>
             <!-- TASK RENDERN -->
             <div id="to_do" class="kanban-task-wrapper"></div>
@@ -141,7 +141,7 @@
           <div class="kanban-column" ondrop="drop(event, 'in_progress')" ondragover="allowDrop(event)">
             <div class="kanban-header">
               <h2>In progress</h2>
-              <img class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+              <img onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
             </div>
             <div id="in_progress" class="kanban-task-wrapper"></div>
             <!-- <div id="in_progress_message" class="kanban-empty-message" style="display: none;">No tasks in progress</div> -->
@@ -150,7 +150,7 @@
           <div class="kanban-column" ondrop="drop(event, 'await_feedback')" ondragover="allowDrop(event)">
             <div class="kanban-header">
               <h2>Await feedback</h2>
-              <img class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+              <img onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
             </div>
             <div id="await_feedback" class="kanban-task-wrapper"></div>
             <!--    <div id="await_feedback_message" class="kanban-empty-message" style="display: none;">No tasks awaiting feedback</div> -->
@@ -441,7 +441,7 @@
         <!-- POP UP BOARD ADD TASK RENDERN -->
         <div onclick="closePopUps()" id="overlay_add_task_pop_up" class="overlay-pop-up-add-task responsive-pop-up-closed">
           <div onclick="event.stopPropagation()" id="add_task_pop_up" class="pop-up-add-task-wrapper">
-            <div class="headingAndAnEx">
+           <!--  <div class="headingAndAnEx">
               <h1>Add Task</h1>
               <img onclick="closePopUps()" class="makeEnEx" src="../assets/img/makeEnEx.png" alt="">
             </div>
@@ -537,21 +537,14 @@
                   <img id="checkIcon" src="../assets/img/check_white.png" alt="Check Icon" />
                 </button>
               </div>
-            </div>
-           
-          </div>
-          <div class="showMe d-none">
-            Task Added To Board
-            <img src="../assets/img/board.png" alt="" />
+            </div>  -->
           </div> 
         </div>
+        
       
-
-
-      </main>
       
              
-      </div>
+      
     </div>
   </main>
 </body>

@@ -718,9 +718,9 @@ textarea {
     width: 80%;
   }
 
-  h1 {
+  /* h1 {
     font-size: 30px;
-  }
+  } */
 
   .placeholder {
     font-size: 15px !important;
@@ -756,7 +756,11 @@ textarea {
   .pop-up-add-task-wrapper {
     height: 90vh;
     width: 90%;
-    padding: 16px;
+    /* padding: 16px; */
+  }
+
+  .addTaskFooterLeftSide{
+    padding-top: 32px;
   }
 
   .bothSides {

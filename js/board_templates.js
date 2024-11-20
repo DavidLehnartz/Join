@@ -131,7 +131,7 @@ function getBoardHeadlineTemplate() {
                 </button>
               
                 <button class="add-task-btn-responsive">
-                  <img
+                  <img onclick="openAddTaskPopUp()"
                     class="add-task-btn-img"
                     src="../assets/img/plus_white.png"
                     alt="plus"
@@ -145,7 +145,7 @@ function getBoardHeadlineTemplate() {
             <div class="headline-responsive">
               <h1>Board</h1>
               <button class="add-task-btn-responsive">
-                <img
+                <img onclick="openAddTaskPopUp()"
                   class="add-task-btn-img"
                   src="../assets/img/plus_white.png"
                   alt="plus"
@@ -172,7 +172,7 @@ function getBoardHeadlineTemplate() {
 
 function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials )  {
   return `    
-              <div onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" class="kanban-task">
+              <div id="${task.id}" onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" class="kanban-task">
                 <div class="kanban-task-header"  style="background-color: ${categoryColor};">
                   <p>${task.category}</p>
                 </div>
@@ -483,7 +483,7 @@ function getAddedSubtasksTemplate(addedSubtask) {
 }
 
 
-/* function getAddTaskPopUpTemplate() {
+ function getAddTaskPopUpTemplate() {
   return `
          <div class="headingAndAnEx">
               <h1>Add Task</h1>
@@ -527,10 +527,10 @@ function getAddedSubtasksTemplate(addedSubtask) {
                       Urgent
                       <img src="../assets/img/urgent.png" class="priority-icon" />
                     </button>
-                    <button id="inputFieldMedium" class="priobtn urgMedLow-btn-medium"
+                    <button id="inputFieldMedium" class="priobtn urgMedLow-btn-medium active-medium"
                       onclick="setPriority(this, 'medium')">
                       Medium
-                      <img src="../assets/img/medium21.png" class="priority-icon" />
+                      <img src="../assets/img/medium.png" class="priority-icon" />
                     </button>
                     <button id="inputFieldLow" class="priobtn urgMedLow-btn" onclick="setPriority(this, 'low')">
                       Low
@@ -559,33 +559,36 @@ function getAddedSubtasksTemplate(addedSubtask) {
                   </div>
 
                   <div id="subtaskList" class="subtaskList"></div>
-                  
-                </div>
-                <div>
-                  <div class="clear-task-button">
-                    <button class="btn clear-btn" onclick="clearEverything()">
-                      Clear
-                      <img id="cancelIcon" src="../assets/img/iconoir_cancel.png" alt="Cancel Icon" />
-                    </button>
-                    <button id="createTaskBtn" class="btn create-task-btn" onclick="createTask()" disabled>
-                      Create Task
-                      <img id="checkIcon" src="../assets/img/check_white.png" alt="Check Icon" />
-                    </button>
-                  </div>
+
                 </div>
               </div>
             </div>
-            <span class="mobileSpanStyle" style="color: black; position: relative">
-              <span style="position: absolute; left: -5px; top: -7px; color: red">*</span>
-              This Field is required
-            </span>
-          </div>
-          <div class="showMe d-none">
-            Task Added To Board
-            <img src="../assets/img/board.png" alt="" />
-          </div> 
+            <div class="addTaskFooter">
+              <div class="addTaskFooterLeftSide">
+                <span class="mobileSpanStyle" style="color: black; position: relative">
+                  <span style="position: absolute; left: -5px; top: -7px; color: red">*</span>
+                  This Field is required
+                </span>
+              </div>
+              
+              <div class="clear-task-button">
+                <button class="btn clear-btn" onclick="clearEverything()">
+                  Clear
+                  <img id="cancelIcon" src="../assets/img/iconoir_cancel.png" alt="Cancel Icon" />
+                </button>
+                <button id="createTaskBtn" class="btn create-task-btn" onclick="createTask()" disabled>
+                  Create Task
+                  <img id="checkIcon" src="../assets/img/check_white.png" alt="Check Icon" />
+                </button>
+              </div>
+            </div>
+
+        <div class="showMe d-none">
+          Task Added To Board
+          <img src="../assets/img/board.png" alt="" />
+        </div> 
   `;
-} */
+} 
 
 
 
