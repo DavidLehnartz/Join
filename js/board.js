@@ -5,13 +5,15 @@
 let currentTaskId = null;
 let selectedPriority = "";
 
-async function init(header, sidebar, link) {
+function init(header, sidebar, link) {
+  let boardContent = document.getElementById("board-content");
   renderDesktopTemplate(header, sidebar, link);
-  await loadFetchedData();
-
-  console.log(tasks);
+  setTimeout(() => {
+    loadFetchedData();
+    console.log(tasks);
+    boardContent.classList.remove("hidden");
+  }, 100);
 }
-
 
 async function loadFetchedData() {
   try {
@@ -22,7 +24,6 @@ async function loadFetchedData() {
   }
   renderTasks();
 }
-
 
 function renderDesktopTemplate(header, sidebar, link) {
   createHeader(header);
@@ -108,7 +109,6 @@ function renderDesktopTemplate(header, sidebar, link) {
   });
 } */
 
-
 function renderTasks() {
   let tasksContent = document.getElementById("to_do");
   tasksContent.innerHTML = "";
@@ -126,7 +126,6 @@ function renderTasks() {
     );
   });
 }
-
 
 function renderTaskPopUp(taskId) {
   let taskPopUpContent = document.getElementById("task_pop_up");
@@ -149,7 +148,6 @@ function renderTaskPopUp(taskId) {
   renderSubtasks(taskId);
 }
 
-
 function renderEditTaskPopUp(taskId, priorityImage) {
   currentTaskId = taskId;
 
@@ -167,9 +165,10 @@ function renderEditTaskPopUp(taskId, priorityImage) {
     setPriorityButton(task.priority);
   }
 
-  document.getElementById("edit_task_pop_up").classList.remove("responsive-pop-up-closed");
+  document
+    .getElementById("edit_task_pop_up")
+    .classList.remove("responsive-pop-up-closed");
 }
-
 
 function renderSelectedContacts() {
   let selectedContactsContent = document.getElementById("selected_contacts");
@@ -185,7 +184,6 @@ function renderSelectedContacts() {
   }
 }
 
-
 function renderAssigneeInitials(assignedTo) {
   let assigneeInitialsContent = "";
 
@@ -198,7 +196,6 @@ function renderAssigneeInitials(assignedTo) {
   return assigneeInitialsContent;
 }
 
-
 function openTaskPopUp(taskId) {
   document
     .getElementById("overlay_task_pop_up")
@@ -207,19 +204,18 @@ function openTaskPopUp(taskId) {
   renderTaskPopUp(taskId);
 }
 
-
 function renderAddTaskPopUp() {
-  let addTaskPopUpContent = document.getElementById('add_task_pop_up');
+  let addTaskPopUpContent = document.getElementById("add_task_pop_up");
   addTaskPopUpContent.innerHTML = getAddTaskPopUpTemplate();
 }
 
-
 function openAddTaskPopUp() {
-  document.getElementById('overlay_add_task_pop_up').classList.remove('responsive-pop-up-closed');
+  document
+    .getElementById("overlay_add_task_pop_up")
+    .classList.remove("responsive-pop-up-closed");
 
   renderAddTaskPopUp();
 }
-
 
 async function saveTaskChanges(taskId) {
   const task = tasks.find((t) => t.id === taskId);
@@ -244,7 +240,6 @@ async function saveTaskChanges(taskId) {
   openTaskPopUp(taskId);
 }
 
-
 function getCategoryColor(category) {
   if (category === "User Story") {
     return "rgb(0, 56, 255)";
@@ -253,7 +248,6 @@ function getCategoryColor(category) {
   }
   return "gray";
 }
-
 
 function getPriorityImage(priority) {
   if (priority === "Low") {
@@ -265,7 +259,6 @@ function getPriorityImage(priority) {
   }
   return "";
 }
-
 
 function changePrioButtonsEditPopUp(selectedButton) {
   resetButtonsEditPopUp();
@@ -295,7 +288,6 @@ function changePrioButtonsEditPopUp(selectedButton) {
   }
 }
 
-
 function setPriorityButton(priority) {
   resetButtonsEditPopUp();
 
@@ -314,7 +306,6 @@ function setPriorityButton(priority) {
   }
 }
 
-
 function updateTaskPriority(priority) {
   const task = tasks.find(
     (t) => t.id === currentTaskId
@@ -323,7 +314,6 @@ function updateTaskPriority(priority) {
     task.priority = priority;
   }
 }
-
 
 function resetButtonsEditPopUp() {
   let buttons = document.querySelectorAll(".prio-btn");
@@ -390,7 +380,6 @@ function renderSubtasks(taskId) {
   }
 }
 
-
 function getSubtasksTemplate(taskId, subtask, index) {
   return `
           <div class="subtask" id="subtask_${taskId}_${index}">
@@ -403,7 +392,6 @@ function getSubtasksTemplate(taskId, subtask, index) {
   `;
 }
 
-
 function renderAddSubtasksEditPopUp() {
   let addedSubtasksContent = document.getElementById("added_subtasks");
   addedSubtasksContent.innerHTML = "";
@@ -412,7 +400,6 @@ function renderAddSubtasksEditPopUp() {
     addedSubtasksContent.innerHTML += getAddedSubtasksTemplate(addedSubtask);
   });
 }
-
 
 function addSubtaskEditPopUp() {
   let inputAddedSubtask = document.getElementById("input_add_subtask");
@@ -435,19 +422,17 @@ function addSubtaskEditPopUp() {
   updateButtonImage();
 }
 
-
 function deleteAddedSubtaskEditPopUp(id) {
-  let index = addedSubtasks.findIndex(addedSubtask => addedSubtask.id === id);
+  let index = addedSubtasks.findIndex((addedSubtask) => addedSubtask.id === id);
 
   if (index !== -1) {
     addedSubtasks.splice(index, 1);
     renderAddSubtasksEditPopUp();
-    console.log('subtask deleted successfully', addedSubtasks);
+    console.log("subtask deleted successfully", addedSubtasks);
   } else {
-    console.error('subtask not found!', addedSubtasks);
+    console.error("subtask not found!", addedSubtasks);
   }
 }
-
 
 function updateButtonImage() {
   /* let ButtonImage = document.getElementById('input_button_image'); */
@@ -477,9 +462,8 @@ function updateButtonImage() {
   }
 }
 
-
 function editSubtaskEditPopUp(id) {
-  const subtask = addedSubtasks.find(sub => sub.id === id);
+  const subtask = addedSubtasks.find((sub) => sub.id === id);
   if (!subtask) return;
 
   const listItem = document.querySelector(`li[data-id="${id}"]`);
@@ -504,12 +488,11 @@ function editSubtaskEditPopUp(id) {
                         </div>
                      `;
 
-  console.log('save edit subtask', addedSubtasks);
+  console.log("save edit subtask", addedSubtasks);
 }
 
-
 function saveEditedSubtaskEditPopUp(id, newTitle) {
-  const subtaskIndex = addedSubtasks.findIndex(sub => sub.id === id);
+  const subtaskIndex = addedSubtasks.findIndex((sub) => sub.id === id);
   if (subtaskIndex !== -1 && newTitle.trim() !== "") {
     addedSubtasks[subtaskIndex].title = newTitle.trim();
   }
@@ -518,13 +501,11 @@ function saveEditedSubtaskEditPopUp(id, newTitle) {
   console.log(addedSubtasks);
 }
 
-
 function handleEnterKey(event, id, inputElement) {
   if (event.key === "Enter") {
     saveEditedSubtaskEditPopUp(id, inputElement.value);
   }
 }
-
 
 function errorMessage() {
   let inputAddedSubtask = document
@@ -541,30 +522,25 @@ function errorMessage() {
   return false;
 }
 
-
 function generateUniqueId() {
   return "_" + Math.random().toString(36).substr(2, 9);
 }
-
 
 function showIcons(listItem) {
   const iconContainer = listItem.querySelector(".list-icon-container");
   iconContainer.style.visibility = "visible";
 }
 
-
 function hideIcons(listItem) {
   const iconContainer = listItem.querySelector(".list-icon-container");
   iconContainer.style.visibility = "hidden";
 }
-
 
 function closeEditPopUp() {
   document
     .getElementById("edit_task_pop_up")
     .classList.add("responsive-pop-up-closed");
 }
-
 
 function closePopUps() {
   document
@@ -576,12 +552,10 @@ function closePopUps() {
     .classList.add("responsive-pop-up-closed");
 }
 
-
 function clearInputs() {
   document.getElementById("input_add_subtask").value = "";
   updateButtonImage();
 }
-
 
 function changeImageEdit() {
   document.getElementById("edit_img").src = "../assets/img/edit_blue.png";
@@ -798,6 +772,3 @@ else {
     }));
   }
 } */
-
-
-

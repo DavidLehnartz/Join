@@ -1,9 +1,13 @@
 function init(header, sidebar, link) {
+  let addTaskContent = document.getElementById("add-task-content");
   createHeader(header);
   createSidebar(sidebar, link);
-  restorePriority();
-  setTodayDate();
-  loadAllContactsInfo();
+  setTimeout(() => {
+    restorePriority();
+    setTodayDate();
+    loadAllContactsInfo();
+    addTaskContent.classList.remove("hidden");
+  }, 100);
 }
 
 function setTodayDate() {
