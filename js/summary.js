@@ -2,20 +2,31 @@ function navigateToBoard() {
   window.location.href = "board.html";
 }
 
-async function loadData(header, sidebar, link) {
+function loadData(header, sidebar, link) {
+  let summaryContent = document.getElementById("summary-content");
+  createHeader(header);
+  createSidebar(sidebar, link);
+  setTimeout(() => {
+    loadTasks();
+    loadGreeting();
+    summaryContent.classList.remove("hidden");
+  }, 100);
+}
+
+async function loadTasks() {
   const response = await fetch(
     "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
   );
   const data = await response.json();
-  console.log(data);
-  createHeader(header);
-  createSidebar(sidebar, link);
   showHowManyTasksUrgent(data);
   taskInProgess(data);
   taskToDo(data);
   taskInBoard(data);
   taskDone(data);
   taskAwaiting(data);
+}
+
+function loadGreeting() {
   displayGreeting();
   displayUsername();
 }
