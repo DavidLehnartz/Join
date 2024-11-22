@@ -184,7 +184,7 @@ function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials )
                 </div>
                 <div class="kanban-task-subtasks">
                       <progress value="0" max="100"></progress>
-        <span>Subtasks Completed</span>
+                      <span>Subtasks Completed</span>
                 </div>
                 <div class="kanban-task-footer">
 

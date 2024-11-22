@@ -175,11 +175,7 @@ function renderSelectedContacts() {
   let selectedContactsContent = document.getElementById("selected_contacts");
   selectedContactsContent.innerHTML = "";
 
-  for (
-    let indexSelectedContacts = 0;
-    indexSelectedContacts < selectedContacts.length;
-    indexSelectedContacts++
-  ) {
+  for (let indexSelectedContacts = 0; indexSelectedContacts < selectedContacts.length; indexSelectedContacts++) {
     let contact = selectedContacts[indexSelectedContacts];
     selectedContactsContent.innerHTML += getSelectedContactsTemplate(contact);
   }
@@ -234,10 +230,8 @@ async function saveTaskChanges(taskId) {
     if (selectedPriority) {
       task.priority = selectedPriority;
     }
-
-    //  const priorityButton = document.querySelector('.prio-btn.prio-urgent-active, .prio-btn.prio-medium-active, .prio-btn.prio-low-active');
-    //task.priority = priorityButton ? priorityButton.id.replace('prio_', '') : '';
   }
+
   renderTasks();
   await updateTaskInFirebase(task);
   closeEditPopUp();
@@ -344,36 +338,6 @@ function resetButtonsEditPopUp() {
   });
 }
 
-/* ----- versuch subtasks in ein globales array zu pushen ----- */
-
-/* function toggleCheckboxSubtasks(subtaskId) {
-  let checkbox = document.getElementById(`checkbox_${subtaskId}`);
-
-  if (checkbox.src.includes('checkbox_false.png')) {
-    checkbox.src = '../assets/img/checkbox_true.png';
-    // Optional: Subtask zum Array hinzufügen, wenn nicht vorhanden
-    const subtask = subtasks.find(subtask => subtask.id === subtaskId);
-    if (!subtask) {
-      subtasks.push(
-        {
-          id: subtaskId,
-          completed: true
-        });
-    } else {
-      subtask.completed = true; // Setze completed auf true
-    }
-  } else {
-    checkbox.src = '../assets/img/checkbox_false.png';
-
-    const index = subtasks.findIndex(subtask => subtask.id === subtaskId);
-    if (index !== -1) {
-      subtasks[index].completed = false; // Setze completed auf false
-      subtasks.splice(index, 1)
-    }
-  }
-  renderTasks();
-  console.log(subtasks); 
-} */
 
 function renderSubtasks(taskId) {
   let subtaskContent = document.getElementById("single_subtasks");
@@ -394,13 +358,24 @@ function renderSubtasks(taskId) {
 function getSubtasksTemplate(taskId, subtask, index) {
   return `
           <div class="subtask" id="subtask_${taskId}_${index}">
-            <img class="checkbox" onclick="toggleCheckboxSubtasks('${taskId}', ${index})" 
-                 id="checkbox_${taskId}_${index}" 
+            <img class="checkbox" onclick="toggleSubtasksCheckbox()" 
+                 id="checkbox_subtask" 
                  src="../assets/img/checkbox_false.png" 
                  alt="checkbox">
             <span>${subtask.name}</span>
           </div>
   `;
+}
+
+
+function toggleSubtasksCheckbox() {
+  let checkbox = document.getElementById("checkbox_subtask");
+
+  if (checkbox.src.includes('checkbox_false.png')) {
+    checkbox.src ='../assets/img/checkbox_true.png';
+  } else{
+    checkbox.src = '../assets/img/checkbox_false.png';
+  }
 }
 
 
@@ -601,40 +576,43 @@ function resetImageDelete() {
 
 /* ---------- WIRD NOCH GEBRAUCHT ---------- */
 
-/**
- * This function is used to render added subtasks
- *
- *
- */
-/* function renderAddSubtasks() {
-  let subtasksContent = document.getElementById('subtasks');
-  subtasksContent.innerHTML = "";
+/* ----- versuch subtasks in ein globales array zu pushen ----- */
+
+/* function toggleCheckboxSubtasks(subtaskId) {
+  let checkbox = document.getElementById(`checkbox_${subtaskId}`);
+
+  if (checkbox.src.includes('checkbox_false.png')) {
+    checkbox.src = '../assets/img/checkbox_true.png';
+    // Optional: Subtask zum Array hinzufügen, wenn nicht vorhanden
+    const subtask = subtasks.find(subtask => subtask.id === subtaskId);
+    if (!subtask) {
+      subtasks.push(
+        {
+          id: subtaskId,
+          completed: true
+        });
+    } else {
+      subtask.completed = true; // Setze completed auf true
+    }
+  } else {
+    checkbox.src = '../assets/img/checkbox_false.png';
+
+    const index = subtasks.findIndex(subtask => subtask.id === subtaskId);
+    if (index !== -1) {
+      subtasks[index].completed = false; // Setze completed auf false
+      subtasks.splice(index, 1)
+    }
+  }
+  renderTasks();
+  console.log(subtasks); 
+} */
 
 /* ------------------------------- GPT ---------------------------------- */
 
-async function toggleCheckboxSubtasks(taskId, subtaskIndex) {
-  const task = tasks.find((t) => t.id === taskId);
-  if (!task) return;
-}
-/**
- * This function is used to add a subtask to subtasks at edit task pop up
- *
- *
- */
-/* function addSubtask() {
-  let inputAddedSubtask = document.getElementById('input_subtask_add_subtask');
-  let addedSubtask = inputAddedSubtask.value.trim();
-  // Toggle the completion status of the specified subtask
-  task.subtasks[subtaskIndex].completed = !task.subtasks[subtaskIndex].completed;
 
-  // Update the task in Firebase
-  await updateTaskInFirebase(task);
 
-  // Re-render the subtasks to reflect the change in the UI
-  renderSubtasks(taskId);
-}
 
-/* ------------------------------------------------------------------- */
+/* ------------------------- switch anstatt if else ------------------------------------------ */
 
 /* function getPriorityImage(priority) {
   switch (priority) {
@@ -702,102 +680,3 @@ async function toggleCheckboxSubtasks(taskId, subtaskIndex) {
      }
    }
  } */
-
-/* ---- neuen subtask erstellen ---- */
-
-/*  function renderAddSubtasks(taskId) {
-   const task = tasks.find((t) => t.id === taskId);
-   const subtasksContent = document.getElementById('subtasks');
-   subtasksContent.innerHTML = "";
- 
-   if (task && task.subtasks) {
-     task.subtasks.forEach((subtask, index) => {
-       subtasksContent.innerHTML += getSubtasksTemplate(subtask, index);
-     });
-   }
- } */
-
-/* function addSubtask(taskId) {
-  let inputAddedSubtask = document.getElementById('input_add_subtask');
-  let addedSubtask = inputAddedSubtask.value.trim();
- 
-  if (!addedSubtask) {
-    console.error("Please enter a valid subtask.");
-    return;
-  }
- 
-  const task = tasks.find(t => t.id === taskId);
-  if (task) {
-    task.subtasks = task.subtasks || []; 
-    task.subtasks.push(addedSubtask);
-    renderAddSubtasks(taskId);
-    clearInputs();
-  }
-} */
-
-/* function renderSubtasks(task) {
-let subtasksContent = document.getElementById('single_subtasks');
-subtasksContent.innerHTML = "";
-
-// Prüfen, ob subtasks ein Array ist
-if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
-  task.subtasks.forEach(subtask => {
-    const subtaskImage = getSubtaskImage(subtask.checked);
-    subtasksContent.innerHTML += getSubtaskTemplate(task, subtaskImage);
-  });
-}
-else {
-  subtasksContent.innerHTML = "<p>No subtasks available</p>";
-} 
-}*/
-
-/* function getSubtaskTemplate(task, subtaskImage) {
-  return `
-    <div class="subtask">
-      <img onclick="toggleSubtaskStatus()"
-           id="subtask_image"
-           src="${subtaskImage}" alt="checkbox">
-      <span>${task.subtasks}</span>
-    </div>
-  `;
-} */
-
-/* function getSubtaskImage(isChecked) {
-  return isChecked ? "../assets/img/checkbox_true.png" : "../assets/img/checkbox_false.png";
-} */
-
-/* async function toggleSubtaskStatus(taskId, subtaskId) {
-  const task = tasks.find(t => t.id === taskId);
-  if (!task) return;
-
-  const subtask = task.subtasks.find(s => s.id === subtaskId);
-  if (subtask) {
-    // Status wechseln
-    subtask.checked = !subtask.checked;
-
-  
-    const subtaskElement = document.getElementById(`subtask_image-${taskId}-${subtaskId}`);
-    if (subtaskElement) {
-      subtaskElement.src = getSubtaskImage(subtask.checked);
-    }
-
-    
-    await updateTaskInFirebase(task);
-
-    
-    updateTaskProgress(taskId);
-  }
-} */
-
-/* function transformSubtasks(task) {
-  if (Array.isArray(task.subtasks)) {
-    task.subtasks = task.subtasks.map((title, index) => ({
-      id: `subtask-${task.id}-${index}`, 
-      title: title,
-      checked: false 
-    }));
-  }
-} */
-
-
-
