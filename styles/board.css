@@ -255,7 +255,7 @@ progress {
   font-weight: 400;
 }
 
-.completed-subtasks{
+/* .completed-subtasks{
   color: rgb(41, 171, 226);
   font-size: bold;
 }
@@ -263,7 +263,7 @@ progress {
 .total-subtasks{
   color: rgb(41, 171, 226);
   font-size: bold;
-}
+} */
 
 .kanban-task-footer {
   display: flex;

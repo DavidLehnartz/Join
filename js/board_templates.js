@@ -252,21 +252,23 @@ function getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeConten
               </div>
               <div class="pop-up-footer">
                 <img onclick="renderEditTaskPopUp('${task.id}'), renderDropdownContacts()"
-                     onmouseover="changeImageEdit()" onmouseout="resetImageEdit()"
+                     onmouseover="changeImage('edit_img', 'edit')" 
+                     onmouseout="changeImage('edit_img', 'edit')"
                      id="edit_img"
-                  class="pop-up-footer-edit-img"
-                  src="../assets/img/edit_black.png"
-                  alt="edit"
+                     class="pop-up-footer-edit-img"
+                     src="../assets/img/edit_black.png"
+                     alt="edit"
                 />
 
                 <div class="pop-up-seperator"></div>
 
                 <img onclick="deleteTaskData('${task.id}')"
-                     onmouseover="changeImageDelete()" onmouseout="resetImageDelete()"
+                     onmouseover="changeImage('delete_img', 'delete')" 
+                     onmouseout="changeImage('delete_img', 'delete')"
                      id="delete_img"
-                  class="pop-up-footer-delete-img"
-                  src="../assets/img/delete_black.png"
-                  alt="delete"
+                     class="pop-up-footer-delete-img"
+                     src="../assets/img/delete_black.png"
+                     alt="delete"
                 />
               </div> 
 
