@@ -36,78 +36,6 @@ function renderDesktopTemplate(header, sidebar, link) {
   // headerTemplateContent.innerHTML = getHeaderTemplate();
   boardHeadlineContent.innerHTML = getBoardHeadlineTemplate();
 }
-/* ----- FÜR DRAG AND DROP ----- */
-
-/* function renderTasks() {
-  let tasksContent = document.getElementById('to_do');
-  tasksContent.innerHTML = "";
-
-  for (let indexTasks = 0; indexTasks < tasks.length; indexTasks++) {
-    let task = tasks[indexTasks];
-    let priorityImage = getPriorityImage(task.priority);
-    let categoryColor = getCategoryColor(task.category);
-    let assigneeInitials = renderAssigneeInitials(task.assignedTo);
-
-    const { completedSubtasksCount, totalSubtasks, progressPercent } = calculateSubtaskProgress(task);
-
-    tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials,  completedSubtasksCount, totalSubtasks, progressPercent);
-  }
-  // renderAssigneeInitials();
-} */
-
-/* function renderTasks() {
-  const columns = ['to_do', 'in_progress', 'await_feedback', 'done'];
-
-  columns.forEach(columnId => {
-    let tasksContent = document.getElementById(columnId);
-    tasksContent.innerHTML = "";
-
-    // Filtern der Aufgaben nach dem aktuellen Spaltenstatus
-    let filteredTasks = tasks.filter(task => task.status === columnId);
-
-    // Aufgaben in der aktuellen Spalte rendern
-    filteredTasks.forEach(task => {
-      let priorityImage = getPriorityImage(task.priority);
-      let categoryColor = getCategoryColor(task.category);
-      let assigneeInitials = renderAssigneeInitials(task.assignedTo);
-
-      // Füge das Template für jede Aufgabe hinzu
-      tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
-    });
-  });
-} */
-
-/* ----------------------------------------------------- */
-
-/* function renderTasks() {
-  const columns = {
-      to_do: document.getElementById("to_do"),
-      in_progress: document.getElementById("in_progress"),
-      await_feedback: document.getElementById("await_feedback"),
-      done: document.getElementById("done"),
-  };
-
-  // Alle Spalten leeren
-  for (let column in columns) {
-      columns[column].innerHTML = "";
-  }
-
-  tasks.forEach((task) => {
-      let priorityImage = getPriorityImage(task.priority);
-      let categoryColor = getCategoryColor(task.category);
-      let assigneeInitials = renderAssigneeInitials(task.assignedTo);
-
-      const column = columns[task.status];
-      if (column) {
-          column.innerHTML += getTasksTemplate(
-              task,
-              priorityImage,
-              categoryColor,
-              assigneeInitials
-          );
-      }
-  });
-} */
 
 function renderTasks() {
   let tasksContent = document.getElementById("to_do");
@@ -117,12 +45,17 @@ function renderTasks() {
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
     let assigneeInitials = renderAssigneeInitials(task.assignedTo);
+    let { completedSubtasks, totalSubtasks } = calculateSubtaskProgress(task);
+    let subtaskProgressHTML = renderSubtaskProgress(completedSubtasks, totalSubtasks);
+    let{ progressPercentage } = calculateSubtaskProgress(task);
 
     tasksContent.innerHTML += getTasksTemplate(
       task,
       priorityImage,
       categoryColor,
-      assigneeInitials
+      assigneeInitials,
+      subtaskProgressHTML,
+      progressPercentage
     );
   });
 }
@@ -131,7 +64,7 @@ function renderTaskPopUp(taskId) {
   let taskPopUpContent = document.getElementById("task_pop_up");
   taskPopUpContent.innerHTML = "";
 
-  const task = tasks.find((t) => t.id === taskId);
+  let task = tasks.find((t) => t.id === taskId);
   if (task) {
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
@@ -154,7 +87,7 @@ function renderEditTaskPopUp(taskId, priorityImage) {
   let editTaskPopUpContent = document.getElementById("edit_task_pop_up");
   editTaskPopUpContent.innerHTML = "";
 
-  const task = tasks.find((t) => t.id === taskId);
+  let task = tasks.find((t) => t.id === taskId);
 
   if (task) {
     editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(
@@ -214,7 +147,7 @@ function openAddTaskPopUp() {
 }
 
 async function saveTaskChanges(taskId) {
-  const task = tasks.find((t) => t.id === taskId);
+  let task = tasks.find((t) => t.id === taskId);
 
   if (task) {
     task.title = document.getElementById("edit_title").value;
@@ -301,7 +234,7 @@ function setPriorityButton(priority) {
 }
 
 function updateTaskPriority(priority) {
-  const task = tasks.find(
+  let task = tasks.find(
     (t) => t.id === currentTaskId
   ); /* currentTaskId für den aktiven Task */
   if (task) {
@@ -328,12 +261,11 @@ function resetButtonsEditPopUp() {
   });
 }
 
-
 function renderSubtasks(taskId) {
   let subtaskContent = document.getElementById("single_subtasks");
   subtaskContent.innerHTML = "";
 
-  const task = tasks.find((t) => t.id === taskId);
+  let task = tasks.find((t) => t.id === taskId);
 
   if (task && Array.isArray(task.subtasks) && task.subtasks.length > 0) {
     task.subtasks.forEach((subtask, index) => {
@@ -347,8 +279,8 @@ function renderSubtasks(taskId) {
 function getSubtasksTemplate(taskId, subtask, index) {
   return `
           <div class="subtask" id="subtask_${taskId}_${index}">
-            <img class="checkbox" onclick="toggleSubtasksCheckbox()" 
-                 id="checkbox_subtask" 
+            <img class="checkbox" onclick="toggleSubtasksCheckbox('${taskId}', ${index})" 
+                 id="checkbox_subtask_${taskId}_${index}"
                  src="../assets/img/checkbox_false.png" 
                  alt="checkbox">
             <span>${subtask.name}</span>
@@ -356,17 +288,37 @@ function getSubtasksTemplate(taskId, subtask, index) {
   `;
 }
 
-
-function toggleSubtasksCheckbox() {
-  let checkbox = document.getElementById("checkbox_subtask");
+function toggleSubtasksCheckbox(taskId, index) {
+  let checkbox = document.getElementById(`checkbox_subtask_${taskId}_${index}`);
 
   if (checkbox.src.includes('checkbox_false.png')) {
-    checkbox.src ='../assets/img/checkbox_true.png';
-  } else{
+    checkbox.src = '../assets/img/checkbox_true.png';
+  } else {
     checkbox.src = '../assets/img/checkbox_false.png';
   }
+  renderTasks();
 }
 
+function calculateSubtaskProgress(task) {
+  let totalSubtasks = task.subtasks ? task.subtasks.length : 0;
+  let completedSubtasks = 0;
+
+  if (totalSubtasks > 0) {
+    for (let i = 0; i < totalSubtasks; i++) {
+      let checkbox = document.getElementById(`checkbox_subtask_${task.id}_${i}`);
+      if (checkbox && checkbox.src.includes("checkbox_true.png")) {
+        completedSubtasks++;
+      }
+    }
+  }
+  let progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+
+  return { completedSubtasks, totalSubtasks,progressPercentage };
+}
+
+function renderSubtaskProgress(completed, total) {
+  return `<span>${completed}/${total} Subtasks Completed</span>`;
+}
 
 function renderAddSubtasksEditPopUp() {
   let addedSubtasksContent = document.getElementById("added_subtasks");
@@ -439,10 +391,10 @@ function updateButtonImage() {
 }
 
 function editSubtaskEditPopUp(id) {
-  const subtask = addedSubtasks.find((sub) => sub.id === id);
+  let subtask = addedSubtasks.find((sub) => sub.id === id);
   if (!subtask) return;
 
-  const listItem = document.querySelector(`li[data-id="${id}"]`);
+  let listItem = document.querySelector(`li[data-id="${id}"]`);
   if (!listItem) return;
 
   listItem.classList.add("editing");
@@ -468,7 +420,7 @@ function editSubtaskEditPopUp(id) {
 }
 
 function saveEditedSubtaskEditPopUp(id, newTitle) {
-  const subtaskIndex = addedSubtasks.findIndex((sub) => sub.id === id);
+  let subtaskIndex = addedSubtasks.findIndex((sub) => sub.id === id);
   if (subtaskIndex !== -1 && newTitle.trim() !== "") {
     addedSubtasks[subtaskIndex].title = newTitle.trim();
   }
@@ -503,12 +455,12 @@ function generateUniqueId() {
 }
 
 function showIcons(listItem) {
-  const iconContainer = listItem.querySelector(".list-icon-container");
+  let iconContainer = listItem.querySelector(".list-icon-container");
   iconContainer.style.visibility = "visible";
 }
 
 function hideIcons(listItem) {
-  const iconContainer = listItem.querySelector(".list-icon-container");
+  let iconContainer = listItem.querySelector(".list-icon-container");
   iconContainer.style.visibility = "hidden";
 }
 
@@ -549,109 +501,77 @@ function resetImageDelete() {
   document.getElementById("delete_img").src = "../assets/img/delete_black.png";
 }
 
-/* ---------- WIRD NOCH GEBRAUCHT ---------- */
-
-/* ----- versuch subtasks in ein globales array zu pushen ----- */
-
-/* function toggleCheckboxSubtasks(subtaskId) {
-  let checkbox = document.getElementById(`checkbox_${subtaskId}`);
-
-  if (checkbox.src.includes('checkbox_false.png')) {
-    checkbox.src = '../assets/img/checkbox_true.png';
-    // Optional: Subtask zum Array hinzufügen, wenn nicht vorhanden
-    const subtask = subtasks.find(subtask => subtask.id === subtaskId);
-    if (!subtask) {
-      subtasks.push(
-        {
-          id: subtaskId,
-          completed: true
-        });
-    } else {
-      subtask.completed = true; // Setze completed auf true
-    }
-  } else {
-    checkbox.src = '../assets/img/checkbox_false.png';
-
-    const index = subtasks.findIndex(subtask => subtask.id === subtaskId);
-    if (index !== -1) {
-      subtasks[index].completed = false; // Setze completed auf false
-      subtasks.splice(index, 1)
-    }
-  }
-  renderTasks();
-  console.log(subtasks); 
-} */
-
-/* ------------------------------- GPT ---------------------------------- */
 
 
-
-
-/* ------------------------- switch anstatt if else ------------------------------------------ */
-
-/* function getPriorityImage(priority) {
-  switch (priority) {
-      case 'urgent':
-          return '../assets/img/prio_urgent_red.png';
-      case 'medium':
-          return '../assets/img/prio_medium_orange.png';
-      case 'low':
-          return '../assets/img/prio_low_green.png';
-      default:
-          console.error('Unbekannte Priorität:', priority);
-          return '';
-  }
-} */
-
-/* --------- drag and drop mit empty kanban wrapper message -------- */
+/* ----- FÜR DRAG AND DROP ----- */
 
 /* function renderTasks() {
-  clearColumns();
- 
+  let tasksContent = document.getElementById('to_do');
+  tasksContent.innerHTML = "";
+
   for (let indexTasks = 0; indexTasks < tasks.length; indexTasks++) {
     let task = tasks[indexTasks];
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
     let assigneeInitials = renderAssigneeInitials(task.assignedTo);
- 
-    let columnId = task.status;
-    let column = document.getElementById(columnId);
- 
-    if (column) {
-      column.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
-    } else {
-      console.error(`Spalte mit ID ${columnId} nicht gefunden.`);
-    }
-  }
-   // updateEmptyMessages();
-}  */
 
-/* function clearColumns() {
- document.getElementById('to_do').innerHTML = "";
- document.getElementById('in_progress').innerHTML = "";
- document.getElementById('await_feedback').innerHTML = "";
- document.getElementById('done').innerHTML = "";
+    const { completedSubtasksCount, totalSubtasks, progressPercent } = calculateSubtaskProgress(task);
+
+    tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials,  completedSubtasksCount, totalSubtasks, progressPercent);
+  }
+  // renderAssigneeInitials();
 } */
 
-/*  function updateEmptyMessages() {
-   
-   const columnsWithTasks = {
-     to_do: false,
-     in_progress: false,
-     await_feedback: false,
-     done: false
-   };
- 
-   tasks.forEach(task => {
-     columnsWithTasks[task.status] = true; 
-   });
- 
-   for (const columnId in columnsWithTasks) {
-     const messageElement = document.getElementById(`${columnId}_message`);
-     if (!columnsWithTasks[columnId]) {
-       messageElement.style.display = 'block'; 
-     } else {
-       messageElement.style.display = 'none'; 
-     }
-   }
- } */
+/* function renderTasks() {
+  const columns = ['to_do', 'in_progress', 'await_feedback', 'done'];
+
+  columns.forEach(columnId => {
+    let tasksContent = document.getElementById(columnId);
+    tasksContent.innerHTML = "";
+
+    // Filtern der Aufgaben nach dem aktuellen Spaltenstatus
+    let filteredTasks = tasks.filter(task => task.status === columnId);
+
+    // Aufgaben in der aktuellen Spalte rendern
+    filteredTasks.forEach(task => {
+      let priorityImage = getPriorityImage(task.priority);
+      let categoryColor = getCategoryColor(task.category);
+      let assigneeInitials = renderAssigneeInitials(task.assignedTo);
+
+      // Füge das Template für jede Aufgabe hinzu
+      tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
+    });
+  });
+} */
+
+/* ----------------------------------------------------- */
+
+/* function renderTasks() {
+  const columns = {
+      to_do: document.getElementById("to_do"),
+      in_progress: document.getElementById("in_progress"),
+      await_feedback: document.getElementById("await_feedback"),
+      done: document.getElementById("done"),
+  };
+
+  // Alle Spalten leeren
+  for (let column in columns) {
+      columns[column].innerHTML = "";
+  }
+
+  tasks.forEach((task) => {
+      let priorityImage = getPriorityImage(task.priority);
+      let categoryColor = getCategoryColor(task.category);
+      let assigneeInitials = renderAssigneeInitials(task.assignedTo);
+
+      const column = columns[task.status];
+      if (column) {
+          column.innerHTML += getTasksTemplate(
+              task,
+              priorityImage,
+              categoryColor,
+              assigneeInitials
+          );
+      }
+  });
+} */

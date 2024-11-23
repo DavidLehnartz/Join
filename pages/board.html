@@ -34,20 +34,17 @@
 </head>
 
 <!-- TASKS
-* subtasks rendern in task pop up ********
-* subtasks progres bar *******
+
 * subtasks completed count  ******
+
+* subtasks progres bar *******
 
 * selected contacts, wenn true im task aktualisieren *****
 
-* add new subtasks rendern 
 * add new subtask im task aktualisieren
 
 * drag and drop funktioniert, aber es werden keine neuen erstellten tasks angezeigt
 
-* add task von david implementieren
-
-* filter funktion muss noch ausgebessert werden
 -->
 
 <body onload="init('board-header', 'board-sidebar', 'board-link')">
@@ -167,7 +164,6 @@
       </section>
 
       <!-- OVERLAY / POP UP BOARD TASK RENDERN-->
-
       <div onclick=" closePopUps()" id="overlay_task_pop_up" class="overlay-pop-up-board responsive-pop-up-closed">
         <div onclick="event.stopPropagation()" id="task_pop_up" class="pop-up-board-wrapper">
           <!--  <div class="pop-up-board-inner-container">
@@ -438,10 +434,10 @@
         <!-- </div> -->
       </section>
 
-        <!-- POP UP BOARD ADD TASK RENDERN -->
-        <div onclick="closePopUps()" id="overlay_add_task_pop_up" class="overlay-pop-up-add-task responsive-pop-up-closed">
-          <div onclick="event.stopPropagation()" id="add_task_pop_up" class="pop-up-add-task-wrapper">
-           <!--  <div class="headingAndAnEx">
+       <!-- POP UP BOARD ADD TASK RENDERN -->
+      <div onclick="closePopUps()" id="overlay_add_task_pop_up" class="overlay-pop-up-add-task responsive-pop-up-closed">
+        <div onclick="event.stopPropagation()" id="add_task_pop_up" class="pop-up-add-task-wrapper">
+         <!--  <div class="headingAndAnEx">
               <h1>Add Task</h1>
               <img onclick="closePopUps()" class="makeEnEx" src="../assets/img/makeEnEx.png" alt="">
             </div>
@@ -538,17 +534,13 @@
                 </button>
               </div>
             </div>  -->
-          </div> 
-        </div>
-        
-      
-      
-             
-      
+        </div> 
+      </div>
+
     </div>
   </main>
 </body>
-<script src="../js/database.js" defer></script>
 
+<script src="../js/database.js" defer></script>
 
 </html>

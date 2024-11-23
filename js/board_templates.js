@@ -170,7 +170,7 @@ function getBoardHeadlineTemplate() {
 }
 
 
-function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials )  {
+function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials, subtaskProgressHTML, progressPercentage) {
   return `    
               <div id="${task.id}" onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" class="kanban-task">
                 <div class="kanban-task-header"  style="background-color: ${categoryColor};">
@@ -183,8 +183,8 @@ function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials )
                   </p>
                 </div>
                 <div class="kanban-task-subtasks">
-                      <progress value="0" max="100"></progress>
-                      <span>Subtasks Completed</span>
+                      <progress value="${progressPercentage}" max="100"></progress>
+                       ${subtaskProgressHTML}
                 </div>
                 <div class="kanban-task-footer">
 
@@ -483,7 +483,7 @@ function getAddedSubtasksTemplate(addedSubtask) {
 }
 
 
- function getAddTaskPopUpTemplate() {
+function getAddTaskPopUpTemplate() {
   return `
          <div class="headingAndAnEx">
               <h1>Add Task</h1>
@@ -588,7 +588,7 @@ function getAddedSubtasksTemplate(addedSubtask) {
           <img src="../assets/img/board.png" alt="" />
         </div> 
   `;
-} 
+}
 
 
 
