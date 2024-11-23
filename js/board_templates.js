@@ -4,7 +4,8 @@
 
 
 function renderHeaderMenu() {
-  return `<div class="header-menu-container">
+  return `
+          <div class="header-menu-container">
                 <div
                   class="header-menu-item hidden-desktop"
                   onclick="window.location.href='../pages/help.html'"
@@ -26,60 +27,58 @@ function renderHeaderMenu() {
                 <div class="header-menu-item" onclick="logOut(event)">
                   <p class="header-menu-text">Log out</p>
                 </div>
-              </div>`;
+          </div>`;
 }
-
 
 function getSidebarTemplate() {
   return `
-           <div class="left-sidebar">
-        <img src="../assets/img/join_logo_white.svg" alt="join logo" />
-        <div class="left-sidebar-links">
-          <a class="links" href="summary.html">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/summary.png"
-              alt="Summary"
-            />
-            <p>Summary</p>
-          </a>
-          <a class="links" href="add_tasks.html">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/add_task.png"
-              alt="Add Task"
-            />
-            <p>Add Task</p>
-          </a>
-          <a class="links link-active" href="#">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/board.png"
-              alt="Board"
-            />
-            <p>Board</p>
-          </a>
-          <a class="links" href="contacts.html">
-            <img
-              class="sidebar-icons"
-              src="../assets/img/contacts.png"
-              alt="Contacts"
-            />
-            <p>Contacts</p>
-          </a>
+        <div class="left-sidebar">
+           <img src="../assets/img/join_logo_white.svg" alt="join logo" />
+           <div class="left-sidebar-links">
+             <a class="links" href="summary.html">
+               <img
+                 class="sidebar-icons"
+                 src="../assets/img/summary.png"
+                 alt="Summary"
+               />
+               <p>Summary</p>
+             </a>
+             <a class="links" href="add_tasks.html">
+               <img
+                 class="sidebar-icons"
+                 src="../assets/img/add_task.png"
+                 alt="Add Task"
+               />
+               <p>Add Task</p>
+             </a>
+             <a class="links link-active" href="#">
+               <img
+                 class="sidebar-icons"
+                 src="../assets/img/board.png"
+                 alt="Board"
+               />
+               <p>Board</p>
+             </a>
+             <a class="links" href="contacts.html">
+               <img
+                 class="sidebar-icons"
+                 src="../assets/img/contacts.png"
+                 alt="Contacts"
+               />
+              <p>Contacts</p>
+             </a>
+           </div>
+           <div class="left-sidebar-links">
+             <a class="legacy-links" href="#"> Privacy Policy </a>
+             <a class="legacy-links" href="#"> Legal notice </a>
+           </div>
         </div>
-        <div class="left-sidebar-links">
-          <a class="legacy-links" href="#"> Privacy Policy </a>
-          <a class="legacy-links" href="#"> Legal notice </a>
-        </div>
-      </div>
     `;
 }
 
-
 function getHeaderTemplate() {
   return `
-          <div class="header-wrapper">
+        <div class="header-wrapper">
           <span class="app-description"> Kanban Project Management Tool</span>
           
           <img
@@ -100,10 +99,8 @@ function getHeaderTemplate() {
     `;
 }
 
-
 function getBoardHeadlineTemplate() {
   return `
- 
           <div class="headline">
               <h1>Board</h1>
               <div class="searchbox-wrapper">
@@ -169,10 +166,9 @@ function getBoardHeadlineTemplate() {
     `;
 }
 
-
 function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials, subtaskProgressHTML, progressPercentage) {
   return `    
-              <div id="${task.id}" onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" class="kanban-task">
+          <div id="${task.id}" onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" class="kanban-task">
                 <div class="kanban-task-header"  style="background-color: ${categoryColor};">
                   <p>${task.category}</p>
                 </div>
@@ -196,14 +192,13 @@ function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials, 
                      <img src="${priorityImage}" alt="${task.priority}" class="priority-icon">
                   </div>
                 </div>
-              </div>
+          </div>
 `;
 }
 
-
 function getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeContent) {
   return `
-             <div class="pop-up-board-inner-container">
+          <div class="pop-up-board-inner-container">
                 <div class="pop-up-task-header">
                   <div class="header-category"  style="background-color: ${categoryColor};">
                     <p>${task.category}</p>
@@ -272,10 +267,9 @@ function getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeConten
                 />
               </div> 
 
-              <div id="edit_task_pop_up"></div>
+          <div id="edit_task_pop_up"></div>
     `;
 }
-
 
 function getEditTaskPopUpTemplate(task) {
   return `
@@ -420,7 +414,6 @@ function getEditTaskPopUpTemplate(task) {
     `;
 }
 
-
 function getDropdownContactsTemplate(contact) {
   return `
          <div  class="dropdown-contact" onclick="toggleCheckboxContact('checkbox_${contact.name}', '${contact.initial}','${contact.color}')" id="selected_contact">
@@ -433,15 +426,13 @@ function getDropdownContactsTemplate(contact) {
   `;
 }
 
-
 function getAssigneeInitialsTemplate(assignee) {
   return `
-    <div class="initials bg-${assignee.color}";>
-      ${assignee.initial} 
-    </div>
+         <div class="initials bg-${assignee.color}";>
+           ${assignee.initial} 
+         </div>
   `;
 }
-
 
 function getAssigneesTemplate(assignedTo) {
   if (Array.isArray(assignedTo)) {
@@ -463,13 +454,11 @@ function getAssigneesTemplate(assignedTo) {
   return `<p>No contacts selected</p> `;
 }
 
-
 function getSelectedContactsTemplate(contact) {
   return `
           <div id="selected_contact" class="selected-contact bg-${contact.color}">${contact.initial}</div>
   `;
 }
-
 
 function getAddedSubtasksTemplate(addedSubtask) {
   return `
@@ -483,7 +472,6 @@ function getAddedSubtasksTemplate(addedSubtask) {
           </li>
         `;
 }
-
 
 function getAddTaskPopUpTemplate() {
   return `
@@ -589,6 +577,45 @@ function getAddTaskPopUpTemplate() {
           Task Added To Board
           <img src="../assets/img/board.png" alt="" />
         </div> 
+  `;
+}
+
+function getBeforeButtonContainer() {
+  return `
+          <button class="pop-up-edit-task-input-btn">
+            <div id="button_content_with_images" class="pop-up-edit-task-input-btn-img-container">
+                <img onclick="clearInputs()" class="pop-up-edit-task-input-btn-img" src="../assets/img/iconoir_cancel.png" alt="image 1">
+                <div class="vertical_line"></div>
+                <img onclick="addSubtaskEditPopUp()" class="pop-up-edit-task-input-btn-img" src="../assets/img/check_black.png" alt="image 2">
+            </div>
+          </button>
+  `;
+}
+
+function getAfterButtonContainer() {
+  return `
+          <button class="pop-up-edit-task-input-btn">
+            <img id="input_button_image"class="pop-up-edit-task-input-btn-img"src="../assets/img/add_black.png"alt="" />
+          </button> 
+  `;
+}
+
+function getEditSubtaskInput(id, subtask) {
+  return`
+          <input type="text" value="${subtask.title}" 
+                onblur="saveEditedSubtaskEditPopUp('${id}', this.value)"  
+                onkeydown="handleEnterKey(event, '${id}', this)" 
+                class="edit-subtask-input">
+          <div class="list-icon-container">
+                <img onclick="deleteAddedSubtaskEditPopUp('${id}')" 
+                class="icon-container-images" 
+                src="../assets/img/delete.png" 
+                alt="check icon">
+          <div class="vertical_line"></div>
+                <img onclick="saveEditedSubtaskEditPopUp('${id}')"
+                class="icon-container-images" 
+                src="../assets/img/check_black.png" 
+          </div>
   `;
 }
 

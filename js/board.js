@@ -236,11 +236,7 @@ function resetButtonsEditPopUp() {
     } else if (button.id === "prio_low") {
       img.src = "../assets/img/prio_low_green.png";
     }
-    button.classList.remove(
-      "prio-low-active",
-      "prio-medium-active",
-      "prio-urgent-active"
-    );
+    button.classList.remove("prio-low-active", "prio-medium-active", "prio-urgent-active");
   });
 }
 
@@ -351,23 +347,9 @@ function updateButtonImage() {
   let inputAddedSubtask = document.getElementById("input_add_subtask").value.trim();
 
   if (inputAddedSubtask.length > 0) {
-    buttonContainer.innerHTML = ` <button class="pop-up-edit-task-input-btn">
-                                    <div id="button_content_with_images" class="pop-up-edit-task-input-btn-img-container">
-                                       <img onclick="clearInputs()" class="pop-up-edit-task-input-btn-img" src="../assets/img/iconoir_cancel.png" alt="image 1">
-                                       <div class="vertical_line"></div>
-                                       <img onclick="addSubtaskEditPopUp()" class="pop-up-edit-task-input-btn-img" src="../assets/img/check_black.png" alt="image 2">
-                                    </div>
-                                  </button>
-                                `;
+    buttonContainer.innerHTML = getBeforeButtonContainer();
   } else {
-    buttonContainer.innerHTML = ` <button class="pop-up-edit-task-input-btn">
-                                    <img id="input_button_image"
-                                    class="pop-up-edit-task-input-btn-img"
-                                    src="../assets/img/add_black.png"
-                                    alt=""
-                                    />
-                                  </button> 
-                                `;
+    buttonContainer.innerHTML = getAfterButtonContainer();
   }
 }
 
@@ -380,22 +362,7 @@ function editSubtaskEditPopUp(id) {
 
   editedSubtask.classList.add("editing");
 
-  editedSubtask.innerHTML = `
-                        <input type="text" value="${subtask.title}" 
-                              onblur="saveEditedSubtaskEditPopUp('${id}', this.value)"  
-                              onkeydown="handleEnterKey(event, '${id}', this)" 
-                               class="edit-subtask-input">
-                        <div class="list-icon-container">
-                              <img onclick="deleteAddedSubtaskEditPopUp('${id}')" 
-                              class="icon-container-images" 
-                              src="../assets/img/delete.png" 
-                              alt="check icon">
-                        <div class="vertical_line"></div>
-                              <img onclick="saveEditedSubtaskEditPopUp('${id}')"
-                              class="icon-container-images" 
-                              src="../assets/img/check_black.png" 
-                        </div>
-                     `;
+  editedSubtask.innerHTML = getEditSubtaskInput(id, subtask);
 
   console.log("save edit subtask", addedSubtasks);
 }
