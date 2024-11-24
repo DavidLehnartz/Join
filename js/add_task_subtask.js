@@ -1,13 +1,18 @@
-function addSubtask() {
+function initializeSubtaskInput() {
     const inputField = document.getElementById("inputFieldSubtask");
     const iconWrapper = document.getElementById("iconWrapper");
     const actionIcon = document.getElementById("actionIcon");
     inputField.disabled = false;
     inputField.focus();
     actionIcon.src = "../assets/img/Propertycheck.png";
+
     if (!document.getElementById("closeIcon")) {
         iconWrapper.insertAdjacentHTML("afterbegin", createCloseIconHTML());
     }
+    return { inputField, actionIcon };
+}
+
+function handleSubtaskAddition(inputField, actionIcon) {
     actionIcon.onclick = function () {
         const subtaskText = inputField.value.trim();
         if (subtaskText !== "") {
@@ -18,6 +23,11 @@ function addSubtask() {
             inputField.focus();
         }
     };
+}
+
+function addSubtask() {
+    const { inputField, actionIcon } = initializeSubtaskInput();
+    handleSubtaskAddition(inputField, actionIcon);
 }
 
 function cancelSubtask() {
