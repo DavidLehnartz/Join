@@ -160,7 +160,7 @@ function getContactListItemTemplate(contact, id) {
   return `<button
               id="contact-item"
               class="contact-list-item"
-              onclick="showContactInfo('${id}')"
+              onclick="showContactInfo(event, '${id}')"
             >
               <div id="list-initial" class="profile-icon-small bg-${contact.color}">${contact.initial}</div>
               <div class="contact-list-info">
