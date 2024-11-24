@@ -1,8 +1,9 @@
 let groupedContacts = {};
 let editMenuShown = false;
+let activeContact = null;
 
 function initContacts(header, sidebar, link) {
-  let contactContent = document.getElementById("contacts-list-container");
+  let contactContent = document.getElementById("contact-content");
   createHeader(header);
   createSidebar(sidebar, link);
   setTimeout(() => {
@@ -11,14 +12,26 @@ function initContacts(header, sidebar, link) {
   }, 100);
 }
 
-async function showContactInfo(id) {
+async function showContactInfo(event, id) {
   let contact = await getContactById(id);
   if (window.innerWidth > 800) {
+    triggerListItemBackground(event);
     let contactInfo = document.getElementById("contacts-info");
     contactInfo.innerHTML = "";
     contactInfo.innerHTML += getContactInfoTemplate(contact, id);
   } else {
     showMobileInfoDialog(contact, id);
+  }
+}
+
+function triggerListItemBackground(event) {
+  const target = event.target;
+  if (target.tagName === "BUTTON") {
+    if (activeContact) {
+      activeContact.classList.remove("contact-active");
+    }
+    activeContact = target;
+    activeContact.classList.add("contact-active");
   }
 }
 
