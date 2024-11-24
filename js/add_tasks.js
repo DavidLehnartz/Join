@@ -55,7 +55,6 @@ function toggleContactDropdown() {
   const dropdown = document.getElementById("categoryDropdown2");
   const arrowElement = document.getElementById("dropdownArrow2");
   const dropdown1 = document.getElementById("selectOnes");
-
   if (dropdown.classList.contains("open")) {
     dropdown.classList.remove("open");
     arrowElement.src = "../assets/img/arrow_drop_downaa.png";
@@ -101,19 +100,7 @@ function populateDropdown(dropdown) {
     const contactElement = document.createElement("div");
     contactElement.classList.add("contact-item");
     if (isSelected(contact.name)) contactElement.classList.add("selected");
-    contactElement.innerHTML = `
-      <div class="nameInitials">
-          <div class="contact-initials bg-${contact.color}">
-            ${contact.initial}
-          </div>
-          <span class="contact-name">${contact.name}</span>
-      </div>
-      <input type="checkbox" 
-             name="assignedContacts" 
-             class="contact-checkbox" 
-             data-name="${contact.name}" 
-             ${isSelected(contact.name) ? "checked" : ""} />
-    `;
+    contactElement.innerHTML = createContactHTML(contact, isSelected(contact.name));
     const checkbox = contactElement.querySelector(".contact-checkbox");
     preventDropdownCloseOnSelect(checkbox, contactElement, contact);
     preventDropdownCloseOnSelect(contactElement, contactElement, contact);
@@ -159,29 +146,31 @@ function updateSelectedContactsDisplay() {
   const maxContactsContainer = document.querySelector(".maxContacts");
   badgesContainer.innerHTML = "";
   maxContactsContainer.innerHTML = "";
-  if (selectedContacts.length > 0) {
-    if (selectedContacts.length > 5) {
-      for (let i = 0; i < 5; i++) {
-        const contact = selectedContacts[i];
-        const contactBadge = document.createElement("div");
-        contactBadge.classList.add("contact-badge", `bg-${contact.color}`);
-        contactBadge.textContent = contact.initial;
-        badgesContainer.appendChild(contactBadge);
-      }
-      const remainingCount = selectedContacts.length - 5;
-      const remainingBadge = document.createElement("div");
-      remainingBadge.classList.add("contact-badge", "remaining-contacts-badge");
-      remainingBadge.textContent = `+${remainingCount}`;
-      maxContactsContainer.appendChild(remainingBadge);
-    } else {
-      selectedContacts.forEach((contact) => {
-        const contactBadge = document.createElement("div");
-        contactBadge.classList.add("contact-badge", `bg-${contact.color}`);
-        contactBadge.textContent = contact.initial;
-        badgesContainer.appendChild(contactBadge);
-      });
-    }
+  if (selectedContacts.length === 0) return;
+  const contactsToShow = selectedContacts.slice(0, 5);
+  contactsToShow.forEach((contact) => {
+    const badge = createContactBadge(contact);
+    badgesContainer.appendChild(badge);
+  });
+  if (selectedContacts.length > 5) {
+    const remainingCount = selectedContacts.length - 5;
+    const remainingBadge = createRemainingBadge(remainingCount);
+    maxContactsContainer.appendChild(remainingBadge);
   }
+}
+
+function createContactBadge(contact) {
+  const badge = document.createElement("div");
+  badge.classList.add("contact-badge", `bg-${contact.color}`);
+  badge.textContent = contact.initial;
+  return badge;
+}
+
+function createRemainingBadge(count) {
+  const badge = document.createElement("div");
+  badge.classList.add("contact-badge", "remaining-contacts-badge");
+  badge.textContent = `+${count}`;
+  return badge;
 }
 
 function toggleDropdown() {
@@ -233,209 +222,4 @@ function setPriority(button, priority) {
 function restorePriority() {
   const mediumPriorityBtn = document.querySelector(".urgMedLow-btn-medium");
   setPriority(mediumPriorityBtn, "medium");
-}
-
-function addSubtask() {
-  const inputField = document.getElementById("inputFieldSubtask");
-  const iconWrapper = document.getElementById("iconWrapper");
-  const actionIcon = document.getElementById("actionIcon");
-  inputField.disabled = false;
-  inputField.focus();
-  actionIcon.src = "../assets/img/Propertycheck.png";
-  if (!document.getElementById("closeIcon")) {
-    iconWrapper.insertAdjacentHTML(
-      "afterbegin",
-      `
-            <img src="../assets/img/close.png" class="icon" id="closeIcon" onclick="cancelSubtask()">
-        `
-    );
-  }
-  actionIcon.onclick = function () {
-    const subtaskText = inputField.value.trim();
-    if (subtaskText !== "") {
-      const subtaskList = document.getElementById("subtaskList");
-      subtaskList.insertAdjacentHTML(
-        "beforeend",
-        `
-                <div class="subtask-item">
-                    <span class="subtask-text">${subtaskText}</span>
-                    <div class="subtask-icons">
-                        <img src="../assets/img/edit.png" alt="Edit" class="icon" onclick="editSubtask(this.closest('.subtask-item'))">
-                        <div class="separator"></div>
-                        <img src="../assets/img/delete.png" alt="Delete" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
-                    </div>
-                </div>
-            `
-      );
-      subtasksData.push({
-        name: subtaskText,
-        completed: false,
-      });
-      inputField.value = "";
-      inputField.focus();
-    }
-  };
-}
-
-function cancelSubtask() {
-  const inputField = document.getElementById("inputFieldSubtask");
-  const iconWrapper = document.getElementById("iconWrapper");
-  const actionIcon = document.getElementById("actionIcon");
-  inputField.disabled = true;
-  inputField.value = "";
-  actionIcon.src = "../assets/img/Propertyadd.png";
-  const closeIcon = document.getElementById("closeIcon");
-  if (closeIcon) {
-    iconWrapper.removeChild(closeIcon);
-  }
-  actionIcon.onclick = addSubtask;
-}
-
-function editSubtask(subtaskItem) {
-  const textElement = subtaskItem.querySelector(".subtask-text");
-  const currentText = textElement.textContent.trim();
-  subtaskItem.classList.add("editing");
-  subtaskItem.querySelector(".subtask-text").outerHTML = `
-        <input type="text" class="subtaskInput" value="${currentText}" style="width: 100%; height: ${subtaskItem.offsetHeight}px; background-color: #fff; border: none; outline: none;">
-    `;
-  const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
-  iconsWrapper.innerHTML = `
-        <img src="../assets/img/delete.png" alt="Löschen" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
-        <div class="separator3"></div>
-        <img src="../assets/img/propertychecktwo.png" alt="Speichern" class="icon" onclick="finishEditing(this.closest('.subtask-item').querySelector('.subtaskInput'), this.closest('.subtask-item').querySelector('.subtask-text'), this.closest('.subtask-item'))">
-    `;
-  const input = subtaskItem.querySelector(".subtaskInput");
-  input.focus();
-  input.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      finishEditing(input, textElement, subtaskItem);
-    }
-  });
-  input.addEventListener("blur", function () {
-    finishEditing(input, textElement, subtaskItem);
-  });
-}
-
-document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("contact-checkbox")) {
-    console.log("Checkbox clicked:", event.target.dataset.name);
-  }
-});
-
-function finishEditing(input, textElement, subtaskItem) {
-  const newText = input.value.trim();
-  textElement.textContent = newText !== "" ? newText : input.value;
-  input.replaceWith(textElement);
-  subtaskItem.classList.remove("editing");
-  const subtask = subtasksData.find(
-    (sub) => sub.name === textElement.textContent
-  );
-  if (subtask) {
-    subtask.name = newText;
-  }
-  const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
-  iconsWrapper.innerHTML = `
-    <img src="../assets/img/edit.png" alt="Bearbeiten" class="icon" onclick="editSubtask(this.closest('.subtask-item'))">
-    <div class="separator"></div>
-    <img src="../assets/img/delete.png" alt="Löschen" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
-`;
-}
-
-function deleteSubtask(subtaskItem) {
-  subtaskItem.remove();
-}
-
-function clearFormInputs() {
-  const inputs = document.querySelectorAll(
-    'input[type="text"], input[type="number"], input[type="date"], input[type="email"], input[type="password"]'
-  );
-  inputs.forEach((input) => {
-    input.value = "";
-  });
-  const textareas = document.querySelectorAll("textarea");
-  textareas.forEach((textarea) => {
-    textarea.value = "";
-  });
-}
-
-function clearCheckboxesAndDropdowns() {
-  const checkboxesAndRadios = document.querySelectorAll(
-    'input[type="checkbox"], input[type="radio"]'
-  );
-  checkboxesAndRadios.forEach((input) => {
-    input.checked = false;
-  });
-  const dropdowns = document.querySelectorAll("select");
-  dropdowns.forEach((dropdown) => {
-    dropdown.selectedIndex = 0;
-  });
-}
-
-function resetSpecialFields() {
-  const subtaskInput = document.getElementById("inputFieldSubtask");
-  if (subtaskInput) {
-    subtaskInput.value = "";
-    subtaskInput.disabled = true;
-  }
-  const selectedCategoryElement = document.getElementById("selectedCategory");
-  if (selectedCategoryElement) {
-    selectedCategoryElement.textContent = "Select task category";
-  }
-  resetButtons();
-  restorePriority();
-  setTodayDate();
-}
-
-function clearEverything() {
-  clearFormInputs();
-  clearCheckboxesAndDropdowns();
-  resetSpecialFields();
-  cancelSubtask();
-  const subtaskList = document.getElementById("subtaskList");
-  subtaskList.innerHTML = "";
-  clearSelectedContacts();
-}
-
-function clearSelectedContacts() {
-  const selectedContactsElement = document.getElementById("selectedContacts");
-  if (selectedContactsElement) {
-    selectedContactsElement.textContent = "Select Contacts to assign";
-  }
-  const selectedContactsBadges = document.getElementById(
-    "selectedContactsBadges"
-  );
-  if (selectedContactsBadges) {
-    selectedContactsBadges.innerHTML = "";
-  }
-  const contactCheckboxes = document.querySelectorAll(".contact-checkbox");
-  contactCheckboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-  });
-  selectedContacts = [];
-}
-
-function checkForm() {
-  const title = document.getElementById("inputFieldTitle");
-  const dueDate = document.getElementById("inputFieldDueDate");
-  const selectedCategory = document.getElementById("selectedCategory");
-  let formIsValid = true;
-  if (title.value.trim() === "") {
-    title.style.border = "2px solid red";
-    formIsValid = false;
-  } else {
-    title.style.border = "";
-  }
-  if (dueDate.value === "") {
-    dueDate.style.border = "2px solid red";
-    formIsValid = false;
-  } else {
-    dueDate.style.border = "";
-  }
-  if (selectedCategory.textContent.trim() === "Select task category") {
-    selectedCategory.parentElement.style.border = "2px solid red";
-    formIsValid = false;
-  } else {
-    selectedCategory.parentElement.style.border = "";
-  }
-  document.getElementById("createTaskBtn").disabled = !formIsValid;
 }
