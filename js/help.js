@@ -1,3 +1,6 @@
+/**
+ * Represents an array of steps.
+ */
 let howToUseArray = [
   {
     number: "1.",
@@ -30,6 +33,13 @@ let howToUseArray = [
   },
 ];
 
+/**
+ * Load header and sidebar dynamically.
+ * Show content after loading header and sidebar
+ * @param {string} header - The id of header container.
+ * @param {string} sidebar - The id of sidebar container.
+ * @param {string} link - The id of navigation item that will be focused.
+ */
 function initHelp(header, sidebar, link) {
   let helpContent = document.getElementById("help-content-container");
   createHeader(header);
@@ -40,6 +50,12 @@ function initHelp(header, sidebar, link) {
   }, 100);
 }
 
+/**
+ * Render the template of the how to use steps.
+ * @param {string} number - The number of the step.
+ * @param {string} headline - The headline of the step.
+ * @param {string} content - The content of the step.
+ */
 function renderHowToUseTemplate(number, headline, content) {
   return `<div class="help-how-to-step">
               <h3>${number}</h3>
@@ -50,6 +66,9 @@ function renderHowToUseTemplate(number, headline, content) {
             </div>`;
 }
 
+/**
+ * Show the how to use steps dynamically.
+ */
 function showHowToUseSteps() {
   let howToContainer = document.getElementById("help-how-to-use");
   for (let i = 0; i < howToUseArray.length; i++) {

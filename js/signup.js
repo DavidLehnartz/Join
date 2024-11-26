@@ -1,5 +1,9 @@
 let isPrivacyChecked = false;
 
+/**
+ * Check if privacy policy checkbox is checked
+ * Render the symbol accordingly
+ */
 function checkPrivacyPolicy() {
   let checkbox = document.getElementById("privacy-checkbox");
   let checkboxHover = document.getElementById("privacy-checkbox-hover");
@@ -13,6 +17,10 @@ function checkPrivacyPolicy() {
   }
 }
 
+/**
+ * Check if any input field is empty
+ * Returns true or false
+ */
 function isInputEmpty() {
   let name = document.getElementById("signup-name").value;
   let email = document.getElementById("signup-mail").value;
@@ -23,6 +31,10 @@ function isInputEmpty() {
   return name != "" && email != "" && password != "" && passwordConfirm != "";
 }
 
+/**
+ * Check if both password inputs are the same
+ * Returns true or false
+ */
 function isPasswordSame() {
   let password = document.getElementById("signup-password");
   let passwordConfirm = document.getElementById("signup-password-confirm");
@@ -38,10 +50,18 @@ function isPasswordSame() {
   }
 }
 
+/**
+ * Validate input
+ * Returns true or false
+ */
 function validateInput() {
   return isPrivacyChecked && isInputEmpty() && isPasswordSame();
 }
 
+/**
+ * Show toast message after successful signup
+ * @param {string} url - The url to navigate to the login page.
+ */
 function showSignupSuccessMessage(url) {
   let message = document.getElementById("signup-message");
   message.classList.add("show");
@@ -51,6 +71,11 @@ function showSignupSuccessMessage(url) {
   }, 3000);
 }
 
+/**
+ * Sign up new user and create contact out of user data.
+ * Reset form after that.
+ * @param {event} event - The event of that element.
+ */
 async function signUpUser(event) {
   event.preventDefault();
   let name = document.getElementById("signup-name").value;
@@ -63,6 +88,12 @@ async function signUpUser(event) {
   resetForm();
 }
 
+/**
+ * Validate all inputs and checkboxes.
+ * Either signup user or show alert.
+ * @param {event} event - The event of that element.
+ * @param {string} url - The url to navigate to the login page.
+ */
 async function validateAndSignupUser(event, url) {
   if (validateInput()) {
     await signUpUser(event);
@@ -72,12 +103,21 @@ async function validateAndSignupUser(event, url) {
   }
 }
 
+/**
+ * Reset form and clear all inputs.
+ */
 function resetForm() {
   let form = document.getElementById("signup-form");
   form.reset();
   isPrivacyChecked = false;
 }
 
+/**
+ * Return an object with the given inputs to create a user.
+ * @param {string} name - The name of the user.
+ * @param {string} mail - The email address of the user.
+ * @param {string} password - The password of the user.
+ */
 function newUserObject(name, mail, password) {
   return {
     email: mail,

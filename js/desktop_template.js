@@ -1,5 +1,8 @@
 let headerMenuShown = false;
 
+/**
+ * Render the template of the header menu.
+ */
 function renderHeaderMenu() {
   return `<div class="header-menu-container">
                 <div
@@ -26,6 +29,10 @@ function renderHeaderMenu() {
               </div>`;
 }
 
+/**
+ * Show the header menu.
+ * @param {string} headerId - The id of the header container.
+ */
 function showHeaderMenu(headerId) {
   let headerMenu = document.getElementById(headerId);
   if (headerMenuShown) {
@@ -36,6 +43,11 @@ function showHeaderMenu(headerId) {
   headerMenuShown = !headerMenuShown;
 }
 
+/**
+ * Show the sidebar.
+ * @param {string} sidebarId - The id of sidebar container.
+ * @param {string} linkId - The id of navigation item that will be focused.
+ */
 function createSidebar(sidebarId, linkId) {
   let sidebar = document.getElementById(sidebarId);
   sidebar.innerHTML = renderSidebar();
@@ -45,6 +57,9 @@ function createSidebar(sidebarId, linkId) {
   }
 }
 
+/**
+ * Render the template of the sidebar.
+ */
 function renderSidebar() {
   return `<div class="left-sidebar">
       <img class="bigLogo" src="../assets/img/join_logo_white.svg" alt="join logo" />
@@ -73,12 +88,20 @@ function renderSidebar() {
     </div>`;
 }
 
+/**
+ * Show the header.
+ * @param {string} headerId - The id of header container.
+ */
 function createHeader(headerId) {
   let header = document.getElementById(headerId);
   let user = getUserFromLocalStorage();
   header.innerHTML = renderHeader(user.initial);
 }
 
+/**
+ * Render the template of the header.
+ * @param {string} initial - The initial of the logged in user.
+ */
 function renderHeader(initial) {
   return `<header id="header">
       <div class="header-wrapper">

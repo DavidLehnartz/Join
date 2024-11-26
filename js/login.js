@@ -1,6 +1,9 @@
 let isVisible = false;
 let isRememberOn = false;
 
+/**
+ * Start animation based on device width.
+ */
 function animateIntro() {
   if (window.innerWidth > 700) {
     introAnimationDesktop();
@@ -9,6 +12,9 @@ function animateIntro() {
   }
 }
 
+/**
+ * Create animation for desktop view.
+ */
 function introAnimationDesktop() {
   const logo = document.getElementById("intro-logo");
   logo.addEventListener("animationend", (event) => {
@@ -18,6 +24,9 @@ function introAnimationDesktop() {
   });
 }
 
+/**
+ * Create animation for mobile view.
+ */
 function introAnimationMobile() {
   const mobileLogo = document.getElementById("intro-mobile-logo");
   mobileLogo.addEventListener("animationend", (event) => {
@@ -27,6 +36,12 @@ function introAnimationMobile() {
   });
 }
 
+/**
+ * Show or hide password input.
+ * Change visibility icon accordingly.
+ * @param {string} iconId - The id of the icon.
+ * @param {string} passwordId - The id of password input.
+ */
 function showPassword(iconId, passwordId) {
   let passwordIcon = document.getElementById(iconId);
   let password = document.getElementById(passwordId);
@@ -40,11 +55,18 @@ function showPassword(iconId, passwordId) {
   }
 }
 
+/**
+ * Show visibility icon.
+ * @param {string} iconId - The id of the icon.
+ */
 function showVisibilityIcon(iconId) {
   let passwordIcon = document.getElementById(iconId);
   passwordIcon.src = "../assets/icons/visibility_off.svg";
 }
 
+/**
+ * Check the checkbox for Remember Me.
+ */
 function checkRememberMe() {
   let checkbox = document.getElementById("remember-checkbox");
   let checkboxHover = document.getElementById("remember-checkbox-hover");
@@ -58,6 +80,12 @@ function checkRememberMe() {
   }
 }
 
+/**
+ * Check if there is a user with the given inputs.
+ * Returns true or false.
+ * @param {string} mail - The mail of the login input.
+ * @param {string} password - The password of the login input.
+ */
 async function findUser(mail, password) {
   let userList = await loadAllUsersInfo();
   let validMail = userList.some((user) => user.email === mail);
@@ -65,6 +93,12 @@ async function findUser(mail, password) {
   return validMail && validPassword;
 }
 
+/**
+ * Find a valid user with the given inputs.
+ * Returns user object.
+ * @param {string} mail - The mail of the login input.
+ * @param {string} password - The password of the login input.
+ */
 async function getValidUser(mail, password) {
   let users = await loadAllUsersInfo();
   let validUser = users.find(
@@ -73,6 +107,11 @@ async function getValidUser(mail, password) {
   return validUser;
 }
 
+/**
+ * Save the valid user to local storage.
+ * @param {string} mail - The mail of the login input.
+ * @param {string} password - The password of the login input.
+ */
 async function saveContactToLocalStorage(mail, password) {
   let user = await getValidUser(mail, password);
   let contacts = await loadAllContactsInfo();
@@ -82,6 +121,11 @@ async function saveContactToLocalStorage(mail, password) {
   localStorage.setItem("user", JSON.stringify(loggedContact));
 }
 
+/**
+ * Validate the login inputs and if user exists, navigates to summary.
+ * If not, show error under input fields.
+ * @param {event} event - The event of that element.
+ */
 async function isValidCredential(event) {
   event.preventDefault();
   let password = document.getElementById("login-password");
@@ -98,6 +142,10 @@ async function isValidCredential(event) {
   }
 }
 
+/**
+ * Login as guest when the guest button is clicked and navigate to summary.
+ * The initial is automatically set to "G".
+ */
 function loginAsGuest() {
   localStorage.setItem("user", JSON.stringify({ name: "Guest", initial: "G" }));
   window.location.href = "../pages/summary.html";
