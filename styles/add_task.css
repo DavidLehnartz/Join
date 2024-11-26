@@ -363,7 +363,3 @@ textarea {
 .d-none {
     display: none;
 }
-
-::-webkit-scrollbar {
-    width: 0px;
-}
