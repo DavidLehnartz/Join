@@ -1,5 +1,7 @@
-
-
+/**
+ * Load all contact objects from Firebase.
+ * Add the id as key value pair to the object.
+ */
 async function loadAllContactsInfo() {
   let contacts = [];
   let contactsResponse = await fetch(`${BASE_URL}/contacts.json`);
@@ -16,12 +18,20 @@ async function loadAllContactsInfo() {
   return contacts;
 }
 
+/**
+ * Get the contact with the given id from Firebase.
+ * @param {string} id - The id of the contact.
+ */
 async function getContactById(id) {
   let contactResponse = await fetch(`${BASE_URL}/contacts/${id}.json`);
   let contactToJson = await contactResponse.json();
   return contactToJson;
 }
 
+/**
+ * Create a new contact and store it in Firebase.
+ * @param {object} contactData - The object with the needed key value pairs of the new contact.
+ */
 async function createContact(contactData) {
   let newContactResponse = await fetch(`${BASE_URL}/contacts.json`, {
     method: "POST",
@@ -33,6 +43,11 @@ async function createContact(contactData) {
   return (contactToJson = await newContactResponse.json());
 }
 
+/**
+ * Update an existing contact in Firebase.
+ * @param {object} contactData - The object with the needed key value pairs to update the contact.
+ * @param {string} id - The id of the contact which should be updated.
+ */
 async function updateContact(contactData, id) {
   const response = await fetch(`${BASE_URL}/contacts/${id}.json`, {
     method: "PATCH",
@@ -47,6 +62,10 @@ async function updateContact(contactData, id) {
   return await response.json();
 }
 
+/**
+ * Delete an existing contact in Firebase.
+ * @param {string} id - The id of the contact which should be deleted.
+ */
 async function deleteContact(id) {
   let response = await fetch(`${BASE_URL}/contacts/${id}.json`, {
     method: "DELETE",
@@ -54,14 +73,19 @@ async function deleteContact(id) {
   return (responseToJson = await response.json());
 }
 
+/**
+ * Load all users as json from Firebase.
+ */
 async function loadUsers() {
-  let users = {};
   let usersResponse = await fetch(`${BASE_URL}/users.json`);
   let usersToJson = await usersResponse.json();
-  console.log(usersToJson);
   return usersToJson;
 }
 
+/**
+ * Load all user objects from Firebase.
+ * Add the id as key value pair to the object.
+ */
 async function loadAllUsersInfo() {
   let users = [];
   let usersResponse = await fetch(`${BASE_URL}/users.json`);
@@ -78,6 +102,10 @@ async function loadAllUsersInfo() {
   return users;
 }
 
+/**
+ * Create a new user and store it in Firebase.
+ * @param {object} userData - The object with the needed key value pairs of the new user.
+ */
 async function createUser(userData) {
   let newUserResponse = await fetch(`${BASE_URL}/users.json`, {
     method: "POST",

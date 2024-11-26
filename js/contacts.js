@@ -2,6 +2,13 @@ let groupedContacts = {};
 let editMenuShown = false;
 let activeContact = null;
 
+/**
+ * Load header and sidebar dynamically.
+ * Show content after loading header and sidebar
+ * @param {string} header - The id of header container.
+ * @param {string} sidebar - The id of sidebar container.
+ * @param {string} link - The id of navigation item that will be focused.
+ */
 function initContacts(header, sidebar, link) {
   let contactContent = document.getElementById("contact-content");
   createHeader(header);
@@ -12,6 +19,11 @@ function initContacts(header, sidebar, link) {
   }, 100);
 }
 
+/**
+ * Show the detail information of the selected contact.
+ * @param {event} event - The event of that element.
+ * @param {string} id - The id of the selected contact.
+ */
 async function showContactInfo(event, id) {
   let contact = await getContactById(id);
   if (window.innerWidth > 800) {
@@ -24,6 +36,11 @@ async function showContactInfo(event, id) {
   }
 }
 
+/**
+ * Change the background of the contact list item when it is clicked.
+ * When other list item is clicked, change it back to default.
+ * @param {event} event - The event of that element.
+ */
 function triggerListItemBackground(event) {
   const target = event.target;
   if (target.tagName === "BUTTON") {
@@ -35,6 +52,11 @@ function triggerListItemBackground(event) {
   }
 }
 
+/**
+ * Show the detail information of the selected contact for mobile view.
+ * @param {event} event - The event of that element.
+ * @param {string} id - The id of the selected contact.
+ */
 function showMobileInfoDialog(contact, id) {
   let mobileInfo = document.getElementById("mobile-contacts-dialog");
   let contactList = document.getElementById("contacts-list-container");
@@ -44,6 +66,9 @@ function showMobileInfoDialog(contact, id) {
   mobileInfo.innerHTML = renderMobileInfoSection(contact, id);
 }
 
+/**
+ * Close the detail information of the selected contact for mobile view.
+ */
 function closeMobileInfoDialog() {
   let mobileInfo = document.getElementById("mobile-contacts-dialog");
   let contactList = document.getElementById("contacts-list-container");
@@ -51,6 +76,9 @@ function closeMobileInfoDialog() {
   contactList.classList.remove("hidden");
 }
 
+/**
+ * Load a grouped list of all contacts.
+ */
 async function loadContactList() {
   getInitialOfUser("contact-profile-icon");
   let contactsArray = await loadAllContactsInfo();
@@ -58,6 +86,9 @@ async function loadContactList() {
   loadGroupedContactList();
 }
 
+/**
+ * Refresh the list of contacts from Firebase.
+ */
 async function refreshContactList() {
   let contactList = document.getElementById("contact-list");
   let contactInfo = document.getElementById("contacts-info");
@@ -66,6 +97,9 @@ async function refreshContactList() {
   await loadContactList();
 }
 
+/**
+ * Delete a contact and refresh the contact list from Firebase after that.
+ */
 async function deleteAndRefreshContactList(id) {
   let contactList = document.getElementById("contact-list");
   let contactInfo = document.getElementById("contacts-info");
@@ -75,6 +109,9 @@ async function deleteAndRefreshContactList(id) {
   await loadContactList();
 }
 
+/**
+ * Delete a contact and refresh the contact list from Firebase after that for mobile view.
+ */
 async function deleteAndRefreshContactListMobile(id) {
   let contactList = document.getElementById("contact-list");
   await deleteContact(id);
@@ -83,11 +120,17 @@ async function deleteAndRefreshContactListMobile(id) {
   await loadContactList();
 }
 
+/**
+ * Group the contact list alphabetically.
+ */
 function groupContacts(arrayName) {
   groupedContacts = Object.groupBy(arrayName, ({ name }) => name.slice(0, 1));
   return groupedContacts;
 }
 
+/**
+ * Sort the grouped contact list alphabetically with section headers.
+ */
 function loadGroupedContactList() {
   let contactList = document.getElementById("contact-list");
   for (i = 65; i <= 90; i++) {
@@ -99,6 +142,9 @@ function loadGroupedContactList() {
   }
 }
 
+/**
+ * Load contact list and show it in list items.
+ */
 function loadContactListItems(arrayName) {
   let contactList = document.getElementById("contact-list");
   for (let i = 0; i < arrayName.length; i++) {
@@ -107,6 +153,9 @@ function loadContactListItems(arrayName) {
   }
 }
 
+/**
+ * Show Floating Action Button to edit a contact in mobile view.
+ */
 function showMobileEditMenu(id) {
   let editMenu = document.getElementById("edit-menu");
   if (editMenuShown) {
