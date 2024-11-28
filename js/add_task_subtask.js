@@ -1,3 +1,9 @@
+/**
+ * Initializes the subtask input field and its associated icons.
+ * Enables the input field, focuses it, and sets the action icon.
+ * Adds a close icon if it doesn't already exist.
+ * @returns {Object} Contains references to the input field and the action icon.
+ */
 function initializeSubtaskInput() {
     const inputField = document.getElementById("inputFieldSubtask");
     const iconWrapper = document.getElementById("iconWrapper");
@@ -5,13 +11,18 @@ function initializeSubtaskInput() {
     inputField.disabled = false;
     inputField.focus();
     actionIcon.src = "../assets/img/Propertycheck.png";
-
     if (!document.getElementById("closeIcon")) {
         iconWrapper.insertAdjacentHTML("afterbegin", createCloseIconHTML());
     }
     return { inputField, actionIcon };
 }
 
+/**
+ * Handles the addition of a new subtask.
+ * Adds the subtask to the list and resets the input field for further use.
+ * @param {HTMLElement} inputField - The input field for subtasks.
+ * @param {HTMLElement} actionIcon - The action icon to trigger subtask addition.
+ */
 function handleSubtaskAddition(inputField, actionIcon) {
     actionIcon.onclick = function () {
         const subtaskText = inputField.value.trim();
@@ -25,11 +36,18 @@ function handleSubtaskAddition(inputField, actionIcon) {
     };
 }
 
+/**
+ * Adds a new subtask by initializing the input field and handling the addition logic.
+ */
 function addSubtask() {
     const { inputField, actionIcon } = initializeSubtaskInput();
     handleSubtaskAddition(inputField, actionIcon);
 }
 
+/**
+ * Cancels the subtask addition process.
+ * Resets the input field, removes the close icon, and restores the default action icon.
+ */
 function cancelSubtask() {
     const inputField = document.getElementById("inputFieldSubtask");
     const iconWrapper = document.getElementById("iconWrapper");
@@ -44,6 +62,11 @@ function cancelSubtask() {
     actionIcon.onclick = addSubtask;
 }
 
+/**
+ * Edits an existing subtask by replacing its text with an input field.
+ * Provides icons for confirming or canceling the edit and handles input events.
+ * @param {HTMLElement} subtaskItem - The subtask item to be edited.
+ */
 function editSubtask(subtaskItem) {
     const textElement = subtaskItem.querySelector(".subtask-text");
     const currentText = textElement.textContent.trim();
@@ -63,12 +86,22 @@ function editSubtask(subtaskItem) {
     });
 }
 
+/**
+ * Listens for checkbox clicks and logs the associated contact name.
+ */
 document.addEventListener("click", (event) => {
     if (event.target.classList.contains("contact-checkbox")) {
         console.log("Checkbox clicked:", event.target.dataset.name);
     }
 });
 
+/**
+ * Completes the editing process for a subtask.
+ * Updates the subtask's text and data, and restores the default icons.
+ * @param {HTMLElement} input - The input field used for editing.
+ * @param {HTMLElement} textElement - The original text element of the subtask.
+ * @param {HTMLElement} subtaskItem - The subtask item being edited.
+ */
 function finishEditing(input, textElement, subtaskItem) {
     const newText = input.value.trim();
     textElement.textContent = newText !== "" ? newText : input.value;
@@ -84,6 +117,10 @@ function finishEditing(input, textElement, subtaskItem) {
     iconsWrapper.innerHTML = createDefaultIconsHTML();
 }
 
+/**
+ * Deletes a subtask from the list.
+ * @param {HTMLElement} subtaskItem - The subtask item to be deleted.
+ */
 function deleteSubtask(subtaskItem) {
     subtaskItem.remove();
 }
