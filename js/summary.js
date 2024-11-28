@@ -1,7 +1,17 @@
+/**
+ * Navigates the user to the board page.
+ */
 function navigateToBoard() {
   window.location.href = "board.html";
 }
 
+/**
+ * Loads data for the summary page, including tasks and greeting messages.
+ * Sets up the header and sidebar and makes the summary content visible.
+ * @param {HTMLElement} header - The header element to be created.
+ * @param {HTMLElement} sidebar - The sidebar element to be created.
+ * @param {string} link - The link associated with the sidebar.
+ */
 function loadData(header, sidebar, link) {
   let summaryContent = document.getElementById("summary-content");
   createHeader(header);
@@ -13,6 +23,9 @@ function loadData(header, sidebar, link) {
   }, 100);
 }
 
+/**
+ * Fetches tasks from the API and processes them for various views.
+ */
 async function loadTasks() {
   const response = await fetch(
     "https://join-6838e-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
@@ -26,11 +39,18 @@ async function loadTasks() {
   taskAwaiting(data);
 }
 
+/**
+ * Loads and displays greeting messages and the user's username.
+ */
 function loadGreeting() {
   displayGreeting();
   displayUsername();
 }
 
+/**
+ * Displays the number of urgent tasks and calculates the nearest due date.
+ * @param {Object} data - The tasks data object.
+ */
 function showHowManyTasksUrgent(data) {
   const urgentTasks = Object.values(data).filter((task) =>
     task.priority?.includes("Urgent")
@@ -41,6 +61,10 @@ function showHowManyTasksUrgent(data) {
   console.log("Urgent Tasks:", urgentTasks.length);
 }
 
+/**
+ * Displays the number of tasks currently in progress.
+ * @param {Object} data - The tasks data object.
+ */
 function taskInProgess(data) {
   const progressTasks = Object.values(data).filter((task) =>
     task.status?.includes("inprogress")
@@ -50,19 +74,27 @@ function taskInProgess(data) {
   console.log("taskInProgess:", progressTasks.length);
 }
 
+/**
+ * Filters urgent tasks to find the nearest due date and displays it.
+ * @param {Array} urgentTasks - The list of urgent tasks.
+ */
 function filterWichDateNearest(urgentTasks) {
   const sortedTasks = urgentTasks.sort((a, b) => {
     const aDate = new Date(a.dueDate);
     const bDate = new Date(b.dueDate);
     return aDate - bDate;
   });
-  date = new Date(sortedTasks[0].dueDate);
+  const date = new Date(sortedTasks[0].dueDate);
   const options = { year: "numeric", month: "long", day: "numeric" };
   console.log(date.toLocaleDateString("en-US", options));
   let nextDate = document.getElementById("nextDate");
   nextDate.innerHTML = date.toLocaleDateString("en-US", options);
 }
 
+/**
+ * Displays the number of tasks marked as "to-do".
+ * @param {Object} data - The tasks data object.
+ */
 function taskToDo(data) {
   const tasksToDo = Object.values(data).filter((task) =>
     task.status?.includes("todo")
@@ -71,12 +103,20 @@ function taskToDo(data) {
   taskToDo.innerHTML = tasksToDo.length;
 }
 
+/**
+ * Displays the total number of tasks in the board.
+ * @param {Object} data - The tasks data object.
+ */
 function taskInBoard(data) {
   let taskInBoardCount = document.getElementById("taskInBoardCount");
   let tasksInBoard = Object.values(data).length;
   taskInBoardCount.innerHTML = tasksInBoard;
 }
 
+/**
+ * Displays the number of tasks marked as "done".
+ * @param {Object} data - The tasks data object.
+ */
 function taskDone(data) {
   const tasksDone = Object.values(data).filter((task) =>
     task.status?.includes("toDo")
@@ -85,6 +125,10 @@ function taskDone(data) {
   tasksDoneCount.innerHTML = tasksDone.length;
 }
 
+/**
+ * Displays the number of tasks awaiting feedback.
+ * @param {Object} data - The tasks data object.
+ */
 function taskAwaiting(data) {
   const tasksAwaiting = Object.values(data).filter((task) =>
     task.status?.includes("feedback")
@@ -93,6 +137,9 @@ function taskAwaiting(data) {
   tasksAwaitingCount.innerHTML = tasksAwaiting.length;
 }
 
+/**
+ * Displays a greeting message based on the current time of day.
+ */
 function displayGreeting() {
   const greetingElement = document.getElementById("greeting");
   const currentHour = new Date().getHours();
@@ -107,6 +154,9 @@ function displayGreeting() {
   greetingElement.innerHTML = greetingMessage;
 }
 
+/**
+ * Retrieves the user data from local storage and displays the username and initial.
+ */
 function getUserFromStorage() {
   let userDataAsText = localStorage.getItem("user");
   if (userDataAsText) {
@@ -117,12 +167,19 @@ function getUserFromStorage() {
   displayInitial(user);
 }
 
+/**
+ * Displays the user's username in the UI.
+ */
 function displayUsername() {
   let userName = document.getElementById("userName");
   let user = getUserFromLocalStorage();
   userName.innerHTML = user.name;
 }
 
+/**
+ * Displays the user's initials in the UI.
+ * @param {Object} user - The user object.
+ */
 function displayInitial(user) {
   let userInitial = document.getElementById("userInitial");
   userInitial.innerHTML = user.initial;
