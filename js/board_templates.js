@@ -1,35 +1,6 @@
-'use strict';
+"use strict";
 
 /* BOARD TEMPLATES */
-
-
-function renderHeaderMenu() {
-  return `
-          <div class="header-menu-container">
-                <div
-                  class="header-menu-item hidden-desktop"
-                  onclick="window.location.href='../pages/help.html'"
-                >
-                  <p class="header-menu-text">Help</p>
-                </div>
-                <div
-                  class="header-menu-item"
-                  onclick="window.location.href='../pages/legal_notice.html'"
-                >
-                  <p class="header-menu-text">Legal Notice</p>
-                </div>
-                <div
-                  class="header-menu-item"
-                  onclick="window.location.href='../pages/privacy_policy.html'"
-                >
-                  <p class="header-menu-text">Privacy Policy</p>
-                </div>
-                <div class="header-menu-item" onclick="logOut(event)">
-                  <p class="header-menu-text">Log out</p>
-                </div>
-          </div>`;
-}
-
 function getSidebarTemplate() {
   return `
         <div class="left-sidebar">
@@ -166,7 +137,14 @@ function getBoardHeadlineTemplate() {
     `;
 }
 
-function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials, subtaskProgressHTML, progressPercentage) {
+function getTasksTemplate(
+  task,
+  priorityImage,
+  categoryColor,
+  assigneeInitials,
+  subtaskProgressHTML,
+  progressPercentage
+) {
   return `    
           <div id="${task.id}" onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" class="kanban-task">
                 <div class="kanban-task-header"  style="background-color: ${categoryColor};">
@@ -178,7 +156,7 @@ function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials, 
                     ${task.description}
                   </p>
                 </div>
-                <div class="kanban-task-subtasks">
+                <div id="kanban-task-subtasks" class="kanban-task-subtasks">
                       <progress value="${progressPercentage}" max="100"></progress>
                        ${subtaskProgressHTML}
                 </div>
@@ -196,7 +174,12 @@ function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials, 
 `;
 }
 
-function getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeContent) {
+function getTaskPopUpTemplate(
+  task,
+  priorityImage,
+  categoryColor,
+  assigneeContent
+) {
   return `
           <div class="pop-up-board-inner-container">
                 <div class="pop-up-task-header">
@@ -436,8 +419,9 @@ function getAssigneeInitialsTemplate(assignee) {
 
 function getAssigneesTemplate(assignedTo) {
   if (Array.isArray(assignedTo)) {
-    return assignedTo.map(assignee => {
-      return `
+    return assignedTo
+      .map((assignee) => {
+        return `
         <div class="single-assigned-profil-wrapper">
           <div class="single-assigned-profil">
             <div class="single-assigned-profil-initials bg-${assignee.color}">
@@ -449,7 +433,8 @@ function getAssigneesTemplate(assignedTo) {
           </div>
         </div>
       `;
-    }).join('');
+      })
+      .join("");
   }
   return `<p>No contacts selected</p> `;
 }
@@ -601,7 +586,7 @@ function getAfterButtonContainer() {
 }
 
 function getEditSubtaskInput(id, subtask) {
-  return`
+  return `
           <input type="text" value="${subtask.title}" 
                 onblur="saveEditedSubtaskEditPopUp('${id}', this.value)"  
                 onkeydown="handleEnterKey(event, '${id}', this)" 
@@ -618,10 +603,6 @@ function getEditSubtaskInput(id, subtask) {
           </div>
   `;
 }
-
-
-
-
 
 /* function getNavbarResponsiveTemplate() {
   return `

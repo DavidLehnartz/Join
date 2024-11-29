@@ -38,8 +38,6 @@ async function fetchTasksData() {
   console.log("Subtasks:", subtasks);
 }
 
-
-
 async function fetchContactsData() {
   contacts = [];
 
@@ -97,6 +95,7 @@ async function updateTaskInFirebase(task) {
         assignedTo: task.assignedTo,
         dueDate: task.dueDate,
         priority: task.priority,
+        status: task.status,
         name: task.name,
         initials: task.initials,
         subtasks: task.subtasks,
@@ -113,7 +112,6 @@ async function updateTaskInFirebase(task) {
   }
   /* await fetchTasksData(); */
 }
-
 
 /* async function updateTaskInFirebase(task) {
     const taskId = task.id;
@@ -139,8 +137,7 @@ async function updateTaskInFirebase(task) {
     }
 } */
 
-
-    // GPT
+// GPT
 /*   async function fetchTasksData() {
       tasks = [];
       subtasks = [];
