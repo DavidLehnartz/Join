@@ -28,39 +28,8 @@ async function loadFetchedData() {
 function renderDesktopTemplate(header, sidebar, link) {
   createHeader(header);
   createSidebar(sidebar, link);
-  // let sidebarTemplateContent = document.getElementById('sidebar_template');
-  // let headerTemplateContent = document.getElementById('header_template');
   let boardHeadlineContent = document.getElementById("board_headline");
-
-  // sidebarTemplateContent.innerHTML = getSidebarTemplate();
-  // headerTemplateContent.innerHTML = getHeaderTemplate();
   boardHeadlineContent.innerHTML = getBoardHeadlineTemplate();
-}
-
-function renderTasks() {
-  let tasksContent = document.getElementById("to_do");
-  tasksContent.innerHTML = "";
-
-  tasks.forEach((task) => {
-    let priorityImage = getPriorityImage(task.priority);
-    let categoryColor = getCategoryColor(task.category);
-    let assigneeInitials = renderAssigneeInitials(task.assignedTo);
-    let { completedSubtasks, totalSubtasks } = calculateSubtaskProgress(task);
-    let subtaskProgressHTML = renderSubtaskProgress(
-      completedSubtasks,
-      totalSubtasks
-    );
-    let { progressPercentage } = calculateSubtaskProgress(task);
-
-    tasksContent.innerHTML += getTasksTemplate(
-      task,
-      priorityImage,
-      categoryColor,
-      assigneeInitials,
-      subtaskProgressHTML,
-      progressPercentage
-    );
-  });
 }
 
 function renderTaskPopUp(taskId) {
@@ -80,7 +49,6 @@ function renderTaskPopUp(taskId) {
       assigneeContent
     );
   }
-
   renderSubtasks(taskId);
 }
 
@@ -298,37 +266,17 @@ function getSubtasksTemplate(taskId, subtask, index) {
 
 function toggleSubtasksCheckbox(taskId, index) {
   let checkbox = document.getElementById(`checkbox_subtask_${taskId}_${index}`);
-
+  let task = tasks.find((t) => t.id === taskId);
   if (checkbox.src.includes("checkbox_false.png")) {
     checkbox.src = "../assets/img/checkbox_true.png";
+    task.subtasks[index].completed = true;
+    updateTaskInFirebase(task);
   } else {
     checkbox.src = "../assets/img/checkbox_false.png";
+    task.subtasks[index].completed = false;
+    updateTaskInFirebase(task);
   }
   renderTasks();
-}
-
-function calculateSubtaskProgress(task) {
-  let totalSubtasks = task.subtasks ? task.subtasks.length : 0;
-  let completedSubtasks = 0;
-
-  if (totalSubtasks > 0) {
-    for (let i = 0; i < totalSubtasks; i++) {
-      let checkbox = document.getElementById(
-        `checkbox_subtask_${task.id}_${i}`
-      );
-      if (checkbox && checkbox.src.includes("checkbox_true.png")) {
-        completedSubtasks++;
-      }
-    }
-  }
-  let progressPercentage =
-    totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-
-  return { completedSubtasks, totalSubtasks, progressPercentage };
-}
-
-function renderSubtaskProgress(completedSubtasks, totalSubtasks) {
-  return `<span>${completedSubtasks}/${totalSubtasks} Subtasks Completed</span>`;
 }
 
 function renderAddSubtasksEditPopUp() {
@@ -547,10 +495,50 @@ function resetImageDelete() {
 } */
 
 /* ----------------------------------------------------- */
+/**
+ * Get the count of the Subtasks of a Task.
+ * @param {object} task - The object of the task.
+ */
+function getCompletedSubtasksCount(task) {
+  let completedSubTasks = [];
+  for (let i = 0; i < task.subtasks.length; i++) {
+    const subtask = task.subtasks[i];
+    if (subtask.completed) {
+      completedSubTasks.push(subtask);
+    }
+  }
+  return completedSubTasks.length;
+}
+
+/**
+ * Get the percentage of the completed Subtasks of a Task.
+ * @param {object} task - The object of the task.
+ */
+function getSubtasksProgress(task) {
+  if (task.subtasks) {
+    let subTaskCount = task.subtasks.length;
+    let completedSubTasks = getCompletedSubtasksCount(task);
+    return (completedSubTasks / subTaskCount) * 100;
+  }
+}
+
+/**
+ * Render a string that shows how many of the Subtasks are completed.
+ * @param {object} task - The object of the task.
+ */
+function renderProgressString(task) {
+  if (task.subtasks) {
+    let subTaskCount = task.subtasks.length;
+    let completedSubTasks = getCompletedSubtasksCount(task);
+    return `${completedSubTasks}/${subTaskCount} Subtasks Completed`;
+  } else {
+    return "0/0 Subtasks Completed";
+  }
+}
 
 function renderTasks() {
   const columns = {
-    to_do: document.getElementById("to_do"),
+    todo: document.getElementById("to_do"),
     in_progress: document.getElementById("in_progress"),
     await_feedback: document.getElementById("await_feedback"),
     done: document.getElementById("done"),
@@ -560,19 +548,19 @@ function renderTasks() {
   for (let column in columns) {
     columns[column].innerHTML = "";
   }
-
   tasks.forEach((task) => {
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
     let assigneeInitials = renderAssigneeInitials(task.assignedTo);
-
     const column = columns[task.status];
     if (column) {
       column.innerHTML += getTasksTemplate(
         task,
         priorityImage,
         categoryColor,
-        assigneeInitials
+        assigneeInitials,
+        renderProgressString(task),
+        getSubtasksProgress(task)
       );
     }
   });
