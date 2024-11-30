@@ -146,7 +146,7 @@ function getTasksTemplate(
   progressPercentage
 ) {
   return `    
-          <div id="${task.id}" onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" class="kanban-task">
+          <div id="${task.id}" onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" ondragend="endDragging('${task.id}')" class="kanban-task task">
                 <div class="kanban-task-header"  style="background-color: ${categoryColor};">
                   <p>${task.category}</p>
                 </div>

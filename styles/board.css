@@ -29,8 +29,8 @@ label {
 }
 
 .d_none {
-  display: none;
-}
+  display: none !;
+} 
 
 .d-none{
   display: none;
@@ -178,14 +178,13 @@ label {
     /* height: 100vh; */
 }
 
-.kanban-task-wrapper .task {
-  transition: transform 0.2s ease; /* Übergang für den Kipp-Effekt */
+.task {
+  transition: transform 0.5s; /* Sanfter Übergang */
 }
 
-.kanban-task-wrapper .task.dragging {
-  transform: rotate(
-    10deg
-  ); /* Drehung um 10 Grad, wenn das Element gezogen wird */
+.dragged {
+  transform: rotate(5deg); /* Leicht gekippt */
+  border: 2px solid rgb(41, 171, 226);
 }
 
 .kanban-task {

@@ -131,14 +131,14 @@
             No matching task found !
             </span> -->
         <div class="kanban-board-wrapper">
-          <div class="kanban-column" ondrop="drop(event, 'to_do')" ondragover="allowDrop(event)">
+          <div class="kanban-column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
             <div class="kanban-header">
               <h2>To Do</h2>
               <img onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
             </div>
             <!-- TASK RENDERN -->
             <div id="to_do" class="kanban-task-wrapper"></div>
-            <!-- <div id="to_do_message" class="kanban-empty-message" style="display: none;">No tasks to do</div> -->
+            <!-- <div id="to_do_message" class="kanban-empty-message d_none">No tasks to do</div> -->
           </div>
 
           <div class="kanban-column" ondrop="drop(event, 'in_progress')" ondragover="allowDrop(event)">
@@ -147,7 +147,7 @@
               <img onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
             </div>
             <div id="in_progress" class="kanban-task-wrapper"></div>
-            <!-- <div id="in_progress_message" class="kanban-empty-message" style="display: none;">No tasks in progress</div> -->
+            <!-- <div id="in_progress_message" class="kanban-empty-message d_none">No tasks in progress</div> -->
           </div>
 
           <div class="kanban-column" ondrop="drop(event, 'await_feedback')" ondragover="allowDrop(event)">
@@ -156,7 +156,7 @@
               <img onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
             </div>
             <div id="await_feedback" class="kanban-task-wrapper"></div>
-            <!--    <div id="await_feedback_message" class="kanban-empty-message" style="display: none;">No tasks awaiting feedback</div> -->
+               <!-- <div id="await_feedback_message" class="kanban-empty-message d_none">No tasks awaiting feedback</div> -->
           </div>
 
           <div class="kanban-column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
@@ -164,7 +164,7 @@
               <h2>Done</h2>
             </div>
             <div id="done" class="kanban-task-wrapper"></div>
-            <!--  <div id="done_message" class="kanban-empty-message" style="display: none;">No tasks done</div> -->
+             <!-- <div id="done_message" class="kanban-empty-message d_none">No tasks done</div> -->
           </div>
         </div>
       </section>

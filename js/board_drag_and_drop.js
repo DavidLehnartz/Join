@@ -5,10 +5,41 @@
 
 let draggedTaskId;
 
+/* let columns = {
+    todo: {
+        container: document.getElementById("to_do"),
+        message: document.getElementById("to_do_message"),
+    },
+    in_progress: {
+        container: document.getElementById("in_progress"),
+        message: document.getElementById("in_progress_message"),
+    },
+    await_feedback: {
+        container: document.getElementById("await_feedback"),
+        message: document.getElementById("await_feedback_message"),
+    },
+    done: {
+        container: document.getElementById("done"),
+        message: document.getElementById("done_message"),
+    },
+}; */
+
 
 function startDragging(taskId) {
     draggedTaskId = taskId;
     console.log("startDragging: Task ID gesetzt zum Ziehen:", draggedTaskId);
+
+    let taskElement = document.getElementById(taskId);
+    if (taskElement) {
+        taskElement.classList.add("dragged");
+    }
+}
+
+function endDragging(taskId) {
+    let taskElement = document.getElementById(taskId);
+    if (taskElement) {
+        taskElement.classList.remove("dragged");
+    }
 }
 
 
@@ -33,10 +64,10 @@ async function drop(event, targetColumn) {
 
         await updateTaskInDatabase(task);
 
-         /* renderTasks(); */  
-          /* updateEmptyMessages();  */ 
-          await fetchTasksData(); 
-    } else{
+       /*  renderTasks(); */
+        /* updateColumnEmptyMessage(); */
+        await fetchTasksData();
+    } else {
         console.error("drop: aufgabe mit ID nicht gefunden:", draggedTaskId);
     }
 }
@@ -47,7 +78,7 @@ async function updateTaskInDatabase(task) {
 
     try {
         const response = await fetch(`${BASE_URL}/tasks/${task.id}.json`, {
-            method: "PUT",  
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -63,3 +94,17 @@ async function updateTaskInDatabase(task) {
         console.error("fehler beim speichern des task:", error);
     }
 }
+
+
+/* function updateColumnEmptyMessage() {
+    for (let column in columns) {
+        let { container, message } = columns[column];
+        if (container.innerHTML.trim() === "") {
+            message.classList.remove("d_done");
+        } else {
+            message.classList.add("d_none");
+        }
+    }
+} */
+
+      

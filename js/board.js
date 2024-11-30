@@ -564,4 +564,5 @@ function renderTasks() {
       );
     }
   });
+  /* updateColumnEmptyMessage(); */
 }
