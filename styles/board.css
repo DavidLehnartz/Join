@@ -179,11 +179,11 @@ label {
 }
 
 .task {
-  transition: transform 0.5s; /* Sanfter Übergang */
+  transition: transform 0.5s; 
 }
 
 .dragged {
-  transform: rotate(5deg); /* Leicht gekippt */
+  transform: rotate(5deg); 
   border: 2px solid rgb(41, 171, 226);
 }
 
