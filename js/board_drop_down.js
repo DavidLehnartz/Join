@@ -1,96 +1,95 @@
-'use strict';
+"use strict";
 
 /* DROP DOWN  */
 
-
 function toggleDropdownTaskPopUp() {
-  document.getElementById('dropdown_content').classList.toggle('d_none');
+  document.getElementById("dropdown_content").classList.toggle("d_none");
 }
-
 
 function toggleInputImage() {
-  let inputImage = document.getElementById('dropdown_icon');
+  let inputImage = document.getElementById("dropdown_icon");
 
-  if (inputImage.src.includes('arrow_drop_downaa.png')) {
-    inputImage.src = '../assets/img/arrow_drop_up.png';
+  if (inputImage.src.includes("arrow_drop_downaa.png")) {
+    inputImage.src = "../assets/img/arrow_drop_up.png";
   } else {
-    inputImage.src = '../assets/img/arrow_drop_downaa.png';
+    inputImage.src = "../assets/img/arrow_drop_downaa.png";
   }
 }
 
-
-function renderDropdownContacts() {
-  let dropdownContent = document.getElementById('dropdown_contacts');
+function renderDropdownContacts(taskId) {
+  let dropdownContent = document.getElementById("dropdown_contacts");
   dropdownContent.innerHTML = "";
-
-  for (let indexContacts = 0; indexContacts < contacts.length; indexContacts++) {
-    let contact = contacts[indexContacts];
-    dropdownContent.innerHTML += getDropdownContactsTemplate(contact);
+  let task = tasks.find((t) => t.id === taskId);
+  selectedContacts = task.assignedTo;
+  for (let i = 0; i < contacts.length; i++) {
+    let contact = contacts[i];
+    if (task.assignedTo) {
+      if (task.assignedTo.some((c) => c.name === contact.name)) {
+        dropdownContent.innerHTML +=
+          getSelectedDropdownContactsTemplate(contact);
+      } else {
+        dropdownContent.innerHTML += getDropdownContactsTemplate(contact);
+      }
+    } else {
+      dropdownContent.innerHTML += getDropdownContactsTemplate(contact);
+    }
   }
 }
 
-
-function toggleCheckboxContact(checkboxId, contactInitial, contactColor) {
-  let checkbox = document.getElementById(checkboxId);
-  let selectedContactContent = checkbox.closest('.dropdown-contact');
-
-  if (checkbox.src.includes('checkbox_false.png')) {
+function toggleCheckboxContact(contactId) {
+  let contact = contacts.find((c) => c.id === contactId);
+  let checkbox = document.getElementById(`checkbox_${contact.name}`);
+  let selectedContactContent = checkbox.closest(".dropdown-contact");
+  if (checkbox.src.includes("checkbox_false.png")) {
     activateCheckbox(checkbox, selectedContactContent);
-    addContactToSelected(checkboxId, contactInitial, contactColor);
+    addContactToSelected(contactId);
   } else {
     deactivateCheckbox(checkbox, selectedContactContent);
-    removeContactFromSelected(checkboxId);
+    removeContactFromSelected(contactId);
   }
-
-  renderSelectedContacts();
-  console.log(selectedContacts);
 }
-
 
 function activateCheckbox(checkbox, selectedContactContent) {
-  checkbox.src = '../assets/img/checkbox_true_white.png';  
-  /* selectedContactContent.style.backgroundColor = '#2A3647';  */ 
- /*  selectedContactContent.style.color = 'white'; */
- selectedContactContent.classList.add('checked');  
+  checkbox.src = "../assets/img/checkbox_true_white.png";
+  selectedContactContent.classList.add("checked");
 }
-
 
 function deactivateCheckbox(checkbox, selectedContactContent) {
-  checkbox.src = '../assets/img/checkbox_false.png';  
- /*  selectedContactContent.style.backgroundColor = '';  
-  selectedContactContent.style.color = '';  */
-  selectedContactContent.classList.remove('checked');
+  checkbox.src = "../assets/img/checkbox_false.png";
+  selectedContactContent.classList.remove("checked");
 }
 
+function addContactToSelected(contactId) {
+  let contact = contacts.find((c) => c.id === contactId);
+  selectedContacts.push(contact);
+}
 
-function addContactToSelected(checkboxId, contactInitial, contactColor) {
+/*function addContactToSelected(checkboxId, contactInitial, contactColor) {
   selectedContacts.push({
     id: checkboxId,
     initial: contactInitial,
-    color: contactColor
+    color: contactColor,
   });
-}
+}*/
 
-
-function removeContactFromSelected(checkboxId) {
-  const index = selectedContacts.findIndex(contact => contact.id === checkboxId);
+function removeContactFromSelected(contactId) {
+  const index = selectedContacts.findIndex(
+    (contact) => contact.id === contactId
+  );
   if (index !== -1) {
     selectedContacts.splice(index, 1);
   }
 }
 
-
 window.onclick = function (event) {
-  if (!event.target.matches('.drop-btn')) {
+  if (!event.target.matches(".drop-btn")) {
     let dropdowns = document.getElementsByClassName("dropdown-content");
     let i;
     for (i = 0; i < dropdowns.length; i++) {
       let openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('d_none')) {
-        openDropdown.classList.remove('d_none');
+      if (openDropdown.classList.contains("d_none")) {
+        openDropdown.classList.remove("d_none");
       }
     }
   }
-} 
-
-  
+};

@@ -229,7 +229,7 @@ function getTaskPopUpTemplate(
                 </div>
               </div>
               <div class="pop-up-footer">
-                <img onclick="renderEditTaskPopUp('${task.id}'), renderDropdownContacts()"
+                <img onclick="renderEditTaskPopUp('${task.id}'), renderDropdownContacts('${task.id}')"
                      onmouseover="changeImage('edit_img', 'edit')" 
                      onmouseout="changeImage('edit_img', 'edit')"
                      id="edit_img"
@@ -397,14 +397,53 @@ function getEditTaskPopUpTemplate(task) {
     `;
 }
 
+function getSubtasksTemplate(taskId, subtask, index) {
+  return `
+          <div class="subtask" id="subtask_${taskId}_${index}">
+            <img class="checkbox" onclick="toggleSubtasksCheckbox('${taskId}', ${index})" 
+                 id="checkbox_subtask_${taskId}_${index}"
+                 src="../assets/img/checkbox_false.png" 
+                 alt="checkbox">
+            <span>${subtask.name}</span>
+          </div>
+  `;
+}
+
+function getAddDropdownContactsTemplate(contact) {
+  return `<div class="nameInitials">
+          <div class="contact-initials bg-${contact.color}">
+            ${contact.initial}
+          </div>
+          <span class="contact-name">${contact.name}</span>
+      </div>
+      <input type="checkbox" 
+             name="assignedContacts" 
+             class="contact-checkbox" 
+             data-name="${contact.name}" 
+             ${isSelected(contact.name) ? "checked" : ""} />
+    `;
+}
+
 function getDropdownContactsTemplate(contact) {
   return `
-         <div  class="dropdown-contact" onclick="toggleCheckboxContact('checkbox_${contact.name}', '${contact.initial}','${contact.color}')" id="selected_contact">
+         <div  class="dropdown-contact" onclick="toggleCheckboxContact('${contact.id}')" id="selected_contact">
               <div class="dropdown-contact-name">
                 <span class="dropdown-initial bg-${contact.color}">${contact.initial}</span>
                 <p>${contact.name}</p>
               </div>
                 <img id="checkbox_${contact.name}" src="../assets/img/checkbox_false.png" alt="checkbox">
+          </div>
+  `;
+}
+
+function getSelectedDropdownContactsTemplate(contact) {
+  return `
+         <div  class="dropdown-contact checked" onclick="toggleCheckboxContact('${contact.id}')" id="selected_contact">
+              <div class="dropdown-contact-name">
+                <span class="dropdown-initial bg-${contact.color}">${contact.initial}</span>
+                <p>${contact.name}</p>
+              </div>
+                <img id="checkbox_${contact.name}" src="../assets/img/checkbox_true_white.png" alt="checkbox">
           </div>
   `;
 }

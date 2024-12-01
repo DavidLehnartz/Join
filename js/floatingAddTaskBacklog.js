@@ -86,6 +86,7 @@ function handleContactSelection(contactElement, contact, isChecked) {
     selectedContacts = selectedContacts.filter((c) => c.name !== contact.name);
   }
   contactElement.classList.toggle("selected", isChecked);
+  render;
   updateSelectedContactsDisplay();
 }
 
@@ -438,11 +439,21 @@ function gatherTaskData() {
 }
 
 function getPriority() {
-  if (document.getElementById("inputFieldUrgent").classList.contains("active-urgent")) {
+  if (
+    document
+      .getElementById("inputFieldUrgent")
+      .classList.contains("active-urgent")
+  ) {
     return "Urgent";
-  } else if (document.getElementById("inputFieldMedium").classList.contains("active-medium")) {
+  } else if (
+    document
+      .getElementById("inputFieldMedium")
+      .classList.contains("active-medium")
+  ) {
     return "Medium";
-  } else if (document.getElementById("inputFieldLow").classList.contains("active-low")) {
+  } else if (
+    document.getElementById("inputFieldLow").classList.contains("active-low")
+  ) {
     return "Low";
   }
   return "None";

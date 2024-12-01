@@ -131,7 +131,7 @@
             No matching task found !
             </span> -->
         <div class="kanban-board-wrapper">
-          <div class="kanban-column" ondrop="drop(event, 'to_do')" ondragover="allowDrop(event)">
+          <div class="kanban-column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
             <div class="kanban-header">
               <h2>To Do</h2>
               <img onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
@@ -548,5 +548,6 @@
 </body>
 
 <script src="../js/database.js" defer></script>
+<script src="../js/user_database.js"></script>
 
 </html>
