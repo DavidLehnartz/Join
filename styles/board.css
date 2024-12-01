@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 56px;
-  padding: 0px 60px;
+  padding: 0px 48px;
 }
 
 h1 {
@@ -127,16 +127,17 @@ label {
 .kanban-board-wrapper {
   display: flex;
   justify-content: space-between;
-  gap: 24px;
+  /* gap: 24px; */
   margin-top: 24px;
-  padding: 0px 60px;
+  /* padding: 0px 60px; */
+  padding: 0px 34px;
 }
 
 .kanban-column {
   display: flex;
   flex-direction: column;
   width: 30%;
-  border: 2px solid;
+  /* border: 2px solid; */
   /*  width: 100%; */
 }
 
@@ -145,6 +146,7 @@ label {
   justify-content: space-between;
   color: rgb(66, 82, 110);
   margin-bottom: 16px;
+  padding: 0px 16px;
 }
 
 .kanban-header-img {
@@ -168,7 +170,7 @@ label {
   height: 370px;
   /* border-radius: 24px; */
   /* background: rgb(255, 255, 255); */
-  /* padding: 16px; */
+  padding: 16px;
   /* gap: 24px; */
   cursor: pointer;
   /* margin-bottom: 24px; */
@@ -410,7 +412,11 @@ nav {
   }
   
   
-  @media (max-width: 1400px) {
+  @media (max-width: 1490px) {
+.kanban-board-wrapper{
+  gap: 24px;
+}
+
     .kanban-board-wrapper {
       flex-wrap: wrap;
     }
@@ -460,7 +466,7 @@ nav {
     }
 
     .kanban-board-wrapper {
-      padding: 0px 16px;
+      padding: 0px 0px;
     }
 
     .input-btn-responsive {
@@ -469,7 +475,7 @@ nav {
     }
   }
   
-  @media (max-width: 630px) {
+  @media (max-width: 700px) {
     .kanban-column {
       width: 100%;
     }
