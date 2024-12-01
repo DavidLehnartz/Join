@@ -2,39 +2,38 @@
 
 /* FILTER */
 
-
-function filterTaskByTitleOrDescription() {
+function getFilderedTask() {
     let filterInput = document.getElementById('filter_input').value.toLowerCase();
-    let kanbanTask = document.querySelectorAll('.kanban-task');
-    /* let foundAny = false; */
+    let filterInputResponsive = document.getElementById('filter_input_responsive').value.toLowerCase();
 
-    kanbanTask.forEach(task => {
+    let activeFilter = filterInput || filterInputResponsive;
+    if (activeFilter.length < 3) {
+        showAllTasks();
+    } else {
+        filterTaskByTitleOrDescription(activeFilter);
+    }
+}
+
+
+function filterTaskByTitleOrDescription(filterInput) {
+    let kanbanTasks = document.querySelectorAll('.kanban-task');
+    let foundAny = false;
+
+    kanbanTasks.forEach(task => {
         let taskTitle = task.querySelector('.task-title').textContent.toLowerCase();
         let taskDescription = task.querySelector('.kanban-task-description').textContent.toLowerCase();
 
         if (taskTitle.includes(filterInput) || taskDescription.includes(filterInput)) {
             task.style.display = '';
-            /* task.style.opacity = '1'; */
-            /*  foundAny = true; */
+            foundAny = true;
+            // task.style.opacity = '1';
         } else {
             task.style.display = 'none';
-           /*  task.style.opacity = '0.3'; */
-
+            //  task.style.opacity = '0.3'; 
         }
     });
 
-    /* toggleNoMatchMessage(true); */
-}
-
-
-function getFilderedTask() {
-    let filterInput = document.getElementById('filter_input').value.toLowerCase();
-   
-    if (filterInput.length < 3) {
-        showAllTasks();
-    } else {
-        filterTaskByTitleOrDescription(filterInput);
-    }
+    toggleNoMatchMessage(!foundAny);
 }
 
 
@@ -44,7 +43,17 @@ function showAllTasks() {
     kanbanTask.forEach(task => {
         task.style.display = '';
     });
-    /* toggleNoMatchMessage(true); */
+    toggleNoMatchMessage(false);
+}
+
+
+function toggleNoMatchMessage(show) {
+    const noMatchMessage = document.getElementById('no_matching_task');
+    if (show) {
+        noMatchMessage.style.display = 'block'; 
+    } else {
+        noMatchMessage.style.display = 'none'; 
+    }
 }
 
 
@@ -53,27 +62,3 @@ function disableBtn() {
 
     inputBtn.disabled = true;
 }
-
-
-/* function clearInput() {
-    document.getElementById('filter_input').value = '';
-    
-} */
-
-
-/* function isTaskFound(foundAny) {
-    let noMatchingTaskMessage = document.getElementById('no_matching_task');
-    let kanbanTask = document.querySelectorAll('.kanban-task');
-
-    if (foundAny) {
-        noMatchingTaskMessage.classList.remove('d_none');
-    } else{
-        noMatchingTaskMessage.classList.remove('d_none');
-    }
-} */
-
-
-/*  function toggleNoMatchMessage(foundAny) {
-     let noMatchMessage = document.getElementById('no-matching-tasks');
-     noMatchMessage.style.display = foundAny ? 'none' : 'block';
- } */

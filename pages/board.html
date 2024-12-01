@@ -25,12 +25,6 @@
     <script src="../js/board_add_task_pop_up.js"></script>
     <!-- <script src="../js/floatingAddTaskBacklog.js" defer></script> -->
     <script src="../js/board.js" defer></script>
-    
-    
-    
-  </head>
-
-  
 </head>
 
 <!-- TASKS
@@ -48,7 +42,7 @@
   speichern
 *****
 
-* drag and drop funktioniert, aber es werden keine neuen erstellten tasks angezeig
+* Aufräumen und Doku
 *****
 
 -->
@@ -127,14 +121,14 @@
 
       <!-- KANBAN BOARD -->
       <section>
-        <!--  <span class="no-matching-task-found" id="no_matching_task">
+         <span class="no-matching-task-found" id="no_matching_task" style="display: none;">
             No matching task found !
-            </span> -->
+            </span>
         <div class="kanban-board-wrapper">
           <div class="kanban-column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
             <div class="kanban-header">
               <h2>To Do</h2>
-              <img onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+              <img onmouseover="changePlusImage(event)" onmouseout="changePlusImage(event)" onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
             </div>
             <!-- TASK RENDERN -->
             <div id="to_do" class="kanban-task-wrapper"></div>
@@ -144,7 +138,7 @@
           <div class="kanban-column" ondrop="drop(event, 'in_progress')" ondragover="allowDrop(event)">
             <div class="kanban-header">
               <h2>In progress</h2>
-              <img onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+              <img onmouseover="changePlusImage(event)" onmouseout="changePlusImage(event)" onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
             </div>
             <div id="in_progress" class="kanban-task-wrapper"></div>
             <!-- <div id="in_progress_message" class="kanban-empty-message d_none">No tasks in progress</div> -->
@@ -153,7 +147,7 @@
           <div class="kanban-column" ondrop="drop(event, 'await_feedback')" ondragover="allowDrop(event)">
             <div class="kanban-header">
               <h2>Await feedback</h2>
-              <img onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+              <img onmouseover="changePlusImage(event)" onmouseout="changePlusImage(event)" onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
             </div>
             <div id="await_feedback" class="kanban-task-wrapper"></div>
                <!-- <div id="await_feedback_message" class="kanban-empty-message d_none">No tasks awaiting feedback</div> -->

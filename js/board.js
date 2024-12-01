@@ -431,68 +431,16 @@ function changeImage(imgageId, action) {
   }
 }
 
-/* function closeEditPopUp() {
-  document
-    .getElementById("edit_task_pop_up")
-    .classList.add("responsive-pop-up-closed");
-} */
+function changePlusImage(event) {
+  let img = event.target;
 
-/* function changeImageEdit() {
-  document.getElementById("edit_img").src = "../assets/img/edit_blue.png";
-}
-
-function resetImageEdit() {
-  document.getElementById("edit_img").src = "../assets/img/edit_black.png";
-}
-
-function changeImageDelete() {
-  document.getElementById("delete_img").src = "../assets/img/delete_blue.png";
-}
-
-function resetImageDelete() {
-  document.getElementById("delete_img").src = "../assets/img/delete_black.png";
-} */
-
-/* ----- FÜR DRAG AND DROP ----- */
-
-/* function renderTasks() {
-  let tasksContent = document.getElementById('to_do');
-  tasksContent.innerHTML = "";
-
-  for (let indexTasks = 0; indexTasks < tasks.length; indexTasks++) {
-    let task = tasks[indexTasks];
-    let priorityImage = getPriorityImage(task.priority);
-    let categoryColor = getCategoryColor(task.category);
-    let assigneeInitials = renderAssigneeInitials(task.assignedTo);
-
-    const { completedSubtasksCount, totalSubtasks, progressPercent } = calculateSubtaskProgress(task);
-
-    tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials,  completedSubtasksCount, totalSubtasks, progressPercent);
+  if (img.src.includes("plus_black.png")) {
+    img.src = "../assets/img/plus_blue.png";
+  } else {
+    img.src = "../assets/img/plus_black.png";
   }
-  // renderAssigneeInitials();
-} */
+}
 
-/* function renderTasks() {
-  const columns = ['to_do', 'in_progress', 'await_feedback', 'done'];
-
-  columns.forEach(columnId => {
-    let tasksContent = document.getElementById(columnId);
-    tasksContent.innerHTML = "";
-
-    // Filtern der Aufgaben nach dem aktuellen Spaltenstatus
-    let filteredTasks = tasks.filter(task => task.status === columnId);
-
-    // Aufgaben in der aktuellen Spalte rendern
-    filteredTasks.forEach(task => {
-      let priorityImage = getPriorityImage(task.priority);
-      let categoryColor = getCategoryColor(task.category);
-      let assigneeInitials = renderAssigneeInitials(task.assignedTo);
-
-      // Füge das Template für jede Aufgabe hinzu
-      tasksContent.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials);
-    });
-  });
-} */
 
 /* ----------------------------------------------------- */
 /**
@@ -564,5 +512,4 @@ function renderTasks() {
       );
     }
   });
-  /* updateColumnEmptyMessage(); */
 }

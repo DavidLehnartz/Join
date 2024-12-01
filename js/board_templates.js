@@ -120,7 +120,7 @@ function getBoardHeadlineTemplate() {
                 />
               </button>
             </div>
-            <input
+            <input onkeyup="getFilderedTask()" id="filter_input_responsive"
               class="searchbox-input-responsive"
               type="text"
               placeholder="Find Task"
@@ -150,11 +150,11 @@ function getTasksTemplate(
                 <div class="kanban-task-header"  style="background-color: ${categoryColor};">
                   <p>${task.category}</p>
                 </div>
-                <div class="kanban-task-content">
-                  <h3 class="task-title" >${task.title}</h3>
-                  <p  class="kanban-task-description">
-                    ${task.description}
-                  </p>
+                <div class="task-title">
+                  <h3>${task.title}</h3>
+                </div>
+                <div class="kanban-task-description">
+                  <p>${task.description}</p>
                 </div>
                 <div id="kanban-task-subtasks" class="kanban-task-subtasks">
                       <progress value="${progressPercentage}" max="100"></progress>
