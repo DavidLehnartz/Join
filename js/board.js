@@ -110,7 +110,6 @@ function openAddTaskPopUp() {
 
 async function saveTaskChanges(taskId) {
   let task = tasks.find((t) => t.id === taskId);
-
   if (task) {
     task.title = document.getElementById("edit_title").value;
     task.description = document.getElementById("edit_description").value;
@@ -119,11 +118,12 @@ async function saveTaskChanges(taskId) {
     if (selectedPriority) {
       task.priority = selectedPriority;
     }
+    task.subtasks = [...addedSubtasks];
   }
-
   renderTasks();
   await updateTaskInFirebase(task);
-  /* closeEditPopUp(); */
+  selectedContacts = [];
+  addedSubtasks = [];
   closePopUps();
   openTaskPopUp(taskId);
 }
@@ -225,28 +225,22 @@ function resetButtonsEditPopUp() {
 function renderSubtasks(taskId) {
   let subtaskContent = document.getElementById("single_subtasks");
   subtaskContent.innerHTML = "";
-
   let task = tasks.find((t) => t.id === taskId);
-
   if (task && Array.isArray(task.subtasks) && task.subtasks.length > 0) {
     task.subtasks.forEach((subtask, index) => {
-      subtaskContent.innerHTML += getSubtasksTemplate(taskId, subtask, index);
+      if (subtask.completed) {
+        subtaskContent.innerHTML += getDoneSubtasksTemplate(
+          taskId,
+          subtask,
+          index
+        );
+      } else {
+        subtaskContent.innerHTML += getSubtasksTemplate(taskId, subtask, index);
+      }
     });
   } else {
     subtaskContent.innerHTML = "<p>No subtasks found</p>";
   }
-}
-
-function getSubtasksTemplate(taskId, subtask, index) {
-  return `
-          <div class="subtask" id="subtask_${taskId}_${index}">
-            <img class="checkbox" onclick="toggleSubtasksCheckbox('${taskId}', ${index})" 
-                 id="checkbox_subtask_${taskId}_${index}"
-                 src="../assets/img/checkbox_false.png" 
-                 alt="checkbox">
-            <span>${subtask.name}</span>
-          </div>
-  `;
 }
 
 function toggleSubtasksCheckbox(taskId, index) {
@@ -273,30 +267,32 @@ function renderAddSubtasksEditPopUp() {
   });
 }
 
-function addSubtaskEditPopUp() {
+function addSubtaskEditPopUp(taskId) {
   let inputAddedSubtask = document.getElementById("input_add_subtask");
   let addedSubtaskTitle = inputAddedSubtask.value.trim();
+  let task = tasks.find((t) => t.id === taskId);
+  addedSubtasks = task.subtasks ? task.subtasks : [];
+  console.log(addedSubtasks);
   let addedSubtask = {
     id: generateUniqueId(),
-    title: addedSubtaskTitle,
+    name: addedSubtaskTitle,
+    completed: false,
   };
-
   if (errorMessage()) {
     return;
   } else {
     addedSubtasks.push(addedSubtask);
-    console.log("added subtasks arr", addedSubtasks);
-
     renderAddSubtasksEditPopUp();
-    clearInputs();
+    clearInputs(taskId);
   }
-
-  updateButtonImage();
+  updateTaskInFirebase(task);
+  updateButtonImage(taskId);
 }
 
-function deleteAddedSubtaskEditPopUp(id) {
-  let index = addedSubtasks.findIndex((addedSubtask) => addedSubtask.id === id);
-
+function deleteAddedSubtaskEditPopUp(name) {
+  let index = addedSubtasks.findIndex(
+    (addedSubtask) => addedSubtask.name === name
+  );
   if (index !== -1) {
     addedSubtasks.splice(index, 1);
     renderAddSubtasksEditPopUp();
@@ -306,7 +302,7 @@ function deleteAddedSubtaskEditPopUp(id) {
   }
 }
 
-function updateButtonImage() {
+function updateButtonImage(taskId) {
   /* let ButtonImage = document.getElementById('input_button_image'); */
   let buttonContainer = document.getElementById("input_image_content");
   let inputAddedSubtask = document
@@ -314,7 +310,7 @@ function updateButtonImage() {
     .value.trim();
 
   if (inputAddedSubtask.length > 0) {
-    buttonContainer.innerHTML = getBeforeButtonContainer();
+    buttonContainer.innerHTML = getBeforeButtonContainer(taskId);
   } else {
     buttonContainer.innerHTML = getAfterButtonContainer();
   }
@@ -393,9 +389,9 @@ function closePopUps() {
     .classList.add("responsive-pop-up-closed");
 }
 
-function clearInputs() {
+function clearInputs(taskId) {
   document.getElementById("input_add_subtask").value = "";
-  updateButtonImage();
+  updateButtonImage(taskId);
 }
 
 function changeImage(imgageId, action) {
@@ -425,7 +421,6 @@ function changePlusImage(event) {
     img.src = "../assets/img/plus_black.png";
   }
 }
-
 
 /* ----------------------------------------------------- */
 /**
