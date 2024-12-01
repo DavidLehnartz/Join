@@ -25,30 +25,6 @@ function selectCategory(category) {
   checkForm();
 }
 
-async function loadContacts() {
-  let contacts1 = await fetch(BASE_URL + "/contacts" + ".json");
-  let contactsToJson = await contacts1.json();
-  let contacts = Object.keys(contactsToJson);
-  return contacts;
-}
-
-async function getContactById(id) {
-  let contactResponse = await fetch(BASE_URL + "/contacts/" + id + ".json");
-  let contactToJson = await contactResponse.json();
-  return contactToJson;
-}
-
-async function loadAllContactsInfo() {
-  let idArray = await loadContacts();
-  for (let i = 0; i < idArray.length; i++) {
-    const id = idArray[i];
-    let newContact = await getContactById(id);
-    contacts.push(newContact);
-  }
-  console.log(contacts);
-  return contacts;
-}
-
 function toggleContactDropdown() {
   const dropdown = document.getElementById("categoryDropdown2");
   const arrowElement = document.getElementById("dropdownArrow2");
@@ -90,7 +66,6 @@ function handleContactSelection(contactElement, contact, isChecked) {
     selectedContacts = selectedContacts.filter((c) => c.name !== contact.name);
   }
   contactElement.classList.toggle("selected", isChecked);
-  updateSelectedContactsDisplay();
 }
 
 function populateDropdown(dropdown) {
@@ -99,20 +74,7 @@ function populateDropdown(dropdown) {
     const contactElement = document.createElement("div");
     contactElement.classList.add("contact-item");
     if (isSelected(contact.name)) contactElement.classList.add("selected");
-    contactElement.innerHTML = `
-      <div class="nameInitials">
-          <div class="contact-initials bg-${contact.color}">
-            ${contact.initial}
-          </div>
-          <span class="contact-name">${contact.name}</span>
-      </div>
-      <input type="checkbox" 
-             name="assignedContacts" 
-             class="contact-checkbox" 
-             data-name="${contact.name}" 
-             ${isSelected(contact.name) ? "checked" : ""} />
-    `;
-
+    contactElement.innerHTML = getAddDropdownContactsTemplate(contact);
     const checkbox = contactElement.querySelector(".contact-checkbox");
     preventDropdownCloseOnSelect(checkbox, contactElement, contact);
     preventDropdownCloseOnSelect(contactElement, contactElement, contact);
@@ -138,7 +100,6 @@ function removeOutsideClickListener() {
   if (listener) {
     dropdown.removeAttribute("data-listener");
   }
-
 }
 
 function toggleContactSelection(contact) {
@@ -459,11 +420,21 @@ function gatherTaskData() {
 }
 
 function getPriority() {
-  if (document.getElementById("inputFieldUrgent").classList.contains("active-urgent")) {
+  if (
+    document
+      .getElementById("inputFieldUrgent")
+      .classList.contains("active-urgent")
+  ) {
     return "Urgent";
-  } else if (document.getElementById("inputFieldMedium").classList.contains("active-medium")) {
+  } else if (
+    document
+      .getElementById("inputFieldMedium")
+      .classList.contains("active-medium")
+  ) {
     return "Medium";
-  } else if (document.getElementById("inputFieldLow").classList.contains("active-low")) {
+  } else if (
+    document.getElementById("inputFieldLow").classList.contains("active-low")
+  ) {
     return "Low";
   }
   return "None";

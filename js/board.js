@@ -35,13 +35,11 @@ function renderDesktopTemplate(header, sidebar, link) {
 function renderTaskPopUp(taskId) {
   let taskPopUpContent = document.getElementById("task_pop_up");
   taskPopUpContent.innerHTML = "";
-
   let task = tasks.find((t) => t.id === taskId);
   if (task) {
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
     let assigneeContent = getAssigneesTemplate(task.assignedTo);
-
     taskPopUpContent.innerHTML = getTaskPopUpTemplate(
       task,
       priorityImage,
@@ -54,21 +52,17 @@ function renderTaskPopUp(taskId) {
 
 function renderEditTaskPopUp(taskId, priorityImage) {
   currentTaskId = taskId;
-
   let editTaskPopUpContent = document.getElementById("edit_task_pop_up");
   editTaskPopUpContent.innerHTML = "";
-
   let task = tasks.find((t) => t.id === taskId);
-
   if (task) {
     editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(
       task,
       priorityImage
     );
-
+    renderSelectedContacts();
     setPriorityButton(task.priority);
   }
-
   document
     .getElementById("edit_task_pop_up")
     .classList.remove("responsive-pop-up-closed");
@@ -77,26 +71,21 @@ function renderEditTaskPopUp(taskId, priorityImage) {
 function renderSelectedContacts() {
   let selectedContactsContent = document.getElementById("selected_contacts");
   selectedContactsContent.innerHTML = "";
-
-  for (
-    let indexSelectedContacts = 0;
-    indexSelectedContacts < selectedContacts.length;
-    indexSelectedContacts++
-  ) {
-    let contact = selectedContacts[indexSelectedContacts];
-    selectedContactsContent.innerHTML += getSelectedContactsTemplate(contact);
+  if (selectedContacts) {
+    for (let i = 0; i < selectedContacts.length; i++) {
+      let contact = selectedContacts[i];
+      selectedContactsContent.innerHTML += getSelectedContactsTemplate(contact);
+    }
   }
 }
 
 function renderAssigneeInitials(assignedTo) {
   let assigneeInitialsContent = "";
-
   if (Array.isArray(assignedTo)) {
     assignedTo.forEach((assignee) => {
       assigneeInitialsContent += getAssigneeInitialsTemplate(assignee);
     });
   }
-
   return assigneeInitialsContent;
 }
 
@@ -104,7 +93,6 @@ function openTaskPopUp(taskId) {
   document
     .getElementById("overlay_task_pop_up")
     .classList.remove("responsive-pop-up-closed");
-
   renderTaskPopUp(taskId);
 }
 
@@ -117,7 +105,6 @@ function openAddTaskPopUp() {
   document
     .getElementById("overlay_add_task_pop_up")
     .classList.remove("responsive-pop-up-closed");
-
   renderAddTaskPopUp();
 }
 
@@ -128,9 +115,7 @@ async function saveTaskChanges(taskId) {
     task.title = document.getElementById("edit_title").value;
     task.description = document.getElementById("edit_description").value;
     task.dueDate = document.getElementById("edit_due_date").value;
-
-    task.assignedContacts = [...selectedContacts];
-
+    task.assignedTo = [...selectedContacts];
     if (selectedPriority) {
       task.priority = selectedPriority;
     }
