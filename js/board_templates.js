@@ -354,7 +354,7 @@ function getEditTaskPopUpTemplate(task) {
                 <div class="pop-up-edit-task-subtasks">
                   Subtasks
                   <div class="input-box">
-                    <input onkeyup="updateButtonImage();"
+                    <input onkeyup="updateButtonImage('${task.id}');"
                       id="input_add_subtask"
                       class="pop-up-edit-subtask-input"
                       type="text"
@@ -484,14 +484,38 @@ function getSelectedContactsTemplate(contact) {
   `;
 }
 
+function getSubtasksTemplate(taskId, subtask, index) {
+  return `
+          <div class="subtask" id="subtask_${taskId}_${index}">
+            <img class="checkbox" onclick="toggleSubtasksCheckbox('${taskId}', ${index})" 
+                 id="checkbox_subtask_${taskId}_${index}"
+                 src="../assets/img/checkbox_false.png" 
+                 alt="checkbox">
+            <span>${subtask.name}</span>
+          </div>
+  `;
+}
+
+function getDoneSubtasksTemplate(taskId, subtask, index) {
+  return `
+          <div class="subtask" id="subtask_${taskId}_${index}">
+            <img class="checkbox" onclick="toggleSubtasksCheckbox('${taskId}', ${index})" 
+                 id="checkbox_subtask_${taskId}_${index}"
+                 src="../assets/img/checkbox_true.png" 
+                 alt="checkbox">
+            <span>${subtask.name}</span>
+          </div>
+  `;
+}
+
 function getAddedSubtasksTemplate(addedSubtask) {
   return `
           <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item" data-id="${addedSubtask.id}">
-            <span>${addedSubtask.title}</span>
+            <span>${addedSubtask.name}</span>
             <div class="list-icon-container">
               <img onclick="editSubtaskEditPopUp('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/edit.png" alt="edit icon">
               <div class="vertical_line"></div>
-              <img onclick="deleteAddedSubtaskEditPopUp('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/delete.png" alt="delete icon">
+              <img onclick="deleteAddedSubtaskEditPopUp('${addedSubtask.name}')" class="icon-container-images" src="../assets/img/delete.png" alt="delete icon">
             </div>
           </li>
         `;
@@ -604,13 +628,13 @@ function getAddTaskPopUpTemplate() {
   `;
 }
 
-function getBeforeButtonContainer() {
+function getBeforeButtonContainer(taskId) {
   return `
           <button class="pop-up-edit-task-input-btn">
             <div id="button_content_with_images" class="pop-up-edit-task-input-btn-img-container">
-                <img onclick="clearInputs()" class="pop-up-edit-task-input-btn-img" src="../assets/img/iconoir_cancel.png" alt="image 1">
+                <img onclick="clearInputs('${taskId}')" class="pop-up-edit-task-input-btn-img" src="../assets/img/iconoir_cancel.png" alt="image 1">
                 <div class="vertical_line"></div>
-                <img onclick="addSubtaskEditPopUp()" class="pop-up-edit-task-input-btn-img" src="../assets/img/check_black.png" alt="image 2">
+                <img onclick="addSubtaskEditPopUp('${taskId}')" class="pop-up-edit-task-input-btn-img" src="../assets/img/check_black.png" alt="image 2">
             </div>
           </button>
   `;
@@ -626,12 +650,12 @@ function getAfterButtonContainer() {
 
 function getEditSubtaskInput(id, subtask) {
   return `
-          <input type="text" value="${subtask.title}" 
+          <input type="text" value="${subtask.name}" 
                 onblur="saveEditedSubtaskEditPopUp('${id}', this.value)"  
                 onkeydown="handleEnterKey(event, '${id}', this)" 
                 class="edit-subtask-input">
           <div class="list-icon-container">
-                <img onclick="deleteAddedSubtaskEditPopUp('${id}')" 
+                <img onclick="deleteAddedSubtaskEditPopUp('${subtask.name}')" 
                 class="icon-container-images" 
                 src="../assets/img/delete.png" 
                 alt="check icon">

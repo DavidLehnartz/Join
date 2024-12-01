@@ -60,17 +60,10 @@ function deactivateCheckbox(checkbox, selectedContactContent) {
 }
 
 function addContactToSelected(contactId) {
+  if (!selectedContacts) selectedContacts = [];
   let contact = contacts.find((c) => c.id === contactId);
   selectedContacts.push(contact);
 }
-
-/*function addContactToSelected(checkboxId, contactInitial, contactColor) {
-  selectedContacts.push({
-    id: checkboxId,
-    initial: contactInitial,
-    color: contactColor,
-  });
-}*/
 
 function removeContactFromSelected(contactId) {
   const index = selectedContacts.findIndex(

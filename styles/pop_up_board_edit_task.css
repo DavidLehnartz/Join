@@ -471,7 +471,7 @@ li.added-subtask-item.editing {
   margin-bottom: 8px;
 }
 
-.dropdown-content.d_none {
+.dropdown-content. {
   display: none;
 }
 
@@ -554,7 +554,6 @@ li.added-subtask-item.editing {
 
 /* MEDIA QUERY */
 
-
 @media (max-width: 500px) {
   .pop-up-edit-task-wrapper {
     height: 100vh;
@@ -569,11 +568,11 @@ li.added-subtask-item.editing {
     flex-direction: column;
   }
 
-  .prio-btn{
+  .prio-btn {
     display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
 
   .pop-up-edit-task-footer {

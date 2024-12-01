@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Board</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/img/join_logo_grey.svg"
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Board</title>
-  <link rel="icon" type="image/x-icon" href="../assets/img/join_logo_grey.svg" />
-
-  <link rel="stylesheet" href="../styles/desktop_template.css" />
-  <link rel="stylesheet" href="../styles/fonts.css" />
-  <link rel="stylesheet" href="../styles/board.css" />
-  <link rel="stylesheet" href="../styles/pop_up_board.css" />
-  <link rel="stylesheet" href="../styles/pop_up_board_edit_task.css" />
-  <link rel="stylesheet" href="../styles/color.css" />
-  <link rel="stylesheet" href="../styles/pop_up_board_add_task.css" />
-  <!-- <link rel="stylesheet" href="../styles/pop_up_add_task.css"> -->
+    <link rel="stylesheet" href="../styles/desktop_template.css" />
+    <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="../styles/board.css" />
+    <link rel="stylesheet" href="../styles/pop_up_board.css" />
+    <link rel="stylesheet" href="../styles/pop_up_board_edit_task.css" />
+    <link rel="stylesheet" href="../styles/color.css" />
+    <link rel="stylesheet" href="../styles/pop_up_board_add_task.css" />
+    <!-- <link rel="stylesheet" href="../styles/pop_up_add_task.css"> -->
 
     <script src="../js/board_database.js" defer></script>
     <script src="../js/desktop_template.js"></script>
@@ -25,9 +28,9 @@
     <script src="../js/board_add_task_pop_up.js"></script>
     <!-- <script src="../js/floatingAddTaskBacklog.js" defer></script> -->
     <script src="../js/board.js" defer></script>
-</head>
+  </head>
 
-<!-- TASKS
+  <!-- TASKS
 
 * subtasks completed count
   subtasks progres bar
@@ -47,16 +50,16 @@
 
 -->
 
-<body onload="init('board-header', 'board-sidebar', 'board-link')">
-  <div id="board-sidebar" class="board-sidebar-wrapper"></div>
+  <body onload="init('board-header', 'board-sidebar', 'board-link')">
+    <div id="board-sidebar" class="board-sidebar-wrapper"></div>
 
-  <main>
-    <div id="board-header"></div>
-    <!-- MAiN CONTENT -->
-    <div id="board-content" class="main-content-wrapper hidden">
-      <!-- HEADLINE / SEARCHBOX -->
-      <section id="board_headline">
-        <!--  <div class="headline">
+    <main>
+      <div id="board-header"></div>
+      <!-- MAiN CONTENT -->
+      <div id="board-content" class="main-content-wrapper hidden">
+        <!-- HEADLINE / SEARCHBOX -->
+        <section id="board_headline">
+          <!--  <div class="headline">
             <h1>Board</h1>
             <form class="searchbox-wrapper">
               <div class="searchbox-container"></div>
@@ -91,10 +94,10 @@
               </button>
             </form>
           </div> -->
-      </section>
+        </section>
 
-      <!-- HEADLINE / SEARCHBOX  RESPONSIVE-->
-      <!-- <section>
+        <!-- HEADLINE / SEARCHBOX  RESPONSIVE-->
+        <!-- <section>
           <div class="headline-responsive">
             <h1>Board</h1>
             <button class="add-task-btn-responsive">
@@ -119,54 +122,103 @@
           </button>
         </section> -->
 
-      <!-- KANBAN BOARD -->
-      <section>
-         <span class="no-matching-task-found" id="no_matching_task" style="display: none;">
+        <!-- KANBAN BOARD -->
+        <section>
+          <span
+            class="no-matching-task-found"
+            id="no_matching_task"
+            style="display: none"
+          >
             No matching task found !
-            </span>
-        <div class="kanban-board-wrapper">
-          <div class="kanban-column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-            <div class="kanban-header">
-              <h2>To Do</h2>
-              <img onmouseover="changePlusImage(event)" onmouseout="changePlusImage(event)" onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+          </span>
+          <div class="kanban-board-wrapper">
+            <div
+              class="kanban-column"
+              ondrop="drop(event, 'todo')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="kanban-header">
+                <h2>To Do</h2>
+                <img
+                  onmouseover="changePlusImage(event)"
+                  onmouseout="changePlusImage(event)"
+                  onclick="openAddTaskPopUp()"
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+              <!-- TASK RENDERN -->
+              <div id="to_do" class="kanban-task-wrapper"></div>
+              <!-- <div id="to_do_message" class="kanban-empty-message d_none">No tasks to do</div> -->
             </div>
-            <!-- TASK RENDERN -->
-            <div id="to_do" class="kanban-task-wrapper"></div>
-            <!-- <div id="to_do_message" class="kanban-empty-message d_none">No tasks to do</div> -->
-          </div>
 
-          <div class="kanban-column" ondrop="drop(event, 'in_progress')" ondragover="allowDrop(event)">
-            <div class="kanban-header">
-              <h2>In progress</h2>
-              <img onmouseover="changePlusImage(event)" onmouseout="changePlusImage(event)" onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+            <div
+              class="kanban-column"
+              ondrop="drop(event, 'in_progress')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="kanban-header">
+                <h2>In progress</h2>
+                <img
+                  onmouseover="changePlusImage(event)"
+                  onmouseout="changePlusImage(event)"
+                  onclick="openAddTaskPopUp()"
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+              <div id="in_progress" class="kanban-task-wrapper"></div>
+              <!-- <div id="in_progress_message" class="kanban-empty-message d_none">No tasks in progress</div> -->
             </div>
-            <div id="in_progress" class="kanban-task-wrapper"></div>
-            <!-- <div id="in_progress_message" class="kanban-empty-message d_none">No tasks in progress</div> -->
-          </div>
 
-          <div class="kanban-column" ondrop="drop(event, 'await_feedback')" ondragover="allowDrop(event)">
-            <div class="kanban-header">
-              <h2>Await feedback</h2>
-              <img onmouseover="changePlusImage(event)" onmouseout="changePlusImage(event)" onclick="openAddTaskPopUp()" class="kanban-header-img" src="../assets/img/plus_black.png" alt="plus" />
+            <div
+              class="kanban-column"
+              ondrop="drop(event, 'await_feedback')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="kanban-header">
+                <h2>Await feedback</h2>
+                <img
+                  onmouseover="changePlusImage(event)"
+                  onmouseout="changePlusImage(event)"
+                  onclick="openAddTaskPopUp()"
+                  class="kanban-header-img"
+                  src="../assets/img/plus_black.png"
+                  alt="plus"
+                />
+              </div>
+              <div id="await_feedback" class="kanban-task-wrapper"></div>
+              <!-- <div id="await_feedback_message" class="kanban-empty-message d_none">No tasks awaiting feedback</div> -->
             </div>
-            <div id="await_feedback" class="kanban-task-wrapper"></div>
-               <!-- <div id="await_feedback_message" class="kanban-empty-message d_none">No tasks awaiting feedback</div> -->
-          </div>
 
-          <div class="kanban-column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-            <div class="kanban-header">
-              <h2>Done</h2>
+            <div
+              class="kanban-column"
+              ondrop="drop(event, 'done')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="kanban-header">
+                <h2>Done</h2>
+              </div>
+              <div id="done" class="kanban-task-wrapper"></div>
+              <!-- <div id="done_message" class="kanban-empty-message d_none">No tasks done</div> -->
             </div>
-            <div id="done" class="kanban-task-wrapper"></div>
-             <!-- <div id="done_message" class="kanban-empty-message d_none">No tasks done</div> -->
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- OVERLAY / POP UP BOARD TASK RENDERN-->
-      <div onclick=" closePopUps()" id="overlay_task_pop_up" class="overlay-pop-up-board responsive-pop-up-closed">
-        <div onclick="event.stopPropagation()" id="task_pop_up" class="pop-up-board-wrapper">
-          <!--  <div class="pop-up-board-inner-container">
+        <!-- OVERLAY / POP UP BOARD TASK RENDERN-->
+        <div
+          onclick=" closePopUps()"
+          id="overlay_task_pop_up"
+          class="overlay-pop-up-board responsive-pop-up-closed"
+        >
+          <div
+            onclick="event.stopPropagation()"
+            id="task_pop_up"
+            class="pop-up-board-wrapper"
+          >
+            <!--  <div class="pop-up-board-inner-container">
                 <div class="pop-up-task-header">
                   <div class="header-category">
                     <p>$$Ctgry$$</p>
@@ -251,13 +303,13 @@
                   alt="delete"
                 />
               </div>  -->
+          </div>
         </div>
-      </div>
 
-      <!-- POP UP BOARD EDIT TASK RENDERN-->
-      <section id="edit_task_pop_up" class="d_none">
-        <!-- <div class="overlay-pop-up-edit-task"> -->
-        <!--  <div class="pop-up-edit-task-wrapper">
+        <!-- POP UP BOARD EDIT TASK RENDERN-->
+        <section id="edit_task_pop_up" class="d_none">
+          <!-- <div class="overlay-pop-up-edit-task"> -->
+          <!--  <div class="pop-up-edit-task-wrapper">
             <div class="pop-up-edit-task-inner-container">
               <div class="pop-up-edit-task-headline">
                 <h4>Edit task</h4>
@@ -431,13 +483,21 @@
               </button>
             </div>
           </div> -->
-        <!-- </div> -->
-      </section>
+          <!-- </div> -->
+        </section>
 
-       <!-- POP UP BOARD ADD TASK RENDERN -->
-      <div onclick="closePopUps()" id="overlay_add_task_pop_up" class="overlay-pop-up-add-task responsive-pop-up-closed">
-        <div onclick="event.stopPropagation()" id="add_task_pop_up" class="pop-up-add-task-wrapper">
-         <!--  <div class="headingAndAnEx">
+        <!-- POP UP BOARD ADD TASK RENDERN -->
+        <div
+          onclick="closePopUps()"
+          id="overlay_add_task_pop_up"
+          class="overlay-pop-up-add-task responsive-pop-up-closed"
+        >
+          <div
+            onclick="event.stopPropagation()"
+            id="add_task_pop_up"
+            class="pop-up-add-task-wrapper"
+          >
+            <!--  <div class="headingAndAnEx">
               <h1>Add Task</h1>
               <img onclick="closePopUps()" class="makeEnEx" src="../assets/img/makeEnEx.png" alt="">
             </div>
@@ -534,14 +594,12 @@
                 </button>
               </div>
             </div>  -->
-        </div> 
+          </div>
+        </div>
       </div>
+    </main>
+  </body>
 
-    </div>
-  </main>
-</body>
-
-<script src="../js/database.js" defer></script>
-<script src="../js/user_database.js"></script>
-
+  <script src="../js/database.js"></script>
+  <script src="../js/user_database.js"></script>
 </html>
