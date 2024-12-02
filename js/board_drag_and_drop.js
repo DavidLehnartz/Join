@@ -5,25 +5,6 @@
 
 let draggedTaskId;
 
-/* let columns = {
-    todo: {
-        container: document.getElementById("to_do"),
-        message: document.getElementById("to_do_message"),
-    },
-    in_progress: {
-        container: document.getElementById("in_progress"),
-        message: document.getElementById("in_progress_message"),
-    },
-    await_feedback: {
-        container: document.getElementById("await_feedback"),
-        message: document.getElementById("await_feedback_message"),
-    },
-    done: {
-        container: document.getElementById("done"),
-        message: document.getElementById("done_message"),
-    },
-}; */
-
 
 function startDragging(taskId) {
     draggedTaskId = taskId;
@@ -63,9 +44,6 @@ async function drop(event, targetColumn) {
         task.status = targetColumn;
 
         await updateTaskInDatabase(task);
-
-       /*  renderTasks(); */
-        /* updateColumnEmptyMessage(); */
         await fetchTasksData();
     } else {
         console.error("drop: aufgabe mit ID nicht gefunden:", draggedTaskId);
@@ -96,15 +74,23 @@ async function updateTaskInDatabase(task) {
 }
 
 
-/* function updateColumnEmptyMessage() {
-    for (let column in columns) {
-        let { container, message } = columns[column];
-        if (container.innerHTML.trim() === "") {
-            message.classList.remove("d_done");
-        } else {
-            message.classList.add("d_none");
-        }
-    }
-} */
+function emptyColumnMessage() {
+    const columns = [
+        { tasksWrapper: document.getElementById('to_do'), message: document.getElementById('to_do_message') },
+        { tasksWrapper: document.getElementById('in_progress'), message: document.getElementById('in_progress_message') },
+        { tasksWrapper: document.getElementById('await_feedback'), message: document.getElementById('await_feedback_message') },
+        { tasksWrapper: document.getElementById('done'), message: document.getElementById('done_message') },
+    ];
 
-      
+    columns.forEach(column => {
+        if (column.tasksWrapper.children.length === 0) {
+            column.message.classList.remove('d_none');
+            column.tasksWrapper.classList.add('d_none');
+            /* column.tasksWrapper.style.display = 'none'; */
+        } else {
+            column.message.classList.add('d_none');
+            column.tasksWrapper.classList.remove('d_none');
+            /* column.tasksWrapper.style.display = ''; */
+        }
+    });
+}

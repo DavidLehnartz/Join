@@ -75,8 +75,8 @@ label {
   transform: translate(-50%, -50%);
   justify-content: center;
   text-align: center;
-  color: red;
-  font-size: 16px;
+  color: rgb(41, 171, 226);
+  font-size: 32px;
   font-weight: bold;
 }
 
@@ -307,14 +307,21 @@ progress {
   margin-right: -5px;
 }
 
+.kanban-empty-message-wrapper {
+  display: flex;
+  padding: 0px 16px;
+}
+
 .kanban-empty-message {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 48px;
+  width: 100%;
   background-color: rgb(231, 231, 231);
   border-radius: 10px;
   border: dotted rgb(168, 168, 168);
+  /* border: dotted rgb(41, 171, 226); */
   color: rgb(168, 168, 168);
   cursor: pointer;
 }

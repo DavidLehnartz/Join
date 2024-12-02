@@ -492,4 +492,6 @@ function renderTasks() {
       );
     }
   });
+  emptyColumnMessage();
+  /* removeEmptyColumns(); */
 }

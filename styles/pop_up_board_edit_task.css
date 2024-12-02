@@ -471,9 +471,9 @@ li.added-subtask-item.editing {
   margin-bottom: 8px;
 }
 
-.dropdown-content. {
+/* .dropdown-content {
   display: none;
-}
+} */
 
 .dropdown-contact.checked {
   background-color: #2a3647;
@@ -548,7 +548,7 @@ li.added-subtask-item.editing {
 }
 
 .error-message {
-  color: red;
+  color: rgb(41, 171, 226);
   font-size: 14px;
 }
 

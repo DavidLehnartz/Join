@@ -50,9 +50,11 @@ function showAllTasks() {
 function toggleNoMatchMessage(show) {
     const noMatchMessage = document.getElementById('no_matching_task');
     if (show) {
-        noMatchMessage.style.display = 'block'; 
+        /* noMatchMessage.style.display = 'block';  */
+        noMatchMessage.classList.remove('d_none');
     } else {
-        noMatchMessage.style.display = 'none'; 
+        /* noMatchMessage.style.display = 'none'; */ 
+        noMatchMessage.classList.add('d_none');
     }
 }
 
