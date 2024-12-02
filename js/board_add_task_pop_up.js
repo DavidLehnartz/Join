@@ -29,7 +29,6 @@ function toggleContactDropdown() {
   const dropdown = document.getElementById("categoryDropdown2");
   const arrowElement = document.getElementById("dropdownArrow2");
   const dropdown1 = document.getElementById("selectOnes");
-
   if (dropdown.classList.contains("open")) {
     dropdown.classList.remove("open");
     arrowElement.src = "../assets/img/arrow_drop_downaa.png";
@@ -66,6 +65,7 @@ function handleContactSelection(contactElement, contact, isChecked) {
     selectedContacts = selectedContacts.filter((c) => c.name !== contact.name);
   }
   contactElement.classList.toggle("selected", isChecked);
+  updateSelectedContactsDisplay();
 }
 
 function populateDropdown(dropdown) {
@@ -74,7 +74,7 @@ function populateDropdown(dropdown) {
     const contactElement = document.createElement("div");
     contactElement.classList.add("contact-item");
     if (isSelected(contact.name)) contactElement.classList.add("selected");
-    contactElement.innerHTML = getAddDropdownContactsTemplate(contact);
+    contactElement.innerHTML = createContactHTML(contact, isSelected(contact.name));
     const checkbox = contactElement.querySelector(".contact-checkbox");
     preventDropdownCloseOnSelect(checkbox, contactElement, contact);
     preventDropdownCloseOnSelect(contactElement, contactElement, contact);
@@ -120,29 +120,31 @@ function updateSelectedContactsDisplay() {
   const maxContactsContainer = document.querySelector(".maxContacts");
   badgesContainer.innerHTML = "";
   maxContactsContainer.innerHTML = "";
-  if (selectedContacts.length > 0) {
-    if (selectedContacts.length > 5) {
-      for (let i = 0; i < 5; i++) {
-        const contact = selectedContacts[i];
-        const contactBadge = document.createElement("div");
-        contactBadge.classList.add("contact-badge", `bg-${contact.color}`);
-        contactBadge.textContent = contact.initial;
-        badgesContainer.appendChild(contactBadge);
-      }
-      const remainingCount = selectedContacts.length - 5;
-      const remainingBadge = document.createElement("div");
-      remainingBadge.classList.add("contact-badge", "remaining-contacts-badge");
-      remainingBadge.textContent = `+${remainingCount}`;
-      maxContactsContainer.appendChild(remainingBadge);
-    } else {
-      selectedContacts.forEach((contact) => {
-        const contactBadge = document.createElement("div");
-        contactBadge.classList.add("contact-badge", `bg-${contact.color}`);
-        contactBadge.textContent = contact.initial;
-        badgesContainer.appendChild(contactBadge);
-      });
-    }
+  if (selectedContacts.length === 0) return;
+  const contactsToShow = selectedContacts.slice(0, 5);
+  contactsToShow.forEach((contact) => {
+    const badge = createContactBadge(contact);
+    badgesContainer.appendChild(badge);
+  });
+  if (selectedContacts.length > 5) {
+    const remainingCount = selectedContacts.length - 5;
+    const remainingBadge = createRemainingBadge(remainingCount);
+    maxContactsContainer.appendChild(remainingBadge);
   }
+}
+
+function createContactBadge(contact) {
+  const badge = document.createElement("div");
+  badge.classList.add("contact-badge", `bg-${contact.color}`);
+  badge.textContent = contact.initial;
+  return badge;
+}
+
+function createRemainingBadge(count) {
+  const badge = document.createElement("div");
+  badge.classList.add("contact-badge", "remaining-contacts-badge");
+  badge.textContent = `+${count}`;
+  return badge;
 }
 
 function toggleDropdown() {
@@ -196,7 +198,7 @@ function restorePriority() {
   setPriority(mediumPriorityBtn, "medium");
 }
 
-function addSubtask() {
+function initializeSubtaskInput() {
   const inputField = document.getElementById("inputFieldSubtask");
   const iconWrapper = document.getElementById("iconWrapper");
   const actionIcon = document.getElementById("actionIcon");
@@ -204,40 +206,39 @@ function addSubtask() {
   inputField.focus();
   actionIcon.src = "../assets/img/Propertycheck.png";
   if (!document.getElementById("closeIcon")) {
-    iconWrapper.insertAdjacentHTML(
-      "afterbegin",
-      `
-            <img src="../assets/img/close.png" class="icon" id="closeIcon" onclick="cancelSubtask()">
-        `
-    );
+      iconWrapper.insertAdjacentHTML("afterbegin", createCloseIconHTML());
   }
+  return { inputField, actionIcon };
+}
+
+/**
+* Handles the addition of a new subtask.
+* Adds the subtask to the list and resets the input field for further use.
+* @param {HTMLElement} inputField - The input field for subtasks.
+* @param {HTMLElement} actionIcon - The action icon to trigger subtask addition.
+*/
+function handleSubtaskAddition(inputField, actionIcon) {
   actionIcon.onclick = function () {
-    const subtaskText = inputField.value.trim();
-    if (subtaskText !== "") {
-      const subtaskList = document.getElementById("subtaskList");
-      subtaskList.insertAdjacentHTML(
-        "beforeend",
-        `
-                <div class="subtask-item">
-                    <span class="subtask-text">${subtaskText}</span>
-                    <div class="subtask-icons">
-                        <img src="../assets/img/edit.png" alt="Edit" class="icon" onclick="editSubtask(this.closest('.subtask-item'))">
-                        <div class="separator"></div>
-                        <img src="../assets/img/delete.png" alt="Delete" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
-                    </div>
-                </div>
-            `
-      );
-      subtasksData.push({
-        name: subtaskText,
-        completed: false,
-      });
-      inputField.value = "";
-      inputField.focus();
-    }
+      const subtaskText = inputField.value.trim();
+      if (subtaskText !== "") {
+          const subtaskList = document.getElementById("subtaskList");
+          subtaskList.insertAdjacentHTML("beforeend", createSubtaskHTML(subtaskText));
+          subtasksData.push({ name: subtaskText, completed: false });
+          inputField.value = "";
+          inputField.focus();
+      }
   };
 }
 
+function addSubtask() {
+  const { inputField, actionIcon } = initializeSubtaskInput();
+  handleSubtaskAddition(inputField, actionIcon);
+}
+
+/**
+* Cancels the subtask addition process.
+* Resets the input field, removes the close icon, and restores the default action icon.
+*/
 function cancelSubtask() {
   const inputField = document.getElementById("inputFieldSubtask");
   const iconWrapper = document.getElementById("iconWrapper");
@@ -247,59 +248,64 @@ function cancelSubtask() {
   actionIcon.src = "../assets/img/Propertyadd.png";
   const closeIcon = document.getElementById("closeIcon");
   if (closeIcon) {
-    iconWrapper.removeChild(closeIcon);
+      iconWrapper.removeChild(closeIcon);
   }
   actionIcon.onclick = addSubtask;
 }
 
+/**
+* Edits an existing subtask by replacing its text with an input field.
+* Provides icons for confirming or canceling the edit and handles input events.
+* @param {HTMLElement} subtaskItem - The subtask item to be edited.
+*/
 function editSubtask(subtaskItem) {
   const textElement = subtaskItem.querySelector(".subtask-text");
   const currentText = textElement.textContent.trim();
   subtaskItem.classList.add("editing");
-  subtaskItem.querySelector(".subtask-text").outerHTML = `
-        <input type="text" class="subtaskInput" value="${currentText}" style="width: 100%; height: ${subtaskItem.offsetHeight}px; background-color: #fff; border: none; outline: none;">
-    `;
+  textElement.outerHTML = createSubtaskInputHTML(currentText, subtaskItem.offsetHeight);
   const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
-  iconsWrapper.innerHTML = `
-        <img src="../assets/img/delete.png" alt="Löschen" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
-        <div class="separator3"></div>
-        <img src="../assets/img/propertychecktwo.png" alt="Speichern" class="icon" onclick="finishEditing(this.closest('.subtask-item').querySelector('.subtaskInput'), this.closest('.subtask-item').querySelector('.subtask-text'), this.closest('.subtask-item'))">
-    `;
+  iconsWrapper.innerHTML = createEditingIconsHTML();
   const input = subtaskItem.querySelector(".subtaskInput");
   input.focus();
   input.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      finishEditing(input, textElement, subtaskItem);
-    }
+      if (event.key === "Enter") {
+          finishEditing(input, textElement, subtaskItem);
+      }
   });
   input.addEventListener("blur", function () {
-    finishEditing(input, textElement, subtaskItem);
+      finishEditing(input, textElement, subtaskItem);
   });
 }
 
+/**
+* Listens for checkbox clicks and logs the associated contact name.
+*/
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("contact-checkbox")) {
-    console.log("Checkbox clicked:", event.target.dataset.name);
+      console.log("Checkbox clicked:", event.target.dataset.name);
   }
 });
 
+/**
+* Completes the editing process for a subtask.
+* Updates the subtask's text and data, and restores the default icons.
+* @param {HTMLElement} input - The input field used for editing.
+* @param {HTMLElement} textElement - The original text element of the subtask.
+* @param {HTMLElement} subtaskItem - The subtask item being edited.
+*/
 function finishEditing(input, textElement, subtaskItem) {
   const newText = input.value.trim();
   textElement.textContent = newText !== "" ? newText : input.value;
   input.replaceWith(textElement);
   subtaskItem.classList.remove("editing");
   const subtask = subtasksData.find(
-    (sub) => sub.name === textElement.textContent
+      (sub) => sub.name === textElement.textContent
   );
   if (subtask) {
-    subtask.name = newText;
+      subtask.name = newText;
   }
   const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
-  iconsWrapper.innerHTML = `
-    <img src="../assets/img/edit.png" alt="Bearbeiten" class="icon" onclick="editSubtask(this.closest('.subtask-item'))">
-    <div class="separator"></div>
-    <img src="../assets/img/delete.png" alt="Löschen" class="icon" onclick="deleteSubtask(this.closest('.subtask-item'))">
-`;
+  iconsWrapper.innerHTML = createDefaultIconsHTML();
 }
 
 function deleteSubtask(subtaskItem) {
@@ -321,26 +327,26 @@ function clearFormInputs() {
 
 function clearCheckboxesAndDropdowns() {
   const checkboxesAndRadios = document.querySelectorAll(
-    'input[type="checkbox"], input[type="radio"]'
+      'input[type="checkbox"], input[type="radio"]'
   );
   checkboxesAndRadios.forEach((input) => {
-    input.checked = false;
+      input.checked = false;
   });
   const dropdowns = document.querySelectorAll("select");
   dropdowns.forEach((dropdown) => {
-    dropdown.selectedIndex = 0;
+      dropdown.selectedIndex = 0;
   });
 }
 
 function resetSpecialFields() {
   const subtaskInput = document.getElementById("inputFieldSubtask");
   if (subtaskInput) {
-    subtaskInput.value = "";
-    subtaskInput.disabled = true;
+      subtaskInput.value = "";
+      subtaskInput.disabled = true;
   }
   const selectedCategoryElement = document.getElementById("selectedCategory");
   if (selectedCategoryElement) {
-    selectedCategoryElement.textContent = "Select task category";
+      selectedCategoryElement.textContent = "Select task category";
   }
   resetButtons();
   restorePriority();
@@ -360,17 +366,17 @@ function clearEverything() {
 function clearSelectedContacts() {
   const selectedContactsElement = document.getElementById("selectedContacts");
   if (selectedContactsElement) {
-    selectedContactsElement.textContent = "Select Contacts to assign";
+      selectedContactsElement.textContent = "Select Contacts to assign";
   }
   const selectedContactsBadges = document.getElementById(
-    "selectedContactsBadges"
+      "selectedContactsBadges"
   );
   if (selectedContactsBadges) {
-    selectedContactsBadges.innerHTML = "";
+      selectedContactsBadges.innerHTML = "";
   }
   const contactCheckboxes = document.querySelectorAll(".contact-checkbox");
   contactCheckboxes.forEach((checkbox) => {
-    checkbox.checked = false;
+      checkbox.checked = false;
   });
   selectedContacts = [];
 }
@@ -379,26 +385,54 @@ function checkForm() {
   const title = document.getElementById("inputFieldTitle");
   const dueDate = document.getElementById("inputFieldDueDate");
   const selectedCategory = document.getElementById("selectedCategory");
-  let formIsValid = true;
+  const isTitleValid = validateTitle(title);
+  const isDueDateValid = validateDueDate(dueDate);
+  const isCategoryValid = validateCategory(selectedCategory);
+  const formIsValid = isTitleValid && isDueDateValid && isCategoryValid;
+  toggleSubmitButton(formIsValid);
+}
+
+function validateTitle(title) {
   if (title.value.trim() === "") {
-    title.style.border = "2px solid red";
-    formIsValid = false;
+      title.style.border = "2px solid red";
+      return false;
   } else {
-    title.style.border = "";
+      title.style.border = "";
+      return true;
   }
+}
+
+/**
+* Validates the due date input field.
+* @param {HTMLElement} dueDate - The due date input field.
+* @returns {boolean} True if the due date is valid, otherwise false.
+*/
+function validateDueDate(dueDate) {
   if (dueDate.value === "") {
-    dueDate.style.border = "2px solid red";
-    formIsValid = false;
+      dueDate.style.border = "2px solid red";
+      return false;
   } else {
-    dueDate.style.border = "";
+      dueDate.style.border = "";
+      return true;
   }
+}
+
+function validateCategory(selectedCategory) {
   if (selectedCategory.textContent.trim() === "Select task category") {
-    selectedCategory.parentElement.style.border = "2px solid red";
-    formIsValid = false;
+      selectedCategory.parentElement.style.border = "2px solid red";
+      return false;
   } else {
-    selectedCategory.parentElement.style.border = "";
+      selectedCategory.parentElement.style.border = "";
+      return true;
   }
-  document.getElementById("createTaskBtn").disabled = !formIsValid;
+}
+
+/**
+* Enables or disables the submit button based on form validation results.
+* @param {boolean} isFormValid - Whether the form is valid.
+*/
+function toggleSubmitButton(isFormValid) {
+  document.getElementById("createTaskBtn").disabled = !isFormValid;
 }
 
 function gatherTaskData() {
@@ -408,65 +442,54 @@ function gatherTaskData() {
   const priority = getPriority();
   const category = document.getElementById("selectedCategory").textContent;
   return {
-    title,
-    description,
-    dueDate,
-    priority,
-    category,
-    subtasks: subtasksData,
-    assignedTo: selectedContacts,
-    status: "todo",
+      title,
+      description,
+      dueDate,
+      priority,
+      category,
+      subtasks: subtasksData,
+      assignedTo: selectedContacts,
+      status: "todo",
   };
 }
 
 function getPriority() {
-  if (
-    document
-      .getElementById("inputFieldUrgent")
-      .classList.contains("active-urgent")
-  ) {
-    return "Urgent";
-  } else if (
-    document
-      .getElementById("inputFieldMedium")
-      .classList.contains("active-medium")
-  ) {
-    return "Medium";
-  } else if (
-    document.getElementById("inputFieldLow").classList.contains("active-low")
-  ) {
-    return "Low";
+  if (document.getElementById("inputFieldUrgent").classList.contains("active-urgent")) {
+      return "Urgent";
+  } else if (document.getElementById("inputFieldMedium").classList.contains("active-medium")) {
+      return "Medium";
+  } else if (document.getElementById("inputFieldLow").classList.contains("active-low")) {
+      return "Low";
   }
   return "None";
 }
 
 async function sendTaskToApi(taskData) {
   try {
-    const response = await fetch(`${BASE_URL}/tasks.json`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(taskData),
-    });
-
-    return response.ok;
+      const response = await fetch(`${BASE_URL}/tasks.json`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(taskData),
+      });
+      return response.ok;
   } catch (error) {
-    console.error("Error saving task:", error);
-    return false;
+      console.error("Error saving task:", error);
+      return false;
   }
 }
 
 function handleTaskCreationResponse(success) {
   if (success) {
-    const message = document.querySelector(".showMe");
-    message.classList.remove("d-none");
-    setTimeout(() => {
-      window.location.href = "board.html";
-      message.classList.add("d-none");
-    }, 2900);
+      const message = document.querySelector(".showMe");
+      message.classList.remove("d-none");
+      setTimeout(() => {
+          window.location.href = "board.html";
+          message.classList.add("d-none");
+      }, 2900);
   } else {
-    console.error("Task creation failed.");
+      console.error("Task creation failed.");
   }
 }
 
