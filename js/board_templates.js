@@ -1,6 +1,11 @@
 "use strict";
 
 /* BOARD TEMPLATES */
+
+/**
+ * Creates the HTML template for the left sidebar of the application.
+ * @returns {string} The HTML structure of the sidebar as a string.
+ */
 function getSidebarTemplate() {
   return `
         <div class="left-sidebar">
@@ -47,6 +52,10 @@ function getSidebarTemplate() {
     `;
 }
 
+/**
+ * Creates the HTML template for the application's header.
+ * @returns {string} The HTML structure of the header as a string.
+ */
 function getHeaderTemplate() {
   return `
         <div class="header-wrapper">
@@ -70,6 +79,10 @@ function getHeaderTemplate() {
     `;
 }
 
+/**
+ * Creates the HTML template for the board's headline section.
+ * @returns {string} The HTML structure of the headline section as a string.
+ */
 function getBoardHeadlineTemplate() {
   return `
           <div class="headline">
@@ -137,14 +150,17 @@ function getBoardHeadlineTemplate() {
     `;
 }
 
-function getTasksTemplate(
-  task,
-  priorityImage,
-  categoryColor,
-  assigneeInitials,
-  subtaskProgressHTML,
-  progressPercentage
-) {
+/**
+ * Generates the HTML template for a single task on the Kanban board.
+ * @param {Object} task - The task object containing details like ID, title, description, and category.
+ * @param {string} priorityImage - The path to the image representing the task's priority.
+ * @param {string} categoryColor - The background color representing the task's category.
+ * @param {string} assigneeInitials - HTML content for assignee initials.
+ * @param {string} subtaskProgressHTML - HTML content representing the subtasks progress.
+ * @param {number} progressPercentage - The progress percentage of the task.
+ * @returns {string} The HTML structure of a single task as a string.
+ */
+function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials, subtaskProgressHTML, progressPercentage) {
   return `    
           <div id="${task.id}" onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" ondragend="endDragging('${task.id}')" class="kanban-task task">
                 <div class="kanban-task-header"  style="background-color: ${categoryColor};">
@@ -174,12 +190,15 @@ function getTasksTemplate(
 `;
 }
 
-function getTaskPopUpTemplate(
-  task,
-  priorityImage,
-  categoryColor,
-  assigneeContent
-) {
+/**
+ * Generates the HTML template for the task popup window.
+ * @param {Object} task - The task object containing details like ID, title, description, and category.
+ * @param {string} priorityImage - The path to the image representing the task's priority.
+ * @param {string} categoryColor - The background color representing the task's category.
+ * @param {string} assigneeContent - HTML content for assignee details.
+ * @returns {string} The HTML structure of the task popup as a string.
+ */
+function getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeContent) {
   return `
           <div class="pop-up-board-inner-container">
                 <div class="pop-up-task-header">
@@ -254,6 +273,11 @@ function getTaskPopUpTemplate(
     `;
 }
 
+/**
+ * Creates the HTML template for editing a task in the popup window.
+ * @param {Object} task - The task object containing details such as title, description, and due date.
+ * @returns {string} The HTML structure of the edit task popup as a string.
+ */
 function getEditTaskPopUpTemplate(task) {
   return `
           <div class="pop-up-edit-task-wrapper responsive-pop-up-closed">
@@ -397,6 +421,13 @@ function getEditTaskPopUpTemplate(task) {
     `;
 }
 
+/**
+ * Generates the HTML template for a single subtask in the task editor.
+ * @param {string} taskId - The ID of the parent task.
+ * @param {Object} subtask - The subtask object containing its details.
+ * @param {number} index - The index of the subtask within the list.
+ * @returns {string} The HTML structure of a single subtask as a string.
+ */
 function getSubtasksTemplate(taskId, subtask, index) {
   return `
           <div class="subtask" id="subtask_${taskId}_${index}">
@@ -409,6 +440,11 @@ function getSubtasksTemplate(taskId, subtask, index) {
   `;
 }
 
+/**
+ * Generates the HTML template for adding a contact to the dropdown list.
+ * @param {Object} contact - The contact object containing properties like name, color, and initials.
+ * @returns {string} The HTML structure for adding a contact to the dropdown.
+ */
 function getAddDropdownContactsTemplate(contact) {
   return `<div class="nameInitials">
           <div class="contact-initials bg-${contact.color}">
@@ -424,6 +460,11 @@ function getAddDropdownContactsTemplate(contact) {
     `;
 }
 
+/**
+ * Creates the HTML template for a single contact in the dropdown menu.
+ * @param {Object} contact - The contact object containing ID, name, initials, and color properties.
+ * @returns {string} The HTML structure of a contact in the dropdown menu as a string.
+ */
 function getDropdownContactsTemplate(contact) {
   return `
          <div  class="dropdown-contact" onclick="toggleCheckboxContact('${contact.id}')" id="selected_contact">
@@ -436,6 +477,11 @@ function getDropdownContactsTemplate(contact) {
   `;
 }
 
+/**
+ * Creates the HTML template for a selected contact in the dropdown menu.
+ * @param {Object} contact - The contact object containing ID, name, initials, and color properties.
+ * @returns {string} The HTML structure of a selected contact in the dropdown menu.
+ */
 function getSelectedDropdownContactsTemplate(contact) {
   return `
          <div  class="dropdown-contact checked" onclick="toggleCheckboxContact('${contact.id}')" id="selected_contact">
@@ -448,6 +494,11 @@ function getSelectedDropdownContactsTemplate(contact) {
   `;
 }
 
+/**
+ * Generates the HTML template for displaying assignee initials.
+ * @param {Object} assignee - The assignee object containing their initials and color properties.
+ * @returns {string} The HTML structure of an assignee's initials as a string.
+ */
 function getAssigneeInitialsTemplate(assignee) {
   return `
          <div class="initials bg-${assignee.color}";>
@@ -456,6 +507,11 @@ function getAssigneeInitialsTemplate(assignee) {
   `;
 }
 
+/**
+ * Generates the HTML template for displaying a list of assigned contacts.
+ * @param {Array} assignedTo - Array of assignee objects with properties `name`, `color`, and `initial`.
+ * @returns {string} The HTML structure for displaying the assigned contacts or a message if no contacts are assigned.
+ */
 function getAssigneesTemplate(assignedTo) {
   if (Array.isArray(assignedTo)) {
     return assignedTo
@@ -478,12 +534,24 @@ function getAssigneesTemplate(assignedTo) {
   return `<p>No contacts selected</p> `;
 }
 
+/**
+ * Creates the HTML template for a selected contact badge.
+ * @param {Object} contact - The contact object containing properties `initial` and `color`.
+ * @returns {string} The HTML structure of the selected contact badge.
+ */
 function getSelectedContactsTemplate(contact) {
   return `
           <div id="selected_contact" class="selected-contact bg-${contact.color}">${contact.initial}</div>
   `;
 }
 
+/**
+ * Generates the HTML template for a single subtask.
+ * @param {string} taskId - The ID of the parent task.
+ * @param {Object} subtask - The subtask object containing its name.
+ * @param {number} index - The index of the subtask within the list.
+ * @returns {string} The HTML structure of a single subtask with an unchecked checkbox.
+ */
 function getSubtasksTemplate(taskId, subtask, index) {
   return `
           <div class="subtask" id="subtask_${taskId}_${index}">
@@ -496,6 +564,13 @@ function getSubtasksTemplate(taskId, subtask, index) {
   `;
 }
 
+/**
+ * Generates the HTML template for a completed subtask.
+ * @param {string} taskId - The ID of the parent task.
+ * @param {Object} subtask - The subtask object containing its name.
+ * @param {number} index - The index of the subtask within the list.
+ * @returns {string} The HTML structure of a completed subtask with a checked checkbox.
+ */
 function getDoneSubtasksTemplate(taskId, subtask, index) {
   return `
           <div class="subtask" id="subtask_${taskId}_${index}">
@@ -508,6 +583,11 @@ function getDoneSubtasksTemplate(taskId, subtask, index) {
   `;
 }
 
+/**
+ * Creates the HTML template for a subtask that has been added to the task editor.
+ * @param {Object} addedSubtask - The subtask object containing properties `id` and `name`.
+ * @returns {string} The HTML structure for an added subtask, including edit and delete buttons.
+ */
 function getAddedSubtasksTemplate(addedSubtask) {
   return `
           <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item" data-id="${addedSubtask.id}">
@@ -521,6 +601,10 @@ function getAddedSubtasksTemplate(addedSubtask) {
         `;
 }
 
+/**
+ * Generates the HTML template for the "Add Task" popup.
+ * @returns {string} The HTML structure of the "Add Task" popup.
+ */
 function getAddTaskPopUpTemplate() {
   return `
          <div class="headingAndAnEx">
@@ -628,6 +712,12 @@ function getAddTaskPopUpTemplate() {
   `;
 }
 
+/**
+ * Generates the HTML template for the button container with cancel and check images.
+ * @param {string} taskId - The ID of the task associated with the button container.
+ * @returns {string} The HTML structure of the button container.
+ */
+
 function getBeforeButtonContainer(taskId) {
   return `
           <button class="pop-up-edit-task-input-btn">
@@ -640,6 +730,11 @@ function getBeforeButtonContainer(taskId) {
   `;
 }
 
+/**
+ * Creates the HTML template for a button container with a single "add" image.
+ * @returns {string} The HTML structure of the button container.
+ */
+
 function getAfterButtonContainer() {
   return `
           <button class="pop-up-edit-task-input-btn">
@@ -647,6 +742,13 @@ function getAfterButtonContainer() {
           </button> 
   `;
 }
+
+/**
+ * Generates the HTML template for editing a subtask input field with associated buttons.
+ * @param {string} id - The ID of the subtask being edited.
+ * @param {Object} subtask - The subtask object containing its name.
+ * @returns {string} The HTML structure for editing a subtask input field.
+ */
 
 function getEditSubtaskInput(id, subtask) {
   return `
@@ -666,42 +768,3 @@ function getEditSubtaskInput(id, subtask) {
           </div>
   `;
 }
-
-/* function getNavbarResponsiveTemplate() {
-  return `
-          <div class="navbar-links-responsive">
-            <a class="navbar-links" href="#">
-              <img
-                class="navbar-icons"
-                src="../assets/img/summary.png"
-                alt="Summary"
-              />
-              <p>Summary</p>
-            </a>
-            <a class="navbar-links" href="#">
-              <img
-                class="navbar-icons"
-                src="../assets/img/add_task.png"
-                alt="Add Task"
-              />
-              <p>Add Task</p>
-            </a>
-            <a class="navbar-links" href="#">
-              <img
-                class="navbar-icons"
-                src="../assets/img/board.png"
-                alt="Board"
-              />
-              <p>Board</p>
-            </a>
-            <a class="navbar-links" href="#">
-              <img
-                class="navbar-icons"
-                src="../assets/img/contacts.png"
-                alt="Contacts"
-              />
-              <p>Contacts</p>
-            </a>
-          </div>
-    `;
-} */

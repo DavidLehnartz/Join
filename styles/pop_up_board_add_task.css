@@ -8,8 +8,6 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-  /*  cursor: pointer; */
-
   transition: all 250ms ease-in-out;
 }
 
@@ -25,23 +23,7 @@
   background-color: white;
   transform: translate(-50%, -50%);
   padding: 48px 40px;
-  /* transition: all 250ms ease-in-out; */
 }
-
-/* body {
-    display: flex;
-    margin: 0px auto;
-    width: 100%;
-    min-height: 100vh;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    background-color: rgb(246, 247, 248);
-    font-family: "Inter", sans-serif;
-}
-
-main {
-    flex: 1;
-} */
 
 a {
   text-decoration: none;
@@ -134,10 +116,6 @@ h1 {
 
 .assignedToSpanStyle {
   margin-top: 20px;
-}
-
-.SubtaskSpanStyle {
-  /* margin-top: 30px; */
 }
 
 .selectContactsToAssign {
@@ -505,16 +483,6 @@ textarea {
   filter: invert(50%) sepia(1) saturate(4) hue-rotate(160deg);
 }
 
-/* .create-task-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  background-color: rgb(42, 54, 71);
-  color: #fff;
-  border-color: #2a3647;
-} */
-
 .create-task-btn {
   display: flex;
   justify-content: center;
@@ -526,17 +494,11 @@ textarea {
   background-color: #2a3647 !important;
 }
 
-/* .create-task-btn:hover {
-  border-color: #29abe2;
-  box-shadow: 0 0 10px rgba(42, 54, 71, 0.5);
-} */
-
 .create-task-btn:hover {
   border-color: #29ABE2;
   box-shadow: 0 0 10px rgba(42, 54, 71, 0.5);
   background-color: #29ABE2 !important;
 }
-
 
 .buttonWrapper {
   display: flex;
@@ -651,7 +613,6 @@ textarea {
 .contact-item:hover {
   background-color: #D1D1D1;
   border-radius: 5px;
-
 }
 
 .contact-item span:hover {
@@ -708,19 +669,12 @@ textarea {
   align-items: end;
 }
 
-
 /* MEDIA QUERY */
-
-/* HINZUGEFÜGT */
 
 @media (max-width: 1000px) {
   .pop-up-add-task-wrapper {
     width: 80%;
   }
-
-  /* h1 {
-    font-size: 30px;
-  } */
 
   .placeholder {
     font-size: 15px !important;
@@ -742,11 +696,6 @@ textarea {
     height: 45px;
   }
 
-  /* .inputStyle {
-  height: 80px;
-  margin-top: 10px;
-} */
-
   .mobileSpanStyle {
     margin: 0px;
   }
@@ -756,7 +705,6 @@ textarea {
   .pop-up-add-task-wrapper {
     height: 90vh;
     width: 90%;
-    /* padding: 16px; */
   }
 
   .addTaskFooterLeftSide{
@@ -790,7 +738,6 @@ textarea {
   }
 }
 
-
 @media (max-width: 550px) {
   .addTaskFooter {
     flex-direction: column-reverse;
@@ -800,15 +747,12 @@ textarea {
 }
 
 @media (max-width: 350px) {
-
   .clear-btn,
   .create-task-btn {
     padding: 10px 10px;
-
   }
 
   .clear-task-button {
     margin-top: 10px;
   }
-
 }

@@ -20,15 +20,17 @@
     <!-- <link rel="stylesheet" href="../styles/pop_up_add_task.css"> -->
 
     <script src="../js/board_database.js" defer></script>
+    <script src="../js/database.js" defer></script>
+    <script src="../js/user_database.js" defer></script>
     <script src="../js/desktop_template.js"></script>
     <script src="../js/board_templates.js" defer></script>
+    <script src="../js/add_task_template.js" defer></script>
     <script src="../js/board_drop_down.js" defer></script>
     <script src="../js/board_drag_and_drop.js" defer></script>
     <script src="../js/board_filter.js" defer></script>
     <script src="../js/board_add_task_pop_up.js"></script>
     <!-- <script src="../js/floatingAddTaskBacklog.js" defer></script> -->
     <script src="../js/board.js" defer></script>
-    <script src="../js/add_task_template.js"></script>
   </head>
 
   <!-- TASKS
@@ -42,10 +44,24 @@ werden diese übernommen und im task aktualisiert ?
 * datum im task pop up richtig anzeigen.
 *****
 
-* klick events benutzen, anstatt onclick usw. im html code
+* responsive checken
 *****
 
-* Aufräumen und Doku
+* Aufräumen !!!
+funktionen kürzen, wenn nötig,
+nicht benötigte funktionen entfernen,
+nicht benötigtes html entfernen,
+nicht benötigtes css entfernen,
+console logs entfernen,
+add floating task entfernen,
+zeilenabstand,
+*****
+
+*
+Doku
+*****
+
+* Board add task doku
 *****
 -->
 
@@ -170,7 +186,10 @@ werden diese übernommen und im task aktualisiert ?
                 />
               </div>
               <div class="kanban-empty-message-wrapper">
-                <div id="in_progress_message" class="kanban-empty-message d_none">
+                <div
+                  id="in_progress_message"
+                  class="kanban-empty-message d_none"
+                >
                   No tasks in progress
                 </div>
               </div>
@@ -195,7 +214,10 @@ werden diese übernommen und im task aktualisiert ?
                 />
               </div>
               <div class="kanban-empty-message-wrapper">
-                <div id="await_feedback_message" class="kanban-empty-message d_none">
+                <div
+                  id="await_feedback_message"
+                  class="kanban-empty-message d_none"
+                >
                   No tasks awaiting feedback
                 </div>
               </div>
@@ -614,7 +636,4 @@ werden diese übernommen und im task aktualisiert ?
       </div>
     </main>
   </body>
-
-  <script src="../js/database.js"></script>
-  <script src="../js/user_database.js"></script>
 </html>

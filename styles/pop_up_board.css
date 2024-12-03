@@ -13,8 +13,6 @@ h4 {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-  /*  cursor: pointer; */
-
   transition: all 250ms ease-in-out;
 }
 
@@ -30,7 +28,6 @@ h4 {
   background-color: white;
   transform: translate(-50%, -50%);
   padding: 48px 40px;
-  /* transition: all 250ms ease-in-out; */
 }
 
 .responsive-pop-up-closed {
@@ -55,7 +52,6 @@ h4 {
   display: flex;
   justify-content: center;
   align-items: center;
-  /*  height: 36px; */
   border-radius: 8px;
   padding: 4px 24px;
   background-color: blue;
@@ -86,7 +82,6 @@ h4 {
 
 .pop-up-title {
   display: flex;
-  /* overflow-wrap: anywhere; */
 }
 
 .pop-up-description {
@@ -156,9 +151,6 @@ h4 {
   font-weight: bold;
 }
 
-.initial-name {
-}
-
 .assigned-to-profil-icons {
   width: 42px;
   height: 42px;
@@ -168,17 +160,14 @@ h4 {
   display: flex;
   flex-direction: column;
   gap: 8px;
-
   font-size: 20px;
 }
 
 .single-subtasks-wrapper {
   display: flex;
   flex-direction: column;
-  /* width: 344px; */
   gap: 16px;
   padding: 4px 16px;
-
   font-size: 16px;
 }
 

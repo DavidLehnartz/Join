@@ -1,35 +1,24 @@
-'use strict';
+"use strict";
 
 /* DRAG AND DROP */
 
-
 let draggedTaskId;
 
-
-function startDragging(taskId) {
-    draggedTaskId = taskId;
-    console.log("startDragging: Task ID gesetzt zum Ziehen:", draggedTaskId);
-
-    let taskElement = document.getElementById(taskId);
-    if (taskElement) {
-        taskElement.classList.add("dragged");
-    }
-}
-
-function endDragging(taskId) {
-    let taskElement = document.getElementById(taskId);
-    if (taskElement) {
-        taskElement.classList.remove("dragged");
-    }
-}
-
-
+/**
+ * Prevents the default behavior of the event to allow dropping in the specified target area.
+ * @param {Event} event - The event object representing the drop event.
+ */
 function allowDrop(event) {
     event.preventDefault();
     console.log("allowDrop: Event erlaubt");
 }
 
-
+/**
+ * Handles the drop event when a dragged task is dropped into a new target column. Updates the task's status and saves it in the database.
+ * @param {Event} event - The event object representing the drop event.
+ * @param {string} targetColumn - The target column where the task is being dropped (e.g., 'to_do', 'in_progress').
+ * @async
+ */
 async function drop(event, targetColumn) {
     event.preventDefault();
     console.log("drop: funktion ausgelöst");
@@ -50,7 +39,36 @@ async function drop(event, targetColumn) {
     }
 }
 
+/**
+ * Marks a task as being dragged by adding the "dragged" CSS class to it. Sets the `draggedTaskId` to the ID of the task being dragged.
+ * @param {string} taskId - The ID of the task that is being dragged.
+ */
+function startDragging(taskId) {
+    draggedTaskId = taskId;
+    console.log("startDragging: Task ID gesetzt zum Ziehen:", draggedTaskId);
 
+    let taskElement = document.getElementById(taskId);
+    if (taskElement) {
+        taskElement.classList.add("dragged");
+    }
+}
+
+/**
+ * Removes the "dragged" CSS class from the task when dragging ends, indicating the task is no longer being dragged.
+ * @param {string} taskId - The ID of the task whose dragging has ended.
+ */
+function endDragging(taskId) {
+    let taskElement = document.getElementById(taskId);
+    if (taskElement) {
+        taskElement.classList.remove("dragged");
+    }
+}
+
+/**
+ * Updates the task status in the database after a task is dropped into a new column.
+ * @param {Object} task - The task object that is being updated.
+ * @async
+ */
 async function updateTaskInDatabase(task) {
     console.log("updateTaskInDatabase: in datenbank gespeichert:", task);
 
@@ -73,7 +91,9 @@ async function updateTaskInDatabase(task) {
     }
 }
 
-
+/**
+ * Toggles the visibility of the "no tasks" message for each column based on whether it contains any tasks. If a column is empty, the message is displayed; otherwise, it is hidden.
+ */
 function emptyColumnMessage() {
     const columns = [
         { tasksWrapper: document.getElementById('to_do'), message: document.getElementById('to_do_message') },
@@ -94,3 +114,4 @@ function emptyColumnMessage() {
         }
     });
 }
+

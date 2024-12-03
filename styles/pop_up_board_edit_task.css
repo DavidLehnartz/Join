@@ -23,7 +23,6 @@
   transform: translate(-50%, -50%);
   padding: 48px 40px;
   gap: 24px;
-
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -65,7 +64,6 @@
   padding: 12px 21px;
   font-size: 20px;
   cursor: pointer;
-
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
@@ -92,7 +90,6 @@
   overflow-y: auto;
   scrollbar-width: none;
   cursor: pointer;
-
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
@@ -139,10 +136,6 @@
   box-shadow: 0px 2px 4px 0px rgb(170 170 170);
 }
 
-/* .prio-urgent-active, .prio-medium-active, .prio-low-active {
-  color: white;
-}
- */
 .prio-low-active {
   display: flex;
   align-items: center;
@@ -240,9 +233,6 @@ select {
 .pop-up-edit-task-input-btn-img {
   width: 25px;
   height: 25px;
-  /* position: relative;
-  left: 357px;
-  bottom: 45px; */
 }
 
 .pop-up-edit-task-input-btn-img:hover {
@@ -267,21 +257,6 @@ select {
   flex-direction: column;
 }
 
-/* .added-subtask-item{
-
-}
-
-li {
-  display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    list-style-type: disc;
-    list-style-position: inside; 
-}
-
 li:hover {
   border-radius: 10px;
   background-color: rgb(246, 247, 248);
@@ -302,7 +277,7 @@ li:hover {
 .icon-container-images:hover{
   transition: transform 0.1s;
   transform: scale(1.1);
-} */
+}
 
 ul {
   margin: 0px;
@@ -317,8 +292,8 @@ li.added-subtask-item {
   font-size: 16px;
   cursor: pointer;
   position: relative;
-  list-style-type: disc; /* Standard-Punkt */
-  transition: background-color 0.3s ease; /* Weicher Übergang */
+  list-style-type: disc; 
+  transition: 0.3s ease; 
 }
 
 li.added-subtask-item::before {
@@ -344,9 +319,7 @@ li.added-subtask-item:hover {
 }
 
 li.added-subtask-item.editing {
-  background-color: transparent; /* Entfernt Hover-Hintergrund */
-  list-style-type: none; /* Entfernt den Punkt */
-  cursor: default; /* Kein Pointer-Cursor */
+  background-color: transparent; /
 }
 
 .icon-container-images {
@@ -364,10 +337,10 @@ li.added-subtask-item.editing {
   font-size: 16px;
   padding: 4px;
   border: none;
-  border-bottom: 1px solid rgb(41, 171, 226); /* Blauer horizontaler Streifen */
-  outline: none; /* Entfernt den Fokusrahmen */
-  width: 100%; /* Passt die Breite an */
-  box-sizing: border-box; /* Bezieht Padding und Border in die Breite ein */
+  border-bottom: 1px solid rgb(41, 171, 226); 
+  outline: none; 
+  width: 100%; 
+  box-sizing: border-box; 
 }
 
 .pop-up-edit-task-footer {
@@ -384,7 +357,6 @@ li.added-subtask-item.editing {
   color: white;
   padding: 16px;
   gap: 4px;
-
   font-size: 21px;
   font-weight: 700;
 }
@@ -443,7 +415,6 @@ li.added-subtask-item.editing {
   border-radius: 100%;
 }
 
-/* Versteckter Inhalt des Dropdowns */
 .dropdown-content-wrapper {
   border-radius: 10px;
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
@@ -470,10 +441,6 @@ li.added-subtask-item.editing {
   cursor: pointer;
   margin-bottom: 8px;
 }
-
-/* .dropdown-content {
-  display: none;
-} */
 
 .dropdown-contact.checked {
   background-color: #2a3647;
@@ -507,11 +474,6 @@ li.added-subtask-item.editing {
   background-color: #f1f1f1;
 }
 
-/* .dropdown-item img {
-  width: 20px;
-  height: 20px;
-} */
-
 .dropdown-item-user {
   display: flex;
   align-items: center;
@@ -527,20 +489,6 @@ li.added-subtask-item.editing {
   width: 45px;
   height: 45px;
 }
-
-/* .dropdown-contact.active {
-  background-color: black; 
-  color: white;           
-} */
-
-/* Dropdown anzeigen, wenn geklickt */
-/* .custom-dropdown.open .dropdown-content {
-  display: flex;
-  border-radius: 10px;
-  border: 1px solid rgb(41, 171, 226);
-  width: 100%;
-  box-sizing: border-box;
-} */
 
 .user-icon {
   width: 42px;
