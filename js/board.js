@@ -16,7 +16,7 @@ function init(header, sidebar, link) {
   renderDesktopTemplate(header, sidebar, link);
   setTimeout(() => {
     loadFetchedData();
-    console.log(tasks);
+    /* console.log(tasks); */
     boardContent.classList.remove("hidden");
   }, 100);
 }
@@ -201,36 +201,26 @@ function getPriorityImage(priority) {
   return "";
 }
 
-/**
+  /**
  * Handles changes to priority buttons in the edit popup.
  * @param {HTMLElement} selectedButton - The selected priority button.
  */
-function changePrioButtonsEditPopUp(selectedButton) {
-  resetButtonsEditPopUp();
+  function changePrioButtonsEditPopUp(selectedButton) {
+    resetButtonsEditPopUp();
 
-  let img = selectedButton.querySelector(".prio-img");
+    const priorityConfig = {
+        prio_urgent: { class: "prio-urgent-active", img: "../assets/img/urgent21.png", priority: "Urgent" },
+        prio_medium: { class: "prio-medium-active", img: "../assets/img/medium.png", priority: "Medium" },
+        prio_low: { class: "prio-low-active", img: "../assets/img/low21.png", priority: "Low" },
+    };
 
-  if (selectedButton.id === "prio_urgent") {
-    selectedButton.classList.add("prio-urgent-active");
-    img.src = "../assets/img/urgent21.png";
-    selectedPriority = "Urgent";
-    updateTaskPriority("Urgent");
-  } else if (selectedButton.id === "prio_medium") {
-    selectedButton.classList.add("prio-medium-active");
-    img.src = "../assets/img/medium.png";
-    selectedPriority = "Medium";
-    updateTaskPriority("Medium");
-  } else if (selectedButton.id === "prio_low") {
-    selectedButton.classList.add("prio-low-active");
-    img.src = "../assets/img/low21.png";
-    selectedPriority = "Low";
-    updateTaskPriority("Low");
-  } else if (selectedButton.id === "prio_low") {
-    selectedButton.classList.add("prio-low-active");
-    img.src = "../assets/img/low21.png";
-    selectedPriority = "Low";
-    updateTaskPriority("Low");
-  }
+    let config = priorityConfig[selectedButton.id];
+    if (config) {
+        selectedButton.classList.add(config.class);
+        selectedButton.querySelector(".prio-img").src = config.img;
+        selectedPriority = config.priority;
+        updateTaskPriority(config.priority);
+    }
 }
 
 /**
@@ -349,7 +339,7 @@ function addSubtaskEditPopUp(taskId) {
   let addedSubtaskTitle = inputAddedSubtask.value.trim();
   let task = tasks.find((t) => t.id === taskId);
   addedSubtasks = task.subtasks ? task.subtasks : [];
-  console.log(addedSubtasks);
+  /* console.log(addedSubtasks); */
   let addedSubtask = {
     id: generateUniqueId(),
     name: addedSubtaskTitle,
@@ -377,7 +367,7 @@ function deleteAddedSubtaskEditPopUp(name) {
   if (index !== -1) {
     addedSubtasks.splice(index, 1);
     renderAddSubtasksEditPopUp();
-    console.log("subtask deleted successfully", addedSubtasks);
+    /* console.log("subtask deleted successfully", addedSubtasks); */
   } else {
     console.error("subtask not found!", addedSubtasks);
   }
@@ -413,7 +403,7 @@ function editSubtaskEditPopUp(id) {
 
   editedSubtask.innerHTML = getEditSubtaskInput(id, subtask);
 
-  console.log("save edit subtask", addedSubtasks);
+  /* console.log("save edit subtask", addedSubtasks); */
 }
 
 /**
@@ -428,7 +418,7 @@ function saveEditedSubtaskEditPopUp(id, newTitle) {
   }
 
   renderAddSubtasksEditPopUp();
-  console.log(addedSubtasks);
+  /* console.log(addedSubtasks); */
 }
 
 /**
@@ -606,4 +596,15 @@ function renderTasks() {
     }
   });
   emptyColumnMessage();
+}
+
+/**
+ * Formats a given date string to (Day/Month/Year).
+ * @param {string} dateString - The date string to be formatted.
+ * @returns {string} - The formatted date string in the format "DD/MM/YYYY".
+ */
+function formatDate(dateString) {
+  let options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  let date = new Date(dateString);
+  return date.toLocaleDateString('de-DE', options);
 }

@@ -1,6 +1,6 @@
 "use strict";
 
-/* DROP DOWN  */
+/* BOARD DROP DOWN  */
 
 /**
  * Toggles the visibility of the dropdown content for the task popup by adding or removing the `d_none` class.

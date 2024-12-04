@@ -1,6 +1,6 @@
 "use strict";
 
-/* FILTER */
+/* BOARD FILTER */
 
 /**
  * Filters tasks displayed on the Kanban board based on user input in the search bar. If the input is less than 3 characters, it shows all tasks.

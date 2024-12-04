@@ -9,7 +9,6 @@
 async function fetchTasksData() {
   tasks = [];
   subtasks = [];
-
   let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
   let tasksToJson = await tasksResponse.json();
 
@@ -21,9 +20,7 @@ async function fetchTasksData() {
         id: key,
         ...tasksToJson[key],
       };
-
       tasks.push(task);
-
       if (task.assignedTo) {
         assignees.push(...task.assignedTo);
       }
@@ -32,9 +29,9 @@ async function fetchTasksData() {
     renderTasks();
   }
 
-  console.log("Tasks nach Fetch:", tasks);
+  /* console.log("Tasks nach Fetch:", tasks);
   console.log("Assigned Users:", assignees);
-  console.log("Subtasks:", subtasks);
+  console.log("Subtasks:", subtasks); */
 }
 
 /**
@@ -43,7 +40,6 @@ async function fetchTasksData() {
  */
 async function fetchContactsData() {
   contacts = [];
-
   let contactsResponse = await fetch(BASE_URL + "/contacts" + ".json");
   let contactsToJson = await contactsResponse.json();
 
@@ -57,8 +53,7 @@ async function fetchContactsData() {
       });
     });
   }
-
-  console.log("contacts nach fetch:", contacts);
+  /* console.log("contacts nach fetch:", contacts); */
 
   renderTasks();
 }
@@ -76,7 +71,7 @@ async function deleteTaskData(taskId) {
     });
     let deletedTask = await taskResponse.json();
 
-    console.log("Task erfolgreich gelöscht:", taskId);
+    /* console.log("Task erfolgreich gelöscht:", taskId); */
     await fetchTasksData();
     closePopUps();
     return deletedTask;
@@ -130,9 +125,8 @@ async function updateTaskInFirebase(task) {
     if (!response.ok) {
       throw new Error("Fehler beim Aktualisieren der Aufgabe in Firebase");
     }
-
-    console.log("Aufgabe erfolgreich aktualisiert in Firebase:", task);
+    /* console.log("Aufgabe erfolgreich aktualisiert in Firebase:", task); */
   } catch (error) {
-    console.error("Fehler beim Aktualisieren der Aufgabe:", error);
+    console.error("Fehler beim Aktualisieren des Tasks:", error);
   }
 }

@@ -227,7 +227,7 @@ function getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeConten
                     <div class="task-info-value">Priority:</div>
                   </div>
                   <div class="pop-up-task-info">
-                    <div class="task-info-label">${task.dueDate}</div>
+                    <div class="task-info-label">${formatDate(task.dueDate)}</div>
                     <div class="task-info-value">
                     ${task.priority}
                       <img src="${priorityImage}" alt="${task.priority}" class="priority-icon" />
@@ -359,7 +359,7 @@ function getEditTaskPopUpTemplate(task) {
                     <span class="required-sign">*</span>
                   </div>
             
-                  <div class="dropdown">
+                  <div onfocus="closeDropdownOnBlur() class="dropdown">
                    <button onclick="toggleDropdownTaskPopUp(), toggleInputImage()" id="dropdown" class="drop-btn">
                      Select contacts to assign
                      <img id="dropdown_icon" class="dropdown-icon" src="../assets/img/arrow_drop_downaa.png" alt="arrow">
