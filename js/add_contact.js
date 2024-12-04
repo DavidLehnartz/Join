@@ -72,7 +72,7 @@ async function getNewContactsInfo(event) {
   await createContact(newContact);
   toggleOverlay();
   dialog.classList.remove("show");
-  showSuccessMessage();
+  showContactToastMessage("Contact successfully created");
   refreshContactList();
 }
 
@@ -91,16 +91,19 @@ async function updateContactInfo(event, id) {
   await updateContact(updatedContact, id);
   toggleOverlay();
   dialog.classList.remove("show");
+  showContactToastMessage("Contact successfully updated");
   await showContactInfo(id);
   refreshContactList();
 }
 
 /**
- * Show toast message after successful creation of a new contact.
+ * Show toast message after successful creation, update or deletion of a new contact.
  */
-function showSuccessMessage() {
+function showContactToastMessage(message) {
   let message = document.getElementById("add-contact-message");
+  let messageText = doucment.getElementById("contact-toast-message");
   message.classList.add("show");
+  messageText.innerHTML = message;
   setTimeout(() => {
     message.classList.remove("show");
   }, 3000);

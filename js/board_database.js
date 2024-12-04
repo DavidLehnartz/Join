@@ -84,17 +84,6 @@ async function deleteTaskData(taskId) {
 /**
  * Updates a task's data in Firebase, including its title, description, category, assignees, due date, priority, status, and subtasks.
  * @param {Object} task - The task object to be updated.
- * @param {string} task.id - The unique ID of the task.
- * @param {string} task.title - The title of the task.
- * @param {string} task.description - The description of the task.
- * @param {string} task.category - The category of the task.
- * @param {Array} task.assignedTo - An array of users assigned to the task.
- * @param {string} task.dueDate - The due date of the task.
- * @param {string} task.priority - The priority of the task.
- * @param {string} task.status - The current status of the task.
- * @param {string} task.name - The name of the task.
- * @param {string} task.initials - The initials of the task owner.
- * @param {Array} task.subtasks - An array of subtasks related to the main task.
  * @async
  */
 async function updateTaskInFirebase(task) {

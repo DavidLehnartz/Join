@@ -104,6 +104,7 @@ async function deleteAndRefreshContactList(id) {
   let contactList = document.getElementById("contact-list");
   let contactInfo = document.getElementById("contacts-info");
   await deleteContact(id);
+  showContactToastMessage("Contact successfully deleted");
   contactList.innerHTML = "";
   contactInfo.innerHTML = "";
   await loadContactList();
@@ -115,6 +116,7 @@ async function deleteAndRefreshContactList(id) {
 async function deleteAndRefreshContactListMobile(id) {
   let contactList = document.getElementById("contact-list");
   await deleteContact(id);
+  showContactToastMessage("Contact successfully deleted");
   contactList.innerHTML = "";
   closeMobileInfoDialog();
   await loadContactList();
