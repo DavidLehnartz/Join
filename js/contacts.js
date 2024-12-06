@@ -43,12 +43,14 @@ async function showContactInfo(event, id) {
  */
 function triggerListItemBackground(event) {
   const target = event.target;
-  if (target.tagName === "BUTTON") {
-    if (activeContact) {
-      activeContact.classList.remove("contact-active");
+  if (target) {
+    if (target.tagName === "BUTTON") {
+      if (activeContact) {
+        activeContact.classList.remove("contact-active");
+      }
+      activeContact = target;
+      activeContact.classList.add("contact-active");
     }
-    activeContact = target;
-    activeContact.classList.add("contact-active");
   }
 }
 

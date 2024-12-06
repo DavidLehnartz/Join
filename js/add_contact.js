@@ -41,6 +41,10 @@ function showAddContactForm(event) {
 async function showEditContactForm(event, id) {
   toggleOverlay();
   let dialog = document.getElementById("contacts-dialog");
+  if (!dialog) {
+    console.error("Element #contacts-dialog nicht gefunden");
+    return;
+  }
   dialog.classList.add("show");
   let contact = await getContactById(id);
   dialog.innerHTML = getEditContactDialog(contact, id);
@@ -72,7 +76,6 @@ async function getNewContactsInfo(event) {
   await createContact(newContact);
   toggleOverlay();
   dialog.classList.remove("show");
-  showContactToastMessage("Contact successfully created");
   refreshContactList();
 }
 
@@ -92,18 +95,18 @@ async function updateContactInfo(event, id) {
   toggleOverlay();
   dialog.classList.remove("show");
   showContactToastMessage("Contact successfully updated");
-  await showContactInfo(id);
   refreshContactList();
 }
 
 /**
  * Show toast message after successful creation, update or deletion of a new contact.
+ * @param {string} toastMessage - The message that should be displayed.
  */
-function showContactToastMessage(message) {
+function showContactToastMessage(toastMessage) {
   let message = document.getElementById("add-contact-message");
-  let messageText = doucment.getElementById("contact-toast-message");
+  let messageText = document.getElementById("contact-toast-message");
   message.classList.add("show");
-  messageText.innerHTML = message;
+  messageText.innerHTML = toastMessage;
   setTimeout(() => {
     message.classList.remove("show");
   }, 3000);

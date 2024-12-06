@@ -50,7 +50,7 @@ function getAddContactDialog() {
                   type="submit"
                   id="add-contact-btn"
                   class="contact-form-btn btn-filled"
-                  onclick="getNewContactsInfo(event), showSuccessMessage()"
+                  onclick="getNewContactsInfo(event), showContactToastMessage('Contact successfully created')"
                 >
                   <p>Create Contact</p>
                   <img src="../assets/icons/check.svg" />
