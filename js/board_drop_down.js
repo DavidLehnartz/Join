@@ -128,4 +128,4 @@ function removeContactFromSelected(contactId, taskId) {
       } 
     }
   }
-};
+}*/
