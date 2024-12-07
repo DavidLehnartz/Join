@@ -82,9 +82,9 @@ function checkRememberMe() {
 
 /**
  * Check if there is a user with the given inputs.
- * Returns true or false.
  * @param {string} mail - The mail of the login input.
  * @param {string} password - The password of the login input.
+ * @returns {Boolean} - if password and email are valid inputs.
  */
 async function findUser(mail, password) {
   let userList = await loadAllUsersInfo();
@@ -98,6 +98,7 @@ async function findUser(mail, password) {
  * Returns user object.
  * @param {string} mail - The mail of the login input.
  * @param {string} password - The password of the login input.
+ * @returns {Boolean} - if there is a user with the given email and password.
  */
 async function getValidUser(mail, password) {
   let users = await loadAllUsersInfo();

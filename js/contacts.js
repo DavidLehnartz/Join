@@ -129,6 +129,7 @@ async function deleteAndRefreshContactListMobile(id) {
 /**
  * Group the contact list alphabetically.
  * @param {string} arrayName - The name of the array that should be grouped.
+ * @returns {Object} The object of the grouped contact list.
  */
 function groupContacts(arrayName) {
   groupedContacts = Object.groupBy(arrayName, ({ name }) => name.slice(0, 1));
