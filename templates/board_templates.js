@@ -739,7 +739,7 @@ function getBeforeButtonContainer(taskId) {
 function getAfterButtonContainer() {
   return `
           <button class="pop-up-edit-task-input-btn">
-            <img id="input_button_image"class="pop-up-edit-task-input-btn-img"src="../assets/img/add_black.png"alt="" />
+            <img id="input_button_image" class="pop-up-edit-task-input-btn-img"src="../assets/img/add_black.png"alt="" />
           </button> 
   `;
 }
@@ -764,7 +764,7 @@ function getEditSubtaskInput(id, subtask) {
                 alt="check icon">
           <div class="vertical_line"></div>
                 <img onclick="saveEditedSubtaskEditPopUp('${id}')"
-                class="icon-container-images" 
+                class="icon-container-images-save" 
                 src="../assets/img/check_black.png" 
           </div>
   `;

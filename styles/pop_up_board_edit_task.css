@@ -222,7 +222,7 @@ select {
 .pop-up-edit-task-input-btn {
   display: flex;
   position: absolute;
-  right: 5px;
+  right: 3px;
   top: 50%;
   transform: translateY(-50%);
   align-items: center;
@@ -231,6 +231,7 @@ select {
 }
 
 .pop-up-edit-task-input-btn-img {
+  display: flex;
   width: 25px;
   height: 25px;
 }
@@ -269,14 +270,19 @@ li:hover {
 }
 
 .icon-container-images {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   cursor: pointer;
 }
 
 .icon-container-images:hover{
   transition: transform 0.1s;
   transform: scale(1.1);
+}
+
+.icon-container-images-save{
+  width: 25px;
+  height: 25px;
 }
 
 .added-subtask-wrapper{
@@ -330,16 +336,21 @@ li.added-subtask-item.editing {
   background-color: transparent; /
 }
 
-.icon-container-images {
+/* .icon-container-images {
   width: 16px;
   height: 16px;
   cursor: pointer;
+} */
+
+.test1{
+  width: 24px;
+  height: 24px;
 }
 
-.icon-container-images:hover {
+/* .icon-container-images:hover {
   transition: transform 0.1s;
   transform: scale(1.1);
-}
+} */
 
 .edit-subtask-input {
   font-size: 16px;
