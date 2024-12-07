@@ -481,6 +481,7 @@ function getAddDropdownContactsTemplate(contact) {
 /**
  * Creates the HTML template for a single contact in the dropdown menu.
  * @param {Object} contact - The contact object containing ID, name, initials, and color properties.
+ * @param {Object} task - The task object containing the needed ID properties.
  * @returns {string} The HTML structure of a contact in the dropdown menu as a string.
  */
 function getDropdownContactsTemplate(contact, task) {
@@ -498,6 +499,7 @@ function getDropdownContactsTemplate(contact, task) {
 /**
  * Creates the HTML template for a selected contact in the dropdown menu.
  * @param {Object} contact - The contact object containing ID, name, initials, and color properties.
+ * @param {Object} task - The task object containing the needed ID properties.
  * @returns {string} The HTML structure of a selected contact in the dropdown menu.
  */
 function getSelectedDropdownContactsTemplate(contact, task) {
