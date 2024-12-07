@@ -279,6 +279,14 @@ li:hover {
   transform: scale(1.1);
 }
 
+.added-subtask-wrapper{
+padding-left: 16px;
+}
+.added-subtask-wrapper:hover{
+  background-color: rgb(246, 247, 248);
+  border-radius: 10px;
+}
+
 ul {
   margin: 0px;
   padding: 0px;
@@ -521,6 +529,10 @@ li.added-subtask-item.editing {
     align-items: center;
     justify-content: center;
     gap: 8px;
+  } 
+
+  .drop-btn{
+    font-size: 18px;
   }
 
   .pop-up-edit-task-footer {

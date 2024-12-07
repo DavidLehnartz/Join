@@ -589,7 +589,7 @@ function getDoneSubtasksTemplate(taskId, subtask, index) {
  * @returns {string} The HTML structure for an added subtask, including edit and delete buttons.
  */
 function getAddedSubtasksTemplate(addedSubtask) {
-  return `
+  return `<div class="added-subtask-wrapper">
           <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item" data-id="${addedSubtask.id}">
             <span>${addedSubtask.name}</span>
             <div class="list-icon-container">
@@ -598,6 +598,7 @@ function getAddedSubtasksTemplate(addedSubtask) {
               <img onclick="deleteAddedSubtaskEditPopUp('${addedSubtask.name}')" class="icon-container-images" src="../assets/img/delete.png" alt="delete icon">
             </div>
           </li>
+          </div>
         `;
 }
 
@@ -752,7 +753,7 @@ function getAfterButtonContainer() {
 
 function getEditSubtaskInput(id, subtask) {
   return `
-          <input type="text" value="${subtask.name}" 
+          <input id="edit-input-${id}" type="text" value="${subtask.name}" 
                 onblur="saveEditedSubtaskEditPopUp('${id}', this.value)"  
                 onkeydown="handleEnterKey(event, '${id}', this)" 
                 class="edit-subtask-input">
