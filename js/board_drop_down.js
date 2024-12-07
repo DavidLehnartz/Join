@@ -35,13 +35,15 @@ function renderDropdownContacts(taskId) {
     let contact = contacts[i];
     if (task.assignedTo) {
       if (task.assignedTo.some((c) => c.name === contact.name)) {
-        dropdownContent.innerHTML +=
-          getSelectedDropdownContactsTemplate(contact);
+        dropdownContent.innerHTML += getSelectedDropdownContactsTemplate(
+          contact,
+          task
+        );
       } else {
-        dropdownContent.innerHTML += getDropdownContactsTemplate(contact);
+        dropdownContent.innerHTML += getDropdownContactsTemplate(contact, task);
       }
     } else {
-      dropdownContent.innerHTML += getDropdownContactsTemplate(contact);
+      dropdownContent.innerHTML += getDropdownContactsTemplate(contact, task);
     }
   }
 }
@@ -50,16 +52,19 @@ function renderDropdownContacts(taskId) {
  * Toggles the selection state of a contact in the dropdown. Updates the checkbox appearance and adds/removes the contact from the selected contacts list.
  * @param {string} contactId - The ID of the contact to toggle.
  */
-function toggleCheckboxContact(contactId) {
+function toggleCheckboxContact(contactId, taskId) {
   let contact = contacts.find((c) => c.id === contactId);
+  let task = tasks.find((t) => t.id === taskId);
   let checkbox = document.getElementById(`checkbox_${contact.name}`);
   let selectedContactContent = checkbox.closest(".dropdown-contact");
   if (checkbox.src.includes("checkbox_false.png")) {
     activateCheckbox(checkbox, selectedContactContent);
-    addContactToSelected(contactId);
+    addContactToSelected(contactId, taskId);
+    renderSelectedContacts(task);
   } else {
     deactivateCheckbox(checkbox, selectedContactContent);
-    removeContactFromSelected(contactId);
+    removeContactFromSelected(contactId, taskId);
+    renderSelectedContacts(task);
   }
 }
 
@@ -86,23 +91,29 @@ function deactivateCheckbox(checkbox, selectedContactContent) {
 /**
  * Adds a contact to the `selectedContacts` list.
  * @param {string} contactId - The ID of the contact to add.
+ * @param {string} taskId - The ID of the task to update.
  */
-function addContactToSelected(contactId) {
+function addContactToSelected(contactId, taskId) {
   if (!selectedContacts) selectedContacts = [];
+  let task = tasks.find((t) => t.id === taskId);
   let contact = contacts.find((c) => c.id === contactId);
-  selectedContacts.push(contact);
+  task.assignedTo.push(contact);
+  updateTaskInFirebase(task);
 }
 
 /**
  * Removes a contact from the `selectedContacts` list by its ID.
  * @param {string} contactId - The ID of the contact to remove.
+ * @param {string} taskId - The ID of the task to update.
  */
-function removeContactFromSelected(contactId) {
-  const index = selectedContacts.findIndex(
+function removeContactFromSelected(contactId, taskId) {
+  let task = tasks.find((t) => t.id === taskId);
+  const index = task.assignedTo.findIndex(
     (contact) => contact.id === contactId
   );
   if (index !== -1) {
-    selectedContacts.splice(index, 1);
+    task.assignedTo.splice(index, 1);
+    updateTaskInFirebase(task);
   }
 }
 
@@ -117,4 +128,4 @@ function removeContactFromSelected(contactId) {
       } 
     }
   }
-}; */
+};

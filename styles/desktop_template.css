@@ -101,7 +101,7 @@ h1 {
 .legacy-links:hover {
   color: rgb(41, 171, 226);
   transition: transform 125ms;
-  transform: scale(1.05);
+  font-size: 18px;
 }
 
 header {
@@ -254,6 +254,12 @@ header {
 .link-active {
   background-color: #091931;
   color: white;
+}
+
+@media (max-height: 800px) {
+  .left-sidebar {
+    min-height: 800px;
+  }
 }
 
 @media (max-width: 1320px) {

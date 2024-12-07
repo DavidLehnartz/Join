@@ -55,6 +55,8 @@ function initHelp(header, sidebar, link) {
  * @param {string} number - The number of the step.
  * @param {string} headline - The headline of the step.
  * @param {string} content - The content of the step.
+ * @returns {string} - The HTML structure of the how to use steps of the help content.
+
  */
 function renderHowToUseTemplate(number, headline, content) {
   return `<div class="help-how-to-step">

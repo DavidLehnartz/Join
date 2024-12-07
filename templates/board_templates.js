@@ -160,7 +160,14 @@ function getBoardHeadlineTemplate() {
  * @param {number} progressPercentage - The progress percentage of the task.
  * @returns {string} The HTML structure of a single task as a string.
  */
-function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials, subtaskProgressHTML, progressPercentage) {
+function getTasksTemplate(
+  task,
+  priorityImage,
+  categoryColor,
+  assigneeInitials,
+  subtaskProgressHTML,
+  progressPercentage
+) {
   return `    
           <div id="${task.id}" onclick="openTaskPopUp('${task.id}')" draggable="true" ondragstart="startDragging('${task.id}')" ondragend="endDragging('${task.id}')" class="kanban-task task">
                 <div class="kanban-task-header"  style="background-color: ${categoryColor};">
@@ -198,7 +205,12 @@ function getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials, 
  * @param {string} assigneeContent - HTML content for assignee details.
  * @returns {string} The HTML structure of the task popup as a string.
  */
-function getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeContent) {
+function getTaskPopUpTemplate(
+  task,
+  priorityImage,
+  categoryColor,
+  assigneeContent
+) {
   return `
           <div class="pop-up-board-inner-container">
                 <div class="pop-up-task-header">
@@ -227,10 +239,14 @@ function getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeConten
                     <div class="task-info-value">Priority:</div>
                   </div>
                   <div class="pop-up-task-info">
-                    <div class="task-info-label">${formatDate(task.dueDate)}</div>
+                    <div class="task-info-label">${formatDate(
+                      task.dueDate
+                    )}</div>
                     <div class="task-info-value">
                     ${task.priority}
-                      <img src="${priorityImage}" alt="${task.priority}" class="priority-icon" />
+                      <img src="${priorityImage}" alt="${
+    task.priority
+  }" class="priority-icon" />
                     </div>
                   </div>
                 </div>
@@ -248,7 +264,9 @@ function getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeConten
                 </div>
               </div>
               <div class="pop-up-footer">
-                <img onclick="renderEditTaskPopUp('${task.id}'), renderDropdownContacts('${task.id}')"
+                <img onclick="renderEditTaskPopUp('${
+                  task.id
+                }'), renderDropdownContacts('${task.id}')"
                      onmouseover="changeImage('edit_img', 'edit')" 
                      onmouseout="changeImage('edit_img', 'edit')"
                      id="edit_img"
@@ -463,11 +481,12 @@ function getAddDropdownContactsTemplate(contact) {
 /**
  * Creates the HTML template for a single contact in the dropdown menu.
  * @param {Object} contact - The contact object containing ID, name, initials, and color properties.
+ * @param {Object} task - The task object containing the needed ID properties.
  * @returns {string} The HTML structure of a contact in the dropdown menu as a string.
  */
-function getDropdownContactsTemplate(contact) {
+function getDropdownContactsTemplate(contact, task) {
   return `
-         <div  class="dropdown-contact" onclick="toggleCheckboxContact('${contact.id}')" id="selected_contact">
+         <div  class="dropdown-contact" onclick="toggleCheckboxContact('${contact.id}', '${task.id}')" id="selected_contact">
               <div class="dropdown-contact-name">
                 <span class="dropdown-initial bg-${contact.color}">${contact.initial}</span>
                 <p>${contact.name}</p>
@@ -480,11 +499,12 @@ function getDropdownContactsTemplate(contact) {
 /**
  * Creates the HTML template for a selected contact in the dropdown menu.
  * @param {Object} contact - The contact object containing ID, name, initials, and color properties.
+ * @param {Object} task - The task object containing the needed ID properties.
  * @returns {string} The HTML structure of a selected contact in the dropdown menu.
  */
-function getSelectedDropdownContactsTemplate(contact) {
+function getSelectedDropdownContactsTemplate(contact, task) {
   return `
-         <div  class="dropdown-contact checked" onclick="toggleCheckboxContact('${contact.id}')" id="selected_contact">
+         <div  class="dropdown-contact checked" onclick="toggleCheckboxContact('${contact.id}', '${task.id}')" id="selected_contact">
               <div class="dropdown-contact-name">
                 <span class="dropdown-initial bg-${contact.color}">${contact.initial}</span>
                 <p>${contact.name}</p>

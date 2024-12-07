@@ -1,5 +1,6 @@
 /**
  * Render the template of the dialog to add a contact.
+ * @returns {string} The HTML structure of the add contact dialog.
  */
 function getAddContactDialog() {
   return `<div class="contacts-overlay-header">
@@ -64,6 +65,7 @@ function getAddContactDialog() {
  * Render the template of the dialog to edit a contact.
  * @param {object} contact - The data object of the selected contact.
  * @param {string} id - The id of the selected contact.
+ * @returns {string} The HTML structure of the edit contact dialog.
  */
 function getEditContactDialog(contact, id) {
   return `<div class="contacts-overlay-header">
@@ -127,13 +129,14 @@ function getEditContactDialog(contact, id) {
  * Render the template of the detailed information of a selected contact.
  * @param {object} contact - The data object of the selected contact.
  * @param {string} id - The id of the selected contact.
+ * @returns {string} The HTML structure of the detailed information of a contact.
  */
 function getContactInfoTemplate(contact, id) {
   return `<div class="contacts-name">
               <div id="contact-initial" class="profile-icon-big bg-${contact.color}">${contact.initial}</div>
               <div id="contact-name" class="name-container">
                 <h3>${contact.name}</h3>
-                <div class="contacts-btn-row hide-mobile">
+                <div class="contacts-btn-row hide-on-mobile">
                   <div
                     id="btn-contact-edit"
                     class="text-button"
@@ -165,6 +168,7 @@ function getContactInfoTemplate(contact, id) {
 /**
  * Render the template of the alphabetical section header of the contact list.
  * @param {string} letter - The letter of the alphabet.
+ * @returns {string} The HTML structure of the section header of the contact list.
  */
 function getContactListHeaderTemplate(letter) {
   return `<div id="section-header" class="section-header">
@@ -177,6 +181,7 @@ function getContactListHeaderTemplate(letter) {
  * Render the template of a contact list item.
  * @param {object} contact - The data object of the selected contact.
  * @param {string} id - The id of the selected contact.
+ * @returns {string} The HTML structure of the list item of the contact list.
  */
 function getContactListItemTemplate(contact, id) {
   return `<button
@@ -195,6 +200,7 @@ function getContactListItemTemplate(contact, id) {
 /**
  * Render the template of the edit menu in mobile view.
  * @param {string} id - The id of the selected contact.
+ * @returns {string} The HTML structure of the popup menu to edit a contact in mobile view.
  */
 function renderMobileEditMenu(id) {
   return `<div class="edit-menu-container">
@@ -219,6 +225,7 @@ function renderMobileEditMenu(id) {
  * Render the template of the detailed information of a selected contact in mobile view.
  * @param {object} contact - The data object of the selected contact.
  * @param {string} id - The id of the selected contact.
+ * @returns {string} The HTML structure of the detailed information of a contact in mobile view.
  */
 function renderMobileInfoSection(contact, id) {
   return `<div class="mobile-contacts-header">

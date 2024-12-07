@@ -19,7 +19,7 @@ function checkPrivacyPolicy() {
 
 /**
  * Check if any input field is empty
- * Returns true or false
+ * @returns {Boolean} - if one of the input fields are empty.
  */
 function isInputEmpty() {
   let name = document.getElementById("signup-name").value;
@@ -33,7 +33,7 @@ function isInputEmpty() {
 
 /**
  * Check if both password inputs are the same
- * Returns true or false
+ * @returns {Boolean} - if passwords are the same.
  */
 function isPasswordSame() {
   let password = document.getElementById("signup-password");
@@ -52,7 +52,7 @@ function isPasswordSame() {
 
 /**
  * Validate input
- * Returns true or false
+ * @returns {Boolean} - if privacy is checked, all inputs are given and the passwords are the same.
  */
 function validateInput() {
   return isPrivacyChecked && isInputEmpty() && isPasswordSame();
@@ -117,6 +117,7 @@ function resetForm() {
  * @param {string} name - The name of the user.
  * @param {string} mail - The email address of the user.
  * @param {string} password - The password of the user.
+ * @returns {Object} - The user object which will be added to Firebase.
  */
 function newUserObject(name, mail, password) {
   return {
