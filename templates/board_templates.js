@@ -589,7 +589,7 @@ function getDoneSubtasksTemplate(taskId, subtask, index) {
  * @returns {string} The HTML structure for an added subtask, including edit and delete buttons.
  */
 function getAddedSubtasksTemplate(addedSubtask) {
-  return `<div class="added-subtask-wrapper">
+  return `
           <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item" data-id="${addedSubtask.id}">
             <span>${addedSubtask.name}</span>
             <div class="list-icon-container">
@@ -598,7 +598,6 @@ function getAddedSubtasksTemplate(addedSubtask) {
               <img onclick="deleteAddedSubtaskEditPopUp('${addedSubtask.name}')" class="icon-container-images" src="../assets/img/delete.png" alt="delete icon">
             </div>
           </li>
-          </div>
         `;
 }
 
@@ -739,7 +738,7 @@ function getBeforeButtonContainer(taskId) {
 function getAfterButtonContainer() {
   return `
           <button class="pop-up-edit-task-input-btn">
-            <img id="input_button_image" class="pop-up-edit-task-input-btn-img"src="../assets/img/add_black.png"alt="" />
+            <img id="input_button_image"class="pop-up-edit-task-input-btn-img"src="../assets/img/add_black.png"alt="" />
           </button> 
   `;
 }
@@ -753,7 +752,7 @@ function getAfterButtonContainer() {
 
 function getEditSubtaskInput(id, subtask) {
   return `
-          <input id="edit-input-${id}" type="text" value="${subtask.name}" 
+          <input type="text" value="${subtask.name}" 
                 onblur="saveEditedSubtaskEditPopUp('${id}', this.value)"  
                 onkeydown="handleEnterKey(event, '${id}', this)" 
                 class="edit-subtask-input">
@@ -764,7 +763,7 @@ function getEditSubtaskInput(id, subtask) {
                 alt="check icon">
           <div class="vertical_line"></div>
                 <img onclick="saveEditedSubtaskEditPopUp('${id}')"
-                class="icon-container-images-save" 
+                class="icon-container-images" 
                 src="../assets/img/check_black.png" 
           </div>
   `;

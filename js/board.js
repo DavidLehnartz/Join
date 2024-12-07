@@ -71,30 +71,6 @@ function renderTaskPopUp(taskId) {
  * @param {number} taskId - The ID of the task to edit.
  * @param {string} priorityImage - The path to the priority image for the task.
  */
-/* function renderEditTaskPopUp(taskId, priorityImage) {
-  
-  currentTaskId = taskId;
-
-  let editTaskPopUpContent = document.getElementById("edit_task_pop_up");
-  editTaskPopUpContent.innerHTML = "";
-
-  let task = tasks.find((t) => t.id === taskId);
-  if (task) {
-    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task, priorityImage);
-
-    renderSelectedContacts();
-    setPriorityButton(task.priority);
-    
-  }
-
-  document.getElementById("edit_task_pop_up").classList.remove("responsive-pop-up-closed");
-} */
-
-/**
- * Renders an editable popup for a task.
- * @param {number} taskId - The ID of the task to edit.
- * @param {string} priorityImage - The path to the priority image for the task.
- */
 function renderEditTaskPopUp(taskId, priorityImage) {
   currentTaskId = taskId;
 
@@ -105,17 +81,12 @@ function renderEditTaskPopUp(taskId, priorityImage) {
   if (task) {
     editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task, priorityImage);
 
-    addedSubtasks = task.subtasks ? task.subtasks : [];
-    
-
-    renderAddSubtasksEditPopUp();
     renderSelectedContacts();
     setPriorityButton(task.priority);
   }
+
   document.getElementById("edit_task_pop_up").classList.remove("responsive-pop-up-closed");
 }
-
-
 
 /**
  * Renders the selected contacts in the "Edit Task" popup.
@@ -155,7 +126,6 @@ function openTaskPopUp(taskId) {
   document.getElementById("overlay_task_pop_up").classList.remove("responsive-pop-up-closed");
 
   renderTaskPopUp(taskId);
-  
 }
 
 /**
@@ -434,7 +404,6 @@ function editSubtaskEditPopUp(id) {
   editedSubtask.innerHTML = getEditSubtaskInput(id, subtask);
 
   /* console.log("save edit subtask", addedSubtasks); */
-  
 }
 
 /**
@@ -442,38 +411,15 @@ function editSubtaskEditPopUp(id) {
  * @param {string} id - The ID of the subtask to save.
  * @param {string} newTitle - The updated title of the subtask.
  */
-/* function saveEditedSubtaskEditPopUp(id, newTitle) {
+function saveEditedSubtaskEditPopUp(id, newTitle) {
   let subtaskIndex = addedSubtasks.findIndex((sub) => sub.id === id);
   if (subtaskIndex !== -1 && newTitle.trim() !== "") {
-    addedSubtasks[subtaskIndex].name = newTitle.trim();
+    addedSubtasks[subtaskIndex].title = newTitle.trim();
   }
 
   renderAddSubtasksEditPopUp();
-  // console.log(addedSubtasks);
-} */
-
-  /**
- * Saves changes to an edited subtask.
- * @param {string} id - The ID of the subtask to save.
- * @param {string} newTitle - The updated title of the subtask.
- */
-  function saveEditedSubtaskEditPopUp(id, newTitle) {
-    let subtaskIndex = addedSubtasks.findIndex((sub) => sub.id === id);
-    if (subtaskIndex !== -1) {
-      let updatedTitle = newTitle ? newTitle.trim() : addedSubtasks[subtaskIndex].name;
-  
-      addedSubtasks[subtaskIndex].name = updatedTitle;
-    }
-  
-    renderAddSubtasksEditPopUp();
-  }
-  
-
-  
-  
-  
-  
-  
+  /* console.log(addedSubtasks); */
+}
 
 /**
  * Handles pressing the Enter key during subtask editing.
