@@ -101,6 +101,7 @@ async function refreshContactList() {
 
 /**
  * Delete a contact and refresh the contact list from Firebase after that.
+ * @param {string} id - The id of the contact that should be deleted.
  */
 async function deleteAndRefreshContactList(id) {
   let contactList = document.getElementById("contact-list");
@@ -114,6 +115,7 @@ async function deleteAndRefreshContactList(id) {
 
 /**
  * Delete a contact and refresh the contact list from Firebase after that for mobile view.
+ * @param {string} id - The id of the contact that should be deleted.
  */
 async function deleteAndRefreshContactListMobile(id) {
   let contactList = document.getElementById("contact-list");
@@ -126,6 +128,7 @@ async function deleteAndRefreshContactListMobile(id) {
 
 /**
  * Group the contact list alphabetically.
+ * @param {string} arrayName - The name of the array that should be grouped.
  */
 function groupContacts(arrayName) {
   groupedContacts = Object.groupBy(arrayName, ({ name }) => name.slice(0, 1));
@@ -148,6 +151,7 @@ function loadGroupedContactList() {
 
 /**
  * Load contact list and show it in list items.
+ * @param {string} arrayName - The name of the array that should be loaded.
  */
 function loadContactListItems(arrayName) {
   let contactList = document.getElementById("contact-list");
@@ -159,6 +163,7 @@ function loadContactListItems(arrayName) {
 
 /**
  * Show Floating Action Button to edit a contact in mobile view.
+ * @param {string} id - The id of the contact that should be edited.
  */
 function showMobileEditMenu(id) {
   let editMenu = document.getElementById("edit-menu");

@@ -1,3 +1,13 @@
+body {
+  display: flex;
+  margin: 0px auto;
+  min-height: 100vh !important;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  background-color: rgb(246, 247, 248);
+  font-family: "Inter", sans-serif;
+}
+
 .headline {
   display: flex;
   justify-content: space-between;
@@ -406,7 +416,7 @@ nav {
   .add-task-btn {
     display: none;
   }
-  
+
   .app-description {
     display: none;
   }
