@@ -133,7 +133,7 @@ function getContactInfoTemplate(contact, id) {
               <div id="contact-initial" class="profile-icon-big bg-${contact.color}">${contact.initial}</div>
               <div id="contact-name" class="name-container">
                 <h3>${contact.name}</h3>
-                <div class="contacts-btn-row hide-mobile">
+                <div class="contacts-btn-row hide-on-mobile">
                   <div
                     id="btn-contact-edit"
                     class="text-button"
