@@ -106,7 +106,7 @@ function renderEditTaskPopUp(taskId, priorityImage) {
     editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task, priorityImage);
 
     addedSubtasks = task.subtasks ? task.subtasks : [];
-    
+
 
     renderAddSubtasksEditPopUp();
     renderSelectedContacts();
@@ -114,8 +114,6 @@ function renderEditTaskPopUp(taskId, priorityImage) {
   }
   document.getElementById("edit_task_pop_up").classList.remove("responsive-pop-up-closed");
 }
-
-
 
 /**
  * Renders the selected contacts in the "Edit Task" popup.
@@ -155,7 +153,7 @@ function openTaskPopUp(taskId) {
   document.getElementById("overlay_task_pop_up").classList.remove("responsive-pop-up-closed");
 
   renderTaskPopUp(taskId);
-  
+
 }
 
 /**
@@ -231,26 +229,26 @@ function getPriorityImage(priority) {
   return "";
 }
 
-  /**
- * Handles changes to priority buttons in the edit popup.
- * @param {HTMLElement} selectedButton - The selected priority button.
- */
-  function changePrioButtonsEditPopUp(selectedButton) {
-    resetButtonsEditPopUp();
+/**
+* Handles changes to priority buttons in the edit popup.
+* @param {HTMLElement} selectedButton - The selected priority button.
+*/
+function changePrioButtonsEditPopUp(selectedButton) {
+  resetButtonsEditPopUp();
 
-    const priorityConfig = {
-        prio_urgent: { class: "prio-urgent-active", img: "../assets/img/urgent21.png", priority: "Urgent" },
-        prio_medium: { class: "prio-medium-active", img: "../assets/img/medium.png", priority: "Medium" },
-        prio_low: { class: "prio-low-active", img: "../assets/img/low21.png", priority: "Low" },
-    };
+  const priorityConfig = {
+    prio_urgent: { class: "prio-urgent-active", img: "../assets/img/urgent21.png", priority: "Urgent" },
+    prio_medium: { class: "prio-medium-active", img: "../assets/img/medium.png", priority: "Medium" },
+    prio_low: { class: "prio-low-active", img: "../assets/img/low21.png", priority: "Low" },
+  };
 
-    let config = priorityConfig[selectedButton.id];
-    if (config) {
-        selectedButton.classList.add(config.class);
-        selectedButton.querySelector(".prio-img").src = config.img;
-        selectedPriority = config.priority;
-        updateTaskPriority(config.priority);
-    }
+  let config = priorityConfig[selectedButton.id];
+  if (config) {
+    selectedButton.classList.add(config.class);
+    selectedButton.querySelector(".prio-img").src = config.img;
+    selectedPriority = config.priority;
+    updateTaskPriority(config.priority);
+  }
 }
 
 /**
@@ -430,11 +428,10 @@ function editSubtaskEditPopUp(id) {
   if (!editedSubtask) return;
 
   editedSubtask.classList.add("editing");
-
   editedSubtask.innerHTML = getEditSubtaskInput(id, subtask);
 
   /* console.log("save edit subtask", addedSubtasks); */
-  
+
 }
 
 /**
@@ -452,28 +449,28 @@ function editSubtaskEditPopUp(id) {
   // console.log(addedSubtasks);
 } */
 
-  /**
- * Saves changes to an edited subtask.
- * @param {string} id - The ID of the subtask to save.
- * @param {string} newTitle - The updated title of the subtask.
- */
-  function saveEditedSubtaskEditPopUp(id, newTitle) {
-    let subtaskIndex = addedSubtasks.findIndex((sub) => sub.id === id);
-    if (subtaskIndex !== -1) {
-      let updatedTitle = newTitle ? newTitle.trim() : addedSubtasks[subtaskIndex].name;
-  
-      addedSubtasks[subtaskIndex].name = updatedTitle;
-    }
-  
-    renderAddSubtasksEditPopUp();
-  }
-  
+/**
+* Saves changes to an edited subtask.
+* @param {string} id - The ID of the subtask to save.
+* @param {string} newTitle - The updated title of the subtask.
+*/
+function saveEditedSubtaskEditPopUp(id, newTitle) {
+  let subtaskIndex = addedSubtasks.findIndex((sub) => sub.id === id);
+  if (subtaskIndex !== -1) {
+    let updatedTitle = newTitle ? newTitle.trim() : addedSubtasks[subtaskIndex].name;
 
-  
-  
-  
-  
-  
+    addedSubtasks[subtaskIndex].name = updatedTitle;
+  }
+
+  renderAddSubtasksEditPopUp();
+}
+
+
+
+
+
+
+
 
 /**
  * Handles pressing the Enter key during subtask editing.

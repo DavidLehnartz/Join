@@ -106,7 +106,7 @@ function removeContactFromSelected(contactId) {
   }
 }
 
-window.onclick = function (event) {
+/* window.onclick = function (event) {
   if (!event.target.matches(".drop-btn")) {
     let dropdowns = document.getElementsByClassName("dropdown-content");
     let i;
@@ -114,7 +114,7 @@ window.onclick = function (event) {
       let openDropdown = dropdowns[i];
       if (openDropdown.classList.contains("d_none")) {
         openDropdown.classList.remove("d_none");
-      }
+      } 
     }
   }
-};
+}; */
