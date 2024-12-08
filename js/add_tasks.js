@@ -74,7 +74,6 @@ async function loadAllContactsInfo() {
     let newContact = await getContactById(id);
     contacts.push(newContact);
   }
-  console.log(contacts);
   return contacts;
 }
 
