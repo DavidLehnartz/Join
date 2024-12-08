@@ -77,26 +77,7 @@ async function saveTaskChanges(taskId) {
   addedSubtasks = [];
   closePopUps();
   openTaskPopUp(taskId);
-
   showAnimation("Task successfully saved!");
-}
-
-/**
- * Displays a temporary animation message on the screen.
- * Example Usage:
- * showAnimation("Task successfully saved!"); 
- * @param {string} message - The message to display in the animation.
- */
-function showAnimation(message) {
-  let feedback = document.createElement("div");
-  feedback.className = "save-feedback";
-  feedback.innerText = message;
-
-  document.body.appendChild(feedback);
-
-  setTimeout(() => {
-    feedback.remove();
-  }, 2000);
 }
 
 /**
@@ -137,7 +118,7 @@ function getPriorityImage(priority) {
 function changePrioButtonsEditPopUp(selectedButton) {
   resetButtonsEditPopUp();
 
-  const priorityConfig = {
+  let priorityConfig = {
     prio_urgent: { class: "prio-urgent-active", img: "../assets/img/urgent21.png", priority: "Urgent", },
     prio_medium: { class: "prio-medium-active", img: "../assets/img/medium.png", priority: "Medium", },
     prio_low: { class: "prio-low-active", img: "../assets/img/low21.png", priority: "Low", },
