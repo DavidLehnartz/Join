@@ -82,12 +82,15 @@ h4 {
 
 .pop-up-title {
   display: flex;
+  flex-wrap: wrap;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .pop-up-description {
   display: flex;
   flex-wrap: wrap;
-  word-break: break-word; 
+  word-break: break-word;
   hyphens: auto;
   font-size: 20px;
 }
@@ -175,6 +178,8 @@ h4 {
   align-items: center;
   gap: 10px;
   padding: 4px 16px;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .subtask:hover {
