@@ -25,13 +25,8 @@ async function fetchTasksData() {
         assignees.push(...task.assignedTo);
       }
     });
-
     renderTasks();
   }
-
-  /* console.log("Tasks nach Fetch:", tasks);
-  console.log("Assigned Users:", assignees);
-  console.log("Subtasks:", subtasks); */
 }
 
 /**
@@ -53,8 +48,6 @@ async function fetchContactsData() {
       });
     });
   }
-  /* console.log("contacts nach fetch:", contacts); */
-
   renderTasks();
 }
 
@@ -70,8 +63,6 @@ async function deleteTaskData(taskId) {
       method: "DELETE",
     });
     let deletedTask = await taskResponse.json();
-
-    /* console.log("Task erfolgreich gelöscht:", taskId); */
     await fetchTasksData();
     closePopUps();
     return deletedTask;
@@ -114,7 +105,6 @@ async function updateTaskInFirebase(task) {
     if (!response.ok) {
       throw new Error("Fehler beim Aktualisieren der Aufgabe in Firebase");
     }
-    /* console.log("Aufgabe erfolgreich aktualisiert in Firebase:", task); */
   } catch (error) {
     console.error("Fehler beim Aktualisieren des Tasks:", error);
   }

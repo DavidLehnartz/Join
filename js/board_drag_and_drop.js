@@ -10,7 +10,6 @@ let draggedTaskId;
  */
 function allowDrop(event) {
     event.preventDefault();
-    /* console.log("allowDrop: Event erlaubt"); */
 }
 
 /**
@@ -21,14 +20,9 @@ function allowDrop(event) {
  */
 async function drop(event, targetColumn) {
     event.preventDefault();
-    /* console.log("drop: funktion ausgelöst"); */
-    /* console.log("drop: inhalt von tasks:", tasks); */
-    /* console.log("drop: draggedTaskId:", draggedTaskId); */
 
     let task = tasks.find(task => task.id === draggedTaskId);
-    /* console.log("task gefunden:", task); */
     if (task) {
-        /* console.log("drop: task gefunden und spalte geändert:", task); */
         task.status = targetColumn;
 
         await updateTaskInDatabase(task);
@@ -44,7 +38,6 @@ async function drop(event, targetColumn) {
  */
 function startDragging(taskId) {
     draggedTaskId = taskId;
-    /* console.log("startDragging: Task ID gesetzt zum Ziehen:", draggedTaskId); */
 
     let taskElement = document.getElementById(taskId);
     if (taskElement) {
@@ -69,8 +62,6 @@ function endDragging(taskId) {
  * @async
  */
 async function updateTaskInDatabase(task) {
-    /* console.log("updateTaskInDatabase: in datenbank gespeichert:", task); */
-
     try {
         const response = await fetch(`${BASE_URL}/tasks/${task.id}.json`, {
             method: "PUT",
@@ -83,7 +74,6 @@ async function updateTaskInDatabase(task) {
         if (!response.ok) {
             throw new Error(`Fehler beim speichern des task in der datenbank. status: ${response.status}`);
         }
-        /* console.log("task erfolgreich in der datenbank gespeichert:", task); */
     } catch (error) {
         console.error("Fehler beim speichern des task:", error);
     }
@@ -104,12 +94,9 @@ function emptyColumnMessage() {
         if (column.tasksWrapper.children.length === 0) {
             column.message.classList.remove('d_none');
             column.tasksWrapper.classList.add('d_none');
-            /* column.tasksWrapper.style.display = 'none'; */
         } else {
             column.message.classList.add('d_none');
             column.tasksWrapper.classList.remove('d_none');
-            /* column.tasksWrapper.style.display = ''; */
         }
     });
 }
-

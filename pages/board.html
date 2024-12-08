@@ -24,20 +24,22 @@
     <script src="../templates/desktop_template.js"></script>
     <script src="../templates/board_templates.js" defer></script>
     <script src="../templates/add_task_template.js" defer></script>
+    <script src="../js/board_render.js" defer></script>
     <script src="../js/board_drop_down.js" defer></script>
     <script src="../js/board_drag_and_drop.js" defer></script>
     <script src="../js/board_filter.js" defer></script>
-    <script src="../js/board_add_task_pop_up.js"></script>
     <script src="../js/board.js" defer></script>
+    <script src="../js/board_add_task_pop_up.js"></script>
     <script src="../js/add_task_subtask.js"></script>
     <script src="../js/add_tasks_db.js"></script>
     <script src="../js/add_tasks.js"></script>
   </head>
 
   <!-- TASKS
-* assigned contacts und initials, werden erst beim 2. mal öffnen im pop up richtig angezeigt.
-werden diese übernommen und im task aktualisiert ?
-*****
+
+  *
+  Fehler in Konsole
+  *****
 
 * drop down schließt nicht, wenn auserhalb geklickt wird.
 *****
@@ -62,78 +64,15 @@ zeilenabstand,
 
     <main>
       <div id="board-header"></div>
-      <!-- MAiN CONTENT -->
+
       <div id="board-content" class="main-content-wrapper hidden">
-        <!-- HEADLINE / SEARCHBOX -->
-        <section id="board_headline">
-          <!--  <div class="headline">
-            <h1>Board</h1>
-            <form class="searchbox-wrapper">
-              <div class="searchbox-container"></div>
-              <input
-                class="searchbox-input"
-                type="text"
-                placeholder="Find Task"
-              />
-              <button class="input-btn">
-                <img
-                  class="input-btn-img"
-                  src="../assets/img/search_glass.png"
-                  alt="search"
-                />
-              </button>
+        <section id="board_headline"></section>
 
-              <button class="add-task-btn">
-                Add task
-                <img
-                  class="add-task-btn-img"
-                  src="../assets/img/plus_white.png"
-                  alt="plus"
-                />
-              </button>
-            
-              <button class="add-task-btn-responsive">
-                <img
-                  class="add-task-btn-img"
-                  src="../assets/img/plus_white.png"
-                  alt="plus"
-                />
-              </button>
-            </form>
-          </div> -->
-        </section>
-
-        <!-- HEADLINE / SEARCHBOX  RESPONSIVE-->
-        <!-- <section>
-          <div class="headline-responsive">
-            <h1>Board</h1>
-            <button class="add-task-btn-responsive">
-              <img
-                class="add-task-btn-img"
-                src="../assets/img/plus_white.png"
-                alt="plus"
-              />
-            </button>
-          </div>
-          <input
-            class="searchbox-input-responsive"
-            type="text"
-            placeholder="Find Task"
-          />
-          <button class="input-btn-responsive">
-            <img
-              class="input-btn-img"
-              src="../assets/img/search_glass.png"
-              alt="search"
-            />
-          </button>
-        </section> -->
-
-        <!-- KANBAN BOARD -->
         <section>
           <span class="no-matching-task-found d_none" id="no_matching_task">
             No matching task found !
           </span>
+
           <div class="kanban-board-wrapper">
             <div
               class="kanban-column"
@@ -151,13 +90,11 @@ zeilenabstand,
                   alt="plus"
                 />
               </div>
-              <!-- TASK RENDERN -->
               <div class="kanban-empty-message-wrapper">
                 <div id="to_do_message" class="kanban-empty-message d_none">
                   No tasks to do
                 </div>
               </div>
-
               <div id="to_do" class="kanban-task-wrapper"></div>
             </div>
 
@@ -185,7 +122,6 @@ zeilenabstand,
                   No tasks in progress
                 </div>
               </div>
-
               <div id="in_progress" class="kanban-task-wrapper"></div>
             </div>
 
@@ -213,7 +149,6 @@ zeilenabstand,
                   No tasks awaiting feedback
                 </div>
               </div>
-
               <div id="await_feedback" class="kanban-task-wrapper"></div>
             </div>
 
@@ -230,13 +165,11 @@ zeilenabstand,
                   No tasks done
                 </div>
               </div>
-
               <div id="done" class="kanban-task-wrapper"></div>
             </div>
           </div>
         </section>
 
-        <!-- OVERLAY / POP UP BOARD TASK RENDERN-->
         <div
           onclick=" closePopUps()"
           id="overlay_task_pop_up"
@@ -246,276 +179,11 @@ zeilenabstand,
             onclick="event.stopPropagation()"
             id="task_pop_up"
             class="pop-up-board-wrapper"
-          >
-            <!--  <div class="pop-up-board-inner-container">
-                <div class="pop-up-task-header">
-                  <div class="header-category">
-                    <p>$$Ctgry$$</p>
-                  </div>
-                  <img
-                    class="pop-up-close-img"
-                    src="../assets/img/close_black.png"
-                    alt="close"
-                  />
-                </div>
-                <div class="pop-up-task-content">
-                  <h4>$$ Title $$</h4>
-                  <div class="pop-up-description">
-                    <p>
-                      $$ Task Text $$ Lorem ipsum, dolor sit amet consectetur
-                      adipisicing elit....
-                    </p>
-                  </div>
-                </div>
-                <div class="pop-up-task-info-container">
-                  <div class="pop-up-task-info">
-                    <div class="task-info-label">Due date:</div>
-                    <div class="task-info-value">Priority:</div>
-                  </div>
-                  <div class="pop-up-task-info">
-                    <div class="task-info-label">$$ Date $$</div>
-                    <div class="task-info-value">
-                      Medium
-                      <img src="../assets/img/prio_medium_orange.png" alt="" />
-                    </div>
-                  </div>
-                </div>
-                <div class="pop-up-assigned-to-wrapper">
-                  <p>Assigned To:</p>
-                  <div class="pop-up-assigned-profils">
-                    <div class="single-assigned-profil">
-                      <img
-                        class="assigned-to-profil-icons"
-                        src="../assets/img/profil_icon_orange.png"
-                        alt="contact"
-                      />
-                      <p>$$ Name $$</p>
-                    </div>
-                    <div class="single-assigned-profil">
-                      <img
-                        class="assigned-to-profil-icons"
-                        src="../assets/img/profil_icon_light_blue_.png"
-                        alt="contact"
-                      />
-                      <p>$$ Name $$</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="pop-up-subtasks">
-                  <p>Subtasks</p>
-                  <div class="single-subtasks">
-                    <img
-                      src="../assets/img/checkbox_false.png"
-                      alt="checkbox"
-                    />
-                    $$ Single Subtask $$
-                  </div>
-                  <div class="single-subtasks">
-                    <img
-                      src="../assets/img/checkbox_false.png"
-                      alt="checkbox"
-                    />
-                    $$ Single Subtask $$
-                  </div>
-                </div>
-              </div>
-              <div class="pop-up-footer">
-                <img
-                  class="pop-up-footer-edit-img"
-                  src="../assets/img/edit_black.png"
-                  alt="edit"
-                />
-                <div class="pop-up-seperator"></div>
-                <img
-                  class="pop-up-footer-delete-img"
-                  src="../assets/img/delete_black.png"
-                  alt="delete"
-                />
-              </div>  -->
-          </div>
+          ></div>
         </div>
 
-        <!-- POP UP BOARD EDIT TASK RENDERN-->
-        <section id="edit_task_pop_up" class="d_none">
-          <!-- <div class="overlay-pop-up-edit-task"> -->
-          <!--  <div class="pop-up-edit-task-wrapper">
-            <div class="pop-up-edit-task-inner-container">
-              <div class="pop-up-edit-task-headline">
-                <h4>Edit task</h4>
-                <img
-                  onclick="closePopUps()"
-                  class="pop-up-close-img"
-                  src="../assets/img/close_black.png"
-                  alt="close"
-                />
-              </div>
-              <div class="pop-up-edit-task-form">
-                <div class="pop-up-edit-task-title">
-                  <label for="">
-                    Title
-                    <span class="required-sign">*</span>
-                  </label>
-                  <input
-                    class="pop-up-edit-task-input"
-                    type="text"
-                    placeholder="Enter a title"
-                  />
-                </div>
+        <section id="edit_task_pop_up" class="d_none"></section>
 
-                <div class="pop-up-edit-task-description">
-                  <label for=""> Description </label>
-                  <textarea
-                    class="pop-up-edit-task-textarea"
-                    rows="4"
-                    placeholder="Enter a Description"
-                  ></textarea>
-                </div>
-
-                <div class="pop-up-edit-task-due-date">
-                  <label for="">
-                    Due date
-                    <span class="required-sign">*</span>
-                  </label>
-                  <input class="pop-up-edit-task-input" type="date" />
-                </div>
-
-                <div class="pop-up-edit-task-priority">
-                  <label for=""> Priority </label>
-                  <div class="prio-status">
-                    <div class="prio-urgent">
-                      Urgent
-                      <img
-                        class="prio-img"
-                        src="../assets/img/prio_urgent_red.png"
-                        alt="urgent"
-                      />
-                    </div>
-                    <div class="prio-medium">
-                      Medium
-                      <img
-                        class="prio-img"
-                        src="../assets/img/prio_medium_orange.png"
-                        alt="medium"
-                      />
-                    </div>
-                    <div class="prio-low">
-                      Low
-                      <img
-                        class="prio-img"
-                        src="../assets/img/prio_low_green.png"
-                        alt="low"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="pop-up-edit-task-assigned-to">
-                  <label for="">
-                    Assigned to
-                    <span class="required-sign">*</span>
-                  </label>
-
-                  <div class="custom-dropdown">
-                    <input
-                      type="text"
-                      class="dropdown-input"
-                      placeholder="Select an option"
-                      readonly
-                    />
-                    <img
-                      class="dropdown-icon"
-                      src="../assets/img/arrow_drop_downaa.png"
-                      alt=""
-                    />
-                    <div class="dropdown-content">
-                      <div class="dropdown-item">
-                        <div class="dropdown-item-user">
-                          <img
-                            class="user-icon"
-                            src="../assets/img/profil_icon_orange.png"
-                            alt="Option 1"
-                          />
-                          Option 1
-                        </div>
-                        <img src="../assets/img/checkbox_false.png" alt="" />
-                      </div>
-                      <div class="dropdown-item">
-                        <div class="dropdown-item-user">
-                          <img
-                            class="user-icon"
-                            src="../assets/img/profil_icon_light_blue_.png"
-                            alt="Option 1"
-                          />
-                          Option 2
-                        </div>
-                        <img src="../assets/img/checkbox_false.png" alt="" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="assigned-contacts">
-                    <div>
-                      <img
-                        class="user-icon"
-                        src="../assets/img/profil_icon_orange.png"
-                        alt=""
-                      />
-                    </div>
-                    <div>
-                      <img
-                        class="user-icon"
-                        src="../assets/img/profil_icon_light_blue_.png"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="pop-up-edit-task-subtasks">
-                  Subtasks
-                  <div class="input-box">
-                    <input
-                      id="input_subtask_add_subtask"
-                      class="pop-up-edit-subtask-input"
-                      type="text"
-                      placeholder="Add new subtask"
-                    />
-                    <button class="pop-up-edit-task-input-btn">
-                      <img
-                        onclick="addSubtask()"
-                        class="pop-up-edit-task-input-btn-img"
-                        src="../assets/img/add_black.png"
-                        alt=""
-                      />
-                    </button>
-                  </div>
-
-                  <div id="error_message" class="error-message"></div>
-                  <div
-                    id="subtasks"
-                    class="pop-up-edit-task-list-container"
-                  ></div>
-                </div>
-              </div>
-            </div>
-            <div class="pop-up-edit-task-footer">
-              <button
-                onclick=" renderTaskPopUp();"
-                class="pop-up-edit-task-btn"
-              >
-                Ok
-                <img
-                  class="pop-up-edit-task-btn-img"
-                  src="../assets/img/check_white.png"
-                  alt="check"
-                />
-              </button>
-            </div>
-          </div> -->
-          <!-- </div> -->
-        </section>
-
-        <!-- POP UP BOARD ADD TASK RENDERN -->
         <div
           onclick="closePopUps()"
           id="overlay_add_task_pop_up"
@@ -525,105 +193,7 @@ zeilenabstand,
             onclick="event.stopPropagation()"
             id="add_task_pop_up"
             class="pop-up-add-task-wrapper"
-          >
-            <!--  <div class="headingAndAnEx">
-              <h1>Add Task</h1>
-              <img onclick="closePopUps()" class="makeEnEx" src="../assets/img/makeEnEx.png" alt="">
-            </div>
-            <div class="bothSides">
-              <div class="leftSide">
-                <div class="inputStyle">
-                  <span for="inputField">Title<span class="required-asterisk">*</span></span>
-                  <input type="text" id="inputFieldTitle" placeholder="Enter a title" class="titleInput"
-                    oninput="checkForm()" />
-                </div>
-                <div class="inputStyle">
-                  <span for="inputField">Description</span>
-                  <textarea id="inputFieldDescription" placeholder="Enter a Description"
-                    class="titleInputDescription"></textarea>
-                </div>
-                <div class="inputStyle">
-                  <span class="assignedToSpanStyle" for="inputField">Assigned to</span>
-                  <div id="selectOnes" class="selectContactsToAssign" onclick="toggleContactDropdown()">
-                    <span id="selectedContacts" name="assignedContactsDisplay">Select contacts to assign</span>
-                    <img id="dropdownArrow2" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow" />
-                    <div class="category-dropdown" id="categoryDropdown2"></div>
-                  </div>
-                  <div class="completeContacts">
-                    <div id="selectedContactsBadges" class="selected-contacts-badges-container"></div>
-                    <div class="maxContacts"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="seperator1"></div>
-              <div class="rightSide">
-                <div class="inputStyle">
-                  <span for="inputField">Due date<span class="required-asterisk">*</span></span>
-                  <input type="date" id="inputFieldDueDate" class="titleInput" oninput="checkForm()" />
-                </div>
-                <div class="priorityStyle">
-                  <span for="inputField">Prio</span>
-                  <div class="priority-button">
-                    <button id="inputFieldUrgent" class="priobtn urgMedLow-btn" onclick="setPriority(this, 'urgent')">
-                      Urgent
-                      <img src="../assets/img/urgent.png" class="priority-icon" />
-                    </button>
-                    <button id="inputFieldMedium" class="priobtn urgMedLow-btn-medium active-medium"
-                      onclick="setPriority(this, 'medium')">
-                      Medium
-                      <img src="../assets/img/medium.png" class="priority-icon" />
-                    </button>
-                    <button id="inputFieldLow" class="priobtn urgMedLow-btn" onclick="setPriority(this, 'low')">
-                      Low
-                      <img src="../assets/img/low.png" class="priority-icon" />
-                    </button>
-                  </div>
-                </div>
-                <div class="inputStyle">
-                  <span class="spanCategoryStyle" for="inputField">Category<span class="required-asterisk">*</span></span>
-                  <div id="selectCat" class="selectCategory" onclick="toggleDropdown(event)">
-                    <span id="selectedCategory">Select task category</span>
-                    <img id="dropdownArrow" src="../assets/img/arrow_drop_downaa.png" class="dropdown-arrow" />
-                    <div class="category-dropdown" id="categoryDropdown">
-                      <span onclick="selectCategory('Technical Task')">Technical Task</span>
-                      <span onclick="selectCategory('User Story')">User Story</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="inputStyle">
-                  <span class="SubtaskSpanStyle" for="inputField">Subtasks</span>
-                  <div class="subtaskInputWrapper">
-                    <input type="text" id="inputFieldSubtask" placeholder="Add new subtask" class="subtaskInput" />
-                    <div class="iconWrapper" id="iconWrapper">
-                      <img src="../assets/img/Propertyadd.png" id="actionIcon" class="icon" onclick="addSubtask()" />
-                    </div>
-                  </div>
-
-                  <div id="subtaskList" class="subtaskList"></div>
-
-                </div>
-              </div>
-            </div>
-            <div class="addTaskFooter">
-              <div class="addTaskFooterLeftSide">
-                <span class="mobileSpanStyle" style="color: black; position: relative">
-                  <span style="position: absolute; left: -5px; top: -7px; color: red">*</span>
-                  This Field is required
-                </span>
-              </div>
-              
-              <div class="clear-task-button">
-                <button class="btn clear-btn" onclick="clearEverything()">
-                  Clear
-                  <img id="cancelIcon" src="../assets/img/iconoir_cancel.png" alt="Cancel Icon" />
-                </button>
-                <button id="createTaskBtn" class="btn create-task-btn" onclick="createTask()" disabled>
-                  Create Task
-                  <img id="checkIcon" src="../assets/img/check_white.png" alt="Check Icon" />
-                </button>
-              </div>
-            </div>  -->
-          </div>
+          ></div>
         </div>
       </div>
     </main>

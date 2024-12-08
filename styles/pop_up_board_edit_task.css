@@ -336,22 +336,10 @@ li.added-subtask-item.editing {
   background-color: transparent; /
 }
 
-
-/* .icon-container-images {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-} */
-
 .test1{
   width: 24px;
   height: 24px;
 }
-
-/* .icon-container-images:hover {
-  transition: transform 0.1s;
-  transform: scale(1.1);
-} */
 
 .edit-subtask-input {
   font-size: 16px;
