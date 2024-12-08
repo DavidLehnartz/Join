@@ -57,8 +57,12 @@ function showHowManyTasksUrgent(data) {
   );
   let urgentCount = document.getElementById("urgentCount");
   urgentCount.innerHTML = urgentTasks.length;
-  filterWichDateNearest(urgentTasks);
-  console.log("Urgent Tasks:", urgentTasks.length);
+  if (urgentTasks.length > 0) {
+    filterWichDateNearest(urgentTasks);
+  } else {
+    let nextDate = document.getElementById("nextDate");
+    nextDate.innerHTML = " - ";
+  }
 }
 
 /**
@@ -67,7 +71,7 @@ function showHowManyTasksUrgent(data) {
  */
 function taskInProgess(data) {
   const progressTasks = Object.values(data).filter((task) =>
-    task.status?.includes("inprogress")
+    task.status?.includes("in_progress")
   );
   let taskInProg = document.getElementById("taskInProg");
   taskInProg.innerHTML = progressTasks.length;
@@ -84,14 +88,9 @@ function filterWichDateNearest(urgentTasks) {
     const bDate = new Date(b.dueDate);
     return aDate - bDate;
   });
-  if (sortedTasks.dueDate) {
-    date = new Date(sortedTasks[0].dueDate);
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    console.log(date.toLocaleDateString("en-US", options));
-    nextDate.innerHTML = date.toLocaleDateString("en-US", options);
-  } else {
-    nextDate.innerHTML = "No upcoming Deadline";
-  }
+  date = new Date(sortedTasks[0].dueDate);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  nextDate.innerHTML = date.toLocaleDateString("en-US", options);
 }
 
 /**
@@ -122,7 +121,7 @@ function taskInBoard(data) {
  */
 function taskDone(data) {
   const tasksDone = Object.values(data).filter((task) =>
-    task.status?.includes("toDo")
+    task.status?.includes("done")
   );
   let tasksDoneCount = document.getElementById("tasksDoneCount");
   tasksDoneCount.innerHTML = tasksDone.length;
@@ -134,7 +133,7 @@ function taskDone(data) {
  */
 function taskAwaiting(data) {
   const tasksAwaiting = Object.values(data).filter((task) =>
-    task.status?.includes("feedback")
+    task.status?.includes("await_feedback")
   );
   let tasksAwaitingCount = document.getElementById("tasksAwaitingCount");
   tasksAwaitingCount.innerHTML = tasksAwaiting.length;
