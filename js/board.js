@@ -77,6 +77,26 @@ async function saveTaskChanges(taskId) {
   addedSubtasks = [];
   closePopUps();
   openTaskPopUp(taskId);
+
+  showAnimation("Task successfully saved!");
+}
+
+/**
+ * Displays a temporary animation message on the screen.
+ * Example Usage:
+ * showAnimation("Task successfully saved!"); 
+ * @param {string} message - The message to display in the animation.
+ */
+function showAnimation(message) {
+  let feedback = document.createElement("div");
+  feedback.className = "save-feedback";
+  feedback.innerText = message;
+
+  document.body.appendChild(feedback);
+
+  setTimeout(() => {
+    feedback.remove();
+  }, 2000);
 }
 
 /**
@@ -233,7 +253,7 @@ function addSubtaskEditPopUp(taskId) {
  */
 function handleSubtaskKeyPress(event, taskId) {
   if (event.key === "Enter") {
-      addSubtaskEditPopUp(taskId);
+    addSubtaskEditPopUp(taskId);
   }
 }
 
