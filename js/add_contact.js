@@ -41,10 +41,6 @@ function showAddContactForm(event) {
 async function showEditContactForm(event, id) {
   toggleOverlay();
   let dialog = document.getElementById("contacts-dialog");
-  if (!dialog) {
-    console.error("Element #contacts-dialog nicht gefunden");
-    return;
-  }
   dialog.classList.add("show");
   let contact = await getContactById(id);
   dialog.innerHTML = getEditContactDialog(contact, id);
@@ -114,6 +110,7 @@ function showContactToastMessage(toastMessage) {
 
 /**
  * Get a random color out of the colors array.
+ * @returns {string} The randomly chosen color for the contact.
  */
 function getRandomColor() {
   let color = colors[Math.floor(Math.random() * colors.length)];
@@ -125,6 +122,7 @@ function getRandomColor() {
  * @param {string} name - The name of the contact.
  * @param {string} mail - The email address of the contact.
  * @param {string} password - The password of the contact.
+ * @returns {Object} - The contact object which will be added to Firebase.
  */
 function newContactObject(name, mail, phone) {
   return {
@@ -141,6 +139,7 @@ function newContactObject(name, mail, phone) {
  * @param {string} name - The name of the contact.
  * @param {string} mail - The email address of the contact.
  * @param {string} password - The password of the contact.
+ * @returns {Object} - The contact object which will be updated Firebase.
  */
 function updatedContactObject(name, mail, phone) {
   return {
