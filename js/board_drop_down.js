@@ -35,10 +35,7 @@ function renderDropdownContacts(taskId) {
     let contact = contacts[i];
     if (task.assignedTo) {
       if (task.assignedTo.some((c) => c.name === contact.name)) {
-        dropdownContent.innerHTML += getSelectedDropdownContactsTemplate(
-          contact,
-          task
-        );
+        dropdownContent.innerHTML += getSelectedDropdownContactsTemplate(contact, task);
       } else {
         dropdownContent.innerHTML += getDropdownContactsTemplate(contact, task);
       }
@@ -51,6 +48,7 @@ function renderDropdownContacts(taskId) {
 /**
  * Toggles the selection state of a contact in the dropdown. Updates the checkbox appearance and adds/removes the contact from the selected contacts list.
  * @param {string} contactId - The ID of the contact to toggle.
+ * @param {string} taskId - The ID of the task to toggle.
  */
 function toggleCheckboxContact(contactId, taskId) {
   let contact = contacts.find((c) => c.id === contactId);

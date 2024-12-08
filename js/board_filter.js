@@ -32,10 +32,8 @@ function filterTaskByTitleOrDescription(filterInput) {
         if (taskTitle.includes(filterInput) || taskDescription.includes(filterInput)) {
             task.style.display = '';
             foundAny = true;
-            // task.style.opacity = '1';
         } else {
             task.style.display = 'none';
-            //  task.style.opacity = '0.3'; 
         }
     });
 
@@ -51,6 +49,7 @@ function showAllTasks() {
     kanbanTask.forEach(task => {
         task.style.display = '';
     });
+
     toggleNoMatchMessage(false);
 }
 
@@ -61,10 +60,8 @@ function showAllTasks() {
 function toggleNoMatchMessage(show) {
     const noMatchMessage = document.getElementById('no_matching_task');
     if (show) {
-        /* noMatchMessage.style.display = 'block';  */
         noMatchMessage.classList.remove('d_none');
     } else {
-        /* noMatchMessage.style.display = 'none'; */ 
         noMatchMessage.classList.add('d_none');
     }
 }

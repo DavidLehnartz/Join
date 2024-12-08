@@ -239,14 +239,10 @@ function getTaskPopUpTemplate(
                     <div class="task-info-value">Priority:</div>
                   </div>
                   <div class="pop-up-task-info">
-                    <div class="task-info-label">${formatDate(
-                      task.dueDate
-                    )}</div>
+                    <div class="task-info-label">${formatDate(task.dueDate)}</div>
                     <div class="task-info-value">
                     ${task.priority}
-                      <img src="${priorityImage}" alt="${
-    task.priority
-  }" class="priority-icon" />
+                      <img src="${priorityImage}" alt="${task.priority}" class="priority-icon" />
                     </div>
                   </div>
                 </div>
@@ -264,9 +260,7 @@ function getTaskPopUpTemplate(
                 </div>
               </div>
               <div class="pop-up-footer">
-                <img onclick="renderEditTaskPopUp('${
-                  task.id
-                }'), renderDropdownContacts('${task.id}')"
+                <img onclick="renderEditTaskPopUp('${task.id}'), renderDropdownContacts('${task.id}')"
                      onmouseover="changeImage('edit_img', 'edit')" 
                      onmouseout="changeImage('edit_img', 'edit')"
                      id="edit_img"
@@ -327,8 +321,7 @@ function getEditTaskPopUpTemplate(task) {
                   <textarea id="edit_description"
                     class="pop-up-edit-task-textarea"
                     rows="4"
-                    placeholder="Enter a Description"
-                  >${task.description}</textarea>
+                    placeholder="Enter a Description">${task.description}</textarea>
                 </div>
 
                 <div class="pop-up-edit-task-due-date">
@@ -786,7 +779,6 @@ function getEditSubtaskInput(id, subtask) {
                 <img onclick="saveEditedSubtaskEditPopUp('${id}')"
                 class="icon-container-images-save" 
                 src="../assets/img/check_black.png" 
-          </div>
-          
+          </div>  
   `;
 }

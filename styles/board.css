@@ -170,7 +170,6 @@ label {
 .kanban-task-wrapper {
   display: flex;
   flex-direction: column;
-  height: 530px;
   height: 370px;
   padding: 16px;
   cursor: pointer;
@@ -404,13 +403,17 @@ nav {
   .main-content-wrapper {
     width: 100%;
   }
-}
 
-@media (min-width: 1320px) {
   .left-sidebar {
     bottom: 0px;
   }
 }
+
+/* @media (min-width: 1320px) {
+  .left-sidebar {
+    bottom: 0px;
+  }
+} */
 
 @media (max-width: 1130px) {
   .add-task-btn {
