@@ -58,6 +58,7 @@ function showHowManyTasksUrgent(data) {
   let urgentCount = document.getElementById("urgentCount");
   urgentCount.innerHTML = urgentTasks.length;
   filterWichDateNearest(urgentTasks);
+  console.log("Urgent Tasks:", urgentTasks.length);
 }
 
 /**
@@ -77,15 +78,20 @@ function taskInProgess(data) {
  * @param {Array} urgentTasks - The list of urgent tasks.
  */
 function filterWichDateNearest(urgentTasks) {
+  let nextDate = document.getElementById("nextDate");
   const sortedTasks = urgentTasks.sort((a, b) => {
     const aDate = new Date(a.dueDate);
     const bDate = new Date(b.dueDate);
     return aDate - bDate;
   });
-  const date = new Date(sortedTasks[0].dueDate);
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  let nextDate = document.getElementById("nextDate");
-  nextDate.innerHTML = date.toLocaleDateString("en-US", options);
+  if (sortedTasks.dueDate) {
+    date = new Date(sortedTasks[0].dueDate);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    console.log(date.toLocaleDateString("en-US", options));
+    nextDate.innerHTML = date.toLocaleDateString("en-US", options);
+  } else {
+    nextDate.innerHTML = "No upcoming Deadline";
+  }
 }
 
 /**
