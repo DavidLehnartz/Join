@@ -308,6 +308,8 @@ li.added-subtask-item {
   position: relative;
   list-style-type: disc; 
   transition: 0.3s ease; 
+  word-break: break-word;
+  hyphens: auto;
 }
 
 li.added-subtask-item::before {

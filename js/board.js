@@ -226,6 +226,18 @@ function addSubtaskEditPopUp(taskId) {
 }
 
 /**
+ * Handles the key press event for the subtask input.
+ * Adds a new subtask if the Enter key is pressed.
+ * @param {KeyboardEvent} event - The keyboard event.
+ * @param {number} taskId - The ID of the parent task.
+ */
+function handleSubtaskKeyPress(event, taskId) {
+  if (event.key === "Enter") {
+      addSubtaskEditPopUp(taskId);
+  }
+}
+
+/**
  * Deletes a subtask from the "Edit Task" popup.
  * @param {string} name - The name of the subtask to delete.
  */

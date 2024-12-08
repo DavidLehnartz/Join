@@ -224,7 +224,7 @@ function getTaskPopUpTemplate(
                   />
                 </div>
                 <div class="pop-up-task-content">
-                <div class="blubb">
+                <div class="pop-up-title">
                   <h4>${task.title}</h4>
                   </div>
                   <div class="pop-up-description">
@@ -305,9 +305,8 @@ function getEditTaskPopUpTemplate(task) {
               </div>
               <div class="pop-up-edit-task-form">
                 <div class="pop-up-edit-task-title">
-                  <label for="">
-                  Title
-                    <span class="required-sign">*</span>
+                  <label>
+                    Title
                   </label>
                   <input id="edit_title" value="${task.title}"
                     class="pop-up-edit-task-input"
@@ -325,9 +324,8 @@ function getEditTaskPopUpTemplate(task) {
                 </div>
 
                 <div class="pop-up-edit-task-due-date">
-                  <label for="">
+                  <label>
                     Due date
-                    <span class="required-sign">*</span>
                   </label>
                   <input id="edit_due_date" value="${task.dueDate}"
                    class="pop-up-edit-task-input"
@@ -367,7 +365,6 @@ function getEditTaskPopUpTemplate(task) {
                 <div class="pop-up-edit-task-assigned-to">
                   <div>
                     Assigned to
-                    <span class="required-sign">*</span>
                   </div>
             
                   <div class="dropdown">
@@ -389,7 +386,8 @@ function getEditTaskPopUpTemplate(task) {
                 <div class="pop-up-edit-task-subtasks">
                   Subtasks
                   <div class="input-box">
-                    <input onkeyup="updateButtonImage('${task.id}');"
+                    <input onkeyup="handleSubtaskKeyPress(event, '${task.id}'); updateButtonImage('${task.id}');"
+                    
                       id="input_add_subtask"
                       class="pop-up-edit-subtask-input"
                       type="text"
