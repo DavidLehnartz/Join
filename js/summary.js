@@ -58,6 +58,7 @@ function showHowManyTasksUrgent(data) {
   let urgentCount = document.getElementById("urgentCount");
   urgentCount.innerHTML = urgentTasks.length;
   filterWichDateNearest(urgentTasks);
+  console.log("Urgent Tasks:", urgentTasks.length);
 }
 
 /**
@@ -82,8 +83,9 @@ function filterWichDateNearest(urgentTasks) {
     const bDate = new Date(b.dueDate);
     return aDate - bDate;
   });
-  const date = new Date(sortedTasks[0].dueDate);
+  date = new Date(sortedTasks[0].dueDate);
   const options = { year: "numeric", month: "long", day: "numeric" };
+  console.log(date.toLocaleDateString("en-US", options));
   let nextDate = document.getElementById("nextDate");
   nextDate.innerHTML = date.toLocaleDateString("en-US", options);
 }
