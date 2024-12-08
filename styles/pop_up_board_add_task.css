@@ -669,6 +669,48 @@ textarea {
   align-items: end;
 }
 
+@keyframes slideIn {
+  from {
+    bottom: 0px;
+    transform: translateY(-100%);
+    opacity: 0.2;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  to {
+    bottom: 400px;
+    transform: translateY(0);
+    opacity: 1;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.showMe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 220px;
+  height: 50px;
+  background-color: #2a3647;
+  z-index: 1000;
+  color: white;
+  gap: 10px;
+  border-radius: 10px;
+  animation: slideIn 3s ease-in-out forwards;
+}
+
+.showMe img {
+  width: 24px;
+  height: 24px;
+}
+
+.d-none {
+  display: none;
+}
+
 /* MEDIA QUERY */
 
 @media (max-width: 1000px) {
