@@ -36,6 +36,91 @@ async function loadFetchedData() {
 }
 
 /**
+ * Renders the desktop template including header and sidebar.
+ * @param {string} header - The ID of the header container.
+ * @param {string} sidebar - The ID of the sidebar container.
+ * @param {string} link - The ID of the navigation item to focus on.
+ */
+function renderDesktopTemplate(header, sidebar, link) {
+  createHeader(header);
+  createSidebar(sidebar, link);
+  let boardHeadlineContent = document.getElementById("board_headline");
+  boardHeadlineContent.innerHTML = getBoardHeadlineTemplate();
+}
+
+/**
+ * Renders a popup with task details.
+ * @param {number} taskId - The ID of the task to render.
+ */
+function renderTaskPopUp(taskId) {
+  let taskPopUpContent = document.getElementById("task_pop_up");
+  taskPopUpContent.innerHTML = "";
+  let task = tasks.find((t) => t.id === taskId);
+  if (task) {
+    let priorityImage = getPriorityImage(task.priority);
+    let categoryColor = getCategoryColor(task.category);
+    let assigneeContent = getAssigneesTemplate(task.assignedTo);
+    taskPopUpContent.innerHTML = getTaskPopUpTemplate(
+      task,
+      priorityImage,
+      categoryColor,
+      assigneeContent
+    );
+  }
+  renderSubtasks(taskId);
+}
+
+/**
+ * Renders an editable popup for a task.
+ * @param {number} taskId - The ID of the task to edit.
+ * @param {string} priorityImage - The path to the priority image for the task.
+ */
+function renderEditTaskPopUp(taskId, priorityImage) {
+  currentTaskId = taskId;
+  let editTaskPopUpContent = document.getElementById("edit_task_pop_up");
+  editTaskPopUpContent.innerHTML = "";
+  let task = tasks.find((t) => t.id === taskId);
+  if (task) {
+    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task, priorityImage);
+
+    renderSelectedContacts();
+    setPriorityButton(task.priority);
+  }
+
+  document.getElementById("edit_task_pop_up").classList.remove("responsive-pop-up-closed");
+}
+
+/**
+ * Renders the selected contacts in the "Edit Task" popup.
+ */
+function renderSelectedContacts(task) {
+  let selectedContactsContent = document.getElementById("selected_contacts");
+  selectedContacts = task.assignedTo;
+  selectedContactsContent.innerHTML = "";
+  if (selectedContacts) {
+    for (let i = 0; i < selectedContacts.length; i++) {
+      let contact = selectedContacts[i];
+      selectedContactsContent.innerHTML += getSelectedContactsTemplate(contact);
+    }
+  }
+}
+
+/**
+ * Renders the initials of the assignees for a task.
+ * @param {Array<Object>} assignedTo - Array of assigned contact objects.
+ * @returns {string} HTML string of assignee initials.
+ */
+function renderAssigneeInitials(assignedTo) {
+  let assigneeInitialsContent = "";
+  if (Array.isArray(assignedTo)) {
+    assignedTo.forEach((assignee) => {
+      assigneeInitialsContent += getAssigneeInitialsTemplate(assignee);
+    });
+  }
+  return assigneeInitialsContent;
+}
+
+/**
  * Opens a popup displaying task details.
  * @param {number} taskId - The ID of the task to display.
  */
@@ -290,13 +375,12 @@ function editSubtaskEditPopUp(id) {
  */
 function saveEditedSubtaskEditPopUp(id, newTitle) {
   let subtaskIndex = addedSubtasks.findIndex((sub) => sub.id === id);
-  if (subtaskIndex !== -1) {
-    let updatedTitle = newTitle ? newTitle.trim() : addedSubtasks[subtaskIndex].name;
-
-    addedSubtasks[subtaskIndex].name = updatedTitle;
+  if (subtaskIndex !== -1 && newTitle.trim() !== "") {
+    addedSubtasks[subtaskIndex].title = newTitle.trim();
   }
 
   renderAddSubtasksEditPopUp();
+  /* console.log(addedSubtasks); */
 }
 
 /**
