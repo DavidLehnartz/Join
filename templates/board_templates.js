@@ -427,6 +427,7 @@ function getEditTaskPopUpTemplate(task) {
               </button>
             </div>
           </div>
+           
     `;
 }
 

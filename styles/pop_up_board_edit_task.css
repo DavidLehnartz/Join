@@ -510,37 +510,44 @@ li.added-subtask-item.editing {
   font-size: 14px;
 }
 
-/* Animation für Feedback */
-.save-feedback {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgb(41, 171, 226);
+.feedback-animation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 220px;
+  height: 50px;
+  background-color: #2a3647;
+  z-index: 1000;
   color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  animation: fade-in-out 2s ease-in-out;
-  z-index: 999;
+  gap: 10px;
+  border-radius: 10px;
+  padding: 0px 16px;
+  animation: slideIn 3s ease-in-out forwards;
 }
 
-@keyframes fade-in-out {
-  0% {
-      opacity: 0;
-      transform: translate(-50%, -60%);
-  }
-  20%, 80% {
-      opacity: 1;
-      transform: translate(-50%, -50%);
-  }
-  100% {
-      opacity: 0;
-      transform: translate(-50%, -40%);
-  }
+.feedback-animation img {
+  width: 25px;
+  height: 25px;
 }
 
+@keyframes slideIn {
+  from {
+    bottom: 0px;
+    transform: translateY(-100%);
+    opacity: 0.2;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  to {
+    bottom: 50%;
+    transform: translateY(0);
+    opacity: 1;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 
 /* MEDIA QUERY */
 

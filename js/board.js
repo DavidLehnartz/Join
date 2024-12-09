@@ -77,7 +77,7 @@ async function saveTaskChanges(taskId) {
   addedSubtasks = [];
   closePopUps();
   openTaskPopUp(taskId);
-  showAnimation("Task successfully saved!");
+  showAnimation("Task successfully saved!", "../assets/img/board.png");
 }
 
 /**

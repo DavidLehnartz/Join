@@ -186,6 +186,13 @@ label {
   border: 2px solid rgb(41, 171, 226);
 }
 
+.highlight-column {
+  background-color: rgb(41, 171, 226);
+  border-radius: 10px;
+  padding: 16px 0px;
+  transition: background-color 0.2s ease, border 0.2s ease;
+}
+
 .kanban-task {
   display: flex;
   flex-direction: column;
@@ -408,12 +415,6 @@ nav {
     bottom: 0px;
   }
 }
-
-/* @media (min-width: 1320px) {
-  .left-sidebar {
-    bottom: 0px;
-  }
-} */
 
 @media (max-width: 1130px) {
   .add-task-btn {

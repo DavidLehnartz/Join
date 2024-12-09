@@ -53,6 +53,8 @@
               class="kanban-column"
               ondrop="drop(event, 'todo')"
               ondragover="allowDrop(event)"
+              ondragenter="highlightColumn(event)"
+              ondragleave="unhighlightColumn(event)"
             >
               <div class="kanban-header">
                 <h2>To Do</h2>
@@ -77,6 +79,8 @@
               class="kanban-column"
               ondrop="drop(event, 'in_progress')"
               ondragover="allowDrop(event)"
+              ondragenter="highlightColumn(event)"
+              ondragleave="unhighlightColumn(event)"
             >
               <div class="kanban-header">
                 <h2>In progress</h2>
@@ -104,6 +108,8 @@
               class="kanban-column"
               ondrop="drop(event, 'await_feedback')"
               ondragover="allowDrop(event)"
+              ondragenter="highlightColumn(event)"
+              ondragleave="unhighlightColumn(event)"
             >
               <div class="kanban-header">
                 <h2>Await feedback</h2>
@@ -131,6 +137,8 @@
               class="kanban-column"
               ondrop="drop(event, 'done')"
               ondragover="allowDrop(event)"
+              ondragenter="highlightColumn(event)"
+              ondragleave="unhighlightColumn(event)"
             >
               <div class="kanban-header">
                 <h2>Done</h2>

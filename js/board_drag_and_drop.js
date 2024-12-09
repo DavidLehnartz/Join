@@ -21,6 +21,9 @@ function allowDrop(event) {
 async function drop(event, targetColumn) {
     event.preventDefault();
 
+    let column = event.currentTarget;
+    column.classList.remove("highlight-column");
+
     let task = tasks.find(task => task.id === draggedTaskId);
     if (task) {
         task.status = targetColumn;
@@ -99,4 +102,27 @@ function emptyColumnMessage() {
             column.tasksWrapper.classList.remove('d_none');
         }
     });
+}
+
+/**
+ * Highlights the target column when a task is dragged over it.
+ * @param {Event} event - The drag event.
+ */
+function highlightColumn(event) {
+    let column = event.currentTarget;
+
+    if (!column.classList.contains("highlight-column")) {
+        column.classList.add("highlight-column");
+    }
+}
+
+/**
+ * Removes the highlight from the column when a task is dragged out.
+ * @param {Event} event - The drag event.
+ */
+function unhighlightColumn(event) {
+    let column = event.currentTarget;
+
+    if (column.contains(event.relatedTarget)) return;
+    column.classList.remove("highlight-column");
 }

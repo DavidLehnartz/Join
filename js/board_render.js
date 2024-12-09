@@ -162,28 +162,35 @@ function renderAddSubtasksEditPopUp() {
  */
 function renderProgressString(task) {
     if (task.subtasks) {
-      let subTaskCount = task.subtasks.length;
-      let completedSubTasks = getCompletedSubtasksCount(task);
-      return `${completedSubTasks}/${subTaskCount} Subtasks Completed`;
+        let subTaskCount = task.subtasks.length;
+        let completedSubTasks = getCompletedSubtasksCount(task);
+        return `${completedSubTasks}/${subTaskCount} Subtasks Completed`;
     } else {
-      return "0/0 Subtasks Completed";
+        return "0/0 Subtasks Completed";
     }
-  }
+}
 
-  /**
- * Displays a temporary animation message on the screen.
- * Example Usage:
- * showAnimation("Task successfully saved!"); 
+/**
+ * Displays a temporary animation message on the screen with an image.
+ * Starts from the bottom and slides to the middle of the screen.
  * @param {string} message - The message to display in the animation.
+ * @param {string} imgSrc - The source of the image to display in the animation.
  */
-function showAnimation(message) {
+function showAnimation(message, imgSrc) {
     let feedback = document.createElement("div");
-    feedback.className = "save-feedback";
-    feedback.innerText = message;
-  
+    feedback.className = "feedback-animation";
+    let img = document.createElement("img");
+    img.src = imgSrc;
+    img.alt = "Animation Icon";
+    let text = document.createElement("span");
+    text.innerText = message;
+
+    feedback.appendChild(text);
+    feedback.appendChild(img);
+
     document.body.appendChild(feedback);
-  
+
     setTimeout(() => {
-      feedback.remove();
-    }, 2000);
-  }
+        feedback.remove();
+    }, 3000);
+}
