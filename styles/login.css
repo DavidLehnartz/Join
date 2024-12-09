@@ -79,8 +79,7 @@ hr {
 .login-legal {
   display: flex;
   gap: 10px;
-  position: absolute;
-  bottom: 30px;
+  margin-top: 200px;
 }
 
 @media (max-width: 1250px) {
@@ -94,6 +93,10 @@ hr {
 
   .login-form {
     padding: 0px 80px;
+  }
+
+  .login-legal {
+    margin-top: 150px;
   }
 }
 
@@ -116,6 +119,10 @@ hr {
 
   .login-form {
     padding: 0px 60px;
+  }
+
+  .login-legal {
+    margin-top: 100px;
   }
 }
 
@@ -155,7 +162,7 @@ hr {
 
   .login-card {
     width: 100%;
-    margin-top: 180px;
+    margin-top: 150px;
   }
 
   .login-btn-row {
@@ -165,7 +172,7 @@ hr {
   }
 
   .login-legal {
-    bottom: 20px;
+    margin-top: 80px;
   }
 
   .sign-up-info {
