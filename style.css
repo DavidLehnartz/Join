@@ -201,20 +201,32 @@ input:hover {
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 600px) {
   input {
     width: 364px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 550px) {
   input {
-    width: 280px;
+    width: 350px;
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 450px) {
   input {
-    width: 200px;
+    width: 300px;
+  }
+}
+
+@media (max-width: 400px) {
+  input {
+    width: 250px;
+  }
+}
+
+@media (max-width: 350px) {
+  input {
+    width: 210px;
   }
 }

@@ -27,15 +27,20 @@ function getAddContactDialog() {
             <div id="add-contact-icon" class="profile-icon-big bg-grey"><img src="../assets/icons/person.svg" /></div>
             <form id="add-contacts-form" class="add-contacts-form">
               <div class="icon-input-field">
-                <input id="add-contact-name" type="text" placeholder="Name" />
+                <input id="add-contact-name" type="text" placeholder="Name"/>
                 <img class="input-icon" src="../assets/icons/person-grey.svg" />
               </div>
+              <div>
               <div class="icon-input-field">
-                <input id="add-contact-mail" type="email" placeholder="Email" />
+                <input id="add-contact-mail" type="email" placeholder="Email" onkeyup="validateContactsEmail('add')"/>
                 <img class="input-icon" src="../assets/icons/mail-grey.svg" />
               </div>
+              <p id="add-mail-error-message" class="error-text hidden">
+              Please enter a valid email address.
+              </p>
+              </div>
               <div class="icon-input-field">
-                <input id="add-contact-phone" placeholder="Phone" />
+                <input id="add-contact-phone" placeholder="Phone" type="number"/>
                 <img class="input-icon" src="../assets/icons/call-grey.svg" />
               </div>
               <div class="add-contact-buttons">
@@ -51,14 +56,17 @@ function getAddContactDialog() {
                   type="submit"
                   id="add-contact-btn"
                   class="contact-form-btn btn-filled"
-                  onclick="getNewContactsInfo(event), showContactToastMessage('Contact successfully created')"
+                  onclick="getNewContactsInfo(event)"
                 >
                   <p>Create Contact</p>
                   <img src="../assets/icons/check.svg" />
                 </button>
               </div>
             </form>
-          </div>`;
+          </div>
+          <p id="add-empty-error-message" class="error-text hidden" style="margin: 30px 60px 0px 0px">
+              All fields need to be filled.
+              </p>`;
 }
 
 /**
@@ -94,12 +102,17 @@ function getEditContactDialog(contact, id) {
                 <input id="edit-contact-name" type="text" placeholder="Name" value="${contact.name}"/>
                 <img class="input-icon" src="../assets/icons/person-grey.svg" />
               </div>
+              <div>
               <div class="icon-input-field">
-                <input id="edit-contact-mail" type="email" placeholder="Email" value="${contact.email}"/>
+                <input id="edit-contact-mail" type="email" placeholder="Email" value="${contact.email}" onkeyup="validateContactsEmail('edit')"/>
                 <img class="input-icon" src="../assets/icons/mail-grey.svg" />
               </div>
+              <p id="edit-mail-error-message" class="error-text hidden">
+              Please enter a valid email address.
+              </p>
+              </div>
               <div class="icon-input-field">
-                <input id="edit-contact-phone" placeholder="Phone" value="${contact.phone}"/>
+                <input id="edit-contact-phone" placeholder="Phone" type="number" value="${contact.phone}"/>
                 <img class="input-icon" src="../assets/icons/call-grey.svg" />
               </div>
               <div class="add-contact-buttons">
@@ -122,7 +135,10 @@ function getEditContactDialog(contact, id) {
                 </button>
               </div>
             </form>
-          </div>`;
+          </div>
+          <p id="edit-empty-error-message" class="error-text hidden" style="margin: 30px 60px 0px 0px">
+              All fields need to be filled.
+              </p>`;
 }
 
 /**
