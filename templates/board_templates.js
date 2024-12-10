@@ -368,7 +368,7 @@ function getEditTaskPopUpTemplate(task) {
                   </div>
             
                   <div class="dropdown">
-                   <button onclick="toggleDropdownTaskPopUp(), toggleInputImage()" id="dropdown" class="drop-btn">
+                   <button onclick="toggleDropdownTaskPopUp(), toggleInputImage()" tabindex="0" onblur="closeDropdown()" id="dropdown" class="drop-btn">
                      Select contacts to assign
                      <img id="dropdown_icon" class="dropdown-icon" src="../assets/img/arrow_drop_downaa.png" alt="arrow">
                    </button>

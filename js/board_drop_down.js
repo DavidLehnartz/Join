@@ -10,6 +10,17 @@ function toggleDropdownTaskPopUp() {
 }
 
 /**
+ * Schließt das Dropdown, wenn der Benutzer außerhalb klickt oder das Element den Fokus verliert.
+ */
+function closeDropdown() {
+  console.log("Dropdown lost focus");
+  const dropdownContent = document.getElementById("dropdown_content");
+  if (!dropdownContent.classList.contains("d_none")) {
+    dropdownContent.classList.add("d_none");
+  }
+}
+
+/**
  * Toggles the source of the dropdown icon image between "arrow_drop_downaa.png" and "arrow_drop_up.png" to reflect the open/close state.
  */
 function toggleInputImage() {
