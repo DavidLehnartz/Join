@@ -11,10 +11,8 @@ async function fetchTasksData() {
   subtasks = [];
   let tasksResponse = await fetch(BASE_URL + "/tasks" + ".json");
   let tasksToJson = await tasksResponse.json();
-
   if (tasksToJson) {
     const taskKeys = Object.keys(tasksToJson);
-
     taskKeys.forEach((key) => {
       const task = {
         id: key,

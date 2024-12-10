@@ -114,16 +114,3 @@ function removeContactFromSelected(contactId, taskId) {
     updateTaskInFirebase(task);
   }
 }
-
-/* window.onclick = function (event) {
-  if (!event.target.matches(".drop-btn")) {
-    let dropdowns = document.getElementsByClassName("dropdown-content");
-    let i;
-    for (i = 0; i < dropdowns.length; i++) {
-      let openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("d_none")) {
-        openDropdown.classList.remove("d_none");
-      } 
-    }
-  }
-}*/
