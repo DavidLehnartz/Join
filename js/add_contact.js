@@ -59,20 +59,128 @@ function closeContactForm(event) {
 }
 
 /**
+ * Validate the input of the contacts email-field.
+ * @param {String} keyAction - whether "add" or "edit" - the main actions of the contacts dialog
+ * @returns {Boolean} - if the email has a valid form.
+ */
+function validateContactsEmail(keyAction) {
+  const emailInput = document.getElementById(`${keyAction}-contact-mail`);
+  const email = emailInput.value.trim();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let errorMessage = document.getElementById(`${keyAction}-mail-error-message`);
+  if (emailPattern.test(email)) {
+    emailInput.classList.remove("error-input");
+    errorMessage.classList.add("hidden");
+    return true;
+  } else {
+    emailInput.classList.add("error-input");
+    errorMessage.classList.remove("hidden");
+    return false;
+  }
+}
+
+/**
+ * Check if input field is empty.
+ * @param {String} elementId - the ID of the HTML Element.
+ * @returns {Boolean} - if the input field is empty or not.
+ */
+function isContactInputEmpty(elementId) {
+  const element = document.getElementById(elementId);
+  return element.value === "";
+}
+
+/**
+ * Validate all inputs of the contact dialog.
+ * @param {String} keyAction - whether "add" or "edit" - the main actions of the contacts dialog
+ * @returns {Boolean} - if the email has a valid form.
+ */
+function validAddContactInput(keyAction) {
+  return (
+    validateContactsEmail(keyAction) &&
+    isContactInputEmpty(`${keyAction}-contact-mail`) &&
+    isContactInputEmpty(`${keyAction}-contact-name`) &&
+    isContactInputEmpty(`${keyAction}-contact-phone`)
+  );
+}
+
+/**
+ * Change the color of the input border to red and show error message when an input is empty.
+ * @param {String} keyAction - whether "add" or "edit" - the main actions of the contacts dialog
+ */
+function renderEmptyErrorName(keyAction) {
+  if (isContactInputEmpty(`${keyAction}-contact-name`)) {
+    document
+      .getElementById(`${keyAction}-contact-name`)
+      .classList.add("error-input");
+  }
+}
+
+/**
+ * Change the color of the input border to red and show error message when an input is empty.
+ * @param {String} keyAction - whether "add" or "edit" - the main actions of the contacts dialog
+ */
+function renderEmptyErrorMail(keyAction) {
+  let errorMessage = document.getElementById(`${keyAction}-mail-error-message`);
+  if (isContactInputEmpty(`${keyAction}-contact-mail`)) {
+    document
+      .getElementById(`${keyAction}-contact-mail`)
+      .classList.add("error-input");
+    errorMessage.classList.add("hidden");
+  }
+}
+
+/**
+ * Change the color of the input border to red and show error message when an input is empty.
+ * @param {String} keyAction - whether "add" or "edit" - the main actions of the contacts dialog
+ */
+function renderEmptyErrorPhone(keyAction) {
+  if (isContactInputEmpty(`${keyAction}-contact-phone`)) {
+    document
+      .getElementById(`${keyAction}-contact-phone`)
+      .classList.add("error-input");
+  }
+}
+
+/**
+ * Change the color of the input border to red and show error message when an input is empty.
+ * @param {String} keyAction - whether "add" or "edit" - the main actions of the contacts dialog
+ */
+function renderEmptyError(keyAction) {
+  renderEmptyErrorName(keyAction);
+  renderEmptyErrorMail(keyAction);
+  renderEmptyErrorPhone(keyAction);
+  document
+    .getElementById(`${keyAction}-empty-error-message`)
+    .classList.remove("hidden");
+}
+
+/**
+ * Change the color of the input border to red and show error message when an input is empty.
+ * @param {String} keyAction - whether "add" or "edit" - the main actions of the contacts dialog
+ */
+function removeEmptyError(keyAction) {
+  document
+    .getElementById(`${keyAction}-empty-error-message`)
+    .classList.add("hidden");
+}
+
+/**
  * Get all the values for creating a new contact from the given input fields.
  * @param {event} event - The event of that element.
  */
 async function getNewContactsInfo(event) {
   event.preventDefault();
-  let name = document.getElementById("add-contact-name").value;
-  let mail = document.getElementById("add-contact-mail").value;
-  let phone = document.getElementById("add-contact-phone").value;
   let dialog = document.getElementById("contacts-dialog");
-  let newContact = newContactObject(name, mail, phone);
-  await createContact(newContact);
-  toggleOverlay();
-  dialog.classList.remove("show");
-  refreshContactList();
+  let newContact = newContactObject();
+  if (validAddContactInput("add")) {
+    await createContact(newContact);
+    toggleOverlay();
+    dialog.classList.remove("show");
+    showContactToastMessage("Contact successfully created");
+    refreshContactList();
+  } else {
+    renderEmptyError("add");
+  }
 }
 
 /**
@@ -82,16 +190,17 @@ async function getNewContactsInfo(event) {
  */
 async function updateContactInfo(event, id) {
   event.preventDefault();
-  let name = document.getElementById("edit-contact-name").value;
-  let mail = document.getElementById("edit-contact-mail").value;
-  let phone = document.getElementById("edit-contact-phone").value;
   let dialog = document.getElementById("contacts-dialog");
-  let updatedContact = updatedContactObject(name, mail, phone);
-  await updateContact(updatedContact, id);
-  toggleOverlay();
-  dialog.classList.remove("show");
-  showContactToastMessage("Contact successfully updated");
-  refreshContactList();
+  let updatedContact = updatedContactObject();
+  if (validAddContactInput("edit")) {
+    await updateContact(updatedContact, id);
+    toggleOverlay();
+    dialog.classList.remove("show");
+    showContactToastMessage("Contact successfully updated");
+    refreshContactList();
+  } else {
+    renderEmptyError("edit");
+  }
 }
 
 /**
@@ -119,12 +228,12 @@ function getRandomColor() {
 
 /**
  * Return an object with the given inputs to create a contact.
- * @param {string} name - The name of the contact.
- * @param {string} mail - The email address of the contact.
- * @param {string} password - The password of the contact.
  * @returns {Object} - The contact object which will be added to Firebase.
  */
-function newContactObject(name, mail, phone) {
+function newContactObject() {
+  let name = document.getElementById("add-contact-name").value;
+  let mail = document.getElementById("add-contact-mail").value;
+  let phone = document.getElementById("add-contact-phone").value;
   return {
     color: getRandomColor(),
     email: mail,
@@ -136,12 +245,12 @@ function newContactObject(name, mail, phone) {
 
 /**
  * Return an object with the given inputs to update a contact.
- * @param {string} name - The name of the contact.
- * @param {string} mail - The email address of the contact.
- * @param {string} password - The password of the contact.
  * @returns {Object} - The contact object which will be updated Firebase.
  */
-function updatedContactObject(name, mail, phone) {
+function updatedContactObject() {
+  let name = document.getElementById("edit-contact-name").value;
+  let mail = document.getElementById("edit-contact-mail").value;
+  let phone = document.getElementById("edit-contact-phone").value;
   return {
     email: mail,
     initial: createInitial(name),

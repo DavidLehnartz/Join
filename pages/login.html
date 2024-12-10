@@ -39,14 +39,20 @@
           <hr />
         </div>
         <form class="login-form">
-          <div class="icon-input-field">
-            <input
-              id="login-mail"
-              type="email"
-              placeholder="Email"
-              maxlength="30"
-            />
-            <img class="input-icon" src="../assets/icons/mail-grey.svg" />
+          <div>
+            <div class="icon-input-field">
+              <input
+                id="login-mail"
+                type="email"
+                placeholder="Email"
+                maxlength="30"
+                onkeyup="validateLoginEmail()"
+              />
+              <img class="input-icon" src="../assets/icons/mail-grey.svg" />
+            </div>
+            <p id="login-mail-error" class="error-text hidden">
+              Please enter a valid email address.
+            </p>
           </div>
           <div>
             <div class="icon-input-field">
@@ -112,13 +118,13 @@
       <div id="login-legal" class="login-legal">
         <p
           class="small-text-button"
-          onclick="window.location.href='../pages/privacy_policy.html'"
+          onclick="navigateToLegalLoggedOut('../pages/privacy_policy.html')"
         >
           Privacy Policy
         </p>
         <p
           class="small-text-button"
-          onclick="window.location.href='../pages/legal_notice.html'"
+          onclick="navigateToLegalLoggedOut('../pages/legal_notice.html')"
         >
           Legal notice
         </p>

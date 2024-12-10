@@ -13,3 +13,14 @@ function init(header, sidebar, link) {
     legalContent.classList.remove("hidden");
   }, 100);
 }
+
+/**
+ * Function to navigate back from legal notice page whether the user is logged in or not.
+ */
+function navigateBackLegal() {
+  if (JSON.parse(localStorage.getItem("loggedIn"))) {
+    window.location.href = "../pages/privacy_policy.html";
+  } else {
+    window.location.href = "../pages/login.html";
+  }
+}

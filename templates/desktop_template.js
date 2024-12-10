@@ -50,7 +50,12 @@ function showHeaderMenu(headerId) {
  */
 function createSidebar(sidebarId, linkId) {
   let sidebar = document.getElementById(sidebarId);
-  sidebar.innerHTML = renderSidebar();
+  if (JSON.parse(localStorage.getItem("loggedIn"))) {
+    sidebar.innerHTML = renderSidebar();
+  } else {
+    sidebar.innerHTML = renderPlainSidebar();
+  }
+
   if (linkId != "") {
     let activeLink = document.getElementById(linkId);
     activeLink.classList.add("link-active");
@@ -89,13 +94,32 @@ function renderSidebar() {
 }
 
 /**
+ * Render the template of the sidebar when user is not logged in.
+ */
+function renderPlainSidebar() {
+  return `<div class="left-sidebar">
+      <img class="bigLogo" src="../assets/img/join_logo_white.svg" alt="join logo" />
+      <div style="height: 200px"></div>
+      <div class="left-sidebar-links">
+        <a id="privacy-link" class="legacy-links" href="../pages/privacy_policy.html"> Privacy Policy </a>
+        <a id="legal-link" class="legacy-links" href="../pages/legal_notice.html"> Legal notice </a>
+      </div>
+    </div>`;
+}
+
+/**
  * Show the header.
  * @param {string} headerId - The id of header container.
  */
 function createHeader(headerId) {
   let header = document.getElementById(headerId);
   let user = getUserFromLocalStorage();
-  header.innerHTML = renderHeader(user.initial);
+  if (JSON.parse(localStorage.getItem("loggedIn"))) {
+    header.innerHTML = renderHeader(user.initial);
+  } else {
+    header.innerHTML = "";
+    header.innerHTML = renderPlainHeader();
+  }
 }
 
 /**
@@ -113,6 +137,20 @@ function renderHeader(initial) {
           <img class="header-help-icon hidden-mobile" src="../assets/img/help.png" alt="help" onclick="window.location.href='./help.html'"/>
           <div id="contact-profile-icon" class="header-profil-icon" onclick="showHeaderMenu('contacts-header-menu')">${initial}</div>
           <div id="contacts-header-menu"></div>
+        </div>
+      </div>
+    </header>`;
+}
+
+/**
+ * Render the template of the header when the user is not logged in.
+ */
+function renderPlainHeader() {
+  return `<header id="header">
+      <div class="header-wrapper">
+        <div>
+          <img class="mobileLogoStyle" src="../assets/img/join_logo_grey.svg">
+          <span class="KanbanSpanStyle">Kanban Project Management Tool</span>
         </div>
       </div>
     </header>`;

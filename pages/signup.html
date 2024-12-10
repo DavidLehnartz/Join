@@ -49,14 +49,20 @@
             />
             <img class="input-icon" src="../assets/icons/person-grey.svg" />
           </div>
-          <div class="icon-input-field">
-            <input
-              id="signup-mail"
-              type="email"
-              placeholder="Email"
-              maxlength="30"
-            />
-            <img class="input-icon" src="../assets/icons/mail-grey.svg" />
+          <div>
+            <div class="icon-input-field">
+              <input
+                id="signup-mail"
+                type="email"
+                placeholder="Email"
+                maxlength="30"
+                onkeyup="validateSignupEmail()"
+              />
+              <img class="input-icon" src="../assets/icons/mail-grey.svg" />
+            </div>
+            <p id="signup-mail-error" class="error-text hidden">
+              Please enter a valid email address.
+            </p>
           </div>
           <div class="icon-input-field">
             <input

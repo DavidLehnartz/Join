@@ -13,3 +13,14 @@ function init(header, sidebar, link) {
     privacyContent.classList.remove("hidden");
   }, 100);
 }
+
+/**
+ * Function to navigate back from privacy policy page whether the user is logged in or not.
+ */
+function navigateBackPrivacy() {
+  if (JSON.parse(localStorage.getItem("loggedIn"))) {
+    window.location.href = "../pages/contacts.html";
+  } else {
+    window.location.href = "../pages/login.html";
+  }
+}
