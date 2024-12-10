@@ -64,6 +64,7 @@ async function deleteTaskData(taskId) {
     });
     let deletedTask = await taskResponse.json();
     await fetchTasksData();
+    showAnimation("Task successfully deleted!", "../assets/img/board.png")
     closePopUps();
     return deletedTask;
   } catch (error) {
