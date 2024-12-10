@@ -431,10 +431,6 @@ nav {
 }
 
 @media (max-width: 770px) {
-  .header-wrapper {
-    padding: 0px 16px;
-  }
-
   .headline {
     display: none;
   }
