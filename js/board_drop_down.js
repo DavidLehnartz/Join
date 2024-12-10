@@ -10,7 +10,7 @@ function toggleDropdownTaskPopUp() {
 }
 
 /**
- * Schließt das Dropdown, wenn der Benutzer außerhalb klickt oder das Element den Fokus verliert.
+ * Closes the dropdown when the user clicks outside of it or the element loses focus.
  */
 function closeDropdown() {
   console.log("Dropdown lost focus");
