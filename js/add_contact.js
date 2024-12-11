@@ -246,6 +246,22 @@ function newContactObject() {
 }
 
 /**
+ * Return an object with the given inputs to create a contact.
+ * @param {String} name - The name of the signed up user
+ * @param {String} mail - The email of the signed up user
+ * @returns {Object} - The contact object which will be added to Firebase.
+ */
+function newSignupObject(name, mail) {
+  return {
+    color: getRandomColor(),
+    email: mail,
+    initial: createInitial(name),
+    name: name,
+    phone: 0,
+  };
+}
+
+/**
  * Return an object with the given inputs to update a contact.
  * @returns {Object} - The contact object which will be updated Firebase.
  */

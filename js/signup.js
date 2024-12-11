@@ -107,7 +107,7 @@ async function signUpUser(event) {
   let email = document.getElementById("signup-mail").value;
   let password = document.getElementById("signup-password").value;
   let newUser = newUserObject(name, email, password);
-  let newContact = newContactObject(name, email, "-");
+  let newContact = newSignupObject(name, email);
   await createUser(newUser);
   await createContact(newContact);
   resetForm();
