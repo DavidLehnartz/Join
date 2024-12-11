@@ -228,6 +228,13 @@ function formatDate(dateString) {
   return date.toLocaleDateString("de-DE", options);
 }
 
+/**
+ * Sets the minimum date for the due date input field),
+ * so that only future or today's dates can be selected.
+ * 
+ * Sets the "min" attribute of the input field to today's date.
+ * If no date is set in the input field, it defaults to today's date.
+ */
 function setMinDateForDueDate() {
   let today = new Date();
   let year = today.getFullYear();
