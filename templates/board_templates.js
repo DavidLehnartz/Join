@@ -316,7 +316,7 @@ function getEditTaskPopUpTemplate(task) {
                 </div>
 
                 <div class="pop-up-edit-task-description">
-                  <label for=""> Description </label>
+                  <label> Description </label>
                   <textarea id="edit_description"
                     class="pop-up-edit-task-textarea"
                     rows="4"
@@ -327,7 +327,7 @@ function getEditTaskPopUpTemplate(task) {
                   <label>
                     Due date
                   </label>
-                  <input id="edit_due_date" value="${task.dueDate}"
+                  <input onclick="setMinDateForDueDate()" id="edit_due_date" value="${task.dueDate}"
                    class="pop-up-edit-task-input"
                    type="date" />
                 </div>

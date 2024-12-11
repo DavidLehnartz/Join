@@ -227,3 +227,18 @@ function formatDate(dateString) {
   let date = new Date(dateString);
   return date.toLocaleDateString("de-DE", options);
 }
+
+function setMinDateForDueDate() {
+  let today = new Date();
+  let year = today.getFullYear();
+  let month = String(today.getMonth() + 1).padStart(2, '0'); 
+  let day = String(today.getDate()).padStart(2, '0'); 
+  let formattedDate = `${year}-${month}-${day}`;
+  let dueDateInput = document.getElementById("edit_due_date");
+
+  dueDateInput.setAttribute("min", formattedDate);
+
+  if (!dueDateInput.value) {
+    dueDateInput.value = formattedDate; 
+  }
+}
