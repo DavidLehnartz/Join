@@ -249,3 +249,6 @@ function setMinDateForDueDate() {
     dueDateInput.value = formattedDate; 
   }
 }
+
+
+/* console.log(selectedContacts); */

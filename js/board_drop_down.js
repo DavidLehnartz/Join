@@ -117,12 +117,15 @@ function deactivateCheckbox(checkbox, selectedContactContent) {
 
 function addContactToSelected(contactId, taskId) {
   if (!selectedContacts) selectedContacts = [];
+  /* let asigneesContent = document.getElementById('assignee'); */
   let task = tasks.find((t) => t.id === taskId);
   let contact = contacts.find((c) => c.id === contactId);
 
   if (!task.assignedTo) {
     task.assignedTo = [];
-  }
+  } /* else {
+    asigneesContent.innerHTML = "";
+  } */
 
   task.assignedTo.push(contact);
   updateTaskInFirebase(task);
