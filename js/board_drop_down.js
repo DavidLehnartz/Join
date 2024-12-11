@@ -12,13 +12,13 @@ function toggleDropdownTaskPopUp() {
 /**
  * Closes the dropdown when the user clicks outside of it or the element loses focus.
  */
-function closeDropdown() {
+/* function closeDropdown() {
   console.log("Dropdown lost focus");
   const dropdownContent = document.getElementById("dropdown_content");
   if (!dropdownContent.classList.contains("d_none")) {
     dropdownContent.classList.add("d_none");
   }
-}
+} */
 
 /**
  * Toggles the source of the dropdown icon image between "arrow_drop_downaa.png" and "arrow_drop_up.png" to reflect the open/close state.
@@ -102,13 +102,34 @@ function deactivateCheckbox(checkbox, selectedContactContent) {
  * @param {string} contactId - The ID of the contact to add.
  * @param {string} taskId - The ID of the task to update.
  */
-function addContactToSelected(contactId, taskId) {
+/* function addContactToSelected(contactId, taskId) {
   if (!selectedContacts) selectedContacts = [];
+  if (!task.assignedTo) {
+    task.assignedTo = [];
+  }
   let task = tasks.find((t) => t.id === taskId);
   let contact = contacts.find((c) => c.id === contactId);
   task.assignedTo.push(contact);
   updateTaskInFirebase(task);
+} */
+
+// *************************************************
+
+function addContactToSelected(contactId, taskId) {
+  if (!selectedContacts) selectedContacts = [];
+  let task = tasks.find((t) => t.id === taskId);
+  let contact = contacts.find((c) => c.id === contactId);
+
+  if (!task.assignedTo) {
+    task.assignedTo = [];
+  }
+
+  task.assignedTo.push(contact);
+  updateTaskInFirebase(task);
 }
+
+// *****************************************************
+
 
 /**
  * Removes a contact from the `selectedContacts` list by its ID.
