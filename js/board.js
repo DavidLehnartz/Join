@@ -65,7 +65,9 @@ async function saveTaskChanges(taskId) {
     task.title = document.getElementById("edit_title").value;
     task.description = document.getElementById("edit_description").value;
     task.dueDate = document.getElementById("edit_due_date").value;
-    task.assignedTo = [...selectedContacts];
+    if (selectedContacts) {
+      task.assignedTo = [...selectedContacts];
+    }
     if (selectedPriority) {
       task.priority = selectedPriority;
     }
@@ -238,15 +240,15 @@ function formatDate(dateString) {
 function setMinDateForDueDate() {
   let today = new Date();
   let year = today.getFullYear();
-  let month = String(today.getMonth() + 1).padStart(2, '0'); 
-  let day = String(today.getDate()).padStart(2, '0'); 
+  let month = String(today.getMonth() + 1).padStart(2, '0');
+  let day = String(today.getDate()).padStart(2, '0');
   let formattedDate = `${year}-${month}-${day}`;
   let dueDateInput = document.getElementById("edit_due_date");
 
   dueDateInput.setAttribute("min", formattedDate);
 
   if (!dueDateInput.value) {
-    dueDateInput.value = formattedDate; 
+    dueDateInput.value = formattedDate;
   }
 }
 
