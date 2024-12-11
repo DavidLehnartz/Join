@@ -102,37 +102,19 @@ function deactivateCheckbox(checkbox, selectedContactContent) {
  * @param {string} contactId - The ID of the contact to add.
  * @param {string} taskId - The ID of the task to update.
  */
-/* function addContactToSelected(contactId, taskId) {
+function addContactToSelected(contactId, taskId) {
   if (!selectedContacts) selectedContacts = [];
+
+  let task = tasks.find((t) => t.id === taskId);
+  let contact = contacts.find((c) => c.id === contactId);
+
   if (!task.assignedTo) {
     task.assignedTo = [];
   }
-  let task = tasks.find((t) => t.id === taskId);
-  let contact = contacts.find((c) => c.id === contactId);
-  task.assignedTo.push(contact);
-  updateTaskInFirebase(task);
-} */
-
-// *************************************************
-
-function addContactToSelected(contactId, taskId) {
-  if (!selectedContacts) selectedContacts = [];
-  /* let asigneesContent = document.getElementById('assignee'); */
-  let task = tasks.find((t) => t.id === taskId);
-  let contact = contacts.find((c) => c.id === contactId);
-
-  if (!task.assignedTo) {
-    task.assignedTo = [];
-  } /* else {
-    asigneesContent.innerHTML = "";
-  } */
 
   task.assignedTo.push(contact);
   updateTaskInFirebase(task);
 }
-
-// *****************************************************
-
 
 /**
  * Removes a contact from the `selectedContacts` list by its ID.
