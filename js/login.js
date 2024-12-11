@@ -120,6 +120,7 @@ async function saveContactToLocalStorage(mail, password) {
     (c) => c.email === user.email && c.name === user.name
   );
   localStorage.setItem("user", JSON.stringify(loggedContact));
+  localStorage.setItem("loggedIn", JSON.stringify(true));
 }
 
 /**
@@ -133,7 +134,7 @@ async function isValidCredential(event) {
   let mail = document.getElementById("login-mail");
   let error = document.getElementById("login-error-message");
   let userExists = await findUser(mail.value, password.value);
-  if (userExists) {
+  if (userExists && validateLoginEmail()) {
     await saveContactToLocalStorage(mail.value, password.value);
     window.location.href = "../pages/summary.html";
   } else {
@@ -149,5 +150,35 @@ async function isValidCredential(event) {
  */
 function loginAsGuest() {
   localStorage.setItem("user", JSON.stringify({ name: "Guest", initial: "G" }));
+  localStorage.setItem("loggedIn", JSON.stringify(true));
   window.location.href = "../pages/summary.html";
+}
+
+/**
+ * Validate the input of the login email-field.
+ * @returns {Boolean} - if the email has a valid form.
+ */
+function validateLoginEmail() {
+  const emailInput = document.getElementById("login-mail");
+  const email = emailInput.value.trim();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let errorMessage = document.getElementById("login-mail-error");
+  if (emailPattern.test(email)) {
+    emailInput.classList.remove("error-input");
+    errorMessage.classList.add("hidden");
+    return true;
+  } else {
+    emailInput.classList.add("error-input");
+    errorMessage.classList.remove("hidden");
+    return false;
+  }
+}
+
+/**
+ * Navigate to the legal pages and show the content which is available for not logged in users.
+ * @param {String} path - The url to the HTML page.
+ */
+function navigateToLegalLoggedOut(path) {
+  localStorage.setItem("loggedIn", JSON.stringify(false));
+  window.location.href = path;
 }

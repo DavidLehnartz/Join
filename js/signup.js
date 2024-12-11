@@ -51,11 +51,36 @@ function isPasswordSame() {
 }
 
 /**
+ * Validate the input of the signup email-field.
+ * @returns {Boolean} - if the email has a valid form.
+ */
+function validateSignupEmail() {
+  const emailInput = document.getElementById("signup-mail");
+  const email = emailInput.value.trim();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let errorMessage = document.getElementById("signup-mail-error");
+  if (emailPattern.test(email)) {
+    emailInput.classList.remove("error-input");
+    errorMessage.classList.add("hidden");
+    return true;
+  } else {
+    emailInput.classList.add("error-input");
+    errorMessage.classList.remove("hidden");
+    return false;
+  }
+}
+
+/**
  * Validate input
  * @returns {Boolean} - if privacy is checked, all inputs are given and the passwords are the same.
  */
 function validateInput() {
-  return isPrivacyChecked && isInputEmpty() && isPasswordSame();
+  return (
+    isPrivacyChecked &&
+    isInputEmpty() &&
+    isPasswordSame() &&
+    validateSignupEmail()
+  );
 }
 
 /**
