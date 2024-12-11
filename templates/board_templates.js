@@ -307,6 +307,7 @@ function getEditTaskPopUpTemplate(task) {
                 <div class="pop-up-edit-task-title">
                   <label>
                     Title
+                    <div class="required-sign">*</div>
                   </label>
                   <input id="edit_title" value="${task.title}"
                     class="pop-up-edit-task-input"
@@ -326,6 +327,7 @@ function getEditTaskPopUpTemplate(task) {
                 <div class="pop-up-edit-task-due-date">
                   <label>
                     Due date
+                    <div class="required-sign">*</div>
                   </label>
                   <input onclick="setMinDateForDueDate()" id="edit_due_date" value="${task.dueDate}"
                    class="pop-up-edit-task-input"
@@ -333,7 +335,9 @@ function getEditTaskPopUpTemplate(task) {
                 </div>
 
                 <div class="pop-up-edit-task-priority">
-                  <label for=""> Priority </label>
+                  <label>
+                  Priority
+                  </label>
                   <div class="prio-status">
                     <div onclick="changePrioButtonsEditPopUp(this)" id="prio_urgent" class="prio-btn">
                       Urgent
