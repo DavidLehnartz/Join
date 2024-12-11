@@ -17,7 +17,11 @@ body {
   top: 96px;
   left: 280px;
   bottom: 0px;
-  overflow: hidden;
+  overflow: scroll;
+}
+
+.contacts-content-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 ::-webkit-scrollbar {
