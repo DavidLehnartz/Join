@@ -58,5 +58,6 @@ function getInitialOfUser(profileId) {
 function logOut(event) {
   event.preventDefault();
   removeUserFromLocalStorage();
+  localStorage.setItem("loggedIn", JSON.stringify(false));
   window.location.href = "../pages/login.html";
 }

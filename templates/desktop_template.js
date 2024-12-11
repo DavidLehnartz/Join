@@ -55,7 +55,6 @@ function createSidebar(sidebarId, linkId) {
   } else {
     sidebar.innerHTML = renderPlainSidebar();
   }
-
   if (linkId != "") {
     let activeLink = document.getElementById(linkId);
     activeLink.classList.add("link-active");
