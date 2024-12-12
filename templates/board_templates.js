@@ -314,6 +314,7 @@ function getEditTaskPopUpTemplate(task) {
                     type="text"
                     placeholder="Enter a title"
                   />
+                  
                 </div>
 
                 <div class="pop-up-edit-task-description">

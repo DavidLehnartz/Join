@@ -219,6 +219,17 @@ function closePopUps() {
   document.getElementById("edit_task_pop_up").classList.add("responsive-pop-up-closed");
 }
 
+/* function errorMessageTitleInput() {
+  let editTitleInput = document.getElementById("edit_title").value.trim();
+
+  if (editTitleInput === "") {
+    document.getElementById("error_message_edit").innerHTML = `Please enter a title!`;
+    return;
+  } else {
+    document.getElementById("error_message_edit").innerHTML = "";
+  }
+} */
+
 /**
  * Formats a given date string to (Day/Month/Year).
  * @param {string} dateString - The date string to be formatted.
