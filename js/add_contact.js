@@ -97,9 +97,9 @@ function isContactInputEmpty(elementId) {
 function validAddContactInput(keyAction) {
   return (
     validateContactsEmail(keyAction) &&
-    isContactInputEmpty(`${keyAction}-contact-mail`) &&
-    isContactInputEmpty(`${keyAction}-contact-name`) &&
-    isContactInputEmpty(`${keyAction}-contact-phone`)
+    !isContactInputEmpty(`${keyAction}-contact-mail`) &&
+    !isContactInputEmpty(`${keyAction}-contact-name`) &&
+    !isContactInputEmpty(`${keyAction}-contact-phone`)
   );
 }
 
@@ -108,10 +108,11 @@ function validAddContactInput(keyAction) {
  * @param {String} keyAction - whether "add" or "edit" - the main actions of the contacts dialog
  */
 function renderEmptyErrorName(keyAction) {
+  let element = document.getElementById(`${keyAction}-contact-name`);
   if (isContactInputEmpty(`${keyAction}-contact-name`)) {
-    document
-      .getElementById(`${keyAction}-contact-name`)
-      .classList.add("error-input");
+    element.classList.add("error-input");
+  } else {
+    element.classList.remove("error-input");
   }
 }
 
@@ -121,11 +122,12 @@ function renderEmptyErrorName(keyAction) {
  */
 function renderEmptyErrorMail(keyAction) {
   let errorMessage = document.getElementById(`${keyAction}-mail-error-message`);
+  let element = document.getElementById(`${keyAction}-contact-mail`);
   if (isContactInputEmpty(`${keyAction}-contact-mail`)) {
-    document
-      .getElementById(`${keyAction}-contact-mail`)
-      .classList.add("error-input");
+    element.classList.add("error-input");
     errorMessage.classList.add("hidden");
+  } else {
+    element.classList.remove("error-input");
   }
 }
 
@@ -240,6 +242,22 @@ function newContactObject() {
     initial: createInitial(name),
     name: name,
     phone: phone,
+  };
+}
+
+/**
+ * Return an object with the given inputs to create a contact.
+ * @param {String} name - The name of the signed up user
+ * @param {String} mail - The email of the signed up user
+ * @returns {Object} - The contact object which will be added to Firebase.
+ */
+function newSignupObject(name, mail) {
+  return {
+    color: getRandomColor(),
+    email: mail,
+    initial: createInitial(name),
+    name: name,
+    phone: 0,
   };
 }
 

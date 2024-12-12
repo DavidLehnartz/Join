@@ -13,6 +13,20 @@ function animateIntro() {
 }
 
 /**
+ * Fill the input field with the remembered user information
+ */
+function rememberUser() {
+  let user = getUserFromLocalStorage();
+  let remember = JSON.parse(localStorage.getItem("rememberMe"));
+  let password = document.getElementById("login-password");
+  let mail = document.getElementById("login-mail");
+  if (remember) {
+    mail.value = user.email;
+    password.value = user.password;
+  }
+}
+
+/**
  * Create animation for desktop view.
  */
 function introAnimationDesktop() {
@@ -74,9 +88,11 @@ function checkRememberMe() {
   if (isRememberOn) {
     checkbox.src = "../assets/icons/checked.svg";
     checkboxHover.src = "../assets/icons/hover_checked.svg";
+    localStorage.setItem("rememberMe", JSON.stringify(true));
   } else {
     checkbox.src = "../assets/icons/default.svg";
     checkboxHover.src = "../assets/icons/hover_default.svg";
+    localStorage.setItem("rememberMe", JSON.stringify(false));
   }
 }
 
@@ -119,8 +135,10 @@ async function saveContactToLocalStorage(mail, password) {
   let loggedContact = contacts.find(
     (c) => c.email === user.email && c.name === user.name
   );
+  console.log(loggedContact);
   localStorage.setItem("user", JSON.stringify(loggedContact));
   localStorage.setItem("loggedIn", JSON.stringify(true));
+  localStorage.setItem("rememberMe", JSON.stringify(isRememberOn));
 }
 
 /**
@@ -151,6 +169,7 @@ async function isValidCredential(event) {
 function loginAsGuest() {
   localStorage.setItem("user", JSON.stringify({ name: "Guest", initial: "G" }));
   localStorage.setItem("loggedIn", JSON.stringify(true));
+  localStorage.setItem("rememberMe", JSON.stringify(false));
   window.location.href = "../pages/summary.html";
 }
 
