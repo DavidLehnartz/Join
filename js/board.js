@@ -65,9 +65,17 @@ async function saveTaskChanges(taskId) {
     task.title = document.getElementById("edit_title").value;
     task.description = document.getElementById("edit_description").value;
     task.dueDate = document.getElementById("edit_due_date").value;
-    if (selectedContacts) {
+    /* if (selectedContacts) {
       task.assignedTo = [...selectedContacts];
-    }
+    } */
+      task.assignedTo = [...selectedContacts];
+
+      /* task.assignedTo = selectedContacts; */
+      
+      /* if (selectedContacts) {
+        task.assignedTo = selectedContacts;
+      } */
+
     if (selectedPriority) {
       task.priority = selectedPriority;
     }
