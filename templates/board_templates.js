@@ -314,7 +314,7 @@ function getEditTaskPopUpTemplate(task) {
                     type="text"
                     placeholder="Enter a title"
                   />
-                  
+                  <div id="error_message_edit" class="error-message"></div>
                 </div>
 
                 <div class="pop-up-edit-task-description">

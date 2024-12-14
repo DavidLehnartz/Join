@@ -60,21 +60,24 @@ function openAddTaskPopUp() {
  * @param {number} taskId - The ID of the task to save.
  */
 async function saveTaskChanges(taskId) {
+  if (!errorMessageTitleInput()) {
+    return;
+  }
+
   let task = tasks.find((t) => t.id === taskId);
   if (task) {
     task.title = document.getElementById("edit_title").value;
     task.description = document.getElementById("edit_description").value;
     task.dueDate = document.getElementById("edit_due_date").value;
-    /* if (selectedContacts) {
+    if (selectedContacts) {
       task.assignedTo = [...selectedContacts];
-    } */
-      task.assignedTo = [...selectedContacts];
+    }
+    // task.assignedTo = [...selectedContacts];
 
-      /* task.assignedTo = selectedContacts; */
-      
-      /* if (selectedContacts) {
-        task.assignedTo = selectedContacts;
-      } */
+    // task.assignedTo = selectedContacts;
+
+    // if (selectedContacts) {
+    // task.assignedTo = selectedContacts;}
 
     if (selectedPriority) {
       task.priority = selectedPriority;
@@ -88,6 +91,26 @@ async function saveTaskChanges(taskId) {
   closePopUps();
   openTaskPopUp(taskId);
   showAnimation("Task successfully saved!", "../assets/img/board.png");
+
+  console.log("Task gespeichert:", task);
+  console.log("IDs aus task.assignedTo:", task.assignedTo.map(contact => contact.id));
+}
+
+/**
+ * Validates the title input field in the task edit form.
+ * @returns {boolean} - Returns `true` if the title input is valid (not empty),
+ *                      and `false` if it is invalid (empty).
+ */
+function errorMessageTitleInput() {
+  let editTitleInput = document.getElementById("edit_title").value.trim();
+
+  if (editTitleInput === "") {
+    document.getElementById("error_message_edit").innerHTML = `Please enter a title!`;
+    return false;
+  } else {
+    document.getElementById("error_message_edit").innerHTML = "";
+    return true;
+  }
 }
 
 /**
@@ -226,17 +249,6 @@ function closePopUps() {
   document.getElementById("overlay_add_task_pop_up").classList.add("responsive-pop-up-closed");
   document.getElementById("edit_task_pop_up").classList.add("responsive-pop-up-closed");
 }
-
-/* function errorMessageTitleInput() {
-  let editTitleInput = document.getElementById("edit_title").value.trim();
-
-  if (editTitleInput === "") {
-    document.getElementById("error_message_edit").innerHTML = `Please enter a title!`;
-    return;
-  } else {
-    document.getElementById("error_message_edit").innerHTML = "";
-  }
-} */
 
 /**
  * Formats a given date string to (Day/Month/Year).

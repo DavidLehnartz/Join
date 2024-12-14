@@ -42,6 +42,9 @@ function renderDropdownContacts(taskId) {
   dropdownContent.innerHTML = "";
   let task = tasks.find((t) => t.id === taskId);
   selectedContacts = task.assignedTo;
+
+  console.log("Selected Contacts in renderDropdownContacts:", selectedContacts);
+
   for (let i = 0; i < contacts.length; i++) {
     let contact = contacts[i];
     if (task.assignedTo) {
@@ -50,9 +53,10 @@ function renderDropdownContacts(taskId) {
       } else {
         dropdownContent.innerHTML += getDropdownContactsTemplate(contact, task);
       }
-    } else {
+    } /* else {
       dropdownContent.innerHTML += getDropdownContactsTemplate(contact, task);
-    }
+
+    } */
   }
 }
 
@@ -61,7 +65,7 @@ function renderDropdownContacts(taskId) {
  * @param {string} contactId - The ID of the contact to toggle.
  * @param {string} taskId - The ID of the task to toggle.
  */
-function toggleCheckboxContact(contactId, taskId) {
+ function toggleCheckboxContact(contactId, taskId) {
   let contact = contacts.find((c) => c.id === contactId);
   let task = tasks.find((t) => t.id === taskId);
   let checkbox = document.getElementById(`checkbox_${contact.name}`);
@@ -70,12 +74,34 @@ function toggleCheckboxContact(contactId, taskId) {
     activateCheckbox(checkbox, selectedContactContent);
     addContactToSelected(contactId, taskId);
     renderSelectedContacts(task);
+
+    console.log("kontakte nach togglen hinzugefügt:", selectedContacts);
+
   } else {
     deactivateCheckbox(checkbox, selectedContactContent);
     removeContactFromSelected(contactId, taskId);
     renderSelectedContacts(task);
+
+    console.log("kontakte nach togglen entfernt:", selectedContacts);
+
+  } 
+} 
+
+// GPT
+/* function toggleCheckboxContact(contactId, taskId) {
+  let contact = contacts.find((c) => c.id === contactId);
+  let checkbox = document.getElementById(`checkbox_${contact.name}`);
+  let isChecked = checkbox.src.includes("checkbox_true_white.png");
+
+  if (isChecked) {
+    deactivateCheckbox(checkbox, checkbox.closest(".dropdown-contact"));
+    selectedContacts = selectedContacts.filter((c) => c.id !== contactId); // Entfernen aus `selectedContacts`
+  } else {
+    activateCheckbox(checkbox, checkbox.closest(".dropdown-contact"));
+    selectedContacts.push(contact); // Hinzufügen zu `selectedContacts`
   }
-}
+} */
+
 
 /**
  * Marks a contact checkbox as active and visually indicates that the contact is selected.
@@ -130,4 +156,4 @@ function removeContactFromSelected(contactId, taskId) {
     task.assignedTo.splice(index, 1);
     updateTaskInFirebase(task);
   }
-}
+} 
