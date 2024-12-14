@@ -3,6 +3,7 @@
 /* BOARD MAIN SCRIPT */
 
 let currentTaskId = null;
+let originalTaskData = null;
 let selectedPriority = "";
 
 /**
@@ -39,10 +40,71 @@ async function loadFetchedData() {
  * Opens a popup displaying task details.
  * @param {number} taskId - The ID of the task to display.
  */
-function openTaskPopUp(taskId) {
+/* function openTaskPopUp(taskId) {
   document.getElementById("overlay_task_pop_up").classList.remove("responsive-pop-up-closed");
 
   renderTaskPopUp(taskId);
+} */
+
+
+/*******TEST */
+/**
+ * Opens a popup displaying task details and stores original data for reset functionality.
+ * @param {number} taskId - The ID of the task to display.
+ */
+function openTaskPopUp(taskId) {
+  document.getElementById("overlay_task_pop_up").classList.remove("responsive-pop-up-closed");
+
+  let task = tasks.find((t) => t.id === taskId);
+  if (task) {
+    originalTaskData = JSON.parse(JSON.stringify(task));
+    renderTaskPopUp(taskId);
+    console.log("Task found:", taskId);
+
+  } else {
+    console.error("Task not found:", taskId);
+  }
+}
+
+/**
+ * Resets all changes made in the task edit popup to their original state.
+ */
+function resetTaskChanges() {
+  if (!originalTaskData) {
+    console.error("No original task data found to reset.");
+    return;
+  }
+
+  document.getElementById("edit_title").value = originalTaskData.title;
+  document.getElementById("edit_description").value = originalTaskData.description;
+  document.getElementById("edit_due_date").value = originalTaskData.dueDate;
+
+  setPriorityButton(originalTaskData.priority);
+  // renderDropdownContacts(originalTaskData.id);
+  // renderSubtasks(originalTaskData.subtasks);
+
+  // selectedPriority = originalTaskData.priority;
+
+  console.log("Task changes have been reset to their original state.");
+  showAnimation("Reset changes!", "../assets/img/board.png");
+  // checkForChanges();
+}
+
+function checkForChanges() {
+  let title = document.getElementById("edit_title").value;
+  let description = document.getElementById("edit_description").value;
+  let dueDate = document.getElementById("edit_due_date").value;
+  let priority = selectedPriority;
+
+  if (title !== originalTaskData.title ||
+    description !== originalTaskData.description ||
+    dueDate !== originalTaskData.dueDate ||
+    priority !== originalTaskData.priority) {
+
+    document.getElementById("reset_button").disabled = false;
+  } else {
+    document.getElementById("reset_button").disabled = true;
+  }
 }
 
 /**
@@ -163,7 +225,10 @@ function changePrioButtonsEditPopUp(selectedButton) {
     selectedButton.querySelector(".prio-img").src = config.img;
     selectedPriority = config.priority;
     updateTaskPriority(config.priority);
+
+    checkForChanges();
   }
+  
 }
 
 /**
@@ -186,6 +251,7 @@ function setPriorityButton(priority) {
     document.getElementById("prio_low").querySelector(".prio-img").src =
       "../assets/img/low21.png";
   }
+  /* checkForChanges(); */
 }
 
 /**

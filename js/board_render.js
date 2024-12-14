@@ -79,6 +79,7 @@ function renderEditTaskPopUp(taskId, priorityImage) {
         setPriorityButton(task.priority);
     }
     document.getElementById("edit_task_pop_up").classList.remove("responsive-pop-up-closed");
+    document.getElementById("reset_button").disabled = true;
 }
 
 /**

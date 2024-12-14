@@ -309,7 +309,7 @@ function getEditTaskPopUpTemplate(task) {
                     Title
                     <div class="required-sign">*</div>
                   </label>
-                  <input id="edit_title" value="${task.title}"
+                  <input oninput="checkForChanges()" id="edit_title" value="${task.title}"
                     class="pop-up-edit-task-input"
                     type="text"
                     placeholder="Enter a title"
@@ -319,7 +319,7 @@ function getEditTaskPopUpTemplate(task) {
 
                 <div class="pop-up-edit-task-description">
                   <label> Description </label>
-                  <textarea id="edit_description"
+                  <textarea oninput="checkForChanges()" id="edit_description"
                     class="pop-up-edit-task-textarea"
                     rows="4"
                     placeholder="Enter a Description">${task.description}</textarea>
@@ -330,7 +330,7 @@ function getEditTaskPopUpTemplate(task) {
                     Due date
                     <div class="required-sign">*</div>
                   </label>
-                  <input onclick="setMinDateForDueDate()" id="edit_due_date" value="${task.dueDate}"
+                  <input onclick="setMinDateForDueDate()" oninput="checkForChanges()" id="edit_due_date" value="${task.dueDate}"
                    class="pop-up-edit-task-input"
                    type="date" />
                 </div>
@@ -340,7 +340,7 @@ function getEditTaskPopUpTemplate(task) {
                   Priority
                   </label>
                   <div class="prio-status">
-                    <div onclick="changePrioButtonsEditPopUp(this)" id="prio_urgent" class="prio-btn">
+                    <div onclick="changePrioButtonsEditPopUp(this)" onclick="checkForChanges()" id="prio_urgent" class="prio-btn">
                       Urgent
                       <img
                         class="prio-img"
@@ -348,7 +348,7 @@ function getEditTaskPopUpTemplate(task) {
                         alt="urgent"
                       />
                     </div>
-                    <div onclick="changePrioButtonsEditPopUp(this)" id="prio_medium" class="prio-btn">
+                    <div onclick="changePrioButtonsEditPopUp(this)" onclick="checkForChanges()" id="prio_medium" class="prio-btn">
                       Medium
                       <img
                         class="prio-img"
@@ -356,7 +356,7 @@ function getEditTaskPopUpTemplate(task) {
                         alt="medium"
                       />
                     </div>
-                    <div onclick="changePrioButtonsEditPopUp(this)" id="prio_low" class="prio-btn">
+                    <div onclick="changePrioButtonsEditPopUp(this)" onclick="checkForChanges()" id="prio_low" class="prio-btn">
                       Low
                       <img
                         class="prio-img"
@@ -419,6 +419,17 @@ function getEditTaskPopUpTemplate(task) {
               </div>
             </div>
             <div class="pop-up-edit-task-footer">
+            <button id="reset_button" onclick="resetTaskChanges()"
+               class="pop-up-edit-task-btn"
+               disabled
+            >
+            Reset
+             <img
+                  class="pop-up-edit-task-btn-img"
+                  src="../assets/img/close_white.png"
+                  alt="check"
+                />
+            </button>
               <button
                onclick="saveTaskChanges('${task.id}')"
                 class="pop-up-edit-task-btn"
@@ -559,25 +570,6 @@ function getAssigneesTemplate(assignedTo) {
 function getSelectedContactsTemplate(contact) {
   return `
           <div id="selected_contact" class="selected-contact bg-${contact.color}">${contact.initial}</div>
-  `;
-}
-
-/**
- * Generates the HTML template for a single subtask.
- * @param {string} taskId - The ID of the parent task.
- * @param {Object} subtask - The subtask object containing its name.
- * @param {number} index - The index of the subtask within the list.
- * @returns {string} The HTML structure of a single subtask with an unchecked checkbox.
- */
-function getSubtasksTemplate(taskId, subtask, index) {
-  return `
-          <div class="subtask" id="subtask_${taskId}_${index}">
-            <img class="checkbox" onclick="toggleSubtasksCheckbox('${taskId}', ${index})" 
-                 id="checkbox_subtask_${taskId}_${index}"
-                 src="../assets/img/checkbox_false.png" 
-                 alt="checkbox">
-            <span>${subtask.name}</span>
-          </div>
   `;
 }
 

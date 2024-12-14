@@ -355,7 +355,8 @@ li.added-subtask-item.editing {
 
 .pop-up-edit-task-footer {
   display: flex;
-  justify-content: end;
+  /* justify-content: end; */
+  justify-content: space-between;
 }
 
 .pop-up-edit-task-btn {
