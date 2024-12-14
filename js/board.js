@@ -340,3 +340,8 @@ function setMinDateForDueDate() {
     dueDateInput.value = formattedDate;
   }
 }
+
+function toggleMoveToMenu() {
+  let moveToMenu = document.getElementById("move_to_menu");
+  moveToMenu.classList.toggle("d_none");
+}

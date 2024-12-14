@@ -303,6 +303,20 @@ function getEditTaskPopUpTemplate(task) {
                   alt="close"
                 />
               </div>
+              
+              <div class="move-task-to-menu-wrapper">
+                <div onclick="toggleMoveToMenu()" class="move-task-to-menu-headline">
+                  Move Task:
+                  <img src="../assets/img/board.png" alt="">
+                </div>
+                <div id="move_to_menu" class="move-task-to-menu-content d_none">
+                  <div class="move-to-text-top">To Do</div>
+                  <div class="move-to-text">In Progress</div>
+                  <div class="move-to-text">Awaiting Feedback</div>
+                  <div class="move-to-text-bottom">Done</div>
+                </div>
+              </div>
+
               <div class="pop-up-edit-task-form">
                 <div class="pop-up-edit-task-title">
                   <label>
