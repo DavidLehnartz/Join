@@ -582,3 +582,9 @@ li.added-subtask-item.editing {
     padding-bottom: 32px;
   }
 }
+
+@media (max-width: 360px) {
+  .pop-up-edit-task-btn{
+    font-size: 16px;
+  }
+}

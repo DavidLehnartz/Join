@@ -423,7 +423,7 @@ function getEditTaskPopUpTemplate(task) {
                class="pop-up-edit-task-btn"
                disabled
             >
-            Reset
+            Reset changes
              <img
                   class="pop-up-edit-task-btn-img"
                   src="../assets/img/close_white.png"

@@ -37,18 +37,6 @@ async function loadFetchedData() {
 }
 
 /**
- * Opens a popup displaying task details.
- * @param {number} taskId - The ID of the task to display.
- */
-/* function openTaskPopUp(taskId) {
-  document.getElementById("overlay_task_pop_up").classList.remove("responsive-pop-up-closed");
-
-  renderTaskPopUp(taskId);
-} */
-
-
-/*******TEST */
-/**
  * Opens a popup displaying task details and stores original data for reset functionality.
  * @param {number} taskId - The ID of the task to display.
  */
@@ -83,13 +71,16 @@ function resetTaskChanges() {
   // renderDropdownContacts(originalTaskData.id);
   // renderSubtasks(originalTaskData.subtasks);
 
-  // selectedPriority = originalTaskData.priority;
+  selectedPriority = originalTaskData.priority;
 
   console.log("Task changes have been reset to their original state.");
-  showAnimation("Reset changes!", "../assets/img/board.png");
-  // checkForChanges();
+  showAnimation("Changes reset!", "../assets/img/board.png");
+  checkForChanges();
 }
 
+/**
+ * Checks for changes made to the task in the edit popup and toggles the state of the reset button.
+ */
 function checkForChanges() {
   let title = document.getElementById("edit_title").value;
   let description = document.getElementById("edit_description").value;
@@ -106,6 +97,7 @@ function checkForChanges() {
     document.getElementById("reset_button").disabled = true;
   }
 }
+
 
 /**
  * Opens the "Add Task" popup.
@@ -228,7 +220,7 @@ function changePrioButtonsEditPopUp(selectedButton) {
 
     checkForChanges();
   }
-  
+
 }
 
 /**
@@ -251,7 +243,7 @@ function setPriorityButton(priority) {
     document.getElementById("prio_low").querySelector(".prio-img").src =
       "../assets/img/low21.png";
   }
-  /* checkForChanges(); */
+  checkForChanges();
 }
 
 /**
