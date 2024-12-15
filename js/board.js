@@ -48,6 +48,7 @@ function openTaskPopUp(taskId) {
     originalTaskData = JSON.parse(JSON.stringify(task));
     renderTaskPopUp(taskId);
     console.log("Task found:", taskId);
+    console.log(originalTaskData);
 
   } else {
     console.error("Task not found:", taskId);
@@ -341,7 +342,34 @@ function setMinDateForDueDate() {
   }
 }
 
+/**
+ * Toggles the visibility of the "Move To" menu by adding or removing the `d_none` class.
+ */
 function toggleMoveToMenu() {
   let moveToMenu = document.getElementById("move_to_menu");
   moveToMenu.classList.toggle("d_none");
+}
+
+/**
+ * Moves the currently selected task to the specified column and updates the task's status.
+ * @param {string} column - The name of the column to which the task should be moved. 
+ *                          Valid options are 'todo', 'in_progress', 'await_feedback', 'done'.
+ */
+function moveTaskToColumn(column) {
+  if (!currentTaskId) {
+    console.error("No task selected to move");
+    return;
+  }
+
+  let task = tasks.find((t) => t.id === currentTaskId);
+  if (task) {
+    task.status = column;
+    updateTaskInFirebase(task);
+    renderTasks();
+    toggleMoveToMenu();
+    showAnimation(`Task moved to ${column.replace("_", " ")}`, "../assets/img/board.png");
+    console.log(`Task successfully moved to ${column.replace("_", " ")}`);
+  } else {
+    console.error("Task not found:", currentTaskId);
+  }
 }
