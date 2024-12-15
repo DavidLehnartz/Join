@@ -41,9 +41,7 @@ async function loadFetchedData() {
  * @param {number} taskId - The ID of the task to display.
  */
 function openTaskPopUp(taskId) {
-  document
-    .getElementById("overlay_task_pop_up")
-    .classList.remove("responsive-pop-up-closed");
+  document.getElementById("overlay_task_pop_up").classList.remove("responsive-pop-up-closed");
   let task = tasks.find((t) => t.id === taskId);
   if (task) {
     originalTaskData = JSON.parse(JSON.stringify(task));
@@ -54,52 +52,10 @@ function openTaskPopUp(taskId) {
 }
 
 /**
- * Resets all changes made in the task edit popup to their original state.
- */
-function resetTaskChanges() {
-  if (!originalTaskData) {
-    console.error("No original task data found to reset.");
-    return;
-  }
-  document.getElementById("edit_title").value = originalTaskData.title;
-  document.getElementById("edit_description").value =
-    originalTaskData.description;
-  document.getElementById("edit_due_date").value = originalTaskData.dueDate;
-  setPriorityButton(originalTaskData.priority);
-  selectedPriority = originalTaskData.priority;
-  console.log("Task changes have been reset to their original state.");
-  showAnimation("Changes reset!", "../assets/img/board.png");
-  checkForChanges();
-}
-
-/**
- * Checks for changes made to the task in the edit popup and toggles the state of the reset button.
- */
-function checkForChanges() {
-  let title = document.getElementById("edit_title").value;
-  let description = document.getElementById("edit_description").value;
-  let dueDate = document.getElementById("edit_due_date").value;
-  let priority = selectedPriority;
-
-  if (
-    title !== originalTaskData.title ||
-    description !== originalTaskData.description ||
-    dueDate !== originalTaskData.dueDate ||
-    priority !== originalTaskData.priority
-  ) {
-    document.getElementById("reset_button").disabled = false;
-  } else {
-    document.getElementById("reset_button").disabled = true;
-  }
-}
-
-/**
  * Opens the "Add Task" popup.
  */
 function openAddTaskPopUp() {
-  document
-    .getElementById("overlay_add_task_pop_up")
-    .classList.remove("responsive-pop-up-closed");
+  document.getElementById("overlay_add_task_pop_up").classList.remove("responsive-pop-up-closed");
 
   renderAddTaskPopUp();
 }
@@ -146,9 +102,7 @@ function errorMessageTitleInput() {
   let editTitleInput = document.getElementById("edit_title").value.trim();
 
   if (editTitleInput === "") {
-    document.getElementById(
-      "error_message_edit"
-    ).innerHTML = `Please enter a title!`;
+    document.getElementById("error_message_edit").innerHTML = `Please enter a title!`;
     return false;
   } else {
     document.getElementById("error_message_edit").innerHTML = "";
@@ -183,7 +137,6 @@ function getPriorityImage(priority) {
   } else if (priority === "Urgent") {
     return "../assets/img/prio_urgent_red.png";
   }
-
   return "";
 }
 
@@ -195,21 +148,9 @@ function changePrioButtonsEditPopUp(selectedButton) {
   resetButtonsEditPopUp();
 
   let priorityConfig = {
-    prio_urgent: {
-      class: "prio-urgent-active",
-      img: "../assets/img/urgent21.png",
-      priority: "Urgent",
-    },
-    prio_medium: {
-      class: "prio-medium-active",
-      img: "../assets/img/medium.png",
-      priority: "Medium",
-    },
-    prio_low: {
-      class: "prio-low-active",
-      img: "../assets/img/low21.png",
-      priority: "Low",
-    },
+    prio_urgent: { class: "prio-urgent-active", img: "../assets/img/urgent21.png", priority: "Urgent", },
+    prio_medium: { class: "prio-medium-active", img: "../assets/img/medium.png", priority: "Medium", },
+    prio_low: { class: "prio-low-active", img: "../assets/img/low21.png", priority: "Low", },
   };
 
   let config = priorityConfig[selectedButton.id];
@@ -218,7 +159,6 @@ function changePrioButtonsEditPopUp(selectedButton) {
     selectedButton.querySelector(".prio-img").src = config.img;
     selectedPriority = config.priority;
     updateTaskPriority(config.priority);
-
     checkForChanges();
   }
 }
@@ -272,10 +212,7 @@ function resetButtonsEditPopUp() {
     } else if (button.id === "prio_low") {
       img.src = "../assets/img/prio_low_green.png";
     }
-    button.classList.remove(
-      "prio-low-active",
-      "prio-medium-active",
-      "prio-urgent-active"
+    button.classList.remove("prio-low-active", "prio-medium-active", "prio-urgent-active"
     );
   });
 }
@@ -286,9 +223,7 @@ function resetButtonsEditPopUp() {
  */
 function updateButtonImage(taskId) {
   let buttonContainer = document.getElementById("input_image_content");
-  let inputAddedSubtask = document
-    .getElementById("input_add_subtask")
-    .value.trim();
+  let inputAddedSubtask = document.getElementById("input_add_subtask").value.trim();
 
   if (inputAddedSubtask.length > 0) {
     buttonContainer.innerHTML = getBeforeButtonContainer(taskId);
@@ -301,15 +236,9 @@ function updateButtonImage(taskId) {
  * Closes all popups.
  */
 function closePopUps() {
-  document
-    .getElementById("overlay_task_pop_up")
-    .classList.add("responsive-pop-up-closed");
-  document
-    .getElementById("overlay_add_task_pop_up")
-    .classList.add("responsive-pop-up-closed");
-  document
-    .getElementById("edit_task_pop_up")
-    .classList.add("responsive-pop-up-closed");
+  document.getElementById("overlay_task_pop_up").classList.add("responsive-pop-up-closed");
+  document.getElementById("overlay_add_task_pop_up").classList.add("responsive-pop-up-closed");
+  document.getElementById("edit_task_pop_up").classList.add("responsive-pop-up-closed");
 }
 
 /**
@@ -343,87 +272,4 @@ function setMinDateForDueDate() {
   if (!dueDateInput.value) {
     dueDateInput.value = formattedDate;
   }
-}
-
-/**
- * Toggles the visibility of the "Move To" menu by adding or removing the `d_none` class.
- */
-function toggleMoveToMenu() {
-  let moveToMenu = document.getElementById("move_to_menu");
-  moveToMenu.classList.toggle("d_none");
-
-  updateMoveToMenuHighlight();
-}
-
-/**
- * Moves the currently selected task to the specified column and updates the task's status.
- * @param {string} column - The name of the column to which the task should be moved.
- *                          Valid options are 'todo', 'in_progress', 'await_feedback', 'done'.
- */
-function moveTaskToColumn(column) {
-  if (!currentTaskId) {
-    console.error("No task selected to move");
-    return;
-  }
-
-  let task = tasks.find((t) => t.id === currentTaskId);
-  if (task) {
-    task.status = column;
-    updateTaskInFirebase(task);
-    renderTasks();
-    toggleMoveToMenu();
-    showAnimation(
-      `Task moved to ${column.replace("_", " ")}`,
-      "../assets/img/board.png"
-    );
-    console.log(`Task successfully moved to ${column.replace("_", " ")}`);
-  } else {
-    console.error("Task not found:", currentTaskId);
-  }
-}
-
-/**
- * Removes all active status classes from the move-to menu.
- */
-function resetActiveStatusClasses() {
-  document.querySelectorAll(".is-active").forEach((div) => {
-    div.classList.remove(
-      "active-status",
-      "active-status-top",
-      "active-status-bottom"
-    );
-  });
-}
-
-/**
- * Highlights the current status of the selected task.
- */
-function highlightCurrentStatus() {
-  let task = tasks.find((t) => t.id === currentTaskId);
-
-  let moveToTopDiv = document.querySelector(
-    `.move-to-text-top[data-column="${task.status}"]`
-  );
-  let moveToBottomDiv = document.querySelector(
-    `.move-to-text-bottom[data-column="${task.status}"]`
-  );
-  let currentColumnDiv = document.querySelector(
-    `.is-active[data-column="${task.status}"]`
-  );
-
-  if (moveToTopDiv) {
-    moveToTopDiv.classList.add("active-status", "active-status-top");
-  } else if (moveToBottomDiv) {
-    moveToBottomDiv.classList.add("active-status", "active-status-bottom");
-  } else if (currentColumnDiv) {
-    currentColumnDiv.classList.add("active-status");
-  }
-}
-
-/**
- * Combines reset and highlight functionality for reuse in other contexts.
- */
-function updateMoveToMenuHighlight() {
-  resetActiveStatusClasses();
-  highlightCurrentStatus();
 }

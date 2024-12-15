@@ -27,7 +27,6 @@ async function drop(event, targetColumn) {
     let task = tasks.find(task => task.id === draggedTaskId);
     if (task) {
         task.status = targetColumn;
-
         await updateTaskInDatabase(task);
         await fetchTasksData();
     } else {

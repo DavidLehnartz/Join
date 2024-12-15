@@ -10,17 +10,6 @@ function toggleDropdownTaskPopUp() {
 }
 
 /**
- * Closes the dropdown when the user clicks outside of it or the element loses focus.
- */
-/* function closeDropdown() {
-  console.log("Dropdown lost focus");
-  const dropdownContent = document.getElementById("dropdown_content");
-  if (!dropdownContent.classList.contains("d_none")) {
-    dropdownContent.classList.add("d_none");
-  }
-} */
-
-/**
  * Toggles the source of the dropdown icon image between "arrow_drop_downaa.png" and "arrow_drop_up.png" to reflect the open/close state.
  */
 function toggleInputImage() {
@@ -46,10 +35,7 @@ function renderDropdownContacts(taskId) {
     let contact = contacts[i];
     if (task.assignedTo) {
       if (task.assignedTo.some((c) => c.name === contact.name)) {
-        dropdownContent.innerHTML += getSelectedDropdownContactsTemplate(
-          contact,
-          task
-        );
+        dropdownContent.innerHTML += getSelectedDropdownContactsTemplate(contact, task);
       } else {
         dropdownContent.innerHTML += getDropdownContactsTemplate(contact, task);
       }
@@ -79,21 +65,6 @@ function toggleCheckboxContact(contactId, taskId) {
     renderSelectedContacts(task);
   }
 }
-
-// GPT
-/* function toggleCheckboxContact(contactId, taskId) {
-  let contact = contacts.find((c) => c.id === contactId);
-  let checkbox = document.getElementById(`checkbox_${contact.name}`);
-  let isChecked = checkbox.src.includes("checkbox_true_white.png");
-
-  if (isChecked) {
-    deactivateCheckbox(checkbox, checkbox.closest(".dropdown-contact"));
-    selectedContacts = selectedContacts.filter((c) => c.id !== contactId); // Entfernen aus `selectedContacts`
-  } else {
-    activateCheckbox(checkbox, checkbox.closest(".dropdown-contact"));
-    selectedContacts.push(contact); // Hinzufügen zu `selectedContacts`
-  }
-} */
 
 /**
  * Marks a contact checkbox as active and visually indicates that the contact is selected.

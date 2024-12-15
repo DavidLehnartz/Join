@@ -35,14 +35,7 @@ function renderTasks() {
     let assigneeInitials = renderAssigneeInitials(task.assignedTo);
     const column = columns[task.status];
     if (column) {
-      column.innerHTML += getTasksTemplate(
-        task,
-        priorityImage,
-        categoryColor,
-        assigneeInitials,
-        renderProgressString(task),
-        getSubtasksProgress(task)
-      );
+      column.innerHTML += getTasksTemplate(task, priorityImage, categoryColor, assigneeInitials, renderProgressString(task), getSubtasksProgress(task));
     }
   });
   emptyColumnMessage();
@@ -60,14 +53,8 @@ function renderTaskPopUp(taskId) {
     let priorityImage = getPriorityImage(task.priority);
     let categoryColor = getCategoryColor(task.category);
     let assigneeContent = getAssigneesTemplate(task.assignedTo);
-    taskPopUpContent.innerHTML = getTaskPopUpTemplate(
-      task,
-      priorityImage,
-      categoryColor,
-      assigneeContent
-    );
+    taskPopUpContent.innerHTML = getTaskPopUpTemplate(task, priorityImage, categoryColor, assigneeContent);
   }
-
   renderSubtasks(taskId);
 }
 
@@ -83,18 +70,13 @@ function renderEditTaskPopUp(taskId, priorityImage) {
 
   let task = tasks.find((t) => t.id === taskId);
   if (task) {
-    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(
-      task,
-      priorityImage
-    );
+    editTaskPopUpContent.innerHTML = getEditTaskPopUpTemplate(task, priorityImage);
     addedSubtasks = task.subtasks ? task.subtasks : [];
     renderAddSubtasksEditPopUp(task);
     renderSelectedContacts(task);
     setPriorityButton(task.priority);
   }
-  document
-    .getElementById("edit_task_pop_up")
-    .classList.remove("responsive-pop-up-closed");
+  document.getElementById("edit_task_pop_up").classList.remove("responsive-pop-up-closed");
   document.getElementById("reset_button").disabled = true;
 }
 
@@ -151,11 +133,7 @@ function renderSubtasks(taskId) {
   if (task && Array.isArray(task.subtasks) && task.subtasks.length > 0) {
     task.subtasks.forEach((subtask, index) => {
       if (subtask.completed) {
-        subtaskContent.innerHTML += getDoneSubtasksTemplate(
-          taskId,
-          subtask,
-          index
-        );
+        subtaskContent.innerHTML += getDoneSubtasksTemplate(taskId, subtask, index);
       } else {
         subtaskContent.innerHTML += getSubtasksTemplate(taskId, subtask, index);
       }
@@ -174,10 +152,7 @@ function renderAddSubtasksEditPopUp(task) {
   addedSubtasksContent.innerHTML = "";
 
   addedSubtasks.forEach((addedSubtask) => {
-    addedSubtasksContent.innerHTML += getAddedSubtasksTemplate(
-      addedSubtask,
-      task
-    );
+    addedSubtasksContent.innerHTML += getAddedSubtasksTemplate(addedSubtask, task);
   });
 }
 

@@ -36,7 +36,6 @@ function filterTaskByTitleOrDescription(filterInput) {
             task.style.display = 'none';
         }
     });
-
     toggleNoMatchMessage(!foundAny);
 }
 
@@ -49,7 +48,6 @@ function showAllTasks() {
     kanbanTask.forEach(task => {
         task.style.display = '';
     });
-
     toggleNoMatchMessage(false);
 }
 

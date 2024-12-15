@@ -164,14 +164,10 @@ function clearInputs(taskId) {
  * @returns {boolean} True if there is an error, false otherwise.
  */
 function errorMessage() {
-  let inputAddedSubtask = document
-    .getElementById("input_add_subtask")
-    .value.trim();
+  let inputAddedSubtask = document.getElementById("input_add_subtask").value.trim();
 
   if (inputAddedSubtask === "") {
-    document.getElementById(
-      "error_message"
-    ).innerHTML = `Please enter a subtask!`;
+    document.getElementById("error_message").innerHTML = `Please enter a subtask!`;
     return true;
   }
   document.getElementById("error_message").innerHTML = "";
