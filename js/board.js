@@ -66,31 +66,40 @@ function openAddTaskPopUp() {
  * @param {number} taskId - The ID of the task to save.
  */
 async function saveTaskChanges(taskId) {
-  if (!errorMessageTitleInput()) {
-    return;
-  }
+  if (!errorMessageTitleInput()) return;
+
   let task = tasks.find((t) => t.id === taskId);
   if (task) {
-    task.title = document.getElementById("edit_title").value;
-    task.description = document.getElementById("edit_description").value;
-    task.dueDate = document.getElementById("edit_due_date").value;
-    if (selectedContacts) {
-      task.assignedTo = [...selectedContacts];
-    }
-    if (selectedPriority) {
-      task.priority = selectedPriority;
-    }
-    task.subtasks = [...addedSubtasks];
+    updateTaskData(task);
+    await updateTaskInFirebase(task);
+    afterTaskSaved(taskId);
+    showAnimation("Task successfully saved!", "../assets/img/board.png");
   }
+}
+
+/**
+ * Updates the task data with changes from the edit popup.
+ * @param {Object} task - The task object to update.
+ */
+function updateTaskData(task) {
+  task.title = document.getElementById("edit_title").value;
+  task.description = document.getElementById("edit_description").value;
+  task.dueDate = document.getElementById("edit_due_date").value;
+  task.assignedTo = selectedContacts ? [...selectedContacts] : task.assignedTo;
+  task.priority = selectedPriority || task.priority;
+  task.subtasks = [...addedSubtasks];
+}
+
+/**
+ * Performs cleanup and UI updates after saving the task.
+ * @param {number} taskId - The ID of the task that was saved.
+ */
+function afterTaskSaved(taskId) {
   renderTasks();
-  await updateTaskInFirebase(task);
   selectedContacts = [];
   addedSubtasks = [];
   closePopUps();
   openTaskPopUp(taskId);
-  showAnimation("Task successfully saved!", "../assets/img/board.png");
-
-  console.log("Task gespeichert:", task);
 }
 
 /**

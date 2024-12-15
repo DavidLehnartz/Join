@@ -15,8 +15,6 @@ function resetTaskChanges() {
     resetPriority();
     showAnimation("Changes reset!", "../assets/img/board.png");
     checkForChanges();
-  
-    console.log("Task changes have been reset to their original state.");
   }
   
   /**

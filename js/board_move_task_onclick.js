@@ -31,7 +31,6 @@ function toggleMoveToMenu() {
       renderTasks();
       toggleMoveToMenu();
       showAnimation(`Task moved to ${column.replace("_", " ")}`, "../assets/img/board.png");
-      console.log(`Task successfully moved to ${column.replace("_", " ")}`);
     } else {
       console.error("Task not found:", currentTaskId);
     }
