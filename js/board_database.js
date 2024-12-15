@@ -62,7 +62,7 @@ async function deleteTaskData(taskId) {
     });
     let deletedTask = await taskResponse.json();
     await fetchTasksData();
-    showAnimation("Task successfully deleted!", "../assets/img/board.png")
+    showAnimation("Task successfully deleted!", "../assets/img/board.png");
     closePopUps();
     return deletedTask;
   } catch (error) {
@@ -79,32 +79,36 @@ async function deleteTaskData(taskId) {
 async function updateTaskInFirebase(task) {
   const taskId = task.id;
   const url = `${BASE_URL}/tasks/${taskId}.json`;
-
   try {
     const response = await fetch(url, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        id: task.id,
-        title: task.title,
-        description: task.description,
-        category: task.category,
-        assignedTo: task.assignedTo,
-        dueDate: task.dueDate,
-        priority: task.priority,
-        status: task.status,
-        name: task.name,
-        initials: task.initials,
-        subtasks: task.subtasks,
-      }),
+      body: JSON.stringify(getTaskObject(task)),
     });
-
-    if (!response.ok) {
-      throw new Error("Fehler beim Aktualisieren der Aufgabe in Firebase");
-    }
   } catch (error) {
     console.error("Fehler beim Aktualisieren des Tasks:", error);
   }
+}
+
+/**
+ * Create a new task object.
+ * @param {object} task - The object with the needed key value pairs of the task object.
+ * @returns {JSON} - The JSON of the task object.
+ */
+function getTaskObject(task) {
+  return {
+    id: task.id,
+    title: task.title,
+    description: task.description,
+    category: task.category,
+    assignedTo: task.assignedTo,
+    dueDate: task.dueDate,
+    priority: task.priority,
+    status: task.status,
+    name: task.name,
+    initials: task.initials,
+    subtasks: task.subtasks,
+  };
 }

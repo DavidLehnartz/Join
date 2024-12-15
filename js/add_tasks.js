@@ -68,11 +68,16 @@ async function getContactById(id) {
  * @returns {Promise<Array>} An array of contact objects.
  */
 async function loadAllContactsInfo() {
-  let idArray = await loadContacts();
-  for (let i = 0; i < idArray.length; i++) {
-    const id = idArray[i];
-    let newContact = await getContactById(id);
-    contacts.push(newContact);
+  let contactsResponse = await fetch(`${BASE_URL}/contacts.json`);
+  let contactsToJson = await contactsResponse.json();
+  if (contactsToJson) {
+    const contactKeys = Object.keys(contactsToJson);
+    contactKeys.forEach((key) => {
+      contacts.push({
+        id: key,
+        ...contactsToJson[key],
+      });
+    });
   }
   return contacts;
 }
@@ -145,7 +150,10 @@ function populateDropdown(dropdown) {
     const contactElement = document.createElement("div");
     contactElement.classList.add("contact-item");
     if (isSelected(contact.name)) contactElement.classList.add("selected");
-    contactElement.innerHTML = createContactHTML(contact, isSelected(contact.name));
+    contactElement.innerHTML = createContactHTML(
+      contact,
+      isSelected(contact.name)
+    );
     const checkbox = contactElement.querySelector(".contact-checkbox");
     preventDropdownCloseOnSelect(checkbox, contactElement, contact);
     preventDropdownCloseOnSelect(contactElement, contactElement, contact);

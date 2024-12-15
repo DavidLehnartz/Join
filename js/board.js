@@ -41,7 +41,9 @@ async function loadFetchedData() {
  * @param {number} taskId - The ID of the task to display.
  */
 function openTaskPopUp(taskId) {
-  document.getElementById("overlay_task_pop_up").classList.remove("responsive-pop-up-closed");
+  document
+    .getElementById("overlay_task_pop_up")
+    .classList.remove("responsive-pop-up-closed");
 
   let task = tasks.find((t) => t.id === taskId);
   if (task) {
@@ -49,7 +51,6 @@ function openTaskPopUp(taskId) {
     renderTaskPopUp(taskId);
     console.log("Task found:", taskId);
     console.log(originalTaskData);
-
   } else {
     console.error("Task not found:", taskId);
   }
@@ -65,7 +66,8 @@ function resetTaskChanges() {
   }
 
   document.getElementById("edit_title").value = originalTaskData.title;
-  document.getElementById("edit_description").value = originalTaskData.description;
+  document.getElementById("edit_description").value =
+    originalTaskData.description;
   document.getElementById("edit_due_date").value = originalTaskData.dueDate;
 
   setPriorityButton(originalTaskData.priority);
@@ -88,23 +90,25 @@ function checkForChanges() {
   let dueDate = document.getElementById("edit_due_date").value;
   let priority = selectedPriority;
 
-  if (title !== originalTaskData.title ||
+  if (
+    title !== originalTaskData.title ||
     description !== originalTaskData.description ||
     dueDate !== originalTaskData.dueDate ||
-    priority !== originalTaskData.priority) {
-
+    priority !== originalTaskData.priority
+  ) {
     document.getElementById("reset_button").disabled = false;
   } else {
     document.getElementById("reset_button").disabled = true;
   }
 }
 
-
 /**
  * Opens the "Add Task" popup.
  */
 function openAddTaskPopUp() {
-  document.getElementById("overlay_add_task_pop_up").classList.remove("responsive-pop-up-closed");
+  document
+    .getElementById("overlay_add_task_pop_up")
+    .classList.remove("responsive-pop-up-closed");
 
   renderAddTaskPopUp();
 }
@@ -148,7 +152,10 @@ async function saveTaskChanges(taskId) {
   showAnimation("Task successfully saved!", "../assets/img/board.png");
 
   console.log("Task gespeichert:", task);
-  console.log("IDs aus task.assignedTo:", task.assignedTo.map(contact => contact.id));
+  console.log(
+    "IDs aus task.assignedTo:",
+    task.assignedTo.map((contact) => contact.id)
+  );
 }
 
 /**
@@ -160,7 +167,9 @@ function errorMessageTitleInput() {
   let editTitleInput = document.getElementById("edit_title").value.trim();
 
   if (editTitleInput === "") {
-    document.getElementById("error_message_edit").innerHTML = `Please enter a title!`;
+    document.getElementById(
+      "error_message_edit"
+    ).innerHTML = `Please enter a title!`;
     return false;
   } else {
     document.getElementById("error_message_edit").innerHTML = "";
@@ -207,9 +216,21 @@ function changePrioButtonsEditPopUp(selectedButton) {
   resetButtonsEditPopUp();
 
   let priorityConfig = {
-    prio_urgent: { class: "prio-urgent-active", img: "../assets/img/urgent21.png", priority: "Urgent", },
-    prio_medium: { class: "prio-medium-active", img: "../assets/img/medium.png", priority: "Medium", },
-    prio_low: { class: "prio-low-active", img: "../assets/img/low21.png", priority: "Low", },
+    prio_urgent: {
+      class: "prio-urgent-active",
+      img: "../assets/img/urgent21.png",
+      priority: "Urgent",
+    },
+    prio_medium: {
+      class: "prio-medium-active",
+      img: "../assets/img/medium.png",
+      priority: "Medium",
+    },
+    prio_low: {
+      class: "prio-low-active",
+      img: "../assets/img/low21.png",
+      priority: "Low",
+    },
   };
 
   let config = priorityConfig[selectedButton.id];
@@ -221,7 +242,6 @@ function changePrioButtonsEditPopUp(selectedButton) {
 
     checkForChanges();
   }
-
 }
 
 /**
@@ -273,7 +293,11 @@ function resetButtonsEditPopUp() {
     } else if (button.id === "prio_low") {
       img.src = "../assets/img/prio_low_green.png";
     }
-    button.classList.remove("prio-low-active", "prio-medium-active", "prio-urgent-active");
+    button.classList.remove(
+      "prio-low-active",
+      "prio-medium-active",
+      "prio-urgent-active"
+    );
   });
 }
 
@@ -283,7 +307,9 @@ function resetButtonsEditPopUp() {
  */
 function updateButtonImage(taskId) {
   let buttonContainer = document.getElementById("input_image_content");
-  let inputAddedSubtask = document.getElementById("input_add_subtask").value.trim();
+  let inputAddedSubtask = document
+    .getElementById("input_add_subtask")
+    .value.trim();
 
   if (inputAddedSubtask.length > 0) {
     buttonContainer.innerHTML = getBeforeButtonContainer(taskId);
@@ -293,20 +319,18 @@ function updateButtonImage(taskId) {
 }
 
 /**
- * Generates a unique ID.
- * @returns {string} A unique identifier string.
- */
-function generateUniqueId() {
-  return "_" + Math.random().toString(36).substr(2, 9);
-}
-
-/**
  * Closes all popups.
  */
 function closePopUps() {
-  document.getElementById("overlay_task_pop_up").classList.add("responsive-pop-up-closed");
-  document.getElementById("overlay_add_task_pop_up").classList.add("responsive-pop-up-closed");
-  document.getElementById("edit_task_pop_up").classList.add("responsive-pop-up-closed");
+  document
+    .getElementById("overlay_task_pop_up")
+    .classList.add("responsive-pop-up-closed");
+  document
+    .getElementById("overlay_add_task_pop_up")
+    .classList.add("responsive-pop-up-closed");
+  document
+    .getElementById("edit_task_pop_up")
+    .classList.add("responsive-pop-up-closed");
 }
 
 /**
@@ -323,15 +347,15 @@ function formatDate(dateString) {
 /**
  * Sets the minimum date for the due date input field),
  * so that only future or today's dates can be selected.
- * 
+ *
  * Sets the "min" attribute of the input field to today's date.
  * If no date is set in the input field, it defaults to today's date.
  */
 function setMinDateForDueDate() {
   let today = new Date();
   let year = today.getFullYear();
-  let month = String(today.getMonth() + 1).padStart(2, '0');
-  let day = String(today.getDate()).padStart(2, '0');
+  let month = String(today.getMonth() + 1).padStart(2, "0");
+  let day = String(today.getDate()).padStart(2, "0");
   let formattedDate = `${year}-${month}-${day}`;
   let dueDateInput = document.getElementById("edit_due_date");
 
@@ -354,7 +378,7 @@ function toggleMoveToMenu() {
 
 /**
  * Moves the currently selected task to the specified column and updates the task's status.
- * @param {string} column - The name of the column to which the task should be moved. 
+ * @param {string} column - The name of the column to which the task should be moved.
  *                          Valid options are 'todo', 'in_progress', 'await_feedback', 'done'.
  */
 function moveTaskToColumn(column) {
@@ -369,7 +393,10 @@ function moveTaskToColumn(column) {
     updateTaskInFirebase(task);
     renderTasks();
     toggleMoveToMenu();
-    showAnimation(`Task moved to ${column.replace("_", " ")}`, "../assets/img/board.png");
+    showAnimation(
+      `Task moved to ${column.replace("_", " ")}`,
+      "../assets/img/board.png"
+    );
     console.log(`Task successfully moved to ${column.replace("_", " ")}`);
   } else {
     console.error("Task not found:", currentTaskId);
@@ -381,7 +408,11 @@ function moveTaskToColumn(column) {
  */
 function resetActiveStatusClasses() {
   document.querySelectorAll(".is-active").forEach((div) => {
-    div.classList.remove("active-status", "active-status-top", "active-status-bottom");
+    div.classList.remove(
+      "active-status",
+      "active-status-top",
+      "active-status-bottom"
+    );
   });
 }
 
@@ -391,9 +422,15 @@ function resetActiveStatusClasses() {
 function highlightCurrentStatus() {
   let task = tasks.find((t) => t.id === currentTaskId);
 
-  let moveToTopDiv = document.querySelector(`.move-to-text-top[data-column="${task.status}"]`);
-  let moveToBottomDiv = document.querySelector(`.move-to-text-bottom[data-column="${task.status}"]`);
-  let currentColumnDiv = document.querySelector(`.is-active[data-column="${task.status}"]`);
+  let moveToTopDiv = document.querySelector(
+    `.move-to-text-top[data-column="${task.status}"]`
+  );
+  let moveToBottomDiv = document.querySelector(
+    `.move-to-text-bottom[data-column="${task.status}"]`
+  );
+  let currentColumnDiv = document.querySelector(
+    `.is-active[data-column="${task.status}"]`
+  );
 
   if (moveToTopDiv) {
     moveToTopDiv.classList.add("active-status", "active-status-top");

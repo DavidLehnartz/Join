@@ -16,6 +16,7 @@ async function loadAllContactsInfo() {
       });
     });
   }
+  console.log(contacts);
   return contacts;
 }
 
