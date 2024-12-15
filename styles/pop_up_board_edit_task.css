@@ -616,6 +616,21 @@ li.added-subtask-item.editing {
   height: 25px;
 }
 
+.active-status{
+  background-color: #091931;
+}
+
+.active-status-top{
+  background-color: #091931;
+  border-top-right-radius: 10px;
+}
+
+.active-status-bottom{
+  background-color: #091931;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 @keyframes slideIn {
   from {
     bottom: 0px;

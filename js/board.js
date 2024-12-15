@@ -348,6 +348,8 @@ function setMinDateForDueDate() {
 function toggleMoveToMenu() {
   let moveToMenu = document.getElementById("move_to_menu");
   moveToMenu.classList.toggle("d_none");
+
+  updateMoveToMenuHighlight();
 }
 
 /**
@@ -372,4 +374,40 @@ function moveTaskToColumn(column) {
   } else {
     console.error("Task not found:", currentTaskId);
   }
+}
+
+/**
+ * Removes all active status classes from the move-to menu.
+ */
+function resetActiveStatusClasses() {
+  document.querySelectorAll(".is-active").forEach((div) => {
+    div.classList.remove("active-status", "active-status-top", "active-status-bottom");
+  });
+}
+
+/**
+ * Highlights the current status of the selected task.
+ */
+function highlightCurrentStatus() {
+  let task = tasks.find((t) => t.id === currentTaskId);
+
+  let moveToTopDiv = document.querySelector(`.move-to-text-top[data-column="${task.status}"]`);
+  let moveToBottomDiv = document.querySelector(`.move-to-text-bottom[data-column="${task.status}"]`);
+  let currentColumnDiv = document.querySelector(`.is-active[data-column="${task.status}"]`);
+
+  if (moveToTopDiv) {
+    moveToTopDiv.classList.add("active-status", "active-status-top");
+  } else if (moveToBottomDiv) {
+    moveToBottomDiv.classList.add("active-status", "active-status-bottom");
+  } else if (currentColumnDiv) {
+    currentColumnDiv.classList.add("active-status");
+  }
+}
+
+/**
+ * Combines reset and highlight functionality for reuse in other contexts.
+ */
+function updateMoveToMenuHighlight() {
+  resetActiveStatusClasses();
+  highlightCurrentStatus();
 }

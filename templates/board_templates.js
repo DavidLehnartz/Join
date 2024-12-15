@@ -310,10 +310,10 @@ function getEditTaskPopUpTemplate(task) {
                   <img src="../assets/img/board.png" alt="">
                 </div>
                 <div id="move_to_menu" class="move-task-to-menu-content d_none">
-                  <div onclick="moveTaskToColumn('todo')" class="move-to-text-top">To Do</div>
-                  <div onclick="moveTaskToColumn('in_progress')" class="move-to-text">In Progress</div>
-                  <div onclick="moveTaskToColumn('await_feedback')" class="move-to-text">Awaiting Feedback</div>
-                  <div onclick="moveTaskToColumn('done')" class="move-to-text-bottom">Done</div>
+                  <div onclick="moveTaskToColumn('todo')" class="move-to-text-top is-active" data-column="todo">To Do</div>
+                  <div onclick="moveTaskToColumn('in_progress')" class="move-to-text is-active" data-column="in_progress">In Progress</div>
+                  <div onclick="moveTaskToColumn('await_feedback')" class="move-to-text is-active" data-column="await_feedback">Awaiting Feedback</div>
+                  <div onclick="moveTaskToColumn('done')" class="move-to-text-bottom is-active" data-column="done">Done</div>
                 </div>
               </div>
 
