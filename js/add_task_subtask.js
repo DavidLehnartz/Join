@@ -5,16 +5,37 @@
  * @returns {Object} Contains references to the input field and the action icon.
  */
 function initializeSubtaskInput() {
-    const inputField = document.getElementById("inputFieldSubtask");
-    const iconWrapper = document.getElementById("iconWrapper");
-    const actionIcon = document.getElementById("actionIcon");
-    inputField.disabled = false;
-    inputField.focus();
-    actionIcon.src = "../assets/img/Propertycheck.png";
-    if (!document.getElementById("closeIcon")) {
-        iconWrapper.insertAdjacentHTML("afterbegin", createCloseIconHTML());
-    }
-    return { inputField, actionIcon };
+  const inputField = document.getElementById("inputFieldSubtask");
+  const iconWrapper = document.getElementById("iconWrapper");
+  const actionIcon = document.getElementById("actionIcon");
+  inputField.disabled = false;
+  inputField.focus();
+  actionIcon.src = "../assets/img/Propertycheck.png";
+  if (!document.getElementById("closeIcon")) {
+    iconWrapper.insertAdjacentHTML("afterbegin", createCloseIconHTML());
+  }
+  return { inputField, actionIcon };
+}
+
+/**
+ * Generates a unique ID.
+ * @returns {string} A unique identifier string.
+ */
+function generateUniqueId() {
+  return "_" + Math.random().toString(36).substr(2, 9);
+}
+
+/**
+ * Return an object with the given inputs to create a subtask.
+ * @param {String} name - The name of the subtask
+ * @returns {Object} - The subtask object which will be added to Firebase.
+ */
+function newSubtaskObject(name) {
+  return {
+    id: generateUniqueId(),
+    name: name,
+    completed: false,
+  };
 }
 
 /**
@@ -24,24 +45,27 @@ function initializeSubtaskInput() {
  * @param {HTMLElement} actionIcon - The action icon to trigger subtask addition.
  */
 function handleSubtaskAddition(inputField, actionIcon) {
-    actionIcon.onclick = function () {
-        const subtaskText = inputField.value.trim();
-        if (subtaskText !== "") {
-            const subtaskList = document.getElementById("subtaskList");
-            subtaskList.insertAdjacentHTML("beforeend", createSubtaskHTML(subtaskText));
-            subtasksData.push({ name: subtaskText, completed: false });
-            inputField.value = "";
-            inputField.focus();
-        }
-    };
+  actionIcon.onclick = function () {
+    const subtaskText = inputField.value.trim();
+    if (subtaskText !== "") {
+      const subtaskList = document.getElementById("subtaskList");
+      subtaskList.insertAdjacentHTML(
+        "beforeend",
+        createSubtaskHTML(subtaskText)
+      );
+      subtasksData.push(newSubtaskObject(subtaskText));
+      inputField.value = "";
+      inputField.focus();
+    }
+  };
 }
 
 /**
  * Adds a new subtask by initializing the input field and handling the addition logic.
  */
 function addSubtask() {
-    const { inputField, actionIcon } = initializeSubtaskInput();
-    handleSubtaskAddition(inputField, actionIcon);
+  const { inputField, actionIcon } = initializeSubtaskInput();
+  handleSubtaskAddition(inputField, actionIcon);
 }
 
 /**
@@ -49,17 +73,17 @@ function addSubtask() {
  * Resets the input field, removes the close icon, and restores the default action icon.
  */
 function cancelSubtask() {
-    const inputField = document.getElementById("inputFieldSubtask");
-    const iconWrapper = document.getElementById("iconWrapper");
-    const actionIcon = document.getElementById("actionIcon");
-    inputField.disabled = true;
-    inputField.value = "";
-    actionIcon.src = "../assets/img/Propertyadd.png";
-    const closeIcon = document.getElementById("closeIcon");
-    if (closeIcon) {
-        iconWrapper.removeChild(closeIcon);
-    }
-    actionIcon.onclick = addSubtask;
+  const inputField = document.getElementById("inputFieldSubtask");
+  const iconWrapper = document.getElementById("iconWrapper");
+  const actionIcon = document.getElementById("actionIcon");
+  inputField.disabled = true;
+  inputField.value = "";
+  actionIcon.src = "../assets/img/Propertyadd.png";
+  const closeIcon = document.getElementById("closeIcon");
+  if (closeIcon) {
+    iconWrapper.removeChild(closeIcon);
+  }
+  actionIcon.onclick = addSubtask;
 }
 
 /**
@@ -68,31 +92,34 @@ function cancelSubtask() {
  * @param {HTMLElement} subtaskItem - The subtask item to be edited.
  */
 function editSubtask(subtaskItem) {
-    const textElement = subtaskItem.querySelector(".subtask-text");
-    const currentText = textElement.textContent.trim();
-    subtaskItem.classList.add("editing");
-    textElement.outerHTML = createSubtaskInputHTML(currentText, subtaskItem.offsetHeight);
-    const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
-    iconsWrapper.innerHTML = createEditingIconsHTML();
-    const input = subtaskItem.querySelector(".subtaskInput");
-    input.focus();
-    input.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            finishEditing(input, textElement, subtaskItem);
-        }
-    });
-    input.addEventListener("blur", function () {
-        finishEditing(input, textElement, subtaskItem);
-    });
+  const textElement = subtaskItem.querySelector(".subtask-text");
+  const currentText = textElement.textContent.trim();
+  subtaskItem.classList.add("editing");
+  textElement.outerHTML = createSubtaskInputHTML(
+    currentText,
+    subtaskItem.offsetHeight
+  );
+  const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
+  iconsWrapper.innerHTML = createEditingIconsHTML();
+  const input = subtaskItem.querySelector(".subtaskInput");
+  input.focus();
+  input.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      finishEditing(input, textElement, subtaskItem);
+    }
+  });
+  input.addEventListener("blur", function () {
+    finishEditing(input, textElement, subtaskItem);
+  });
 }
 
 /**
  * Listens for checkbox clicks and logs the associated contact name.
  */
 document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("contact-checkbox")) {
-        console.log("Checkbox clicked:", event.target.dataset.name);
-    }
+  if (event.target.classList.contains("contact-checkbox")) {
+    console.log("Checkbox clicked:", event.target.dataset.name);
+  }
 });
 
 /**
@@ -103,18 +130,18 @@ document.addEventListener("click", (event) => {
  * @param {HTMLElement} subtaskItem - The subtask item being edited.
  */
 function finishEditing(input, textElement, subtaskItem) {
-    const newText = input.value.trim();
-    textElement.textContent = newText !== "" ? newText : input.value;
-    input.replaceWith(textElement);
-    subtaskItem.classList.remove("editing");
-    const subtask = subtasksData.find(
-        (sub) => sub.name === textElement.textContent
-    );
-    if (subtask) {
-        subtask.name = newText;
-    }
-    const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
-    iconsWrapper.innerHTML = createDefaultIconsHTML();
+  const newText = input.value.trim();
+  textElement.textContent = newText !== "" ? newText : input.value;
+  input.replaceWith(textElement);
+  subtaskItem.classList.remove("editing");
+  const subtask = subtasksData.find(
+    (sub) => sub.name === textElement.textContent
+  );
+  if (subtask) {
+    subtask.name = newText;
+  }
+  const iconsWrapper = subtaskItem.querySelector(".subtask-icons");
+  iconsWrapper.innerHTML = createDefaultIconsHTML();
 }
 
 /**
@@ -122,5 +149,5 @@ function finishEditing(input, textElement, subtaskItem) {
  * @param {HTMLElement} subtaskItem - The subtask item to be deleted.
  */
 function deleteSubtask(subtaskItem) {
-    subtaskItem.remove();
+  subtaskItem.remove();
 }

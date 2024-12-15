@@ -44,13 +44,10 @@ function openTaskPopUp(taskId) {
   document
     .getElementById("overlay_task_pop_up")
     .classList.remove("responsive-pop-up-closed");
-
   let task = tasks.find((t) => t.id === taskId);
   if (task) {
     originalTaskData = JSON.parse(JSON.stringify(task));
     renderTaskPopUp(taskId);
-    console.log("Task found:", taskId);
-    console.log(originalTaskData);
   } else {
     console.error("Task not found:", taskId);
   }
@@ -64,18 +61,12 @@ function resetTaskChanges() {
     console.error("No original task data found to reset.");
     return;
   }
-
   document.getElementById("edit_title").value = originalTaskData.title;
   document.getElementById("edit_description").value =
     originalTaskData.description;
   document.getElementById("edit_due_date").value = originalTaskData.dueDate;
-
   setPriorityButton(originalTaskData.priority);
-  // renderDropdownContacts(originalTaskData.id);
-  // renderSubtasks(originalTaskData.subtasks);
-
   selectedPriority = originalTaskData.priority;
-
   console.log("Task changes have been reset to their original state.");
   showAnimation("Changes reset!", "../assets/img/board.png");
   checkForChanges();
@@ -122,7 +113,6 @@ async function saveTaskChanges(taskId) {
   if (!errorMessageTitleInput()) {
     return;
   }
-
   let task = tasks.find((t) => t.id === taskId);
   if (task) {
     task.title = document.getElementById("edit_title").value;
@@ -131,13 +121,6 @@ async function saveTaskChanges(taskId) {
     if (selectedContacts) {
       task.assignedTo = [...selectedContacts];
     }
-    // task.assignedTo = [...selectedContacts];
-
-    // task.assignedTo = selectedContacts;
-
-    // if (selectedContacts) {
-    // task.assignedTo = selectedContacts;}
-
     if (selectedPriority) {
       task.priority = selectedPriority;
     }
@@ -152,10 +135,6 @@ async function saveTaskChanges(taskId) {
   showAnimation("Task successfully saved!", "../assets/img/board.png");
 
   console.log("Task gespeichert:", task);
-  console.log(
-    "IDs aus task.assignedTo:",
-    task.assignedTo.map((contact) => contact.id)
-  );
 }
 
 /**

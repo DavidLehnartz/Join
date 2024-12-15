@@ -239,10 +239,14 @@ function getTaskPopUpTemplate(
                     <div class="task-info-value">Priority:</div>
                   </div>
                   <div class="pop-up-task-info">
-                    <div class="task-info-label">${formatDate(task.dueDate)}</div>
+                    <div class="task-info-label">${formatDate(
+                      task.dueDate
+                    )}</div>
                     <div class="task-info-value">
                     ${task.priority}
-                      <img src="${priorityImage}" alt="${task.priority}" class="priority-icon" />
+                      <img src="${priorityImage}" alt="${
+    task.priority
+  }" class="priority-icon" />
                     </div>
                   </div>
                 </div>
@@ -260,7 +264,9 @@ function getTaskPopUpTemplate(
                 </div>
               </div>
               <div class="pop-up-footer">
-                <img onclick="renderEditTaskPopUp('${task.id}'), renderDropdownContacts('${task.id}')"
+                <img onclick="renderEditTaskPopUp('${
+                  task.id
+                }'), renderDropdownContacts('${task.id}')"
                      onmouseover="changeImage('edit_img', 'edit')" 
                      onmouseout="changeImage('edit_img', 'edit')"
                      id="edit_img"
@@ -611,14 +617,14 @@ function getDoneSubtasksTemplate(taskId, subtask, index) {
  * @param {Object} addedSubtask - The subtask object containing properties `id` and `name`.
  * @returns {string} The HTML structure for an added subtask, including edit and delete buttons.
  */
-function getAddedSubtasksTemplate(addedSubtask) {
+function getAddedSubtasksTemplate(addedSubtask, task) {
   return `
           <li onmouseover="showIcons(this)" onmouseout="hideIcons(this)" class="added-subtask-item" data-id="${addedSubtask.id}">
             <span>${addedSubtask.name}</span>
             <div class="list-icon-container">
-              <img onclick="editSubtaskEditPopUp('${addedSubtask.id}')" class="icon-container-images" src="../assets/img/edit.png" alt="edit icon">
+              <img onclick="editSubtaskEditPopUp('${addedSubtask.id}', '${task.id}')" class="icon-container-images" src="../assets/img/edit.png" alt="edit icon">
               <div class="vertical_line"></div>
-              <img onclick="deleteAddedSubtaskEditPopUp('${addedSubtask.name}')" class="icon-container-images" src="../assets/img/delete.png" alt="delete icon">
+              <img onclick="deleteAddedSubtaskEditPopUp('${addedSubtask.name}', '${task.id}')" class="icon-container-images" src="../assets/img/delete.png" alt="delete icon">
             </div>
           </li>
         `;
@@ -770,22 +776,23 @@ function getAfterButtonContainer() {
  * Generates the HTML template for editing a subtask input field with associated buttons.
  * @param {string} id - The ID of the subtask being edited.
  * @param {Object} subtask - The subtask object containing its name.
+ * @param {Object} task - The task object.
  * @returns {string} The HTML structure for editing a subtask input field.
  */
 
-function getEditSubtaskInput(id, subtask) {
+function getEditSubtaskInput(id, subtask, task) {
   return `
           <input type="text" value="${subtask.name}" 
-                onblur="saveEditedSubtaskEditPopUp('${id}', this.value)"  
+                onblur="saveEditedSubtaskEditPopUp('${id}', this.value, '${task.id}')"  
                 onkeydown="handleEnterKey(event, '${id}', this)" 
                 class="edit-subtask-input">
           <div class="list-icon-container">
-                <img onclick="deleteAddedSubtaskEditPopUp('${subtask.name}')" 
+                <img onclick="deleteAddedSubtaskEditPopUp('${subtask.name}', '${task.id}')" 
                 class="icon-container-images" 
                 src="../assets/img/delete.png" 
                 alt="check icon">
           <div class="vertical_line"></div>
-                <img onclick="saveEditedSubtaskEditPopUp('${id}')"
+                <img onclick="saveEditedSubtaskEditPopUp('${id}', '${task.id}')"
                 class="icon-container-images" 
                 src="../assets/img/check_black.png" 
           </div>  

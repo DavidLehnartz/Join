@@ -35,10 +35,8 @@ async function fetchContactsData() {
   contacts = [];
   let contactsResponse = await fetch(BASE_URL + "/contacts" + ".json");
   let contactsToJson = await contactsResponse.json();
-
   if (contactsToJson) {
     const contactKeys = Object.keys(contactsToJson);
-
     contactKeys.forEach((key) => {
       contacts.push({
         id: key,
