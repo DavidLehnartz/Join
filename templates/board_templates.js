@@ -239,14 +239,10 @@ function getTaskPopUpTemplate(
                     <div class="task-info-value">Priority:</div>
                   </div>
                   <div class="pop-up-task-info">
-                    <div class="task-info-label">${formatDate(
-                      task.dueDate
-                    )}</div>
+                    <div class="task-info-label">${formatDate(task.dueDate)}</div>
                     <div class="task-info-value">
                     ${task.priority}
-                      <img src="${priorityImage}" alt="${
-    task.priority
-  }" class="priority-icon" />
+                      <img src="${priorityImage}" alt="${task.priority}" class="priority-icon" />
                     </div>
                   </div>
                 </div>
@@ -264,9 +260,7 @@ function getTaskPopUpTemplate(
                 </div>
               </div>
               <div class="pop-up-footer">
-                <img onclick="renderEditTaskPopUp('${
-                  task.id
-                }'), renderDropdownContacts('${task.id}')"
+                <img onclick="renderEditTaskPopUp('${task.id}'), renderDropdownContacts('${task.id}')"
                      onmouseover="changeImage('edit_img', 'edit')" 
                      onmouseout="changeImage('edit_img', 'edit')"
                      id="edit_img"
