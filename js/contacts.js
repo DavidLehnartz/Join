@@ -13,8 +13,8 @@ function initContacts(header, sidebar, link) {
   let contactContent = document.getElementById("contact-content");
   createHeader(header);
   createSidebar(sidebar, link);
+  loadContactList();
   setTimeout(() => {
-    loadContactList();
     contactContent.classList.remove("hidden");
   }, 100);
 }
@@ -132,8 +132,14 @@ async function deleteAndRefreshContactListMobile(id) {
  * @returns {Object} The object of the grouped contact list.
  */
 function groupContacts(arrayName) {
-  groupedContacts = Object.groupBy(arrayName, ({ name }) => name.slice(0, 1));
-  return groupedContacts;
+  groupedContacts = [];
+  arrayName.forEach((contact) => {
+    const firstLetter = contact.name.charAt(0).toUpperCase();
+    if (!groupedContacts[firstLetter]) {
+      groupedContacts[firstLetter] = [];
+    }
+    groupedContacts[firstLetter].push(contact);
+  });
 }
 
 /**

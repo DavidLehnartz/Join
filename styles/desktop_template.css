@@ -50,6 +50,10 @@ h1 {
   gap: 15px;
 }
 
+.links-placeholder {
+  height: 200px;
+}
+
 .links {
   display: flex;
   align-items: center;
@@ -297,6 +301,10 @@ header {
     z-index: 90;
     justify-content: space-between;
     min-height: 20px;
+  }
+
+  .links-placeholder {
+    height: 60px;
   }
 
   .links p {

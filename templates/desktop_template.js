@@ -98,7 +98,7 @@ function renderSidebar() {
 function renderPlainSidebar() {
   return `<div class="left-sidebar">
       <img class="bigLogo" src="../assets/img/join_logo_white.svg" alt="join logo" />
-      <div style="height: 200px"></div>
+      <div class="links-placeholder"></div>
       <div class="left-sidebar-links">
         <a id="privacy-link" class="legacy-links" href="../pages/privacy_policy.html"> Privacy Policy </a>
         <a id="legal-link" class="legacy-links" href="../pages/legal_notice.html"> Legal notice </a>

@@ -27,12 +27,12 @@ function getAddContactDialog() {
             <div id="add-contact-icon" class="profile-icon-big bg-grey"><img src="../assets/icons/person.svg" /></div>
             <form id="add-contacts-form" class="add-contacts-form">
               <div class="icon-input-field">
-                <input id="add-contact-name"  class="error-input" type="text" placeholder="Name" required onkeyup="renderEmptyErrorName('add')"/>
+                <input id="add-contact-name" type="text" placeholder="Name" required onkeyup="renderEmptyErrorName('add')"/>
                 <img class="input-icon" src="../assets/icons/person-grey.svg" />
               </div>
               <div>
               <div class="icon-input-field">
-                <input id="add-contact-mail"  class="error-input" type="email" placeholder="Email" onkeyup="validateContactsEmail('add')" required/>
+                <input id="add-contact-mail" type="email" placeholder="Email" onkeyup="validateContactsEmail('add')" required/>
                 <img class="input-icon" src="../assets/icons/mail-grey.svg" />
               </div>
               <p id="add-mail-error-message" class="error-text hidden">
@@ -40,7 +40,7 @@ function getAddContactDialog() {
               </p>
               </div>
               <div class="icon-input-field">
-                <input id="add-contact-phone" class="error-input" placeholder="Phone" type="number" required onkeyup="renderEmptyErrorPhone('add')"/>
+                <input id="add-contact-phone" placeholder="Phone" type="number" required onkeyup="renderEmptyErrorPhone('add')"/>
                 <img class="input-icon" src="../assets/icons/call-grey.svg" />
               </div>
               <div class="add-contact-buttons">
