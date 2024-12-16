@@ -131,11 +131,10 @@ async function getValidUser(mail, password) {
  */
 async function saveContactToLocalStorage(mail, password) {
   let user = await getValidUser(mail, password);
-  let contacts = await loadAllContactsInfo();
-  let loggedContact = contacts.find(
-    (c) => c.email === user.email && c.name === user.name
+  let users = await loadAllUsersInfo();
+  let loggedContact = users.find(
+    (c) => c.email === user.email && c.password === user.password
   );
-  console.log(loggedContact);
   localStorage.setItem("user", JSON.stringify(loggedContact));
   localStorage.setItem("loggedIn", JSON.stringify(true));
   localStorage.setItem("rememberMe", JSON.stringify(isRememberOn));

@@ -149,5 +149,6 @@ function newUserObject(name, mail, password) {
     email: mail,
     name: name,
     password: password,
+    initial: createInitial(name),
   };
 }
