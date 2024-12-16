@@ -3,7 +3,6 @@
 /* BOARD MAIN SCRIPT */
 
 let currentTaskId = null;
-let originalTaskData = null;
 let selectedPriority = "";
 
 /**
