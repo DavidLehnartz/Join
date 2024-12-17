@@ -133,6 +133,7 @@ function getBoardHeadlineTemplate() {
                 />
               </button>
             </div>
+             <div class="searchbox-wrapper-responsive">
             <input onkeyup="getFilderedTask()" id="filter_input_responsive"
               class="searchbox-input-responsive"
               type="text"
@@ -145,6 +146,7 @@ function getBoardHeadlineTemplate() {
                 alt="search"
               />
             </button>
+            </div>
             </div>
           </section>
     `;
